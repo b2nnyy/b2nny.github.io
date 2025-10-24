@@ -6,6 +6,16 @@
   <title>b2nny — links</title>
   <meta name="description" content="Official links for b2nny — Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
   <meta name="theme-color" content="#000000" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFPEJ3CD63"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LFPEJ3CD63');
+  </script>
+
   <style>
     :root {
       --fg: #fff;
@@ -43,14 +53,6 @@
       border: 2px solid rgba(255,255,255,0.8);
     }
     h1 { font-size: 28px; margin: 12px 0 4px; }
-
-    #followers {
-      color: #000;
-      font-size: 14px;
-      margin: 0 0 8px;
-      opacity: 0;
-      transition: opacity .6s ease-in-out;
-    }
 
     .links { display: grid; gap: 12px; }
     .link {
@@ -93,7 +95,6 @@
         <img src="apple music.jpg" alt="b2nny profile" />
       </div>
       <h1>@b2nny</h1>
-      <p id="followers">loading followers...</p>
     </header>
 
     <section class="links">
@@ -129,4 +130,13 @@
 
       <a class="link" href="https://x.com/b2nnny" target="_blank">
         <img src="Twitter.jpg" alt="X" />
-        <span>b2nny |
+        <span>b2nny | X</span>
+      </a>
+    </section>
+
+    <footer>
+      © <script>document.write(new Date().getFullYear());</script> Harmony Hill
+    </footer>
+  </main>
+</body>
+</html>
