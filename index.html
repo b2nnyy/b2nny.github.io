@@ -41,7 +41,11 @@
       max-width: var(--maxw);
       padding: 32px 20px 48px;
     }
-    header { text-align: center; margin-bottom: 24px; }
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
     .pfp img {
       width: 120px; height: 120px;
       border-radius: 999px;
@@ -60,6 +64,31 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp .6s ease-out .2s forwards;
+      display: inline-block;
+    }
+
+    /* Play button */
+    .play-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-left: 10px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #000;
+      color: #000;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.2s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp .6s ease-out .3s forwards;
+    }
+    .play-btn:hover {
+      background: #f0f0f0;
+      transform: scale(1.05);
     }
 
     .links { display: grid; gap: 12px; margin-top: 20px; }
@@ -195,6 +224,8 @@
         <img src="apple music.jpg" alt="b2nny profile" />
       </div>
       <h1>@b2nny</h1>
+      <button class="play-btn" id="playBtn">▶</button>
+      <audio id="audioPlayer" src="wussup -74 c.mp3"></audio>
     </header>
 
     <section class="links">
@@ -256,6 +287,19 @@
   <script>
     const overlay = document.getElementById('popupOverlay');
     const closeBtn = document.getElementById('popupClose');
+    const playBtn = document.getElementById('playBtn');
+    const audio = document.getElementById('audioPlayer');
+
+    playBtn.addEventListener('click', () => {
+      audio.play();
+      playBtn.textContent = '⏸';
+      playBtn.disabled = true;
+      audio.addEventListener('ended', () => {
+        playBtn.textContent = '▶';
+        playBtn.disabled = false;
+      });
+    });
+
     window.addEventListener('load', () => {
       setTimeout(() => overlay.style.display = 'flex', 1000);
     });
