@@ -84,7 +84,7 @@
       .link img { width: 26px; height: 26px; }
     }
 
-    /* Popup styling */
+    /* Popup styles */
     .popup-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -96,27 +96,20 @@
       z-index: 999;
       animation: fadeIn .4s ease forwards;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .popup {
       background: #fff;
       color: #000;
       border-radius: 16px;
-      padding: 20px;
-      max-width: 700px;
+      padding: 24px 20px 28px;
+      max-width: 400px;
       width: 90%;
-      max-height: 90%;
-      overflow-y: auto;
       box-shadow: 0 10px 30px rgba(0,0,0,0.4);
       animation: popIn .3s ease forwards;
       position: relative;
+      text-align: center;
     }
-    @keyframes popIn {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+    @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     .popup-close {
       position: absolute;
       top: 8px; right: 12px;
@@ -124,9 +117,47 @@
       cursor: pointer;
       color: #000;
     }
-    iframe {
+    .popup h2 { margin: 0 0 10px; font-size: 22px; }
+    .popup p { margin: 0 0 18px; font-size: 14px; color: #333; }
+
+    #emailForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    #emailForm input {
       width: 100%;
+      max-width: 280px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+      outline: none;
+    }
+    #emailForm button {
+      background: #000;
+      color: #fff;
       border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+      width: 100%;
+      max-width: 150px;
+    }
+    #emailForm button:hover {
+      transform: scale(1.04);
+      background: #222;
+    }
+    .success-message {
+      display: none;
+      color: #000;
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -185,27 +216,25 @@
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
       <span class="popup-close" id="popupClose">&times;</span>
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScbYz6HEy3iCjGKQxDJHYw4BpgwQlDCDbtB5hYMaR8oVxEJcA/viewform?embedded=true" width="640" height="486" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      <h2>Join the b2nny list</h2>
+      <p>Get updates when I drop new music and exclusive content.</p>
+      <form id="emailForm" action="https://docs.google.com/forms/d/e/1FAIpQLScbYz6HEy3iCjGKQxDJHYw4BpgwQlDCDbtB5hYMaR8oVxEJcA/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+        <input type="email" name="entry.1308356018" placeholder="Enter your email" required>
+        <button type="submit">Join the list</button>
+      </form>
+      <iframe name="hidden_iframe" style="display:none;" onload="if(submitted){document.getElementById('emailForm').innerHTML='<p class=\'success-message\'>Thanks for signing up!</p>'; }"></iframe>
     </div>
   </div>
 
   <script>
     const overlay = document.getElementById('popupOverlay');
     const closeBtn = document.getElementById('popupClose');
-
     window.addEventListener('load', () => {
-      setTimeout(() => {
-        overlay.style.display = 'flex';
-      }, 800);
+      setTimeout(() => overlay.style.display = 'flex', 1000);
     });
-
-    closeBtn.addEventListener('click', () => {
-      overlay.style.display = 'none';
-    });
-
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) overlay.style.display = 'none';
-    });
+    closeBtn.addEventListener('click', () => overlay.style.display = 'none');
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.style.display = 'none'; });
   </script>
 </body>
 </html>
+
