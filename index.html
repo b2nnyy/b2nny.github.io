@@ -18,107 +18,95 @@
 
   <style>
     :root{
-      --fg: #fff;
-      --maxw: 720px;
+      --fg:#fff;
+      --maxw:720px;
 
-      /* palette (sky + greens from your image) */
-      --c1: #8EC5FF; /* soft sky */
-      --c2: #4FA3FF; /* mid blue */
-      --c3: #A8F0D1; /* mint */
-      --c4: #57D69A; /* green */
+      /* lightened sky/green palette */
+      --c1:#CFEAFF; /* very light sky */
+      --c2:#AEE4FF; /* ice blue */
+      --c3:#D6FFEF; /* pale mint */
+      --c4:#BFF7D9; /* light green */
 
-      /* button colors */
-      --btn-bg: rgba(0,0,0,0.65);
-      --btn-hover: rgba(0,0,0,0.85);
-      --radius: 16px;
+      --btn-bg:rgba(0,0,0,0.65);
+      --btn-hover:rgba(0,0,0,0.85);
+      --radius:16px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
       min-height:100vh;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--fg);
-      overflow-x:hidden;
+      overflow:hidden; /* hide blob edges gracefully */
       display:flex;justify-content:center;align-items:flex-start;
-      background:#0e0e10; /* base behind blobs */
+      background:#0f1012; /* deep base behind glass */
     }
 
-    /* ========== LAYERS ========== */
+    /* ===== BACKGROUND LAYERS ===== */
     .bg {
-      position:fixed; inset:0;
-      overflow:hidden; z-index:-2;
+      position:fixed; inset:0; z-index:-2;
+      overflow:hidden;
     }
     .blob {
       position:absolute;
       border-radius:50%;
-      filter: blur(40px);
-      opacity:0.85;
-      mix-blend-mode:screen; /* luminous blending */
-      animation: drift linear infinite;
+      /* clean glass look: sharper than haze, no glow */
+      filter: blur(10px) saturate(120%);
+      opacity:0.9;
       will-change: transform;
-    }
-    @keyframes drift {
-      0%   { transform: translate(var(--x0),var(--y0)) scale(1); }
-      50%  { transform: translate(var(--x1),var(--y1)) scale(1.08); }
-      100% { transform: translate(var(--x0),var(--y0)) scale(1); }
+      pointer-events:none;
+      /* no blend glow; keep it natural */
+      mix-blend-mode:normal;
     }
 
     /* subtle frosted sheet to unify colors (slightly transparent) */
     .frost {
       position:fixed; inset:0; z-index:-1;
-      background: rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.08);
       backdrop-filter: blur(22px) saturate(120%);
       -webkit-backdrop-filter: blur(22px) saturate(120%);
     }
 
-    /* ========== CONTENT WRAP ========== */
+    /* ===== CONTENT ===== */
     .wrap{width:100%;max-width:var(--maxw);padding:32px 20px 48px}
     header{text-align:center;margin-bottom:24px}
 
     .pfp img{
       width:120px;height:120px;border-radius:999px;object-fit:cover;
-      border:2px solid rgba(255,255,255,0.8);
-      opacity:0; transform: translateY(22px);
-      animation: snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
+      border:2px solid rgba(255,255,255,0.85);
+      opacity:0; transform:translateY(22px);
+      animation:snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
     }
-
     h1{
       font-size:28px;margin:12px 0 10px;
-      opacity:0; transform: translateY(18px);
-      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .15s forwards;
+      opacity:0; transform:translateY(18px);
+      animation:snap-up .3s cubic-bezier(.2,.8,.2,1) .15s forwards;
     }
-
-    /* play button (below @b2nny) */
     .play-wrap{display:flex;justify-content:center}
     .play-btn{
       display:inline-flex;align-items:center;justify-content:center;
       width:44px;height:44px;border-radius:50%;
       background:#fff;border:2px solid #000;color:#000;cursor:pointer;
       font-size:18px;transition:transform .12s ease, background .12s ease;
-      opacity:0; transform: translateY(14px);
-      animation: snap-up .28s cubic-bezier(.2,.8,.2,1) .22s forwards;
+      opacity:0; transform:translateY(14px);
+      animation:snap-up .28s cubic-bezier(.2,.8,.2,1) .22s forwards;
       user-select:none;
     }
     .play-btn:hover{background:#f0f0f0; transform:translateY(0) scale(1.04)}
+    @keyframes snap-up{to{opacity:1; transform:translateY(0)}}
 
-    @keyframes snap-up { to { opacity:1; transform: translateY(0)} }
-
-    /* LINKS */
     .links{display:grid;gap:12px;margin-top:22px}
     .link{
       display:flex;align-items:center;gap:12px;
       background:var(--btn-bg); color:var(--fg); text-decoration:none;
       padding:14px 18px; border-radius:var(--radius);
       border:1px solid rgba(255,255,255,0.22);
-      opacity:0; transform: translateX(40px);
-      animation: snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
+      opacity:0; transform:translateX(40px);
+      animation:snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
       will-change: transform, opacity;
     }
-    .link:nth-child(even){
-      transform: translateX(-40px);
-      animation-name: snap-in-l;
-    }
+    .link:nth-child(even){transform:translateX(-40px);animation-name:snap-in-l}
     .link:nth-child(1){animation-delay:.28s}
     .link:nth-child(2){animation-delay:.34s}
     .link:nth-child(3){animation-delay:.40s}
@@ -126,36 +114,35 @@
     .link:nth-child(5){animation-delay:.52s}
     .link:nth-child(6){animation-delay:.58s}
     .link:nth-child(7){animation-delay:.64s}
-
-    @keyframes snap-in-r { to {opacity:1; transform: translateX(0)} }
-    @keyframes snap-in-l { to {opacity:1; transform: translateX(0)} }
+    @keyframes snap-in-r{to{opacity:1; transform:translateX(0)}}
+    @keyframes snap-in-l{to{opacity:1; transform:translateX(0)}}
 
     .link:hover{background:var(--btn-hover)}
     .link img{width:28px;height:28px;border-radius:6px;object-fit:cover}
 
     footer{
       font-size:12px;color:#1f1f1f;margin-top:32px;text-align:left;
-      opacity:0; animation: fade .25s .72s forwards;
+      opacity:0; animation:fade .25s .72s forwards;
     }
-    @keyframes fade { to {opacity:1} }
+    @keyframes fade{to{opacity:1}}
 
-    @media (max-width: 480px){
+    @media (max-width:480px){
       h1{font-size:24px}
       .pfp img{width:100px;height:100px}
       .link{padding:12px 16px}
       .link img{width:26px;height:26px}
     }
 
-    /* POPUP */
+    /* ===== POPUP ===== */
     .popup-overlay{
       position:fixed; inset:0; background:rgba(0,0,0,0.6);
       display:none; justify-content:center; align-items:center;
-      z-index:50; animation: fade .3s ease forwards;
+      z-index:50; animation:fade .3s ease forwards;
     }
     .popup{
       background:#fff;color:#000;border-radius:16px;padding:24px 20px 28px;
       max-width:400px;width:90%; box-shadow:0 10px 30px rgba(0,0,0,0.4);
-      position:relative; text-align:center; animation: pop .22s ease forwards;
+      position:relative; text-align:center; animation:pop .22s ease forwards;
     }
     @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
     .popup-close{position:absolute;top:8px;right:12px;font-size:24px;cursor:pointer;color:#000}
@@ -175,7 +162,7 @@
   </style>
 </head>
 <body>
-  <!-- animated background blobs -->
+  <!-- moving glass blobs -->
   <div class="bg" id="bg"></div>
   <div class="frost" aria-hidden="true"></div>
 
@@ -187,6 +174,7 @@
       <h1>@b2nny</h1>
       <div class="play-wrap">
         <button class="play-btn" id="playBtn" aria-label="Play track">▶</button>
+        <!-- bump ?v= number to force-refresh audio if you replace the file -->
         <audio id="audioPlayer" src="wussup -74 c.mp3?v=2"></audio>
       </div>
     </header>
@@ -248,60 +236,124 @@
   </div>
 
   <script>
-    /* ---------- Random iOS-style blobs (3–4), loop forever ---------- */
-    (function makeBlobs(){
+    /* ====== GLASS BLOBS: random, brighter, with gentle collision/repel ====== */
+    (function glassBlobs(){
       const bg = document.getElementById('bg');
-      const palette = ['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
-      const num = Math.floor(Math.random()*2) + 3; // 3–4
-      const vw = window.innerWidth, vh = window.innerHeight;
+      const colors = ['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
+      const count = Math.floor(Math.random()*2)+3; // 3–4
+      const blobs = [];
+      let W = window.innerWidth, H = window.innerHeight;
 
-      for(let i=0;i<num;i++){
-        const blob = document.createElement('div');
-        blob.className = 'blob';
-
-        // random size
-        const size = Math.round(Math.max(vw, vh) * (0.35 + Math.random()*0.25)); // 35%–60% of max dimension
-        blob.style.width = blob.style.height = size + 'px';
-
-        // radial-gradient to get that soft 3D look
-        const c = palette[Math.floor(Math.random()*palette.length)];
-        blob.style.background = `radial-gradient(35% 35% at 35% 35%, rgba(255,255,255,0.55), rgba(255,255,255,0) 60%), radial-gradient(circle at 60% 60%, ${c}, transparent 60%)`;
-
-        // start/end travel points
-        const startX = Math.round(Math.random()*(vw - size));
-        const startY = Math.round(Math.random()*(vh - size));
-        const travel = Math.round(Math.max(vw, vh) * (0.12 + Math.random()*0.18)); // how far it drifts
-
-        // random direction
-        const dx = (Math.random()<0.5? -1:1) * travel;
-        const dy = (Math.random()<0.5? -1:1) * travel;
-
-        // expose to CSS keyframes as vars
-        blob.style.setProperty('--x0', startX + 'px');
-        blob.style.setProperty('--y0', startY + 'px');
-        blob.style.setProperty('--x1', (startX + dx) + 'px');
-        blob.style.setProperty('--y1', (startY + dy) + 'px');
-
-        // random duration (slow), random offset so they feel unsynced
-        const dur = 18 + Math.random()*12; // 18–30s
-        const delay = -Math.random()*dur;  // negative = start mid-animation
-        blob.style.animationDuration = dur + 's';
-        blob.style.animationDelay = delay + 's';
-
-        bg.appendChild(blob);
+      function makeGradient(c){
+        // clean glass: inner highlight + body color, no glow
+        return `
+          radial-gradient(45% 45% at 30% 30%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.25) 38%, rgba(255,255,255,0) 65%),
+          radial-gradient(circle at 60% 60%, ${c} 0%, rgba(255,255,255,0) 70%)
+        `;
       }
+
+      function createBlob(){
+        const el = document.createElement('div');
+        el.className = 'blob';
+
+        // size: larger on desktop, still big on mobile
+        const base = Math.max(W, H);
+        const size = Math.round(base * (0.36 + Math.random()*0.20)); // 36%–56%
+        el.style.width = el.style.height = size + 'px';
+
+        // starting position
+        const x = Math.random()*(W - size);
+        const y = Math.random()*(H - size);
+
+        // velocity: a bit faster than before
+        const sp = 0.18 + Math.random()*0.22; // px per ms-ish
+        const ang = Math.random()*Math.PI*2;
+        const vx = Math.cos(ang)*sp;
+        const vy = Math.sin(ang)*sp;
+
+        // color
+        const c = colors[Math.floor(Math.random()*colors.length)];
+        el.style.background = makeGradient(c);
+
+        bg.appendChild(el);
+        return { el, x, y, vx, vy, r:size/2, size };
+      }
+
+      for(let i=0;i<count;i++) blobs.push(createBlob());
+
+      function tick(){
+        const t = performance.now();
+        const dt = 16; // ~60fps step
+
+        // simple edge bounce + pairwise repel
+        for(let i=0;i<blobs.length;i++){
+          const b = blobs[i];
+
+          // move
+          b.x += b.vx * dt;
+          b.y += b.vy * dt;
+
+          // edge bounce
+          if(b.x < 0){ b.x = 0; b.vx *= -1; }
+          if(b.y < 0){ b.y = 0; b.vy *= -1; }
+          if(b.x + b.size > W){ b.x = W - b.size; b.vx *= -1; }
+          if(b.y + b.size > H){ b.y = H - b.size; b.vy *= -1; }
+
+          // gentle repel with others
+          for(let j=i+1;j<blobs.length;j++){
+            const c = blobs[j];
+            const dx = (b.x + b.r) - (c.x + c.r);
+            const dy = (b.y + b.r) - (c.y + c.r);
+            const dist = Math.hypot(dx,dy);
+            const minDist = (b.r + c.r) * 0.92; // slight overlap tolerance
+
+            if(dist < minDist){
+              const overlap = (minDist - dist) * 0.5;
+              if(dist > 0.0001){
+                const nx = dx / dist, ny = dy / dist;
+                // push them apart
+                b.x += nx * overlap;
+                b.y += ny * overlap;
+                c.x -= nx * overlap;
+                c.y -= ny * overlap;
+                // swap a bit of velocity (fake bounce)
+                const pbx = b.vx, pby = b.vy;
+                b.vx = c.vx*0.85; b.vy = c.vy*0.85;
+                c.vx = pbx*0.85;  c.vy = pby*0.85;
+              } else {
+                // identical centers – nudge randomly
+                b.x += (Math.random()-0.5)*2;
+                b.y += (Math.random()-0.5)*2;
+              }
+            }
+          }
+        }
+
+        // render
+        for(const b of blobs){
+          b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
+        }
+
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      // keep responsive
+      window.addEventListener('resize', () => {
+        W = window.innerWidth; H = window.innerHeight;
+      }, { passive:true });
     })();
 
-    /* ---------- Popup timing ---------- */
+    /* ===== POPUP ===== */
     const overlay = document.getElementById('popupOverlay');
     const closeBtn = document.getElementById('popupClose');
     window.addEventListener('load', () => {
       setTimeout(() => overlay.style.display = 'flex', 1000);
     });
-    closeBtn.addEventListener('click', () => overlay.style.display = 'none');
-    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.style.display = 'none'; });
+    closeBtn?.addEventListener('click', () => overlay.style.display = 'none');
+    overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.style.display = 'none'; });
 
-    /* ---------- Audio play/pause toggle (plays once) ---------- */
+    /* ===== AUDIO TOGGLE (plays once) ===== */
     const playBtn = document.getElementById('playBtn');
     const audio = document.getElementById('audioPlayer');
     let isPlaying = false;
@@ -317,7 +369,6 @@
         isPlaying = false;
       }
     });
-
     audio.addEventListener('ended', () => {
       playBtn.textContent = '▶';
       isPlaying = false;
