@@ -25,10 +25,7 @@
       --maxw: 720px;
     }
     * { box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
+    html, body { height: 100%; margin: 0; }
     body {
       min-height: 100vh;
       background: linear-gradient(to top, #111 0%, #eee 100%);
@@ -86,6 +83,51 @@
       .link { padding: 12px 16px; }
       .link img { width: 26px; height: 26px; }
     }
+
+    /* Popup styling */
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn .4s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .popup {
+      background: #fff;
+      color: #000;
+      border-radius: 16px;
+      padding: 20px;
+      max-width: 700px;
+      width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      animation: popIn .3s ease forwards;
+      position: relative;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .popup-close {
+      position: absolute;
+      top: 8px; right: 12px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #000;
+    }
+    iframe {
+      width: 100%;
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -138,5 +180,32 @@
       © <script>document.write(new Date().getFullYear());</script> Harmony Hill
     </footer>
   </main>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <span class="popup-close" id="popupClose">&times;</span>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScbYz6HEy3iCjGKQxDJHYw4BpgwQlDCDbtB5hYMaR8oVxEJcA/viewform?embedded=true" width="640" height="486" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('popupOverlay');
+    const closeBtn = document.getElementById('popupClose');
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        overlay.style.display = 'flex';
+      }, 800);
+    });
+
+    closeBtn.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
