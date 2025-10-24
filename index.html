@@ -44,6 +44,14 @@
     }
     h1 { font-size: 28px; margin: 12px 0 4px; }
 
+    #listeners {
+      color: #ccc;
+      font-size: 14px;
+      margin: 0 0 8px;
+      opacity: 0;
+      transition: opacity .6s ease-in-out;
+    }
+
     .links { display: grid; gap: 12px; }
     .link {
       display: flex; align-items: center; gap: 12px;
@@ -86,10 +94,10 @@
         <img src="apple music.jpg" alt="b2nny profile" />
       </div>
       <h1>@b2nny</h1>
+      <p id="listeners">loading listeners...</p>
     </header>
 
     <section class="links">
-      <!-- Wussup Song Button -->
       <a class="link" href="https://open.spotify.com/track/7bvzwge2VHijigp5BZuw30?si=a2e3a94fc2e94bcd" target="_blank">
         <img src="Screenshot 2025-10-23 180721.png" alt="Wussup cover" />
         <span>Wussup</span>
@@ -130,5 +138,26 @@
       © <script>document.write(new Date().getFullYear());</script> Harmony Hill
     </footer>
   </main>
+
+  <script>
+    fetch('https://spotify-artist-stats.vercel.app/api/artist/2tbEf5RXMJ4XXwssBVlJ2B')
+      .then(res => res.json())
+      .then(data => {
+        const el = document.getElementById('listeners');
+        if (data.monthlyListeners) {
+          const num = data.monthlyListeners.toLocaleString();
+          el.textContent = `${num} monthly listeners`;
+          el.style.opacity = '1';
+        } else {
+          el.textContent = 'monthly listeners unavailable';
+          el.style.opacity = '1';
+        }
+      })
+      .catch(() => {
+        const el = document.getElementById('listeners');
+        el.textContent = 'monthly listeners unavailable';
+        el.style.opacity = '1';
+      });
+  </script>
 </body>
 </html>
