@@ -7,80 +7,52 @@
   <meta name="description" content="Official links for b2nny — Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
   <meta name="theme-color" content="#0a0a0a" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFPEJ3CD63"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LFPEJ3CD63');
-  </script>
-
   <style>
     :root{
       --fg:#fff;
       --maxw:720px;
-
-      /* lightened sky/green palette */
-      --c1:#CFEAFF; /* very light sky */
-      --c2:#AEE4FF; /* ice blue */
-      --c3:#D6FFEF; /* pale mint */
-      --c4:#BFF7D9; /* light green */
-
-      --btn-bg:rgba(0,0,0,0.65);
-      --btn-hover:rgba(0,0,0,0.85);
-      --radius:16px;
+      --c1:#CFEAFF; --c2:#AEE4FF; --c3:#D6FFEF; --c4:#BFF7D9;
+      --btn-bg:rgba(0,0,0,0.65); --btn-hover:rgba(0,0,0,0.85); --radius:16px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;}
     body{
-      min-height:100vh;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--fg);
-      overflow:hidden; /* hide blob edges gracefully */
       display:flex;justify-content:center;align-items:flex-start;
-      background:#0f1012; /* deep base behind glass */
+      background:#0f1012;
+      overflow-x:hidden; /* allow vertical scroll only */
     }
 
-    /* ===== BACKGROUND LAYERS ===== */
-    .bg {
-      position:fixed; inset:0; z-index:-2;
-      overflow:hidden;
+    .bg{
+      position:fixed;inset:0;z-index:-2;
+      overflow:hidden; /* only background is clipped now */
     }
-    .blob {
-      position:absolute;
-      border-radius:50%;
-      /* clean glass look: sharper than haze, no glow */
-      filter: blur(10px) saturate(120%);
-      opacity:0.9;
-      will-change: transform;
-      pointer-events:none;
-      /* no blend glow; keep it natural */
+    .blob{
+      position:absolute;border-radius:50%;
+      filter:blur(10px)saturate(120%);
+      opacity:0.9;will-change:transform;pointer-events:none;
       mix-blend-mode:normal;
     }
-
-    /* subtle frosted sheet to unify colors (slightly transparent) */
-    .frost {
-      position:fixed; inset:0; z-index:-1;
+    .frost{
+      position:fixed;inset:0;z-index:-1;
       background:rgba(255,255,255,0.08);
-      backdrop-filter: blur(22px) saturate(120%);
-      -webkit-backdrop-filter: blur(22px) saturate(120%);
+      backdrop-filter:blur(22px)saturate(120%);
+      -webkit-backdrop-filter:blur(22px)saturate(120%);
     }
 
-    /* ===== CONTENT ===== */
     .wrap{width:100%;max-width:var(--maxw);padding:32px 20px 48px}
     header{text-align:center;margin-bottom:24px}
-
     .pfp img{
       width:120px;height:120px;border-radius:999px;object-fit:cover;
       border:2px solid rgba(255,255,255,0.85);
-      opacity:0; transform:translateY(22px);
+      opacity:0;transform:translateY(22px);
       animation:snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
     }
     h1{
       font-size:28px;margin:12px 0 10px;
-      opacity:0; transform:translateY(18px);
+      opacity:0;transform:translateY(18px);
       animation:snap-up .3s cubic-bezier(.2,.8,.2,1) .15s forwards;
     }
     .play-wrap{display:flex;justify-content:center}
@@ -88,291 +60,133 @@
       display:inline-flex;align-items:center;justify-content:center;
       width:44px;height:44px;border-radius:50%;
       background:#fff;border:2px solid #000;color:#000;cursor:pointer;
-      font-size:18px;transition:transform .12s ease, background .12s ease;
-      opacity:0; transform:translateY(14px);
+      font-size:18px;transition:transform .12s ease,background .12s ease;
+      opacity:0;transform:translateY(14px);
       animation:snap-up .28s cubic-bezier(.2,.8,.2,1) .22s forwards;
       user-select:none;
     }
-    .play-btn:hover{background:#f0f0f0; transform:translateY(0) scale(1.04)}
-    @keyframes snap-up{to{opacity:1; transform:translateY(0)}}
+    .play-btn:hover{background:#f0f0f0;transform:translateY(0)scale(1.04)}
+    @keyframes snap-up{to{opacity:1;transform:translateY(0)}}
 
     .links{display:grid;gap:12px;margin-top:22px}
     .link{
       display:flex;align-items:center;gap:12px;
-      background:var(--btn-bg); color:var(--fg); text-decoration:none;
-      padding:14px 18px; border-radius:var(--radius);
+      background:var(--btn-bg);color:var(--fg);text-decoration:none;
+      padding:14px 18px;border-radius:var(--radius);
       border:1px solid rgba(255,255,255,0.22);
-      opacity:0; transform:translateX(40px);
+      opacity:0;transform:translateX(40px);
       animation:snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
-      will-change: transform, opacity;
     }
     .link:nth-child(even){transform:translateX(-40px);animation-name:snap-in-l}
-    .link:nth-child(1){animation-delay:.28s}
-    .link:nth-child(2){animation-delay:.34s}
-    .link:nth-child(3){animation-delay:.40s}
-    .link:nth-child(4){animation-delay:.46s}
-    .link:nth-child(5){animation-delay:.52s}
-    .link:nth-child(6){animation-delay:.58s}
-    .link:nth-child(7){animation-delay:.64s}
-    @keyframes snap-in-r{to{opacity:1; transform:translateX(0)}}
-    @keyframes snap-in-l{to{opacity:1; transform:translateX(0)}}
-
+    @keyframes snap-in-r{to{opacity:1;transform:translateX(0)}}
+    @keyframes snap-in-l{to{opacity:1;transform:translateX(0)}}
     .link:hover{background:var(--btn-hover)}
     .link img{width:28px;height:28px;border-radius:6px;object-fit:cover}
-
-    footer{
-      font-size:12px;color:#1f1f1f;margin-top:32px;text-align:left;
-      opacity:0; animation:fade .25s .72s forwards;
-    }
+    footer{font-size:12px;color:#1f1f1f;margin-top:32px;text-align:left;opacity:0;animation:fade .25s .72s forwards;}
     @keyframes fade{to{opacity:1}}
-
-    @media (max-width:480px){
-      h1{font-size:24px}
-      .pfp img{width:100px;height:100px}
-      .link{padding:12px 16px}
-      .link img{width:26px;height:26px}
-    }
-
-    /* ===== POPUP ===== */
-    .popup-overlay{
-      position:fixed; inset:0; background:rgba(0,0,0,0.6);
-      display:none; justify-content:center; align-items:center;
-      z-index:50; animation:fade .3s ease forwards;
-    }
-    .popup{
-      background:#fff;color:#000;border-radius:16px;padding:24px 20px 28px;
-      max-width:400px;width:90%; box-shadow:0 10px 30px rgba(0,0,0,0.4);
-      position:relative; text-align:center; animation:pop .22s ease forwards;
-    }
-    @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
-    .popup-close{position:absolute;top:8px;right:12px;font-size:24px;cursor:pointer;color:#000}
-    .popup h2{margin:0 0 10px;font-size:22px}
-    .popup p{margin:0 0 18px;font-size:14px;color:#333}
-    #emailForm{display:flex;flex-direction:column;align-items:center;gap:10px}
-    #emailForm input{
-      width:100%;max-width:280px;padding:10px;border:1px solid #ccc;border-radius:8px;
-      font-size:14px;text-align:center;outline:none;
-    }
-    #emailForm button{
-      background:#000;color:#fff;border:none;border-radius:8px;padding:10px;font-size:15px;
-      cursor:pointer;transition:transform .12s ease, background .12s ease;
-      width:100%;max-width:150px;
-    }
-    #emailForm button:hover{transform:scale(1.03);background:#222}
+    @media(max-width:480px){h1{font-size:24px}.pfp img{width:100px;height:100px}.link{padding:12px 16px}.link img{width:26px;height:26px}}
   </style>
 </head>
 <body>
-  <!-- moving glass blobs -->
   <div class="bg" id="bg"></div>
-  <div class="frost" aria-hidden="true"></div>
+  <div class="frost"></div>
 
   <main class="wrap">
     <header>
-      <div class="pfp">
-        <img src="apple music.jpg" alt="b2nny profile" />
-      </div>
+      <div class="pfp"><img src="apple music.jpg" alt="b2nny profile"></div>
       <h1>@b2nny</h1>
       <div class="play-wrap">
-        <button class="play-btn" id="playBtn" aria-label="Play track">▶</button>
-        <!-- bump ?v= number to force-refresh audio if you replace the file -->
+        <button class="play-btn" id="playBtn">▶</button>
         <audio id="audioPlayer" src="wussup -74 c.mp3?v=2"></audio>
       </div>
     </header>
 
     <section class="links">
+      <!-- all links the same -->
       <a class="link" href="https://open.spotify.com/track/7bvzwge2VHijigp5BZuw30?si=a2e3a94fc2e94bcd" target="_blank">
-        <img src="Screenshot 2025-10-23 180721.png" alt="Wussup cover" />
-        <span>Wussup</span>
+        <img src="Screenshot 2025-10-23 180721.png" alt="Wussup cover"><span>Wussup</span>
       </a>
-
-      <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank">
-        <img src="Spotify.png" alt="Spotify" />
-        <span>b2nny | Spotify</span>
-      </a>
-
-      <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank">
-        <img src="Apple.png" alt="Apple Music" />
-        <span>b2nny | Apple Music</span>
-      </a>
-
-      <a class="link" href="https://soundcloud.com/b2nny" target="_blank">
-        <img src="Soundcloud.png" alt="SoundCloud" />
-        <span>b2nny | SoundCloud</span>
-      </a>
-
-      <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank">
-        <img src="Youtube.jpg" alt="YouTube" />
-        <span>b2nny | YouTube</span>
-      </a>
-
-      <a class="link" href="https://instagram.com/b2nnyy" target="_blank">
-        <img src="Instagram.png" alt="Instagram" />
-        <span>b2nny | Instagram</span>
-      </a>
-
-      <a class="link" href="https://x.com/b2nnny" target="_blank">
-        <img src="Twitter.jpg" alt="X" />
-        <span>b2nny | X</span>
-      </a>
+      <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank"><img src="Spotify.png" alt="Spotify"><span>b2nny | Spotify</span></a>
+      <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank"><img src="Apple.png" alt="Apple Music"><span>b2nny | Apple Music</span></a>
+      <a class="link" href="https://soundcloud.com/b2nny" target="_blank"><img src="Soundcloud.png" alt="SoundCloud"><span>b2nny | SoundCloud</span></a>
+      <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank"><img src="Youtube.jpg" alt="YouTube"><span>b2nny | YouTube</span></a>
+      <a class="link" href="https://instagram.com/b2nnyy" target="_blank"><img src="Instagram.png" alt="Instagram"><span>b2nny | Instagram</span></a>
+      <a class="link" href="https://x.com/b2nnny" target="_blank"><img src="Twitter.jpg" alt="X"><span>b2nny | X</span></a>
     </section>
 
-    <footer>
-      © <script>document.write(new Date().getFullYear());</script> Harmony Hill
-    </footer>
+    <footer>© <script>document.write(new Date().getFullYear());</script> Harmony Hill</footer>
   </main>
 
-  <!-- popup -->
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup">
-      <span class="popup-close" id="popupClose">&times;</span>
-      <h2>Join the b2nny list</h2>
-      <p>Get updates when I drop new music and exclusive content.</p>
-      <form id="emailForm" action="https://docs.google.com/forms/d/e/1FAIpQLScbYz6HEy3iCjGKQxDJHYw4BpgwQlDCDbtB5hYMaR8oVxEJcA/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-        <input type="email" name="entry.1308356018" placeholder="Enter your email" required />
-        <button type="submit">Join the list</button>
-      </form>
-      <iframe name="hidden_iframe" style="display:none;" onload="if(window.submitted){document.getElementById('emailForm').innerHTML='<p>Thanks for signing up!</p>'; }"></iframe>
-    </div>
-  </div>
-
   <script>
-    /* ====== GLASS BLOBS: random, brighter, with gentle collision/repel ====== */
+    // glass blob physics (unchanged)
     (function glassBlobs(){
-      const bg = document.getElementById('bg');
-      const colors = ['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
-      const count = Math.floor(Math.random()*2)+3; // 3–4
-      const blobs = [];
-      let W = window.innerWidth, H = window.innerHeight;
-
+      const bg=document.getElementById('bg');
+      const colors=['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
+      const count=Math.floor(Math.random()*2)+3;
+      const blobs=[];
+      let W=window.innerWidth,H=window.innerHeight;
       function makeGradient(c){
-        // clean glass: inner highlight + body color, no glow
-        return `
-          radial-gradient(45% 45% at 30% 30%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.25) 38%, rgba(255,255,255,0) 65%),
-          radial-gradient(circle at 60% 60%, ${c} 0%, rgba(255,255,255,0) 70%)
-        `;
+        return`radial-gradient(45% 45% at 30% 30%,rgba(255,255,255,0.7)0%,rgba(255,255,255,0.25)38%,rgba(255,255,255,0)65%),radial-gradient(circle at 60% 60%,${c}0%,rgba(255,255,255,0)70%)`;
       }
-
       function createBlob(){
-        const el = document.createElement('div');
-        el.className = 'blob';
-
-        // size: larger on desktop, still big on mobile
-        const base = Math.max(W, H);
-        const size = Math.round(base * (0.36 + Math.random()*0.20)); // 36%–56%
-        el.style.width = el.style.height = size + 'px';
-
-        // starting position
-        const x = Math.random()*(W - size);
-        const y = Math.random()*(H - size);
-
-        // velocity: a bit faster than before
-        const sp = 0.18 + Math.random()*0.22; // px per ms-ish
-        const ang = Math.random()*Math.PI*2;
-        const vx = Math.cos(ang)*sp;
-        const vy = Math.sin(ang)*sp;
-
-        // color
-        const c = colors[Math.floor(Math.random()*colors.length)];
-        el.style.background = makeGradient(c);
-
+        const el=document.createElement('div');
+        el.className='blob';
+        const base=Math.max(W,H);
+        const size=Math.round(base*(0.36+Math.random()*0.20));
+        el.style.width=el.style.height=size+'px';
+        const x=Math.random()*(W-size);
+        const y=Math.random()*(H-size);
+        const sp=0.18+Math.random()*0.22;
+        const ang=Math.random()*Math.PI*2;
+        const vx=Math.cos(ang)*sp;
+        const vy=Math.sin(ang)*sp;
+        const c=colors[Math.floor(Math.random()*colors.length)];
+        el.style.background=makeGradient(c);
         bg.appendChild(el);
-        return { el, x, y, vx, vy, r:size/2, size };
+        return{el,x,y,vx,vy,r:size/2,size};
       }
-
-      for(let i=0;i<count;i++) blobs.push(createBlob());
-
+      for(let i=0;i<count;i++)blobs.push(createBlob());
       function tick(){
-        const t = performance.now();
-        const dt = 16; // ~60fps step
-
-        // simple edge bounce + pairwise repel
+        const dt=16;
         for(let i=0;i<blobs.length;i++){
-          const b = blobs[i];
-
-          // move
-          b.x += b.vx * dt;
-          b.y += b.vy * dt;
-
-          // edge bounce
-          if(b.x < 0){ b.x = 0; b.vx *= -1; }
-          if(b.y < 0){ b.y = 0; b.vy *= -1; }
-          if(b.x + b.size > W){ b.x = W - b.size; b.vx *= -1; }
-          if(b.y + b.size > H){ b.y = H - b.size; b.vy *= -1; }
-
-          // gentle repel with others
+          const b=blobs[i];
+          b.x+=b.vx*dt;b.y+=b.vy*dt;
+          if(b.x<0){b.x=0;b.vx*=-1}
+          if(b.y<0){b.y=0;b.vy*=-1}
+          if(b.x+b.size>W){b.x=W-b.size;b.vx*=-1}
+          if(b.y+b.size>H){b.y=H-b.size;b.vy*=-1}
           for(let j=i+1;j<blobs.length;j++){
-            const c = blobs[j];
-            const dx = (b.x + b.r) - (c.x + c.r);
-            const dy = (b.y + b.r) - (c.y + c.r);
-            const dist = Math.hypot(dx,dy);
-            const minDist = (b.r + c.r) * 0.92; // slight overlap tolerance
-
-            if(dist < minDist){
-              const overlap = (minDist - dist) * 0.5;
-              if(dist > 0.0001){
-                const nx = dx / dist, ny = dy / dist;
-                // push them apart
-                b.x += nx * overlap;
-                b.y += ny * overlap;
-                c.x -= nx * overlap;
-                c.y -= ny * overlap;
-                // swap a bit of velocity (fake bounce)
-                const pbx = b.vx, pby = b.vy;
-                b.vx = c.vx*0.85; b.vy = c.vy*0.85;
-                c.vx = pbx*0.85;  c.vy = pby*0.85;
-              } else {
-                // identical centers – nudge randomly
-                b.x += (Math.random()-0.5)*2;
-                b.y += (Math.random()-0.5)*2;
-              }
+            const c=blobs[j];
+            const dx=(b.x+b.r)-(c.x+c.r),dy=(b.y+b.r)-(c.y+c.r);
+            const dist=Math.hypot(dx,dy),min=(b.r+c.r)*0.92;
+            if(dist<min){
+              const overlap=(min-dist)*0.5;
+              if(dist>0.0001){
+                const nx=dx/dist,ny=dy/dist;
+                b.x+=nx*overlap;b.y+=ny*overlap;
+                c.x-=nx*overlap;c.y-=ny*overlap;
+                const pbx=b.vx,pby=b.vy;
+                b.vx=c.vx*0.85;b.vy=c.vy*0.85;
+                c.vx=pbx*0.85;c.vy=pby*0.85;
+              }else{b.x+=(Math.random()-0.5)*2;b.y+=(Math.random()-0.5)*2;}
             }
           }
         }
-
-        // render
-        for(const b of blobs){
-          b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
-        }
-
+        for(const b of blobs){b.el.style.transform=`translate(${b.x}px,${b.y}px)`;}
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
-
-      // keep responsive
-      window.addEventListener('resize', () => {
-        W = window.innerWidth; H = window.innerHeight;
-      }, { passive:true });
+      window.addEventListener('resize',()=>{W=window.innerWidth;H=window.innerHeight;},{passive:true});
     })();
 
-    /* ===== POPUP ===== */
-    const overlay = document.getElementById('popupOverlay');
-    const closeBtn = document.getElementById('popupClose');
-    window.addEventListener('load', () => {
-      setTimeout(() => overlay.style.display = 'flex', 1000);
+    const playBtn=document.getElementById('playBtn');
+    const audio=document.getElementById('audioPlayer');
+    let isPlaying=false;
+    playBtn.addEventListener('click',()=>{
+      if(!isPlaying){audio.play();playBtn.textContent='⏸';isPlaying=true;}
+      else{audio.pause();playBtn.textContent='▶';isPlaying=false;}
     });
-    closeBtn?.addEventListener('click', () => overlay.style.display = 'none');
-    overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.style.display = 'none'; });
-
-    /* ===== AUDIO TOGGLE (plays once) ===== */
-    const playBtn = document.getElementById('playBtn');
-    const audio = document.getElementById('audioPlayer');
-    let isPlaying = false;
-
-    playBtn.addEventListener('click', () => {
-      if (!isPlaying) {
-        audio.play();
-        playBtn.textContent = '⏸';
-        isPlaying = true;
-      } else {
-        audio.pause();
-        playBtn.textContent = '▶';
-        isPlaying = false;
-      }
-    });
-    audio.addEventListener('ended', () => {
-      playBtn.textContent = '▶';
-      isPlaying = false;
-    });
+    audio.addEventListener('ended',()=>{playBtn.textContent='▶';isPlaying=false;});
   </script>
 </body>
 </html>
