@@ -29,15 +29,12 @@
     body {
       min-height: 100vh;
       background: linear-gradient(to top, #111 0%, #eee 100%);
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      background-size: cover;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       color: var(--fg);
-      line-height: 1.4;
+      overflow-x: hidden;
     }
     .wrap {
       width: 100%;
@@ -46,12 +43,26 @@
     }
     header { text-align: center; margin-bottom: 24px; }
     .pfp img {
-      width: 120px; height: 120px; border-radius: 999px; object-fit: cover;
+      width: 120px; height: 120px;
+      border-radius: 999px;
+      object-fit: cover;
       border: 2px solid rgba(255,255,255,0.8);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp .6s ease-out forwards;
     }
-    h1 { font-size: 28px; margin: 12px 0 4px; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      font-size: 28px;
+      margin: 12px 0 4px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp .6s ease-out .2s forwards;
+    }
 
-    .links { display: grid; gap: 12px; }
+    .links { display: grid; gap: 12px; margin-top: 20px; }
     .link {
       display: flex; align-items: center; gap: 12px;
       background: var(--button-bg);
@@ -60,9 +71,30 @@
       padding: 14px 18px;
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.2);
-      transition: background .15s ease, transform .15s ease;
-      transform: scale(1);
+      opacity: 0;
+      transform: translateX(50px);
+      animation: slideInRight .5s ease-out forwards;
     }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .link:nth-child(even) {
+      transform: translateX(-50px);
+      animation: slideInLeft .5s ease-out forwards;
+    }
+    .link:nth-child(1) { animation-delay: .3s; }
+    .link:nth-child(2) { animation-delay: .4s; }
+    .link:nth-child(3) { animation-delay: .5s; }
+    .link:nth-child(4) { animation-delay: .6s; }
+    .link:nth-child(5) { animation-delay: .7s; }
+    .link:nth-child(6) { animation-delay: .8s; }
+    .link:nth-child(7) { animation-delay: .9s; }
+
     .link:hover, .link:active {
       background: var(--button-hover);
       transform: scale(1.04);
@@ -75,6 +107,8 @@
       font-size: 12px; color: #222;
       margin-top: 32px;
       text-align: left;
+      opacity: 0;
+      animation: fadeUp .6s ease-out 1s forwards;
     }
 
     @media (max-width: 480px) {
@@ -152,13 +186,6 @@
       transform: scale(1.04);
       background: #222;
     }
-    .success-message {
-      display: none;
-      color: #000;
-      font-size: 15px;
-      font-weight: 500;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
@@ -191,7 +218,7 @@
         <span>b2nny | SoundCloud</span>
       </a>
 
-      <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
+      <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank">
         <img src="Youtube.jpg" alt="YouTube" />
         <span>b2nny | YouTube</span>
       </a>
@@ -222,7 +249,7 @@
         <input type="email" name="entry.1308356018" placeholder="Enter your email" required>
         <button type="submit">Join the list</button>
       </form>
-      <iframe name="hidden_iframe" style="display:none;" onload="if(submitted){document.getElementById('emailForm').innerHTML='<p class=\'success-message\'>Thanks for signing up!</p>'; }"></iframe>
+      <iframe name="hidden_iframe" style="display:none;" onload="if(submitted){document.getElementById('emailForm').innerHTML='<p>Thanks for signing up!</p>'; }"></iframe>
     </div>
   </div>
 
@@ -237,4 +264,3 @@
   </script>
 </body>
 </html>
-
