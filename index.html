@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>b2nny — links</title>
   <meta name="description" content="Official links for b2nny — Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#0a0a0a" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFPEJ3CD63"></script>
@@ -17,229 +17,178 @@
   </script>
 
   <style>
-    :root {
+    :root{
       --fg: #fff;
-      --button-bg: rgba(0,0,0,0.6);
-      --button-hover: rgba(0,0,0,0.8);
-      --radius: 16px;
       --maxw: 720px;
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body {
-      min-height: 100vh;
-      background: linear-gradient(to top, #111 0%, #eee 100%);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      color: var(--fg);
-      overflow-x: hidden;
-    }
-    .wrap {
-      width: 100%;
-      max-width: var(--maxw);
-      padding: 32px 20px 48px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 24px;
-      position: relative;
-    }
-    .pfp img {
-      width: 120px;
-      height: 120px;
-      border-radius: 999px;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.8);
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp .6s ease-out forwards;
-    }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    h1 {
-      font-size: 28px;
-      margin: 12px 0 4px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp .6s ease-out .2s forwards;
-      display: inline-block;
+
+      /* palette (sky + greens from your image) */
+      --c1: #8EC5FF; /* soft sky */
+      --c2: #4FA3FF; /* mid blue */
+      --c3: #A8F0D1; /* mint */
+      --c4: #57D69A; /* green */
+
+      /* button colors */
+      --btn-bg: rgba(0,0,0,0.65);
+      --btn-hover: rgba(0,0,0,0.85);
+      --radius: 16px;
     }
 
-    /* Play button */
-    .play-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      margin-left: 10px;
-      border-radius: 50%;
-      background: #fff;
-      border: 2px solid #000;
-      color: #000;
-      cursor: pointer;
-      font-size: 18px;
-      transition: all 0.2s ease;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp .6s ease-out .3s forwards;
-    }
-    .play-btn:hover {
-      background: #f0f0f0;
-      transform: scale(1.05);
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      min-height:100vh;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--fg);
+      overflow-x:hidden;
+      display:flex;justify-content:center;align-items:flex-start;
+      background:#0e0e10; /* base behind blobs */
     }
 
-    .links {
-      display: grid;
-      gap: 12px;
-      margin-top: 20px;
+    /* ========== LAYERS ========== */
+    .bg {
+      position:fixed; inset:0;
+      overflow:hidden; z-index:-2;
     }
-    .link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--button-bg);
-      color: var(--fg);
-      text-decoration: none;
-      padding: 14px 18px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.2);
-      opacity: 0;
-      transform: translateX(50px);
-      animation: slideInRight .5s ease-out forwards;
+    .blob {
+      position:absolute;
+      border-radius:50%;
+      filter: blur(40px);
+      opacity:0.85;
+      mix-blend-mode:screen; /* luminous blending */
+      animation: drift linear infinite;
+      will-change: transform;
     }
-    @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(50px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-50px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .link:nth-child(even) {
-      transform: translateX(-50px);
-      animation: slideInLeft .5s ease-out forwards;
-    }
-    .link:nth-child(1) { animation-delay: .3s; }
-    .link:nth-child(2) { animation-delay: .4s; }
-    .link:nth-child(3) { animation-delay: .5s; }
-    .link:nth-child(4) { animation-delay: .6s; }
-    .link:nth-child(5) { animation-delay: .7s; }
-    .link:nth-child(6) { animation-delay: .8s; }
-    .link:nth-child(7) { animation-delay: .9s; }
-
-    .link:hover, .link:active {
-      background: var(--button-hover);
-      transform: scale(1.04);
-    }
-    .link img {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      object-fit: cover;
+    @keyframes drift {
+      0%   { transform: translate(var(--x0),var(--y0)) scale(1); }
+      50%  { transform: translate(var(--x1),var(--y1)) scale(1.08); }
+      100% { transform: translate(var(--x0),var(--y0)) scale(1); }
     }
 
-    footer {
-      font-size: 12px;
-      color: #222;
-      margin-top: 32px;
-      text-align: left;
-      opacity: 0;
-      animation: fadeUp .6s ease-out 1s forwards;
+    /* subtle frosted sheet to unify colors (slightly transparent) */
+    .frost {
+      position:fixed; inset:0; z-index:-1;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(22px) saturate(120%);
+      -webkit-backdrop-filter: blur(22px) saturate(120%);
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 24px; }
-      .pfp img { width: 100px; height: 100px; }
-      .link { padding: 12px 16px; }
-      .link img { width: 26px; height: 26px; }
+    /* ========== CONTENT WRAP ========== */
+    .wrap{width:100%;max-width:var(--maxw);padding:32px 20px 48px}
+    header{text-align:center;margin-bottom:24px}
+
+    .pfp img{
+      width:120px;height:120px;border-radius:999px;object-fit:cover;
+      border:2px solid rgba(255,255,255,0.8);
+      opacity:0; transform: translateY(22px);
+      animation: snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
     }
 
-    /* Popup styles */
-    .popup-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      animation: fadeIn .4s ease forwards;
+    h1{
+      font-size:28px;margin:12px 0 10px;
+      opacity:0; transform: translateY(18px);
+      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .15s forwards;
     }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .popup {
-      background: #fff;
-      color: #000;
-      border-radius: 16px;
-      padding: 24px 20px 28px;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      animation: popIn .3s ease forwards;
-      position: relative;
-      text-align: center;
-    }
-    @keyframes popIn {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    .popup-close {
-      position: absolute;
-      top: 8px; right: 12px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #000;
-    }
-    .popup h2 { margin: 0 0 10px; font-size: 22px; }
-    .popup p { margin: 0 0 18px; font-size: 14px; color: #333; }
 
-    #emailForm {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+    /* play button (below @b2nny) */
+    .play-wrap{display:flex;justify-content:center}
+    .play-btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:44px;height:44px;border-radius:50%;
+      background:#fff;border:2px solid #000;color:#000;cursor:pointer;
+      font-size:18px;transition:transform .12s ease, background .12s ease;
+      opacity:0; transform: translateY(14px);
+      animation: snap-up .28s cubic-bezier(.2,.8,.2,1) .22s forwards;
+      user-select:none;
     }
-    #emailForm input {
-      width: 100%;
-      max-width: 280px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-      text-align: center;
-      outline: none;
+    .play-btn:hover{background:#f0f0f0; transform:translateY(0) scale(1.04)}
+
+    @keyframes snap-up { to { opacity:1; transform: translateY(0)} }
+
+    /* LINKS */
+    .links{display:grid;gap:12px;margin-top:22px}
+    .link{
+      display:flex;align-items:center;gap:12px;
+      background:var(--btn-bg); color:var(--fg); text-decoration:none;
+      padding:14px 18px; border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.22);
+      opacity:0; transform: translateX(40px);
+      animation: snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
+      will-change: transform, opacity;
     }
-    #emailForm button {
-      background: #000;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 15px;
-      cursor: pointer;
-      transition: transform .15s ease, background .15s ease;
-      width: 100%;
-      max-width: 150px;
+    .link:nth-child(even){
+      transform: translateX(-40px);
+      animation-name: snap-in-l;
     }
-    #emailForm button:hover {
-      transform: scale(1.04);
-      background: #222;
+    .link:nth-child(1){animation-delay:.28s}
+    .link:nth-child(2){animation-delay:.34s}
+    .link:nth-child(3){animation-delay:.40s}
+    .link:nth-child(4){animation-delay:.46s}
+    .link:nth-child(5){animation-delay:.52s}
+    .link:nth-child(6){animation-delay:.58s}
+    .link:nth-child(7){animation-delay:.64s}
+
+    @keyframes snap-in-r { to {opacity:1; transform: translateX(0)} }
+    @keyframes snap-in-l { to {opacity:1; transform: translateX(0)} }
+
+    .link:hover{background:var(--btn-hover)}
+    .link img{width:28px;height:28px;border-radius:6px;object-fit:cover}
+
+    footer{
+      font-size:12px;color:#1f1f1f;margin-top:32px;text-align:left;
+      opacity:0; animation: fade .25s .72s forwards;
     }
+    @keyframes fade { to {opacity:1} }
+
+    @media (max-width: 480px){
+      h1{font-size:24px}
+      .pfp img{width:100px;height:100px}
+      .link{padding:12px 16px}
+      .link img{width:26px;height:26px}
+    }
+
+    /* POPUP */
+    .popup-overlay{
+      position:fixed; inset:0; background:rgba(0,0,0,0.6);
+      display:none; justify-content:center; align-items:center;
+      z-index:50; animation: fade .3s ease forwards;
+    }
+    .popup{
+      background:#fff;color:#000;border-radius:16px;padding:24px 20px 28px;
+      max-width:400px;width:90%; box-shadow:0 10px 30px rgba(0,0,0,0.4);
+      position:relative; text-align:center; animation: pop .22s ease forwards;
+    }
+    @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+    .popup-close{position:absolute;top:8px;right:12px;font-size:24px;cursor:pointer;color:#000}
+    .popup h2{margin:0 0 10px;font-size:22px}
+    .popup p{margin:0 0 18px;font-size:14px;color:#333}
+    #emailForm{display:flex;flex-direction:column;align-items:center;gap:10px}
+    #emailForm input{
+      width:100%;max-width:280px;padding:10px;border:1px solid #ccc;border-radius:8px;
+      font-size:14px;text-align:center;outline:none;
+    }
+    #emailForm button{
+      background:#000;color:#fff;border:none;border-radius:8px;padding:10px;font-size:15px;
+      cursor:pointer;transition:transform .12s ease, background .12s ease;
+      width:100%;max-width:150px;
+    }
+    #emailForm button:hover{transform:scale(1.03);background:#222}
   </style>
 </head>
 <body>
+  <!-- animated background blobs -->
+  <div class="bg" id="bg"></div>
+  <div class="frost" aria-hidden="true"></div>
+
   <main class="wrap">
     <header>
       <div class="pfp">
         <img src="apple music.jpg" alt="b2nny profile" />
       </div>
       <h1>@b2nny</h1>
-      <button class="play-btn" id="playBtn">▶</button>
-      <audio id="audioPlayer" src="wussup -74 c.mp3"></audio>
+      <div class="play-wrap">
+        <button class="play-btn" id="playBtn" aria-label="Play track">▶</button>
+        <audio id="audioPlayer" src="wussup -74 c.mp3?v=2"></audio>
+      </div>
     </header>
 
     <section class="links">
@@ -284,23 +233,75 @@
     </footer>
   </main>
 
-  <!-- Popup -->
+  <!-- popup -->
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
       <span class="popup-close" id="popupClose">&times;</span>
       <h2>Join the b2nny list</h2>
       <p>Get updates when I drop new music and exclusive content.</p>
       <form id="emailForm" action="https://docs.google.com/forms/d/e/1FAIpQLScbYz6HEy3iCjGKQxDJHYw4BpgwQlDCDbtB5hYMaR8oVxEJcA/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-        <input type="email" name="entry.1308356018" placeholder="Enter your email" required>
+        <input type="email" name="entry.1308356018" placeholder="Enter your email" required />
         <button type="submit">Join the list</button>
       </form>
-      <iframe name="hidden_iframe" style="display:none;" onload="if(submitted){document.getElementById('emailForm').innerHTML='<p>Thanks for signing up!</p>'; }"></iframe>
+      <iframe name="hidden_iframe" style="display:none;" onload="if(window.submitted){document.getElementById('emailForm').innerHTML='<p>Thanks for signing up!</p>'; }"></iframe>
     </div>
   </div>
 
   <script>
+    /* ---------- Random iOS-style blobs (3–4), loop forever ---------- */
+    (function makeBlobs(){
+      const bg = document.getElementById('bg');
+      const palette = ['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
+      const num = Math.floor(Math.random()*2) + 3; // 3–4
+      const vw = window.innerWidth, vh = window.innerHeight;
+
+      for(let i=0;i<num;i++){
+        const blob = document.createElement('div');
+        blob.className = 'blob';
+
+        // random size
+        const size = Math.round(Math.max(vw, vh) * (0.35 + Math.random()*0.25)); // 35%–60% of max dimension
+        blob.style.width = blob.style.height = size + 'px';
+
+        // radial-gradient to get that soft 3D look
+        const c = palette[Math.floor(Math.random()*palette.length)];
+        blob.style.background = `radial-gradient(35% 35% at 35% 35%, rgba(255,255,255,0.55), rgba(255,255,255,0) 60%), radial-gradient(circle at 60% 60%, ${c}, transparent 60%)`;
+
+        // start/end travel points
+        const startX = Math.round(Math.random()*(vw - size));
+        const startY = Math.round(Math.random()*(vh - size));
+        const travel = Math.round(Math.max(vw, vh) * (0.12 + Math.random()*0.18)); // how far it drifts
+
+        // random direction
+        const dx = (Math.random()<0.5? -1:1) * travel;
+        const dy = (Math.random()<0.5? -1:1) * travel;
+
+        // expose to CSS keyframes as vars
+        blob.style.setProperty('--x0', startX + 'px');
+        blob.style.setProperty('--y0', startY + 'px');
+        blob.style.setProperty('--x1', (startX + dx) + 'px');
+        blob.style.setProperty('--y1', (startY + dy) + 'px');
+
+        // random duration (slow), random offset so they feel unsynced
+        const dur = 18 + Math.random()*12; // 18–30s
+        const delay = -Math.random()*dur;  // negative = start mid-animation
+        blob.style.animationDuration = dur + 's';
+        blob.style.animationDelay = delay + 's';
+
+        bg.appendChild(blob);
+      }
+    })();
+
+    /* ---------- Popup timing ---------- */
     const overlay = document.getElementById('popupOverlay');
     const closeBtn = document.getElementById('popupClose');
+    window.addEventListener('load', () => {
+      setTimeout(() => overlay.style.display = 'flex', 1000);
+    });
+    closeBtn.addEventListener('click', () => overlay.style.display = 'none');
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.style.display = 'none'; });
+
+    /* ---------- Audio play/pause toggle (plays once) ---------- */
     const playBtn = document.getElementById('playBtn');
     const audio = document.getElementById('audioPlayer');
     let isPlaying = false;
@@ -321,16 +322,6 @@
       playBtn.textContent = '▶';
       isPlaying = false;
     });
-
-    // popup logic
-    window.addEventListener('load', () => {
-      setTimeout(() => overlay.style.display = 'flex', 1000);
-    });
-    closeBtn.addEventListener('click', () => overlay.style.display = 'none');
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) overlay.style.display = 'none';
-    });
   </script>
 </body>
 </html>
-
