@@ -8,83 +8,107 @@
   <meta name="theme-color" content="#0a0a0a" />
 
   <style>
-    :root{
-      --fg:#fff;
-      --maxw:720px;
-      --c1:#CFEAFF; --c2:#AEE4FF; --c3:#D6FFEF; --c4:#BFF7D9;
-      --btn-bg:rgba(0,0,0,0.65); --btn-hover:rgba(0,0,0,0.85); --radius:16px;
+    :root {
+      --fg: #fff;
+      --maxw: 720px;
+      --c1: #CFEAFF; --c2: #AEE4FF; --c3: #D6FFEF; --c4: #BFF7D9;
+      --btn-bg: rgba(0, 0, 0, 0.65);
+      --btn-hover: rgba(0, 0, 0, 0.85);
+      --radius: 16px;
     }
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;}
-    body{
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--fg);
-      display:flex;justify-content:center;align-items:flex-start;
-      background:#0f1012;
-      overflow-x:hidden; /* allow vertical scroll only */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #0f1012;
+      overflow-x: hidden;
     }
 
-    .bg{
-      position:fixed;inset:0;z-index:-2;
-      overflow:hidden; /* only background is clipped now */
-    }
-    .blob{
-      position:absolute;border-radius:50%;
-      filter:blur(10px)saturate(120%);
-      opacity:0.9;will-change:transform;pointer-events:none;
-      mix-blend-mode:normal;
-    }
-    .frost{
-      position:fixed;inset:0;z-index:-1;
-      background:rgba(255,255,255,0.08);
-      backdrop-filter:blur(22px)saturate(120%);
-      -webkit-backdrop-filter:blur(22px)saturate(120%);
+    .bg {
+      position: fixed; inset: 0; z-index: -2;
+      overflow: hidden;
     }
 
-    .wrap{width:100%;max-width:var(--maxw);padding:32px 20px 48px}
-    header{text-align:center;margin-bottom:24px}
-    .pfp img{
-      width:120px;height:120px;border-radius:999px;object-fit:cover;
-      border:2px solid rgba(255,255,255,0.85);
-      opacity:0;transform:translateY(22px);
-      animation:snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px) saturate(120%);
+      opacity: 0.9;
+      will-change: transform;
+      pointer-events: none;
     }
-    h1{
-      font-size:28px;margin:12px 0 10px;
-      opacity:0;transform:translateY(18px);
-      animation:snap-up .3s cubic-bezier(.2,.8,.2,1) .15s forwards;
-    }
-    .play-wrap{display:flex;justify-content:center}
-    .play-btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      width:44px;height:44px;border-radius:50%;
-      background:#fff;border:2px solid #000;color:#000;cursor:pointer;
-      font-size:18px;transition:transform .12s ease,background .12s ease;
-      opacity:0;transform:translateY(14px);
-      animation:snap-up .28s cubic-bezier(.2,.8,.2,1) .22s forwards;
-      user-select:none;
-    }
-    .play-btn:hover{background:#f0f0f0;transform:translateY(0)scale(1.04)}
-    @keyframes snap-up{to{opacity:1;transform:translateY(0)}}
 
-    .links{display:grid;gap:12px;margin-top:22px}
-    .link{
-      display:flex;align-items:center;gap:12px;
-      background:var(--btn-bg);color:var(--fg);text-decoration:none;
-      padding:14px 18px;border-radius:var(--radius);
-      border:1px solid rgba(255,255,255,0.22);
-      opacity:0;transform:translateX(40px);
-      animation:snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
+    .frost {
+      position: fixed; inset: 0; z-index: -1;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(22px) saturate(120%);
+      -webkit-backdrop-filter: blur(22px) saturate(120%);
     }
-    .link:nth-child(even){transform:translateX(-40px);animation-name:snap-in-l}
-    @keyframes snap-in-r{to{opacity:1;transform:translateX(0)}}
-    @keyframes snap-in-l{to{opacity:1;transform:translateX(0)}}
-    .link:hover{background:var(--btn-hover)}
-    .link img{width:28px;height:28px;border-radius:6px;object-fit:cover}
-    footer{font-size:12px;color:#1f1f1f;margin-top:32px;text-align:left;opacity:0;animation:fade .25s .72s forwards;}
-    @keyframes fade{to{opacity:1}}
-    @media(max-width:480px){h1{font-size:24px}.pfp img{width:100px;height:100px}.link{padding:12px 16px}.link img{width:26px;height:26px}}
+
+    .wrap { width: 100%; max-width: var(--maxw); padding: 32px 20px 48px; }
+    header { text-align: center; margin-bottom: 24px; }
+
+    .pfp img {
+      width: 120px; height: 120px; border-radius: 999px; object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.85);
+      opacity: 0; transform: translateY(22px);
+      animation: snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
+    }
+
+    h1 {
+      font-size: 28px; margin: 12px 0 10px;
+      opacity: 0; transform: translateY(18px);
+      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .15s forwards;
+    }
+
+    .play-wrap { display: flex; justify-content: center; }
+
+    .play-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #fff; border: 2px solid #000; color: #000; cursor: pointer;
+      font-size: 18px; transition: transform .12s ease, background .12s ease;
+      opacity: 0; transform: translateY(14px);
+      animation: snap-up .28s cubic-bezier(.2,.8,.2,1) .22s forwards;
+      user-select: none;
+    }
+
+    .play-btn:hover { background: #f0f0f0; transform: translateY(0) scale(1.04); }
+    @keyframes snap-up { to { opacity: 1; transform: translateY(0); } }
+
+    .links { display: grid; gap: 12px; margin-top: 22px; }
+    .link {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--btn-bg); color: var(--fg); text-decoration: none;
+      padding: 14px 18px; border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.22);
+      opacity: 0; transform: translateX(40px);
+      animation: snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .link:nth-child(even) { transform: translateX(-40px); animation-name: snap-in-l; }
+    @keyframes snap-in-r { to { opacity: 1; transform: translateX(0); } }
+    @keyframes snap-in-l { to { opacity: 1; transform: translateX(0); } }
+    .link:hover { background: var(--btn-hover); }
+    .link img { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; }
+
+    footer {
+      font-size: 12px; color: #1f1f1f; margin-top: 32px; text-align: left;
+      opacity: 0; animation: fade .25s .72s forwards;
+    }
+    @keyframes fade { to { opacity: 1; } }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      .pfp img { width: 100px; height: 100px; }
+      .link { padding: 12px 16px; }
+      .link img { width: 26px; height: 26px; }
+    }
   </style>
 </head>
 <body>
@@ -102,7 +126,6 @@
     </header>
 
     <section class="links">
-      <!-- all links the same -->
       <a class="link" href="https://open.spotify.com/track/7bvzwge2VHijigp5BZuw30?si=a2e3a94fc2e94bcd" target="_blank">
         <img src="Screenshot 2025-10-23 180721.png" alt="Wussup cover"><span>Wussup</span>
       </a>
@@ -118,16 +141,17 @@
   </main>
 
   <script>
-    // glass blob physics (unchanged)
     (function glassBlobs(){
       const bg=document.getElementById('bg');
       const colors=['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
       const count=Math.floor(Math.random()*2)+3;
       const blobs=[];
       let W=window.innerWidth,H=window.innerHeight;
+
       function makeGradient(c){
         return`radial-gradient(45% 45% at 30% 30%,rgba(255,255,255,0.7)0%,rgba(255,255,255,0.25)38%,rgba(255,255,255,0)65%),radial-gradient(circle at 60% 60%,${c}0%,rgba(255,255,255,0)70%)`;
       }
+
       function createBlob(){
         const el=document.createElement('div');
         el.className='blob';
@@ -136,7 +160,8 @@
         el.style.width=el.style.height=size+'px';
         const x=Math.random()*(W-size);
         const y=Math.random()*(H-size);
-        const sp=0.18+Math.random()*0.22;
+        // much slower speed for smooth motion
+        const sp=0.025+Math.random()*0.035; 
         const ang=Math.random()*Math.PI*2;
         const vx=Math.cos(ang)*sp;
         const vy=Math.sin(ang)*sp;
@@ -145,30 +170,30 @@
         bg.appendChild(el);
         return{el,x,y,vx,vy,r:size/2,size};
       }
+
       for(let i=0;i<count;i++)blobs.push(createBlob());
+
       function tick(){
         const dt=16;
         for(let i=0;i<blobs.length;i++){
           const b=blobs[i];
           b.x+=b.vx*dt;b.y+=b.vy*dt;
-          if(b.x<0){b.x=0;b.vx*=-1}
-          if(b.y<0){b.y=0;b.vy*=-1}
-          if(b.x+b.size>W){b.x=W-b.size;b.vx*=-1}
-          if(b.y+b.size>H){b.y=H-b.size;b.vy*=-1}
+          // edge soft bounce
+          if(b.x<0||b.x+b.size>W)b.vx*=-1;
+          if(b.y<0||b.y+b.size>H)b.vy*=-1;
+
+          // gentle repel
           for(let j=i+1;j<blobs.length;j++){
             const c=blobs[j];
             const dx=(b.x+b.r)-(c.x+c.r),dy=(b.y+b.r)-(c.y+c.r);
-            const dist=Math.hypot(dx,dy),min=(b.r+c.r)*0.92;
+            const dist=Math.hypot(dx,dy),min=(b.r+c.r)*0.9;
             if(dist<min){
-              const overlap=(min-dist)*0.5;
+              const overlap=(min-dist)*0.3;
               if(dist>0.0001){
                 const nx=dx/dist,ny=dy/dist;
                 b.x+=nx*overlap;b.y+=ny*overlap;
                 c.x-=nx*overlap;c.y-=ny*overlap;
-                const pbx=b.vx,pby=b.vy;
-                b.vx=c.vx*0.85;b.vy=c.vy*0.85;
-                c.vx=pbx*0.85;c.vy=pby*0.85;
-              }else{b.x+=(Math.random()-0.5)*2;b.y+=(Math.random()-0.5)*2;}
+              }
             }
           }
         }
