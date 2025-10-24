@@ -45,7 +45,7 @@
     h1 { font-size: 28px; margin: 12px 0 4px; }
 
     #listeners {
-      color: #ccc;
+      color: #000;
       font-size: 14px;
       margin: 0 0 8px;
       opacity: 0;
@@ -140,24 +140,22 @@
   </main>
 
   <script>
-    fetch('https://spotify-artist-stats.vercel.app/api/artist/2tbEf5RXMJ4XXwssBVlJ2B')
-      .then(res => res.json())
-      .then(data => {
-        const el = document.getElementById('listeners');
-        if (data.monthlyListeners) {
-          const num = data.monthlyListeners.toLocaleString();
-          el.textContent = `${num} monthly listeners`;
-          el.style.opacity = '1';
+    async function updateListeners() {
+      const el = document.getElementById('listeners');
+      try {
+        const response = await fetch('https://spotify-data-api.vercel.app/api/artist/2tbEf5RXMJ4XXwssBVlJ2B');
+        const data = await response.json();
+        if (data && data.monthlyListeners) {
+          el.textContent = data.monthlyListeners.toLocaleString() + ' monthly listeners';
         } else {
           el.textContent = 'monthly listeners unavailable';
-          el.style.opacity = '1';
         }
-      })
-      .catch(() => {
-        const el = document.getElementById('listeners');
+      } catch {
         el.textContent = 'monthly listeners unavailable';
-        el.style.opacity = '1';
-      });
+      }
+      el.style.opacity = '1';
+    }
+    updateListeners();
   </script>
 </body>
 </html>
