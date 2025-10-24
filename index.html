@@ -44,7 +44,7 @@
     }
     h1 { font-size: 28px; margin: 12px 0 4px; }
 
-    #listeners {
+    #followers {
       color: #000;
       font-size: 14px;
       margin: 0 0 8px;
@@ -78,7 +78,6 @@
       text-align: left;
     }
 
-    /* mobile tweaks */
     @media (max-width: 480px) {
       h1 { font-size: 24px; }
       .pfp img { width: 100px; height: 100px; }
@@ -94,7 +93,7 @@
         <img src="apple music.jpg" alt="b2nny profile" />
       </div>
       <h1>@b2nny</h1>
-      <p id="listeners">loading listeners...</p>
+      <p id="followers">loading followers...</p>
     </header>
 
     <section class="links">
@@ -130,32 +129,4 @@
 
       <a class="link" href="https://x.com/b2nnny" target="_blank">
         <img src="Twitter.jpg" alt="X" />
-        <span>b2nny | X</span>
-      </a>
-    </section>
-
-    <footer>
-      © <script>document.write(new Date().getFullYear());</script> Harmony Hill
-    </footer>
-  </main>
-
-  <script>
-    async function updateListeners() {
-      const el = document.getElementById('listeners');
-      try {
-        const response = await fetch('https://spotify-data-api.vercel.app/api/artist/2tbEf5RXMJ4XXwssBVlJ2B');
-        const data = await response.json();
-        if (data && data.monthlyListeners) {
-          el.textContent = data.monthlyListeners.toLocaleString() + ' monthly listeners';
-        } else {
-          el.textContent = 'monthly listeners unavailable';
-        }
-      } catch {
-        el.textContent = 'monthly listeners unavailable';
-      }
-      el.style.opacity = '1';
-    }
-    updateListeners();
-  </script>
-</body>
-</html>
+        <span>b2nny |
