@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>b2nny — links</title>
-  <meta name="description" content="Official links for b2nny — Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
+  <title>b2nny | links</title>
+  <meta name="description" content="Official links for b2nny | Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
   <meta name="theme-color" content="#0a0a0a" />
 
   <style>
     :root {
       --fg: #fff;
       --maxw: 720px;
-      --c1: #CFEAFF; --c2: #AEE4FF; --c3: #D6FFEF; --c4: #BFF7D9;
+      --c1: #CFEAFF;
+      --c2: #AEE4FF;
+      --c3: #D6FFEF;
+      --c4: #BFF7D9;
       --btn-bg: rgba(0, 0, 0, 0.65);
       --btn-hover: rgba(0, 0, 0, 0.85);
       --radius: 16px;
@@ -30,7 +33,9 @@
     }
 
     .bg {
-      position: fixed; inset: 0; z-index: -2;
+      position: fixed;
+      inset: 0;
+      z-index: -2;
       overflow: hidden;
     }
 
@@ -44,114 +49,199 @@
     }
 
     .frost {
-      position: fixed; inset: 0; z-index: -1;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(22px) saturate(120%);
       -webkit-backdrop-filter: blur(22px) saturate(120%);
     }
 
-    .wrap { width: 100%; max-width: var(--maxw); padding: 32px 20px 48px; }
-    header { text-align: center; margin-bottom: 24px; }
+    .wrap {
+      width: 100%;
+      max-width: var(--maxw);
+      padding: 32px 20px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
 
     .pfp img {
-      width: 120px; height: 120px; border-radius: 999px; object-fit: cover;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      object-fit: cover;
       border: 2px solid rgba(255,255,255,0.85);
-      opacity: 0; transform: translateY(22px);
+      opacity: 0;
+      transform: translateY(22px);
       animation: snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
     }
 
     /* countdown bars */
     .countdown-wrap {
-      margin-top: 12px;
+      margin-top: 18px;
       opacity: 0;
       transform: translateY(18px);
       animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .12s forwards;
+      display: flex;
+      justify-content: center;
     }
 
     .countdown-wrap + .countdown-wrap {
-      margin-top: 8px;
-      animation-delay: .15s;
+      margin-top: 14px;
+      animation-delay: .16s;
     }
 
     .countdown-bar {
       display: inline-flex;
-      align-items: baseline;
-      gap: 8px;
-      padding: 8px 14px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 22px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 13px;
       text-decoration: none;
       color: #fdfdfd;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255,255,255,0.25);
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.25), transparent 55%),
+                  rgba(0, 0, 0, 0.78);
+      border: 1px solid rgba(255,255,255,0.3);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       cursor: pointer;
-      transition: background .15s ease, transform .15s ease, border-color .15s ease;
+      transition: background .15s ease, transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      min-width: min(100%, 440px);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.4),
+        0 18px 38px rgba(0,0,0,0.6);
     }
 
     .countdown-bar:hover {
-      background: rgba(0, 0, 0, 0.9);
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.4);
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.32), transparent 55%),
+                  rgba(0, 0, 0, 0.95);
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.55);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 22px 46px rgba(0,0,0,0.8);
     }
 
     .countdown-label {
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       font-weight: 600;
-      font-size: 11px;
-      opacity: 0.85;
+      font-size: 12px;
+      opacity: 0.9;
+      white-space: nowrap;
     }
 
     .countdown-timer {
       font-variant-numeric: tabular-nums;
-      font-weight: 600;
-      font-size: 13px;
+      font-weight: 700;
+      font-size: 16px;
     }
 
     .countdown-out {
-      font-weight: 600;
+      font-weight: 800;
+      animation: soft-blink 1.25s ease-in-out infinite alternate;
     }
 
     h1 {
-      font-size: 28px; margin: 12px 0 10px;
-      opacity: 0; transform: translateY(18px);
-      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .18s forwards;
+      font-size: 28px;
+      margin: 16px 0 10px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .22s forwards;
     }
 
-    @keyframes snap-up { to { opacity: 1; transform: translateY(0); } }
+    @keyframes snap-up {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    .links { display: grid; gap: 12px; margin-top: 22px; }
+    @keyframes soft-blink {
+      from { opacity: 1; }
+      to { opacity: 0.45; }
+    }
+
+    .links {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
     .link {
-      display: flex; align-items: center; gap: 12px;
-      background: var(--btn-bg); color: var(--fg); text-decoration: none;
-      padding: 14px 18px; border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--btn-bg);
+      color: var(--fg);
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.22);
-      opacity: 0; transform: translateX(40px);
+      opacity: 0;
+      transform: translateX(40px);
       animation: snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
     }
 
-    .link:nth-child(even) { transform: translateX(-40px); animation-name: snap-in-l; }
-    @keyframes snap-in-r { to { opacity: 1; transform: translateX(0); } }
-    @keyframes snap-in-l { to { opacity: 1; transform: translateX(0); } }
-    .link:hover { background: var(--btn-hover); }
-    .link img { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; }
+    .link:nth-child(even) {
+      transform: translateX(-40px);
+      animation-name: snap-in-l;
+    }
+
+    @keyframes snap-in-r {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes snap-in-l {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .link:hover {
+      background: var(--btn-hover);
+    }
+
+    .link img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
 
     footer {
-      font-size: 12px; color: #1f1f1f; margin-top: 32px; text-align: left;
-      opacity: 0; animation: fade .25s .72s forwards;
+      font-size: 12px;
+      color: #1f1f1f;
+      margin-top: 32px;
+      text-align: left;
+      opacity: 0;
+      animation: fade .25s .72s forwards;
     }
-    @keyframes fade { to { opacity: 1; } }
+
+    @keyframes fade {
+      to { opacity: 1; }
+    }
 
     @media (max-width: 480px) {
       h1 { font-size: 24px; }
       .pfp img { width: 100px; height: 100px; }
       .link { padding: 12px 16px; }
       .link img { width: 26px; height: 26px; }
+
       .countdown-bar {
+        min-width: 0;
+        width: 100%;
+        padding: 10px 16px;
+        font-size: 12px;
+      }
+
+      .countdown-label {
         font-size: 11px;
-        padding: 7px 12px;
+        letter-spacing: 0.1em;
+      }
+
+      .countdown-timer {
+        font-size: 15px;
       }
     }
   </style>
@@ -162,7 +252,9 @@
 
   <main class="wrap">
     <header>
-      <div class="pfp"><img src="apple music.jpg" alt="b2nny profile"></div>
+      <div class="pfp">
+        <img src="apple music.jpg" alt="b2nny profile">
+      </div>
 
       <!-- POP DUMP countdown -->
       <div class="countdown-wrap">
@@ -192,76 +284,108 @@
     </header>
 
     <section class="links">
-      <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank"><img src="Spotify.png" alt="Spotify"><span>b2nny | Spotify</span></a>
-      <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank"><img src="Apple.png" alt="Apple Music"><span>b2nny | Apple Music</span></a>
-      <a class="link" href="https://soundcloud.com/b2nny" target="_blank"><img src="Soundcloud.png" alt="SoundCloud"><span>b2nny | SoundCloud</span></a>
-      <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank"><img src="Youtube.jpg" alt="YouTube"><span>b2nny | YouTube</span></a>
-      <a class="link" href="https://instagram.com/b2nnyy" target="_blank"><img src="Instagram.png" alt="Instagram"><span>b2nny | Instagram</span></a>
-      <a class="link" href="https://x.com/b2nnny" target="_blank"><img src="Twitter.jpg" alt="X"><span>b2nny | X</span></a>
+      <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank">
+        <img src="Spotify.png" alt="Spotify">
+        <span>b2nny | Spotify</span>
+      </a>
+      <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank">
+        <img src="Apple.png" alt="Apple Music">
+        <span>b2nny | Apple Music</span>
+      </a>
+      <a class="link" href="https://soundcloud.com/b2nny" target="_blank">
+        <img src="Soundcloud.png" alt="SoundCloud">
+        <span>b2nny | SoundCloud</span>
+      </a>
+      <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank">
+        <img src="Youtube.jpg" alt="YouTube">
+        <span>b2nny | YouTube</span>
+      </a>
+      <a class="link" href="https://instagram.com/b2nnyy" target="_blank">
+        <img src="Instagram.png" alt="Instagram">
+        <span>b2nny | Instagram</span>
+      </a>
+      <a class="link" href="https://x.com/b2nnny" target="_blank">
+        <img src="Twitter.jpg" alt="X">
+        <span>b2nny | X</span>
+      </a>
     </section>
 
-    <footer>© <script>document.write(new Date().getFullYear());</script> Harmony Hill</footer>
+    <footer>
+      © <script>document.write(new Date().getFullYear());</script> Harmony Hill
+    </footer>
   </main>
 
   <script>
     (function glassBlobs(){
-      const bg=document.getElementById('bg');
-      const colors=['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
-      const count=Math.floor(Math.random()*2)+3;
-      const blobs=[];
-      let W=window.innerWidth,H=window.innerHeight;
+      const bg = document.getElementById('bg');
+      const colors = ['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
+      const count = Math.floor(Math.random()*2)+3;
+      const blobs = [];
+      let W = window.innerWidth, H = window.innerHeight;
 
       function makeGradient(c){
         return 'radial-gradient(45% 45% at 30% 30%,rgba(255,255,255,0.7)0%,rgba(255,255,255,0.25)38%,rgba(255,255,255,0)65%),radial-gradient(circle at 60% 60%,'+c+'0%,rgba(255,255,255,0)70%)';
       }
 
       function createBlob(){
-        const el=document.createElement('div');
-        el.className='blob';
-        const base=Math.max(W,H);
-        const size=Math.round(base*(0.36+Math.random()*0.20));
-        el.style.width=el.style.height=size+'px';
-        const x=Math.random()*(W-size);
-        const y=Math.random()*(H-size);
-        const sp=0.025+Math.random()*0.035;
-        const ang=Math.random()*Math.PI*2;
-        const vx=Math.cos(ang)*sp;
-        const vy=Math.sin(ang)*sp;
-        const c=colors[Math.floor(Math.random()*colors.length)];
-        el.style.background=makeGradient(c);
+        const el = document.createElement('div');
+        el.className = 'blob';
+        const base = Math.max(W,H);
+        const size = Math.round(base*(0.36+Math.random()*0.20));
+        el.style.width = el.style.height = size + 'px';
+        const x = Math.random()*(W-size);
+        const y = Math.random()*(H-size);
+        const sp = 0.025+Math.random()*0.035;
+        const ang = Math.random()*Math.PI*2;
+        const vx = Math.cos(ang)*sp;
+        const vy = Math.sin(ang)*sp;
+        const c = colors[Math.floor(Math.random()*colors.length)];
+        el.style.background = makeGradient(c);
         bg.appendChild(el);
-        return{el,x,y,vx,vy,r:size/2,size};
+        return { el, x, y, vx, vy, r: size/2, size };
       }
 
-      for(let i=0;i<count;i++)blobs.push(createBlob());
+      for(let i=0;i<count;i++) blobs.push(createBlob());
 
       function tick(){
-        const dt=16;
+        const dt = 16;
         for(let i=0;i<blobs.length;i++){
-          const b=blobs[i];
-          b.x+=b.vx*dt;b.y+=b.vy*dt;
-          if(b.x<0||b.x+b.size>W)b.vx*=-1;
-          if(b.y<0||b.y+b.size>H)b.vy*=-1;
+          const b = blobs[i];
+          b.x += b.vx*dt;
+          b.y += b.vy*dt;
+          if(b.x<0||b.x+b.size>W) b.vx *= -1;
+          if(b.y<0||b.y+b.size>H) b.vy *= -1;
 
           for(let j=i+1;j<blobs.length;j++){
-            const c=blobs[j];
-            const dx=(b.x+b.r)-(c.x+c.r),dy=(b.y+b.r)-(c.y+c.r);
-            const dist=Math.hypot(dx,dy),min=(b.r+c.r)*0.9;
+            const c = blobs[j];
+            const dx = (b.x+b.r)-(c.x+c.r);
+            const dy = (b.y+b.r)-(c.y+c.r);
+            const dist = Math.hypot(dx,dy);
+            const min = (b.r+c.r)*0.9;
             if(dist<min){
-              const overlap=(min-dist)*0.3;
+              const overlap = (min-dist)*0.3;
               if(dist>0.0001){
-                const nx=dx/dist,ny=dy/dist;
-                b.x+=nx*overlap;b.y+=ny*overlap;
-                c.x-=nx*overlap;c.y-=ny*overlap;
+                const nx = dx/dist;
+                const ny = dy/dist;
+                b.x += nx*overlap;
+                b.y += ny*overlap;
+                c.x -= nx*overlap;
+                c.y -= ny*overlap;
               }
             }
           }
         }
-        for(const b of blobs){b.el.style.transform='translate('+b.x+'px,'+b.y+'px)';}
+        for(const b of blobs){
+          b.el.style.transform = 'translate('+b.x+'px,'+b.y+'px)';
+        }
         requestAnimationFrame(tick);
       }
+
       requestAnimationFrame(tick);
-      window.addEventListener('resize',()=>{W=window.innerWidth;H=window.innerHeight;},{passive:true});
+      window.addEventListener('resize', ()=>{
+        W = window.innerWidth;
+        H = window.innerHeight;
+      }, { passive:true });
     })();
 
     // POP DUMP and RAP DUMP countdowns
@@ -308,7 +432,7 @@
       }
 
       tick();
-      setInterval(tick,1000);
+      setInterval(tick, 1000);
     })();
   </script>
 </body>
