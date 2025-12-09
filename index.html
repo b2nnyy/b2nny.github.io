@@ -60,25 +60,66 @@
       animation: snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
     }
 
+    /* countdown bars */
+    .countdown-wrap {
+      margin-top: 12px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .12s forwards;
+    }
+
+    .countdown-wrap + .countdown-wrap {
+      margin-top: 8px;
+      animation-delay: .15s;
+    }
+
+    .countdown-bar {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      text-decoration: none;
+      color: #fdfdfd;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      cursor: pointer;
+      transition: background .15s ease, transform .15s ease, border-color .15s ease;
+    }
+
+    .countdown-bar:hover {
+      background: rgba(0, 0, 0, 0.9);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .countdown-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      font-size: 11px;
+      opacity: 0.85;
+    }
+
+    .countdown-timer {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .countdown-out {
+      font-weight: 600;
+    }
+
     h1 {
       font-size: 28px; margin: 12px 0 10px;
       opacity: 0; transform: translateY(18px);
-      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .15s forwards;
+      animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .18s forwards;
     }
 
-    .play-wrap { display: flex; justify-content: center; }
-
-    .play-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 44px; height: 44px; border-radius: 50%;
-      background: #fff; border: 2px solid #000; color: #000; cursor: pointer;
-      font-size: 18px; transition: transform .12s ease, background .12s ease;
-      opacity: 0; transform: translateY(14px);
-      animation: snap-up .28s cubic-bezier(.2,.8,.2,1) .22s forwards;
-      user-select: none;
-    }
-
-    .play-btn:hover { background: #f0f0f0; transform: translateY(0) scale(1.04); }
     @keyframes snap-up { to { opacity: 1; transform: translateY(0); } }
 
     .links { display: grid; gap: 12px; margin-top: 22px; }
@@ -108,6 +149,10 @@
       .pfp img { width: 100px; height: 100px; }
       .link { padding: 12px 16px; }
       .link img { width: 26px; height: 26px; }
+      .countdown-bar {
+        font-size: 11px;
+        padding: 7px 12px;
+      }
     }
   </style>
 </head>
@@ -118,11 +163,28 @@
   <main class="wrap">
     <header>
       <div class="pfp"><img src="apple music.jpg" alt="b2nny profile"></div>
-      <h1>@b2nny</h1>
-      <div class="play-wrap">
-        <button class="play-btn" id="playBtn">▶</button>
-        <audio id="audioPlayer" src="wussup -74 c.mp3?v=2"></audio>
+
+      <!-- POP DUMP countdown (clickable to presave) -->
+      <div class="countdown-wrap">
+        <a
+          href="https://distrokid.com/hyperfollow/b2nny/pop-dump"
+          target="_blank"
+          class="countdown-bar"
+        >
+          <span class="countdown-label">Pop Dump drops in</span>
+          <span class="countdown-timer" id="countdownPop">00d 00h 00m 00s</span>
+        </a>
       </div>
+
+      <!-- RAP DUMP countdown (non clickable, one week after Pop Dump) -->
+      <div class="countdown-wrap">
+        <div class="countdown-bar">
+          <span class="countdown-label">Rap Dump drops in</span>
+          <span class="countdown-timer" id="countdownRap">07d 00h 00m 00s</span>
+        </div>
+      </div>
+
+      <h1>@b2nny</h1>
     </header>
 
     <section class="links">
@@ -149,7 +211,7 @@
       let W=window.innerWidth,H=window.innerHeight;
 
       function makeGradient(c){
-        return`radial-gradient(45% 45% at 30% 30%,rgba(255,255,255,0.7)0%,rgba(255,255,255,0.25)38%,rgba(255,255,255,0)65%),radial-gradient(circle at 60% 60%,${c}0%,rgba(255,255,255,0)70%)`;
+        return 'radial-gradient(45% 45% at 30% 30%,rgba(255,255,255,0.7)0%,rgba(255,255,255,0.25)38%,rgba(255,255,255,0)65%),radial-gradient(circle at 60% 60%,'+c+'0%,rgba(255,255,255,0)70%)';
       }
 
       function createBlob(){
@@ -160,8 +222,7 @@
         el.style.width=el.style.height=size+'px';
         const x=Math.random()*(W-size);
         const y=Math.random()*(H-size);
-        // much slower speed for smooth motion
-        const sp=0.025+Math.random()*0.035; 
+        const sp=0.025+Math.random()*0.035;
         const ang=Math.random()*Math.PI*2;
         const vx=Math.cos(ang)*sp;
         const vy=Math.sin(ang)*sp;
@@ -178,11 +239,9 @@
         for(let i=0;i<blobs.length;i++){
           const b=blobs[i];
           b.x+=b.vx*dt;b.y+=b.vy*dt;
-          // edge soft bounce
           if(b.x<0||b.x+b.size>W)b.vx*=-1;
           if(b.y<0||b.y+b.size>H)b.vy*=-1;
 
-          // gentle repel
           for(let j=i+1;j<blobs.length;j++){
             const c=blobs[j];
             const dx=(b.x+b.r)-(c.x+c.r),dy=(b.y+b.r)-(c.y+c.r);
@@ -197,21 +256,59 @@
             }
           }
         }
-        for(const b of blobs){b.el.style.transform=`translate(${b.x}px,${b.y}px)`;}
+        for(const b of blobs){b.el.style.transform='translate('+b.x+'px,'+b.y+'px)';}
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
       window.addEventListener('resize',()=>{W=window.innerWidth;H=window.innerHeight;},{passive:true});
     })();
 
-    const playBtn=document.getElementById('playBtn');
-    const audio=document.getElementById('audioPlayer');
-    let isPlaying=false;
-    playBtn.addEventListener('click',()=>{
-      if(!isPlaying){audio.play();playBtn.textContent='⏸';isPlaying=true;}
-      else{audio.pause();playBtn.textContent='▶';isPlaying=false;}
-    });
-    audio.addEventListener('ended',()=>{playBtn.textContent='▶';isPlaying=false;});
+    // POP DUMP and RAP DUMP countdowns
+    (function setupCountdowns(){
+      const configs = [
+        {
+          id: 'countdownPop',
+          target: new Date('December 11, 2025 00:00:00'),
+          outText: 'Pop Dump out now'
+        },
+        {
+          id: 'countdownRap',
+          target: new Date('December 18, 2025 00:00:00'),
+          outText: 'Rap Dump out now'
+        }
+      ];
+
+      function pad(n){ return String(n).padStart(2,'0'); }
+
+      function updateOne(cfg){
+        const el = document.getElementById(cfg.id);
+        if(!el) return;
+
+        const now = new Date();
+        const diff = cfg.target - now;
+
+        if(diff <= 0){
+          el.textContent = cfg.outText;
+          el.classList.add('countdown-out');
+          return;
+        }
+
+        const sec = Math.floor(diff/1000);
+        const d = Math.floor(sec/86400);
+        const h = Math.floor((sec%86400)/3600);
+        const m = Math.floor((sec%3600)/60);
+        const s = sec%60;
+
+        el.textContent = `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+      }
+
+      function tick(){
+        configs.forEach(updateOne);
+      }
+
+      tick();
+      setInterval(tick,1000);
+    })();
   </script>
 </body>
 </html>
