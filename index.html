@@ -183,6 +183,8 @@
       opacity: 0;
       transform: translateX(40px);
       animation: snap-in-r .28s cubic-bezier(.2,.8,.2,1) forwards;
+      cursor: pointer;
+      font: inherit;
     }
 
     .link:nth-child(even) {
@@ -209,6 +211,18 @@
       object-fit: cover;
     }
 
+    .link-pop {
+      background: linear-gradient(135deg, #ffb5d1, #ffc973);
+      color: #1b1b1f;
+      border-color: rgba(0,0,0,0.4);
+      font-weight: 600;
+    }
+
+    .link-pop:hover {
+      background: linear-gradient(135deg, #ffd1e4, #ffe29c);
+      border-color: rgba(0,0,0,0.7);
+    }
+
     footer {
       font-size: 12px;
       color: #1f1f1f;
@@ -220,6 +234,120 @@
 
     @keyframes fade {
       to { opacity: 1; }
+    }
+
+    /* modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      background: rgba(10,10,14,0.98);
+      border-radius: 18px;
+      padding: 20px 22px 18px;
+      max-width: 380px;
+      width: calc(100% - 40px);
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 22px 48px rgba(0,0,0,0.9);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .modal-sub {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-bottom: 14px;
+    }
+
+    .modal-close {
+      border: none;
+      background: transparent;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 2px 4px;
+      border-radius: 999px;
+      transition: background .12s ease, color .12s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+
+    .modal-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .modal-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      color: #fdfdfd;
+      background: rgba(20,20,25,0.9);
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: background .12s ease, transform .12s ease, border-color .12s ease;
+    }
+
+    .modal-link span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-link strong {
+      font-weight: 600;
+    }
+
+    .modal-link small {
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    .modal-link:hover {
+      background: rgba(32,32,42,0.98);
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-1px);
+    }
+
+    .modal-pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      opacity: 0.85;
     }
 
     @media (max-width: 480px) {
@@ -284,6 +412,12 @@
     </header>
 
     <section class="links">
+      <!-- Pop Dump button that opens modal -->
+      <button class="link link-pop" type="button" id="popDumpBtn">
+        <img src="Screenshot 2025-10-23 180721.png" alt="Pop Dump cover">
+        <span>Pop Dump</span>
+      </button>
+
       <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank">
         <img src="Spotify.png" alt="Spotify">
         <span>b2nny | Spotify</span>
@@ -314,6 +448,57 @@
       © <script>document.write(new Date().getFullYear());</script> Harmony Hill
     </footer>
   </main>
+
+  <!-- Pop Dump modal -->
+  <div class="modal-backdrop" id="popDumpModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popDumpTitle">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="popDumpTitle">Pop Dump</div>
+          <div class="modal-sub">Pick your platform and stream the EP.</div>
+        </div>
+        <button class="modal-close" type="button" data-close-modal>&times;</button>
+      </div>
+
+      <div class="modal-links">
+        <a
+          class="modal-link"
+          href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66"
+          target="_blank"
+        >
+          <span>
+            <strong>Spotify</strong>
+            <small>Open in app or browser</small>
+          </span>
+          <span class="modal-pill">Listen</span>
+        </a>
+
+        <a
+          class="modal-link"
+          href="https://music.apple.com/us/album/pop-dump/1858773650"
+          target="_blank"
+        >
+          <span>
+            <strong>Apple Music</strong>
+            <small>Stream the EP</small>
+          </span>
+          <span class="modal-pill">Listen</span>
+        </a>
+
+        <a
+          class="modal-link"
+          href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
+          target="_blank"
+        >
+          <span>
+            <strong>SoundCloud</strong>
+            <small>Full Pop Dump set</small>
+          </span>
+          <span class="modal-pill">Listen</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <script>
     (function glassBlobs(){
@@ -433,6 +618,41 @@
 
       tick();
       setInterval(tick, 1000);
+    })();
+
+    // Pop Dump modal logic
+    (function setupPopDumpModal(){
+      const btn = document.getElementById('popDumpBtn');
+      const modal = document.getElementById('popDumpModal');
+      if(!btn || !modal) return;
+
+      const closeButtons = modal.querySelectorAll('[data-close-modal]');
+
+      function openModal(){
+        modal.classList.add('open');
+      }
+
+      function closeModal(){
+        modal.classList.remove('open');
+      }
+
+      btn.addEventListener('click', openModal);
+
+      closeButtons.forEach(btnEl=>{
+        btnEl.addEventListener('click', closeModal);
+      });
+
+      modal.addEventListener('click', (e)=>{
+        if(e.target === modal){
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape'){
+          closeModal();
+        }
+      });
     })();
   </script>
 </body>
