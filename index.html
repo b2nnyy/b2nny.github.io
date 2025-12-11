@@ -127,6 +127,12 @@
         0 22px 46px rgba(0,0,0,0.8);
     }
 
+    /* non clickable top countdown */
+    .countdown-bar.is-static {
+      cursor: default;
+      pointer-events: none;
+    }
+
     .countdown-label {
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -216,6 +222,7 @@
       color: #1b1b1f;
       border-color: rgba(0,0,0,0.4);
       font-weight: 600;
+      justify-content: center;
     }
 
     .link-pop:hover {
@@ -384,19 +391,15 @@
         <img src="apple music.jpg" alt="b2nny profile">
       </div>
 
-      <!-- POP DUMP countdown -->
+      <!-- POP DUMP countdown (non clickable) -->
       <div class="countdown-wrap">
-        <a
-          href="https://distrokid.com/hyperfollow/b2nny/pop-dump"
-          target="_blank"
-          class="countdown-bar"
-        >
-          <span class="countdown-label">Pop Dump drops in</span>
-          <span class="countdown-timer" id="countdownPop">00d 00h 00m 00s</span>
-        </a>
+        <div class="countdown-bar is-static">
+          <span class="countdown-label">Pop Dump</span>
+          <span class="countdown-timer" id="countdownPop">Pop Dump out now</span>
+        </div>
       </div>
 
-      <!-- RAP DUMP countdown -->
+      <!-- RAP DUMP countdown (still clickable) -->
       <div class="countdown-wrap">
         <a
           href="https://distrokid.com/hyperfollow/b2nny/rap-dump"
@@ -412,9 +415,8 @@
     </header>
 
     <section class="links">
-      <!-- Pop Dump button that opens modal -->
+      <!-- Pop Dump button (no image, opens modal) -->
       <button class="link link-pop" type="button" id="popDumpBtn">
-        <img src="Screenshot 2025-10-23 180721.png" alt="Pop Dump cover">
         <span>Pop Dump</span>
       </button>
 
