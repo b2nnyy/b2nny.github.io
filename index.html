@@ -919,7 +919,18 @@
 
         try{
           const res = await fetch(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
-          const data = await res.json();
+          const text = await res.text();
+let data;
+
+try {
+  data = JSON.parse(text);
+} catch (e) {
+  msgEl.textContent = "backend returned not json. check apps script deploy.";
+  console.log("backend raw response:", text);
+  submitBtn.disabled = false;
+  return;
+}
+
           if(data && data.ok && Array.isArray(data.busy)){
             busy = new Set(data.busy);
           }
@@ -990,7 +1001,18 @@
             body: params.toString()
           });
 
-          const data = await res.json();
+          const text = await res.text();
+let data;
+
+try {
+  data = JSON.parse(text);
+} catch (e) {
+  msgEl.textContent = "backend returned not json. check apps script deploy.";
+  console.log("backend raw response:", text);
+  submitBtn.disabled = false;
+  return;
+}
+
 
           if(!data || !data.ok){
             msgEl.textContent = (data && data.error) ? data.error : "error, try again";
@@ -1015,3 +1037,4 @@
   </script>
 </body>
 </html>
+
