@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -206,7 +205,6 @@
 
     @keyframes fade { to { opacity: 1; } }
 
-    /* sections */
     .section { display: none; }
     .section.active { display: block; }
 
@@ -220,7 +218,6 @@
     .backBtn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       text-decoration: none;
       color: #fff;
       background: rgba(0,0,0,0.55);
@@ -244,6 +241,19 @@
     .title2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
     .sub2 { font-size: 13px; opacity: 0.82; margin-bottom: 10px; }
     .tiny { font-size: 12px; opacity: 0.7; line-height: 1.35; }
+
+    .priceRow {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.35);
+      font-size: 12px;
+      opacity: 0.9;
+    }
 
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
@@ -312,7 +322,6 @@
 
     .msg { font-size: 13px; opacity: 0.9; }
 
-    /* modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -444,14 +453,13 @@
       <div class="countdown-wrap">
         <a href="#book" class="countdown-bar">
           <span class="countdown-label">Book a session</span>
-          <span class="countdown-timer">pick time</span>
+          <span class="countdown-timer">$50 per hour</span>
         </a>
       </div>
 
       <h1>@b2nny</h1>
     </header>
 
-    <!-- HOME -->
     <section class="section active" id="sectionHome">
       <section class="links">
         <a class="link" href="#book">
@@ -490,7 +498,6 @@
       </footer>
     </section>
 
-    <!-- RAP -->
     <section class="section" id="sectionRap">
       <div class="backRow">
         <a class="backBtn" href="#home">back</a>
@@ -527,7 +534,6 @@
       </div>
     </section>
 
-    <!-- BOOK -->
     <section class="section" id="sectionBook">
       <div class="backRow">
         <a class="backBtn" href="#home">back</a>
@@ -538,6 +544,12 @@
         <div class="title2">request booking</div>
         <div class="sub2">fill this out and pick a date and time. no payment here.</div>
         <div class="tiny">sessions are not confirmed until I text you back and confirm.</div>
+
+        <div class="priceRow">
+          <strong>$50</strong>
+          <span>per hour</span>
+          <span style="opacity:0.7;">1 hour sessions only</span>
+        </div>
 
         <div style="height: 14px;"></div>
 
@@ -573,16 +585,6 @@
 
         <div class="grid2">
           <div>
-            <label for="bkHours">amount of hours needed</label>
-            <select id="bkHours">
-              <option value="1">1 hour</option>
-              <option value="2">2 hours</option>
-              <option value="3">3 hours</option>
-              <option value="4">4 hours</option>
-              <option value="6">6 hours</option>
-            </select>
-          </div>
-          <div>
             <label for="bkRoom">preferred room</label>
             <select id="bkRoom">
               <option value="main room">main room</option>
@@ -590,23 +592,9 @@
               <option value="either">either</option>
             </select>
           </div>
-        </div>
-
-        <div style="height: 12px;"></div>
-
-        <div class="grid2">
           <div>
             <label for="bkDate">date</label>
             <input id="bkDate" type="date" />
-          </div>
-          <div>
-            <label for="bkDuration">session length</label>
-            <select id="bkDuration">
-              <option value="60">60 minutes</option>
-              <option value="90">90 minutes</option>
-              <option value="120">120 minutes</option>
-              <option value="180">180 minutes</option>
-            </select>
           </div>
         </div>
 
@@ -632,7 +620,6 @@
     </section>
   </main>
 
-  <!-- POP DUMP MODAL -->
   <div class="modal-backdrop" id="popDumpModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popDumpTitle">
       <div class="modal-header">
@@ -663,8 +650,8 @@
   </div>
 
   <script>
-    // paste your Apps Script web app url here
-    const API_URL = "https://script.google.com/macros/s/AKfycbx6wXBVIvIIoUptbsUAqXCr4lUxEKEELo83QBCIiiwE9zDnF1b4-RkGMKRiRc6MMinY/exec";
+    const API_URL = "PASTE_APPS_SCRIPT_WEB_APP_URL_HERE";
+    const PRICE_PER_HOUR = 50;
 
     (function glassBlobs(){
       const bg = document.getElementById('bg');
@@ -788,7 +775,6 @@
 
     (function booking(){
       const dateEl = document.getElementById("bkDate");
-      const durationEl = document.getElementById("bkDuration");
       const slotsEl = document.getElementById("bkSlots");
       const submitBtn = document.getElementById("bkSubmit");
       const msgEl = document.getElementById("bkMsg");
@@ -798,7 +784,6 @@
       const emailEl = document.getElementById("bkEmail");
       const phoneEl = document.getElementById("bkPhone");
       const igEl = document.getElementById("bkIg");
-      const hoursEl = document.getElementById("bkHours");
       const roomEl = document.getElementById("bkRoom");
       const notesEl = document.getElementById("bkNotes");
 
@@ -820,11 +805,10 @@
         dateEl.value = t < start ? start : t;
       }
 
-      function timeLabel(h, m){
+      function timeLabel(h){
         const ap = h >= 12 ? "PM" : "AM";
         const hh = ((h + 11) % 12) + 1;
-        const mm = String(m).padStart(2,"0");
-        return hh + ":" + mm + " " + ap;
+        return hh + ":00 " + ap;
       }
 
       function allTimes(){
@@ -832,8 +816,7 @@
         const endHour = 22;
         const out = [];
         for(let h = startHour; h < endHour; h++){
-          out.push(timeLabel(h,0));
-          out.push(timeLabel(h,30));
+          out.push(timeLabel(h));
         }
         return out;
       }
@@ -862,7 +845,7 @@
             b.classList.add("slotSelected");
             selectedTime = t;
             submitBtn.disabled = false;
-            submitBtn.textContent = "request booking";
+            submitBtn.textContent = "request booking ($" + PRICE_PER_HOUR + ")";
             msgEl.textContent = "";
           });
 
@@ -927,19 +910,24 @@
           instagram: igEl.value.trim(),
           date: dateEl.value,
           time: selectedTime,
-          durationMinutes: Number(durationEl.value),
+          durationMinutes: 60,
           notes: [
-            "hours needed: " + String(hoursEl.value),
+            "price: $" + PRICE_PER_HOUR + " per hour",
+            "session length: 60 minutes",
             "preferred room: " + String(roomEl.value),
-            "about: " + String(notesEl.value || "").trim()
+            "",
+            String(notesEl.value || "").trim()
           ].join("\n")
         };
+
+        const params = new URLSearchParams();
+        Object.entries(payload).forEach(([k,v]) => params.append(k, String(v)));
 
         try{
           const res = await fetch(API_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+            body: params.toString()
           });
           const data = await res.json();
 
