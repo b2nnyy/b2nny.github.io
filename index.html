@@ -1,260 +1,1017 @@
-<!-- index.html script block replacement -->
-<script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbx6wXBVIvIIoUptbsUAqXCr4lUxEKEELo83QBCIiiwE9zDnF1b4-RkGMKRiRc6MMinY/exec";
-  const PRICE_PER_HOUR = 50;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>b2nny | links</title>
+  <meta name="description" content="Official links for b2nny | Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
+  <meta name="theme-color" content="#0a0a0a" />
 
-  (function booking(){
-    const dateEl = document.getElementById("bkDate");
-    const slotsEl = document.getElementById("bkSlots");
-    const submitBtn = document.getElementById("bkSubmit");
-    const msgEl = document.getElementById("bkMsg");
-
-    const firstEl = document.getElementById("bkFirst");
-    const lastEl = document.getElementById("bkLast");
-    const emailEl = document.getElementById("bkEmail");
-    const phoneEl = document.getElementById("bkPhone");
-    const igEl = document.getElementById("bkIg");
-    const roomEl = document.getElementById("bkRoom");
-    const notesEl = document.getElementById("bkNotes");
-
-    // one hour slots, user selects a start and an end by selecting multiple consecutive slots
-    const START_HOUR = 12; // 12 PM
-    const END_HOUR = 22;   // 10 PM end, last start is 9 PM
-    let busy = new Set();
-    let selected = new Set();
-
-    function todayISO(){
-      const d = new Date();
-      const y = d.getFullYear();
-      const m = String(d.getMonth() + 1).padStart(2,"0");
-      const day = String(d.getDate()).padStart(2,"0");
-      return y + "-" + m + "-" + day;
+  <style>
+    :root {
+      --fg: #fff;
+      --maxw: 720px;
+      --c1: #CFEAFF;
+      --c2: #AEE4FF;
+      --c3: #D6FFEF;
+      --c4: #BFF7D9;
+      --btnBg: rgba(0, 0, 0, 0.65);
+      --btnHover: rgba(0, 0, 0, 0.85);
+      --radius: 16px;
     }
 
-    function setMinDate(){
-      const start = "2026-01-01";
-      dateEl.min = start;
-      const t = todayISO();
-      dateEl.value = t < start ? start : t;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #0f1012;
+      overflow-x: hidden;
     }
 
-    function timeLabel(h){
-      const ap = h >= 12 ? "PM" : "AM";
-      const hh = ((h + 11) % 12) + 1;
-      return hh + ":00 " + ap;
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
     }
 
-    function allTimes(){
-      const out = [];
-      for(let h = START_HOUR; h < END_HOUR; h++){
-        out.push(timeLabel(h));
+    .blob {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(10px) saturate(120%);
+      opacity: 0.9;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .frost {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(22px) saturate(120%);
+      -webkit-backdrop-filter: blur(22px) saturate(120%);
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--maxw);
+      padding: 32px 20px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .pfp img {
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.85);
+      opacity: 0;
+      transform: translateY(22px);
+      animation: snapUp .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
+    }
+
+    .topRow {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .topBtn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      text-decoration: none;
+      color: #fdfdfd;
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.25), transparent 55%),
+                  rgba(0, 0, 0, 0.78);
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      cursor: pointer;
+      transition: background .15s ease, transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      min-width: min(100%, 440px);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.4),
+        0 18px 38px rgba(0,0,0,0.6);
+    }
+
+    .topBtn:hover {
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.32), transparent 55%),
+                  rgba(0, 0, 0, 0.95);
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.55);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 22px 46px rgba(0,0,0,0.8);
+    }
+
+    .topLabel {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      font-size: 12px;
+      opacity: 0.9;
+      white-space: nowrap;
+    }
+
+    .topSub {
+      font-weight: 700;
+      font-size: 13px;
+      opacity: 0.9;
+      white-space: nowrap;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 16px 0 10px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: snapUp .3s cubic-bezier(.2,.8,.2,1) .22s forwards;
+    }
+
+    @keyframes snapUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .links {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--btnBg);
+      color: var(--fg);
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.22);
+      opacity: 0;
+      transform: translateX(40px);
+      animation: snapInR .28s cubic-bezier(.2,.8,.2,1) forwards;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .link:nth-child(even) {
+      transform: translateX(-40px);
+      animation-name: snapInL;
+    }
+
+    @keyframes snapInR { to { opacity: 1; transform: translateX(0); } }
+    @keyframes snapInL { to { opacity: 1; transform: translateX(0); } }
+
+    .link:hover { background: var(--btnHover); }
+
+    .link img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    footer {
+      font-size: 12px;
+      color: #1f1f1f;
+      margin-top: 32px;
+      text-align: left;
+      opacity: 0;
+      animation: fadeIn .25s .72s forwards;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .backRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0 12px;
+    }
+
+    .backBtn {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 10px 12px;
+      border-radius: 14px;
+    }
+
+    .backBtn:hover { background: rgba(0,0,0,0.85); }
+
+    .card {
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.4),
+        0 18px 38px rgba(0,0,0,0.6);
+    }
+
+    .title2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .sub2 { font-size: 13px; opacity: 0.82; margin-bottom: 10px; }
+    .tiny { font-size: 12px; opacity: 0.7; line-height: 1.35; }
+
+    .priceRow {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.35);
+      font-size: 12px;
+      opacity: 0.92;
+    }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    @media (max-width: 640px) {
+      .grid2, .grid3 { grid-template-columns: 1fr; }
+    }
+
+    label { font-size: 12px; opacity: 0.78; display: block; margin: 2px 0 6px; }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      outline: none;
+    }
+
+    textarea { resize: vertical; }
+
+    .slots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .slots { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .slot {
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .slot:hover { background: rgba(0,0,0,0.80); }
+    .slotBooked { opacity: 0.35; cursor: not-allowed; }
+    .slotSelected { outline: 2px solid rgba(255,255,255,0.65); }
+
+    .cta {
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .btn:hover { background: rgba(0,0,0,0.92); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .msg { font-size: 13px; opacity: 0.9; }
+
+    .modalBackdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .modalBackdrop.open { display: flex; }
+
+    .modal {
+      background: rgba(10,10,14,0.98);
+      border-radius: 18px;
+      padding: 20px 22px 18px;
+      max-width: 380px;
+      width: calc(100% - 40px);
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 22px 48px rgba(0,0,0,0.9);
+    }
+
+    .modalHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .modalTitle { font-size: 18px; font-weight: 700; }
+    .modalSub { font-size: 12px; opacity: 0.7; margin-bottom: 14px; }
+
+    .modalClose {
+      border: none;
+      background: transparent;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 999px;
+      transition: background .12s ease, color .12s ease;
+    }
+
+    .modalClose:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+    .modalLinks { display: grid; gap: 10px; margin-top: 6px; }
+
+    .modalLink {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      color: #fdfdfd;
+      background: rgba(20,20,25,0.9);
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: background .12s ease, transform .12s ease, border-color .12s ease;
+    }
+
+    .modalLink span { display: inline-flex; align-items: center; gap: 8px; }
+    .modalLink strong { font-weight: 600; }
+    .modalLink small { font-size: 11px; opacity: 0.7; }
+
+    .modalLink:hover {
+      background: rgba(32,32,42,0.98);
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-1px);
+    }
+
+    .pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      opacity: 0.85;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      .pfp img { width: 100px; height: 100px; }
+      .link { padding: 12px 16px; }
+      .link img { width: 26px; height: 26px; }
+      .topBtn { min-width: 0; width: 100%; padding: 10px 16px; font-size: 12px; }
+      .topLabel { font-size: 11px; letter-spacing: 0.1em; }
+      .topSub { font-size: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg" id="bg"></div>
+  <div class="frost"></div>
+
+  <main class="wrap">
+    <header>
+      <div class="pfp">
+        <img src="apple music.jpg" alt="b2nny profile">
+      </div>
+
+      <div class="topRow">
+        <a href="#pop" class="topBtn">
+          <span class="topLabel">Pop Dump</span>
+          <span class="topSub">open</span>
+        </a>
+
+        <a href="#rap" class="topBtn">
+          <span class="topLabel">Rap Dump</span>
+          <span class="topSub">open</span>
+        </a>
+
+        <a href="#book" class="topBtn">
+          <span class="topLabel">Book a session</span>
+          <span class="topSub">$50 per hour</span>
+        </a>
+      </div>
+
+      <h1>@b2nny</h1>
+    </header>
+
+    <section class="section active" id="sectionHome">
+      <section class="links">
+        <a class="link" href="#book">
+          <img src="Calendar.png" alt="Book">
+          <span>book a session</span>
+        </a>
+
+        <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
+          <img src="Spotify.png" alt="Spotify">
+          <span>b2nny | Spotify</span>
+        </a>
+
+        <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
+          <img src="Apple.png" alt="Apple Music">
+          <span>b2nny | Apple Music</span>
+        </a>
+
+        <a class="link" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
+          <img src="Soundcloud.png" alt="SoundCloud">
+          <span>b2nny | SoundCloud</span>
+        </a>
+
+        <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
+          <img src="Youtube.jpg" alt="YouTube">
+          <span>b2nny | YouTube</span>
+        </a>
+
+        <a class="link" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
+          <img src="Instagram.png" alt="Instagram">
+          <span>b2nny | Instagram</span>
+        </a>
+
+        <a class="link" href="https://x.com/b2nnny" target="_blank" rel="noopener">
+          <img src="Twitter.jpg" alt="X">
+          <span>b2nny | X</span>
+        </a>
+      </section>
+
+      <footer>
+        © <script>document.write(new Date().getFullYear());</script> Harmony Hill
+      </footer>
+    </section>
+
+    <section class="section" id="sectionRap">
+      <div class="backRow">
+        <a class="backBtn" href="#home">back</a>
+        <a class="backBtn" href="https://distrokid.com/hyperfollow/b2nny/rap-dump" target="_blank" rel="noopener">hyperfollow</a>
+      </div>
+
+      <div class="card">
+        <div class="title2">rap dump</div>
+        <div class="sub2">links</div>
+
+        <div class="links" style="margin-top: 0;">
+          <a class="link" href="https://distrokid.com/hyperfollow/b2nny/rap-dump" target="_blank" rel="noopener">
+            <img src="Link.png" alt="Link">
+            <span>hyperfollow</span>
+          </a>
+
+          <a class="link" href="#" target="_blank" rel="noopener">
+            <img src="Spotify.png" alt="Spotify">
+            <span>rap dump | spotify</span>
+          </a>
+
+          <a class="link" href="#" target="_blank" rel="noopener">
+            <img src="Apple.png" alt="Apple Music">
+            <span>rap dump | apple music</span>
+          </a>
+
+          <a class="link" href="#" target="_blank" rel="noopener">
+            <img src="Soundcloud.png" alt="SoundCloud">
+            <span>rap dump | soundcloud</span>
+          </a>
+        </div>
+
+        <div class="tiny" style="margin-top: 10px;">
+          swap those links when the official pages are live
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sectionBook">
+      <div class="backRow">
+        <a class="backBtn" href="#home">back</a>
+        <a class="backBtn" href="#pop">pop dump</a>
+      </div>
+
+      <div class="card">
+        <div class="title2">request booking</div>
+        <div class="sub2">pick a date, then pick a block of hours like 12 to 3</div>
+        <div class="tiny">no payment here. sessions are not confirmed until I text you back and confirm.</div>
+
+        <div class="priceRow">
+          <strong>$50</strong>
+          <span>per hour</span>
+          <span style="opacity:0.7;">hour slots only</span>
+        </div>
+
+        <div style="height: 14px;"></div>
+
+        <div class="grid2">
+          <div>
+            <label for="bkFirst">first name</label>
+            <input id="bkFirst" type="text" autocomplete="given-name" />
+          </div>
+          <div>
+            <label for="bkLast">last name</label>
+            <input id="bkLast" type="text" autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div style="height: 12px;"></div>
+
+        <div class="grid3">
+          <div>
+            <label for="bkEmail">email</label>
+            <input id="bkEmail" type="email" autocomplete="email" />
+          </div>
+          <div>
+            <label for="bkPhone">phone</label>
+            <input id="bkPhone" type="tel" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="bkIg">instagram</label>
+            <input id="bkIg" type="text" placeholder="@handle" />
+          </div>
+        </div>
+
+        <div style="height: 12px;"></div>
+
+        <div class="grid2">
+          <div>
+            <label for="bkRoom">preferred room</label>
+            <select id="bkRoom">
+              <option value="main room">main room</option>
+              <option value="b room">b room</option>
+              <option value="either">either</option>
+            </select>
+          </div>
+          <div>
+            <label for="bkDate">date</label>
+            <input id="bkDate" type="date" />
+          </div>
+        </div>
+
+        <div style="margin-top: 14px; font-size: 12px; opacity: 0.8;">available hour starts</div>
+        <div class="slots" id="bkSlots"></div>
+
+        <div style="height: 12px;"></div>
+
+        <div>
+          <label for="bkNotes">about</label>
+          <textarea id="bkNotes" rows="4" placeholder="what you want to work on, references, any details"></textarea>
+        </div>
+
+        <div class="cta">
+          <button class="btn" id="bkSubmit" disabled>select hours</button>
+          <div class="msg" id="bkMsg"></div>
+        </div>
+
+        <div class="tiny" style="margin-top: 10px;">
+          tip: click hours that connect, like 12 1 2 for 12 to 3
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modalBackdrop" id="popModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popTitle">
+      <div class="modalHeader">
+        <div>
+          <div class="modalTitle" id="popTitle">Pop Dump</div>
+          <div class="modalSub">Pick your platform and stream the EP.</div>
+        </div>
+        <button class="modalClose" type="button" id="popCloseBtn">×</button>
+      </div>
+
+      <div class="modalLinks">
+        <a class="modalLink" href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">
+          <span><strong>Spotify</strong><small>Open in app or browser</small></span>
+          <span class="pill">Listen</span>
+        </a>
+
+        <a class="modalLink" href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">
+          <span><strong>Apple Music</strong><small>Stream the EP</small></span>
+          <span class="pill">Listen</span>
+        </a>
+
+        <a class="modalLink" href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
+          <span><strong>SoundCloud</strong><small>Full Pop Dump set</small></span>
+          <span class="pill">Listen</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbx6wXBVIvIIoUptbsUAqXCr4lUxEKEELo83QBCIiiwE9zDnF1b4-RkGMKRiRc6MMinY/exec";
+    const PRICE_PER_HOUR = 50;
+
+    (function glassBlobs(){
+      const bg = document.getElementById("bg");
+      const colors = ["var(--c1)","var(--c2)","var(--c3)","var(--c4)"];
+      const count = Math.floor(Math.random() * 2) + 3;
+      const blobs = [];
+      let W = window.innerWidth;
+      let H = window.innerHeight;
+
+      function makeGradient(c){
+        return "radial-gradient(45% 45% at 30% 30%,rgba(255,255,255,0.7)0%,rgba(255,255,255,0.25)38%,rgba(255,255,255,0)65%),radial-gradient(circle at 60% 60%," + c + "0%,rgba(255,255,255,0)70%)";
       }
-      return out;
-    }
 
-    function parseHour(label){
-      // "1:00 PM" -> 13
-      const m = String(label).trim().match(/^(\d{1,2}):00\s*(AM|PM)$/i);
-      if(!m) return null;
-      let hh = Number(m[1]);
-      const ap = m[2].toUpperCase();
-      if(hh < 1 || hh > 12) return null;
-      if(ap === "PM" && hh !== 12) hh += 12;
-      if(ap === "AM" && hh === 12) hh = 0;
-      return hh;
-    }
-
-    function selectionRange(){
-      if(selected.size === 0) return null;
-      const hours = Array.from(selected).map(parseHour).filter(v => v !== null).sort((a,b)=>a-b);
-      if(hours.length === 0) return null;
-
-      // must be consecutive
-      for(let i=1;i<hours.length;i++){
-        if(hours[i] !== hours[i-1] + 1) return null;
+      function createBlob(){
+        const el = document.createElement("div");
+        el.className = "blob";
+        const base = Math.max(W,H);
+        const size = Math.round(base * (0.36 + Math.random() * 0.20));
+        el.style.width = size + "px";
+        el.style.height = size + "px";
+        const x = Math.random() * (W - size);
+        const y = Math.random() * (H - size);
+        const sp = 0.025 + Math.random() * 0.035;
+        const ang = Math.random() * Math.PI * 2;
+        const vx = Math.cos(ang) * sp;
+        const vy = Math.sin(ang) * sp;
+        const c = colors[Math.floor(Math.random() * colors.length)];
+        el.style.background = makeGradient(c);
+        bg.appendChild(el);
+        return { el, x, y, vx, vy, r: size / 2, size };
       }
 
-      const startHour = hours[0];
-      const endHour = hours[hours.length - 1] + 1;
-      const durationHours = endHour - startHour;
+      for(let i = 0; i < count; i++) blobs.push(createBlob());
 
-      return { startHour, endHour, durationHours, hours };
-    }
+      function tick(){
+        const dt = 16;
+        for(let i = 0; i < blobs.length; i++){
+          const b = blobs[i];
+          b.x += b.vx * dt;
+          b.y += b.vy * dt;
+          if(b.x < 0 || b.x + b.size > W) b.vx *= -1;
+          if(b.y < 0 || b.y + b.size > H) b.vy *= -1;
 
-    function updateButtonFromSelection(){
-      const range = selectionRange();
-      if(!range){
-        submitBtn.disabled = true;
-        submitBtn.textContent = selected.size ? "select consecutive times" : "select time slots";
-        return;
-      }
-      const total = range.durationHours * PRICE_PER_HOUR;
-      submitBtn.disabled = false;
-      submitBtn.textContent = "request booking ($" + total + ")";
-    }
-
-    function clearSelection(){
-      selected.clear();
-      document.querySelectorAll(".slotSelected").forEach(x => x.classList.remove("slotSelected"));
-      updateButtonFromSelection();
-    }
-
-    function renderSlots(){
-      slotsEl.innerHTML = "";
-      clearSelection();
-      msgEl.textContent = "";
-
-      for(const t of allTimes()){
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "slot";
-        b.textContent = t;
-
-        if(busy.has(t)){
-          b.classList.add("slotBooked");
-          b.disabled = true;
+          for(let j = i + 1; j < blobs.length; j++){
+            const c = blobs[j];
+            const dx = (b.x + b.r) - (c.x + c.r);
+            const dy = (b.y + b.r) - (c.y + c.r);
+            const dist = Math.hypot(dx, dy);
+            const min = (b.r + c.r) * 0.9;
+            if(dist < min){
+              const overlap = (min - dist) * 0.3;
+              if(dist > 0.0001){
+                const nx = dx / dist;
+                const ny = dy / dist;
+                b.x += nx * overlap;
+                b.y += ny * overlap;
+                c.x -= nx * overlap;
+                c.y -= ny * overlap;
+              }
+            }
+          }
         }
 
-        b.addEventListener("click", ()=>{
-          if(b.disabled) return;
-
-          if(selected.has(t)){
-            selected.delete(t);
-            b.classList.remove("slotSelected");
-          } else {
-            selected.add(t);
-            b.classList.add("slotSelected");
-          }
-
-          // enforce consecutive selection by auto clearing if it becomes non consecutive
-          const range = selectionRange();
-          if(selected.size > 0 && !range){
-            msgEl.textContent = "pick times that connect, like 12 1 2 or 1 2 3";
-            // keep the last clicked slot only
-            document.querySelectorAll(".slotSelected").forEach(x => x.classList.remove("slotSelected"));
-            selected.clear();
-            selected.add(t);
-            b.classList.add("slotSelected");
-          } else {
-            msgEl.textContent = "";
-          }
-
-          updateButtonFromSelection();
-        });
-
-        slotsEl.appendChild(b);
-      }
-
-      updateButtonFromSelection();
-    }
-
-    async function loadBusy(){
-      busy = new Set();
-      renderSlots();
-
-      const date = dateEl.value;
-      if(!date) return;
-
-      if(!API_URL || API_URL.indexOf("PASTE_") === 0){
-        msgEl.textContent = "backend not set yet";
-        return;
-      }
-
-      try{
-        const res = await fetch(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
-        const data = await res.json();
-        if(data && data.ok && Array.isArray(data.busy)){
-          busy = new Set(data.busy);
+        for(const b of blobs){
+          b.el.style.transform = "translate(" + b.x + "px," + b.y + "px)";
         }
-      }catch(e){
+
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+      window.addEventListener("resize", ()=>{
+        W = window.innerWidth;
+        H = window.innerHeight;
+      }, { passive: true });
+    })();
+
+    (function popModal(){
+      const modal = document.getElementById("popModal");
+      const closeBtn = document.getElementById("popCloseBtn");
+
+      function open(){ modal.classList.add("open"); }
+      function close(){ modal.classList.remove("open"); }
+
+      window.openPop = open;
+
+      closeBtn.addEventListener("click", close);
+      modal.addEventListener("click", (e)=>{ if(e.target === modal) close(); });
+      document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") close(); });
+    })();
+
+    (function router(){
+      const home = document.getElementById("sectionHome");
+      const rap = document.getElementById("sectionRap");
+      const book = document.getElementById("sectionBook");
+
+      function show(el){
+        home.classList.remove("active");
+        rap.classList.remove("active");
+        book.classList.remove("active");
+        el.classList.add("active");
+      }
+
+      function onHash(){
+        const h = (location.hash || "#home").replace("#","");
+        if(h === "pop"){
+          window.openPop();
+          show(home);
+          return;
+        }
+        if(h === "rap"){ show(rap); return; }
+        if(h === "book"){ show(book); return; }
+        show(home);
+      }
+
+      window.addEventListener("hashchange", onHash);
+      onHash();
+    })();
+
+    (function booking(){
+      const dateEl = document.getElementById("bkDate");
+      const slotsEl = document.getElementById("bkSlots");
+      const submitBtn = document.getElementById("bkSubmit");
+      const msgEl = document.getElementById("bkMsg");
+
+      const firstEl = document.getElementById("bkFirst");
+      const lastEl = document.getElementById("bkLast");
+      const emailEl = document.getElementById("bkEmail");
+      const phoneEl = document.getElementById("bkPhone");
+      const igEl = document.getElementById("bkIg");
+      const roomEl = document.getElementById("bkRoom");
+      const notesEl = document.getElementById("bkNotes");
+
+      const START_HOUR = 12;
+      const END_HOUR = 22;
+
+      let busy = new Set();
+      let selected = new Set();
+
+      function todayISO(){
+        const d = new Date();
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2,"0");
+        const day = String(d.getDate()).padStart(2,"0");
+        return y + "-" + m + "-" + day;
+      }
+
+      function setMinDate(){
+        const start = "2026-01-01";
+        dateEl.min = start;
+        const t = todayISO();
+        dateEl.value = t < start ? start : t;
+      }
+
+      function timeLabel(h){
+        const ap = h >= 12 ? "PM" : "AM";
+        const hh = ((h + 11) % 12) + 1;
+        return hh + ":00 " + ap;
+      }
+
+      function parseHour(label){
+        const m = String(label).trim().match(/^(\d{1,2}):00\s*(AM|PM)$/i);
+        if(!m) return null;
+        let hh = Number(m[1]);
+        const ap = m[2].toUpperCase();
+        if(hh < 1 || hh > 12) return null;
+        if(ap === "PM" && hh !== 12) hh += 12;
+        if(ap === "AM" && hh === 12) hh = 0;
+        return hh;
+      }
+
+      function allTimes(){
+        const out = [];
+        for(let h = START_HOUR; h < END_HOUR; h++){
+          out.push(timeLabel(h));
+        }
+        return out;
+      }
+
+      function selectionRange(){
+        if(selected.size === 0) return null;
+        const hours = Array.from(selected).map(parseHour).filter(v => v !== null).sort((a,b)=>a-b);
+        if(hours.length === 0) return null;
+        for(let i = 1; i < hours.length; i++){
+          if(hours[i] !== hours[i - 1] + 1) return null;
+        }
+        const startHour = hours[0];
+        const endHour = hours[hours.length - 1] + 1;
+        const durationHours = endHour - startHour;
+        return { startHour, endHour, durationHours };
+      }
+
+      function updateButton(){
+        const range = selectionRange();
+        if(!range){
+          submitBtn.disabled = true;
+          submitBtn.textContent = selected.size ? "select connected hours" : "select hours";
+          return;
+        }
+        const total = range.durationHours * PRICE_PER_HOUR;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "request booking ($" + total + ")";
+      }
+
+      function clearSelectionUi(){
+        selected.clear();
+        const picked = document.querySelectorAll(".slotSelected");
+        for(const el of picked) el.classList.remove("slotSelected");
+        updateButton();
+      }
+
+      function renderSlots(){
+        slotsEl.innerHTML = "";
+        clearSelectionUi();
+        msgEl.textContent = "";
+
+        const times = allTimes();
+        for(const t of times){
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "slot";
+          b.textContent = t;
+
+          if(busy.has(t)){
+            b.classList.add("slotBooked");
+            b.disabled = true;
+          }
+
+          b.addEventListener("click", ()=>{
+            if(b.disabled) return;
+
+            if(selected.has(t)){
+              selected.delete(t);
+              b.classList.remove("slotSelected");
+            } else {
+              selected.add(t);
+              b.classList.add("slotSelected");
+            }
+
+            const range = selectionRange();
+            if(selected.size > 0 && !range){
+              msgEl.textContent = "pick hours that connect, like 12 1 2";
+              const keep = t;
+              const picked = document.querySelectorAll(".slotSelected");
+              for(const el of picked) el.classList.remove("slotSelected");
+              selected.clear();
+              selected.add(keep);
+              b.classList.add("slotSelected");
+            } else {
+              msgEl.textContent = "";
+            }
+
+            updateButton();
+          });
+
+          slotsEl.appendChild(b);
+        }
+
+        updateButton();
+      }
+
+      async function loadBusy(){
         busy = new Set();
-      }
+        renderSlots();
 
-      renderSlots();
-    }
+        const date = dateEl.value;
+        if(!date) return;
 
-    function validate(){
-      if(!firstEl.value.trim()) return "enter first name";
-      if(!lastEl.value.trim()) return "enter last name";
-      if(!emailEl.value.trim()) return "enter email";
-      if(!phoneEl.value.trim()) return "enter phone";
-      if(!igEl.value.trim()) return "enter instagram";
-      if(!dateEl.value) return "pick a date";
-      const range = selectionRange();
-      if(!range) return "pick consecutive times";
-      return "";
-    }
-
-    async function submit(){
-      const err = validate();
-      if(err){ msgEl.textContent = err; return; }
-
-      if(!API_URL || API_URL.indexOf("PASTE_") === 0){
-        msgEl.textContent = "backend not set yet";
-        return;
-      }
-
-      const range = selectionRange();
-      if(!range){
-        msgEl.textContent = "pick consecutive times";
-        return;
-      }
-
-      submitBtn.disabled = true;
-      msgEl.textContent = "sending...";
-
-      const fullName = firstEl.value.trim() + " " + lastEl.value.trim();
-      const durationMinutes = range.durationHours * 60;
-      const total = range.durationHours * PRICE_PER_HOUR;
-
-      const payload = {
-        name: fullName,
-        email: emailEl.value.trim(),
-        phone: phoneEl.value.trim(),
-        instagram: igEl.value.trim(),
-        date: dateEl.value,
-        time: timeLabel(range.startHour),
-        durationMinutes: String(durationMinutes),
-        notes: [
-          "price: $" + PRICE_PER_HOUR + " per hour",
-          "total: $" + total,
-          "hours booked: " + range.durationHours,
-          "range: " + timeLabel(range.startHour) + " to " + timeLabel(range.endHour),
-          "preferred room: " + String(roomEl.value),
-          "",
-          String(notesEl.value || "").trim()
-        ].join("\n")
-      };
-
-      const params = new URLSearchParams();
-      Object.entries(payload).forEach(([k,v]) => params.append(k, String(v)));
-
-      try{
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          body: params.toString()
-        });
-        const data = await res.json();
-
-        if(!data || !data.ok){
-          msgEl.textContent = (data && data.error) ? data.error : "error, try again";
-          submitBtn.disabled = false;
+        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+          msgEl.textContent = "backend not set";
           return;
         }
 
-        msgEl.textContent = "request sent. I will text you to confirm.";
-        await loadBusy();
-      }catch(e){
-        msgEl.textContent = "error, try again";
-        submitBtn.disabled = false;
+        try{
+          const res = await fetch(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
+          const data = await res.json();
+          if(data && data.ok && Array.isArray(data.busy)){
+            busy = new Set(data.busy);
+          }
+        } catch (e) {
+          busy = new Set();
+        }
+
+        renderSlots();
       }
-    }
 
-    setMinDate();
-    loadBusy();
+      function validate(){
+        if(!firstEl.value.trim()) return "enter first name";
+        if(!lastEl.value.trim()) return "enter last name";
+        if(!emailEl.value.trim()) return "enter email";
+        if(!phoneEl.value.trim()) return "enter phone";
+        if(!igEl.value.trim()) return "enter instagram";
+        if(!dateEl.value) return "pick a date";
+        const range = selectionRange();
+        if(!range) return "pick connected hours";
+        return "";
+      }
 
-    dateEl.addEventListener("change", loadBusy);
-    submitBtn.addEventListener("click", submit);
-  })();
-</script>
+      async function submit(){
+        const err = validate();
+        if(err){ msgEl.textContent = err; return; }
+
+        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+          msgEl.textContent = "backend not set";
+          return;
+        }
+
+        const range = selectionRange();
+        if(!range){ msgEl.textContent = "pick connected hours"; return; }
+
+        const fullName = firstEl.value.trim() + " " + lastEl.value.trim();
+        const durationMinutes = range.durationHours * 60;
+        const total = range.durationHours * PRICE_PER_HOUR;
+
+        submitBtn.disabled = true;
+        msgEl.textContent = "sending...";
+
+        const payload = {
+          name: fullName,
+          email: emailEl.value.trim(),
+          phone: phoneEl.value.trim(),
+          instagram: igEl.value.trim(),
+          date: dateEl.value,
+          time: timeLabel(range.startHour),
+          durationMinutes: String(durationMinutes),
+          notes: [
+            "price per hour: $" + PRICE_PER_HOUR,
+            "total: $" + total,
+            "hours booked: " + range.durationHours,
+            "range: " + timeLabel(range.startHour) + " to " + timeLabel(range.endHour),
+            "preferred room: " + String(roomEl.value),
+            "",
+            String(notesEl.value || "").trim()
+          ].join("\n")
+        };
+
+        const params = new URLSearchParams();
+        Object.entries(payload).forEach(([k,v]) => params.append(k, String(v)));
+
+        try{
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+            body: params.toString()
+          });
+
+          const data = await res.json();
+
+          if(!data || !data.ok){
+            msgEl.textContent = (data && data.error) ? data.error : "error, try again";
+            submitBtn.disabled = false;
+            return;
+          }
+
+          msgEl.textContent = "request sent. I will text you to confirm.";
+          await loadBusy();
+        } catch (e) {
+          msgEl.textContent = "error, try again";
+          submitBtn.disabled = false;
+        }
+      }
+
+      setMinDate();
+      loadBusy();
+
+      dateEl.addEventListener("change", loadBusy);
+      submitBtn.addEventListener("click", submit);
+    })();
+  </script>
+</body>
+</html>
