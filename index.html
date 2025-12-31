@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,7 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
+
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--fg);
@@ -65,7 +67,7 @@
 
     header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .pfp img {
@@ -79,7 +81,6 @@
       animation: snap-up .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
     }
 
-    /* countdown bars */
     .countdown-wrap {
       margin-top: 18px;
       opacity: 0;
@@ -127,12 +128,6 @@
         0 22px 46px rgba(0,0,0,0.8);
     }
 
-    /* non clickable top countdown */
-    .countdown-bar.is-static {
-      cursor: default;
-      pointer-events: none;
-    }
-
     .countdown-label {
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -145,12 +140,9 @@
     .countdown-timer {
       font-variant-numeric: tabular-nums;
       font-weight: 700;
-      font-size: 16px;
-    }
-
-    .countdown-out {
-      font-weight: 800;
-      animation: soft-blink 1.25s ease-in-out infinite alternate;
+      font-size: 14px;
+      opacity: 0.9;
+      white-space: nowrap;
     }
 
     h1 {
@@ -161,14 +153,7 @@
       animation: snap-up .3s cubic-bezier(.2,.8,.2,1) .22s forwards;
     }
 
-    @keyframes snap-up {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes soft-blink {
-      from { opacity: 1; }
-      to { opacity: 0.45; }
-    }
+    @keyframes snap-up { to { opacity: 1; transform: translateY(0); } }
 
     .links {
       display: grid;
@@ -198,36 +183,16 @@
       animation-name: snap-in-l;
     }
 
-    @keyframes snap-in-r {
-      to { opacity: 1; transform: translateX(0); }
-    }
+    @keyframes snap-in-r { to { opacity: 1; transform: translateX(0); } }
+    @keyframes snap-in-l { to { opacity: 1; transform: translateX(0); } }
 
-    @keyframes snap-in-l {
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .link:hover {
-      background: var(--btn-hover);
-    }
+    .link:hover { background: var(--btn-hover); }
 
     .link img {
       width: 28px;
       height: 28px;
       border-radius: 6px;
       object-fit: cover;
-    }
-
-    .link-pop {
-      background: linear-gradient(135deg, #ffb5d1, #ffc973);
-      color: #1b1b1f;
-      border-color: rgba(0,0,0,0.4);
-      font-weight: 600;
-      justify-content: center;
-    }
-
-    .link-pop:hover {
-      background: linear-gradient(135deg, #ffd1e4, #ffe29c);
-      border-color: rgba(0,0,0,0.7);
     }
 
     footer {
@@ -239,9 +204,113 @@
       animation: fade .25s .72s forwards;
     }
 
-    @keyframes fade {
-      to { opacity: 1; }
+    @keyframes fade { to { opacity: 1; } }
+
+    /* sections */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .backRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0 12px;
     }
+
+    .backBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 10px 12px;
+      border-radius: 14px;
+    }
+
+    .backBtn:hover { background: rgba(0,0,0,0.85); }
+
+    .card {
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.4),
+        0 18px 38px rgba(0,0,0,0.6);
+    }
+
+    .title2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .sub2 { font-size: 13px; opacity: 0.82; margin-bottom: 10px; }
+    .tiny { font-size: 12px; opacity: 0.7; line-height: 1.35; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    @media (max-width: 640px) {
+      .grid2, .grid3 { grid-template-columns: 1fr; }
+    }
+
+    label { font-size: 12px; opacity: 0.78; display: block; margin: 2px 0 6px; }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      outline: none;
+    }
+
+    textarea { resize: vertical; }
+
+    .slots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 640px) { .slots { grid-template-columns: repeat(2, 1fr); } }
+
+    .slot {
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .slot:hover { background: rgba(0,0,0,0.80); }
+    .slotBooked { opacity: 0.35; cursor: not-allowed; }
+    .slotSelected { outline: 2px solid rgba(255,255,255,0.65); }
+
+    .cta {
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .btn:hover { background: rgba(0,0,0,0.92); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .msg { font-size: 13px; opacity: 0.9; }
 
     /* modal */
     .modal-backdrop {
@@ -254,9 +323,7 @@
       z-index: 10;
     }
 
-    .modal-backdrop.open {
-      display: flex;
-    }
+    .modal-backdrop.open { display: flex; }
 
     .modal {
       background: rgba(10,10,14,0.98);
@@ -277,16 +344,8 @@
       margin-bottom: 10px;
     }
 
-    .modal-title {
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .modal-sub {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-bottom: 14px;
-    }
+    .modal-title { font-size: 18px; font-weight: 700; }
+    .modal-sub { font-size: 12px; opacity: 0.7; margin-bottom: 14px; }
 
     .modal-close {
       border: none;
@@ -300,16 +359,9 @@
       transition: background .12s ease, color .12s ease;
     }
 
-    .modal-close:hover {
-      background: rgba(255,255,255,0.06);
-      color: #fff;
-    }
+    .modal-close:hover { background: rgba(255,255,255,0.06); color: #fff; }
 
-    .modal-links {
-      display: grid;
-      gap: 10px;
-      margin-top: 6px;
-    }
+    .modal-links { display: grid; gap: 10px; margin-top: 6px; }
 
     .modal-link {
       display: flex;
@@ -326,20 +378,9 @@
       transition: background .12s ease, transform .12s ease, border-color .12s ease;
     }
 
-    .modal-link span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .modal-link strong {
-      font-weight: 600;
-    }
-
-    .modal-link small {
-      font-size: 11px;
-      opacity: 0.7;
-    }
+    .modal-link span { display: inline-flex; align-items: center; gap: 8px; }
+    .modal-link strong { font-weight: 600; }
+    .modal-link small { font-size: 11px; opacity: 0.7; }
 
     .modal-link:hover {
       background: rgba(32,32,42,0.98);
@@ -370,17 +411,12 @@
         font-size: 12px;
       }
 
-      .countdown-label {
-        font-size: 11px;
-        letter-spacing: 0.1em;
-      }
-
-      .countdown-timer {
-        font-size: 15px;
-      }
+      .countdown-label { font-size: 11px; letter-spacing: 0.1em; }
+      .countdown-timer { font-size: 13px; }
     }
   </style>
 </head>
+
 <body>
   <div class="bg" id="bg"></div>
   <div class="frost"></div>
@@ -391,67 +427,212 @@
         <img src="apple music.jpg" alt="b2nny profile">
       </div>
 
-      <!-- POP DUMP countdown (non clickable) -->
       <div class="countdown-wrap">
-        <div class="countdown-bar is-static">
+        <a href="#pop" class="countdown-bar">
           <span class="countdown-label">Pop Dump</span>
-          <span class="countdown-timer" id="countdownPop">Pop Dump out now</span>
-        </div>
+          <span class="countdown-timer">open</span>
+        </a>
       </div>
 
-      <!-- RAP DUMP countdown (still clickable) -->
       <div class="countdown-wrap">
-        <a
-          href="https://distrokid.com/hyperfollow/b2nny/rap-dump"
-          target="_blank"
-          class="countdown-bar"
-        >
-          <span class="countdown-label">Rap Dump drops in</span>
-          <span class="countdown-timer" id="countdownRap">07d 00h 00m 00s</span>
+        <a href="#rap" class="countdown-bar">
+          <span class="countdown-label">Rap Dump</span>
+          <span class="countdown-timer">open</span>
+        </a>
+      </div>
+
+      <div class="countdown-wrap">
+        <a href="#book" class="countdown-bar">
+          <span class="countdown-label">Book a session</span>
+          <span class="countdown-timer">pick time</span>
         </a>
       </div>
 
       <h1>@b2nny</h1>
     </header>
 
-    <section class="links">
-      <!-- Pop Dump button (no image, opens modal) -->
-      <button class="link link-pop" type="button" id="popDumpBtn">
-        <span>Pop Dump</span>
-      </button>
+    <!-- HOME -->
+    <section class="section active" id="sectionHome">
+      <section class="links">
+        <a class="link" href="#book">
+          <img src="Calendar.png" alt="Book">
+          <span>book a session</span>
+        </a>
 
-      <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank">
-        <img src="Spotify.png" alt="Spotify">
-        <span>b2nny | Spotify</span>
-      </a>
-      <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank">
-        <img src="Apple.png" alt="Apple Music">
-        <span>b2nny | Apple Music</span>
-      </a>
-      <a class="link" href="https://soundcloud.com/b2nny" target="_blank">
-        <img src="Soundcloud.png" alt="SoundCloud">
-        <span>b2nny | SoundCloud</span>
-      </a>
-      <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank">
-        <img src="Youtube.jpg" alt="YouTube">
-        <span>b2nny | YouTube</span>
-      </a>
-      <a class="link" href="https://instagram.com/b2nnyy" target="_blank">
-        <img src="Instagram.png" alt="Instagram">
-        <span>b2nny | Instagram</span>
-      </a>
-      <a class="link" href="https://x.com/b2nnny" target="_blank">
-        <img src="Twitter.jpg" alt="X">
-        <span>b2nny | X</span>
-      </a>
+        <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
+          <img src="Spotify.png" alt="Spotify">
+          <span>b2nny | Spotify</span>
+        </a>
+        <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
+          <img src="Apple.png" alt="Apple Music">
+          <span>b2nny | Apple Music</span>
+        </a>
+        <a class="link" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
+          <img src="Soundcloud.png" alt="SoundCloud">
+          <span>b2nny | SoundCloud</span>
+        </a>
+        <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
+          <img src="Youtube.jpg" alt="YouTube">
+          <span>b2nny | YouTube</span>
+        </a>
+        <a class="link" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
+          <img src="Instagram.png" alt="Instagram">
+          <span>b2nny | Instagram</span>
+        </a>
+        <a class="link" href="https://x.com/b2nnny" target="_blank" rel="noopener">
+          <img src="Twitter.jpg" alt="X">
+          <span>b2nny | X</span>
+        </a>
+      </section>
+
+      <footer>
+        © <script>document.write(new Date().getFullYear());</script> Harmony Hill
+      </footer>
     </section>
 
-    <footer>
-      © <script>document.write(new Date().getFullYear());</script> Harmony Hill
-    </footer>
+    <!-- RAP -->
+    <section class="section" id="sectionRap">
+      <div class="backRow">
+        <a class="backBtn" href="#home">back</a>
+        <a class="backBtn" href="https://distrokid.com/hyperfollow/b2nny/rap-dump" target="_blank" rel="noopener">hyperfollow</a>
+      </div>
+
+      <div class="card">
+        <div class="title2">rap dump</div>
+        <div class="sub2">links</div>
+
+        <div class="links" style="margin-top: 0;">
+          <a class="link" href="https://distrokid.com/hyperfollow/b2nny/rap-dump" target="_blank" rel="noopener">
+            <img src="Link.png" alt="Link">
+            <span>hyperfollow</span>
+          </a>
+
+          <a class="link" href="#" target="_blank" rel="noopener">
+            <img src="Spotify.png" alt="Spotify">
+            <span>rap dump | spotify</span>
+          </a>
+          <a class="link" href="#" target="_blank" rel="noopener">
+            <img src="Apple.png" alt="Apple Music">
+            <span>rap dump | apple music</span>
+          </a>
+          <a class="link" href="#" target="_blank" rel="noopener">
+            <img src="Soundcloud.png" alt="SoundCloud">
+            <span>rap dump | soundcloud</span>
+          </a>
+        </div>
+
+        <div class="tiny" style="margin-top: 10px;">
+          swap those links when the official pages are live
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOK -->
+    <section class="section" id="sectionBook">
+      <div class="backRow">
+        <a class="backBtn" href="#home">back</a>
+        <a class="backBtn" href="#pop">pop dump</a>
+      </div>
+
+      <div class="card">
+        <div class="title2">request booking</div>
+        <div class="sub2">fill this out and pick a date and time. no payment here.</div>
+        <div class="tiny">sessions are not confirmed until I text you back and confirm.</div>
+
+        <div style="height: 14px;"></div>
+
+        <div class="grid2">
+          <div>
+            <label for="bkFirst">first name</label>
+            <input id="bkFirst" type="text" autocomplete="given-name" />
+          </div>
+          <div>
+            <label for="bkLast">last name</label>
+            <input id="bkLast" type="text" autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div style="height: 12px;"></div>
+
+        <div class="grid3">
+          <div>
+            <label for="bkEmail">email</label>
+            <input id="bkEmail" type="email" autocomplete="email" />
+          </div>
+          <div>
+            <label for="bkPhone">phone</label>
+            <input id="bkPhone" type="tel" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="bkIg">instagram</label>
+            <input id="bkIg" type="text" placeholder="@handle" />
+          </div>
+        </div>
+
+        <div style="height: 12px;"></div>
+
+        <div class="grid2">
+          <div>
+            <label for="bkHours">amount of hours needed</label>
+            <select id="bkHours">
+              <option value="1">1 hour</option>
+              <option value="2">2 hours</option>
+              <option value="3">3 hours</option>
+              <option value="4">4 hours</option>
+              <option value="6">6 hours</option>
+            </select>
+          </div>
+          <div>
+            <label for="bkRoom">preferred room</label>
+            <select id="bkRoom">
+              <option value="main room">main room</option>
+              <option value="b room">b room</option>
+              <option value="either">either</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="height: 12px;"></div>
+
+        <div class="grid2">
+          <div>
+            <label for="bkDate">date</label>
+            <input id="bkDate" type="date" />
+          </div>
+          <div>
+            <label for="bkDuration">session length</label>
+            <select id="bkDuration">
+              <option value="60">60 minutes</option>
+              <option value="90">90 minutes</option>
+              <option value="120">120 minutes</option>
+              <option value="180">180 minutes</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px; font-size: 12px; opacity: 0.8;">available times</div>
+        <div class="slots" id="bkSlots"></div>
+
+        <div style="height: 12px;"></div>
+
+        <div>
+          <label for="bkNotes">about</label>
+          <textarea id="bkNotes" rows="4" placeholder="what you want to work on, references, any details"></textarea>
+        </div>
+
+        <div class="cta">
+          <button class="btn" id="bkSubmit" disabled>select a time</button>
+          <div class="msg" id="bkMsg"></div>
+        </div>
+
+        <div class="tiny" style="margin-top: 10px;">
+          after you request, I will confirm by text.
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Pop Dump modal -->
+  <!-- POP DUMP MODAL -->
   <div class="modal-backdrop" id="popDumpModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popDumpTitle">
       <div class="modal-header">
@@ -463,39 +644,18 @@
       </div>
 
       <div class="modal-links">
-        <a
-          class="modal-link"
-          href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66"
-          target="_blank"
-        >
-          <span>
-            <strong>Spotify</strong>
-            <small>Open in app or browser</small>
-          </span>
+        <a class="modal-link" href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">
+          <span><strong>Spotify</strong><small>Open in app or browser</small></span>
           <span class="modal-pill">Listen</span>
         </a>
 
-        <a
-          class="modal-link"
-          href="https://music.apple.com/us/album/pop-dump/1858773650"
-          target="_blank"
-        >
-          <span>
-            <strong>Apple Music</strong>
-            <small>Stream the EP</small>
-          </span>
+        <a class="modal-link" href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">
+          <span><strong>Apple Music</strong><small>Stream the EP</small></span>
           <span class="modal-pill">Listen</span>
         </a>
 
-        <a
-          class="modal-link"
-          href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
-          target="_blank"
-        >
-          <span>
-            <strong>SoundCloud</strong>
-            <small>Full Pop Dump set</small>
-          </span>
+        <a class="modal-link" href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
+          <span><strong>SoundCloud</strong><small>Full Pop Dump set</small></span>
           <span class="modal-pill">Listen</span>
         </a>
       </div>
@@ -503,6 +663,9 @@
   </div>
 
   <script>
+    // paste your Apps Script web app url here
+    const API_URL = "https://script.google.com/macros/s/AKfycbx6wXBVIvIIoUptbsUAqXCr4lUxEKEELo83QBCIiiwE9zDnF1b4-RkGMKRiRc6MMinY/exec";
+
     (function glassBlobs(){
       const bg = document.getElementById('bg');
       const colors = ['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
@@ -575,86 +738,230 @@
       }, { passive:true });
     })();
 
-    // POP DUMP and RAP DUMP countdowns
-    (function setupCountdowns(){
-      const configs = [
-        {
-          id: 'countdownPop',
-          target: new Date('December 11, 2025 00:00:00'),
-          outText: 'Pop Dump out now'
-        },
-        {
-          id: 'countdownRap',
-          target: new Date('December 18, 2025 00:00:00'),
-          outText: 'Rap Dump out now'
-        }
-      ];
-
-      function pad(n){ return String(n).padStart(2,'0'); }
-
-      function updateOne(cfg){
-        const el = document.getElementById(cfg.id);
-        if(!el) return;
-
-        const now = new Date();
-        const diff = cfg.target - now;
-
-        if(diff <= 0){
-          el.textContent = cfg.outText;
-          el.classList.add('countdown-out');
-          return;
-        }
-
-        const sec = Math.floor(diff/1000);
-        const d = Math.floor(sec/86400);
-        const h = Math.floor((sec%86400)/3600);
-        const m = Math.floor((sec%3600)/60);
-        const s = sec%60;
-
-        el.textContent = `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
-      }
-
-      function tick(){
-        configs.forEach(updateOne);
-      }
-
-      tick();
-      setInterval(tick, 1000);
-    })();
-
-    // Pop Dump modal logic
-    (function setupPopDumpModal(){
-      const btn = document.getElementById('popDumpBtn');
+    (function modalPop(){
       const modal = document.getElementById('popDumpModal');
-      if(!btn || !modal) return;
-
       const closeButtons = modal.querySelectorAll('[data-close-modal]');
 
-      function openModal(){
-        modal.classList.add('open');
-      }
+      function openModal(){ modal.classList.add('open'); }
+      function closeModal(){ modal.classList.remove('open'); }
 
-      function closeModal(){
-        modal.classList.remove('open');
-      }
+      window.openPopModal = openModal;
 
-      btn.addEventListener('click', openModal);
-
-      closeButtons.forEach(btnEl=>{
-        btnEl.addEventListener('click', closeModal);
-      });
+      closeButtons.forEach(btnEl => btnEl.addEventListener('click', closeModal));
 
       modal.addEventListener('click', (e)=>{
-        if(e.target === modal){
-          closeModal();
-        }
+        if(e.target === modal) closeModal();
       });
 
       document.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape'){
-          closeModal();
-        }
+        if(e.key === 'Escape') closeModal();
       });
+    })();
+
+    (function router(){
+      const home = document.getElementById("sectionHome");
+      const rap = document.getElementById("sectionRap");
+      const book = document.getElementById("sectionBook");
+
+      function show(el){
+        home.classList.remove("active");
+        rap.classList.remove("active");
+        book.classList.remove("active");
+        el.classList.add("active");
+      }
+
+      function onHash(){
+        const h = (location.hash || "#home").replace("#","");
+        if(h === "pop"){
+          window.openPopModal();
+          show(home);
+          return;
+        }
+        if(h === "rap"){ show(rap); return; }
+        if(h === "book"){ show(book); return; }
+        show(home);
+      }
+
+      window.addEventListener("hashchange", onHash);
+      onHash();
+    })();
+
+    (function booking(){
+      const dateEl = document.getElementById("bkDate");
+      const durationEl = document.getElementById("bkDuration");
+      const slotsEl = document.getElementById("bkSlots");
+      const submitBtn = document.getElementById("bkSubmit");
+      const msgEl = document.getElementById("bkMsg");
+
+      const firstEl = document.getElementById("bkFirst");
+      const lastEl = document.getElementById("bkLast");
+      const emailEl = document.getElementById("bkEmail");
+      const phoneEl = document.getElementById("bkPhone");
+      const igEl = document.getElementById("bkIg");
+      const hoursEl = document.getElementById("bkHours");
+      const roomEl = document.getElementById("bkRoom");
+      const notesEl = document.getElementById("bkNotes");
+
+      let selectedTime = "";
+      let busy = new Set();
+
+      function todayISO(){
+        const d = new Date();
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2,"0");
+        const day = String(d.getDate()).padStart(2,"0");
+        return y + "-" + m + "-" + day;
+      }
+
+      function setMinDate(){
+        const start = "2026-01-01";
+        dateEl.min = start;
+        const t = todayISO();
+        dateEl.value = t < start ? start : t;
+      }
+
+      function timeLabel(h, m){
+        const ap = h >= 12 ? "PM" : "AM";
+        const hh = ((h + 11) % 12) + 1;
+        const mm = String(m).padStart(2,"0");
+        return hh + ":" + mm + " " + ap;
+      }
+
+      function allTimes(){
+        const startHour = 12;
+        const endHour = 22;
+        const out = [];
+        for(let h = startHour; h < endHour; h++){
+          out.push(timeLabel(h,0));
+          out.push(timeLabel(h,30));
+        }
+        return out;
+      }
+
+      function renderSlots(){
+        slotsEl.innerHTML = "";
+        selectedTime = "";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "select a time";
+        msgEl.textContent = "";
+
+        for(const t of allTimes()){
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "slot";
+          b.textContent = t;
+
+          if(busy.has(t)){
+            b.classList.add("slotBooked");
+            b.disabled = true;
+          }
+
+          b.addEventListener("click", ()=>{
+            if(b.disabled) return;
+            document.querySelectorAll(".slotSelected").forEach(x => x.classList.remove("slotSelected"));
+            b.classList.add("slotSelected");
+            selectedTime = t;
+            submitBtn.disabled = false;
+            submitBtn.textContent = "request booking";
+            msgEl.textContent = "";
+          });
+
+          slotsEl.appendChild(b);
+        }
+      }
+
+      async function loadBusy(){
+        busy = new Set();
+        renderSlots();
+
+        const date = dateEl.value;
+        if(!date) return;
+
+        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+          msgEl.textContent = "backend not set yet";
+          return;
+        }
+
+        try{
+          const res = await fetch(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
+          const data = await res.json();
+          if(data && data.ok && Array.isArray(data.busy)){
+            busy = new Set(data.busy);
+          }
+        }catch(e){
+          busy = new Set();
+        }
+
+        renderSlots();
+      }
+
+      function validate(){
+        if(!firstEl.value.trim()) return "enter first name";
+        if(!lastEl.value.trim()) return "enter last name";
+        if(!emailEl.value.trim()) return "enter email";
+        if(!phoneEl.value.trim()) return "enter phone";
+        if(!igEl.value.trim()) return "enter instagram";
+        if(!dateEl.value) return "pick a date";
+        if(!selectedTime) return "pick a time";
+        return "";
+      }
+
+      async function submit(){
+        const err = validate();
+        if(err){ msgEl.textContent = err; return; }
+
+        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+          msgEl.textContent = "backend not set yet";
+          return;
+        }
+
+        submitBtn.disabled = true;
+        msgEl.textContent = "sending...";
+
+        const fullName = firstEl.value.trim() + " " + lastEl.value.trim();
+
+        const payload = {
+          name: fullName,
+          email: emailEl.value.trim(),
+          phone: phoneEl.value.trim(),
+          instagram: igEl.value.trim(),
+          date: dateEl.value,
+          time: selectedTime,
+          durationMinutes: Number(durationEl.value),
+          notes: [
+            "hours needed: " + String(hoursEl.value),
+            "preferred room: " + String(roomEl.value),
+            "about: " + String(notesEl.value || "").trim()
+          ].join("\n")
+        };
+
+        try{
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+
+          if(!data || !data.ok){
+            msgEl.textContent = (data && data.error) ? data.error : "error, try again";
+            submitBtn.disabled = false;
+            return;
+          }
+
+          msgEl.textContent = "request sent. I will text you to confirm.";
+          await loadBusy();
+        }catch(e){
+          msgEl.textContent = "error, try again";
+          submitBtn.disabled = false;
+        }
+      }
+
+      setMinDate();
+      loadBusy();
+
+      dateEl.addEventListener("change", loadBusy);
+      submitBtn.addEventListener("click", submit);
     })();
   </script>
 </body>
