@@ -62,7 +62,6 @@
       pointer-events:none;
       opacity:0.95;
       filter:saturate(125%);
-
       background:
         radial-gradient(900px 700px at 20% 30%, rgba(255,255,255,0.07), transparent 62%),
         radial-gradient(850px 650px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
@@ -993,6 +992,8 @@
   </div>
 
   <script>
+    // IMPORTANT: this must be your deployed Apps Script Web App URL
+    // Leave the quotes, replace the URL inside them.
     const API_URL = "https://script.google.com/macros/s/AKfycbyQfetK9SCZtHjxelb-KEJUfUZh3I_o9moHJwNk6bxcU2woZ_u5_OWPDSRcvs98V5xx/exec";
     const PRICE_PER_HOUR = 50;
 
@@ -1005,17 +1006,6 @@
       return hh + ":00 " + ap;
     }
 
-    function parseHour(label){
-      const m = String(label).trim().match(/^(\d{1,2}):00\s*(AM|PM)$/i);
-      if(!m) return null;
-      let hh = Number(m[1]);
-      const ap = m[2].toUpperCase();
-      if(hh < 1 || hh > 12) return null;
-      if(ap === "PM" && hh !== 12) hh += 12;
-      if(ap === "AM" && hh === 12) hh = 0;
-      return hh;
-    }
-
     function openModal(id){
       const el = document.getElementById(id);
       if(el) el.classList.add("open");
@@ -1026,6 +1016,39 @@
       if(el) el.classList.remove("open");
     }
 
+    function jsonp(url){
+      return new Promise((resolve, reject)=>{
+        const cb = "cb" + Math.random().toString(16).slice(2);
+        const s = document.createElement("script");
+        const sep = url.includes("?") ? "&" : "?";
+        const full = url + sep + "callback=" + encodeURIComponent(cb);
+
+        const timer = setTimeout(()=>{
+          cleanup();
+          reject(new Error("timeout"));
+        }, 12000);
+
+        function cleanup(){
+          clearTimeout(timer);
+          try{ delete window[cb]; } catch(e){}
+          if(s && s.parentNode) s.parentNode.removeChild(s);
+        }
+
+        window[cb] = (data)=>{
+          cleanup();
+          resolve(data);
+        };
+
+        s.onerror = ()=>{
+          cleanup();
+          reject(new Error("load error"));
+        };
+
+        s.src = full;
+        document.body.appendChild(s);
+      });
+    }
+
     (function modals(){
       document.querySelectorAll("[data-close]").forEach(btn=>{
         btn.addEventListener("click", ()=> closeModal(btn.getAttribute("data-close")));
@@ -1033,6 +1056,7 @@
 
       ["popModal","rapModal"].forEach(id=>{
         const el = document.getElementById(id);
+        if(!el) return;
         el.addEventListener("click", (e)=>{ if(e.target === el) closeModal(id); });
       });
 
@@ -1101,8 +1125,8 @@
       const notesEl = document.getElementById("bkNotes");
 
       let busy = new Set();
-      let chosenStart = null; // hour int
-      let chosenEnd = null;   // hour int
+      let chosenStart = null;
+      let chosenEnd = null;
 
       function todayISO(){
         const d = new Date();
@@ -1167,17 +1191,16 @@
               chosenStart = hh;
               chosenEnd = null;
             } else {
-              if(hh === chosenStart){
-                return;
-              }
+              if(hh === chosenStart) return;
+
               if(hh < chosenStart){
-                chosenEnd = chosenStart;
+                chosenEnd = chosenStart + 1;
                 chosenStart = hh;
               } else {
-                chosenEnd = hh;
+                chosenEnd = hh + 1;
               }
-              if(chosenEnd === chosenStart) chosenEnd = null;
-              if(chosenEnd !== null && chosenEnd <= chosenStart) chosenEnd = null;
+
+              if(chosenEnd <= chosenStart) chosenEnd = null;
             }
 
             syncSelectsFromRange();
@@ -1213,7 +1236,6 @@
 
         const s = chosenStart;
         const e = chosenEnd;
-
         const bars = barsEl.querySelectorAll(".bar");
 
         if(s === null){
@@ -1270,17 +1292,10 @@
         }
       }
 
-      function syncRangeFromSelects(){
-        chosenStart = Number(startEl.value);
-        chosenEnd = Number(endEl.value);
-        renderSelection();
-      }
-
       function syncSelectsFromRange(){
         if(chosenStart !== null){
           startEl.value = String(chosenStart);
           clampEndOptions();
-
           if(chosenEnd !== null){
             endEl.value = String(chosenEnd);
           }
@@ -1294,24 +1309,18 @@
         const date = dateEl.value;
         if(!date) return;
 
-        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+        if(!API_URL){
           msgEl.textContent = "backend not set";
           renderSelection();
           return;
         }
 
         try{
-          const res = await fetch(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
-          const text = await res.text();
-          let data;
-
-          try { data = JSON.parse(text); }
-          catch(e){ data = null; }
-
+          const data = await jsonp(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
           if(data && data.ok && Array.isArray(data.busy)){
             busy = new Set(data.busy);
           }
-        } catch (e) {
+        } catch(e){
           busy = new Set();
         }
 
@@ -1334,7 +1343,7 @@
         const err = validate();
         if(err){ msgEl.textContent = err; return; }
 
-        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+        if(!API_URL){
           msgEl.textContent = "backend not set";
           return;
         }
@@ -1348,6 +1357,7 @@
         msgEl.textContent = "sending...";
 
         const payload = {
+          mode: "book",
           name: fullName,
           email: emailEl.value.trim(),
           phone: phoneEl.value.trim(),
@@ -1366,20 +1376,11 @@
           ].join("\n")
         };
 
-        const params = new URLSearchParams();
-        Object.entries(payload).forEach(([k,v]) => params.append(k, String(v)));
+        const qs = new URLSearchParams();
+        Object.entries(payload).forEach(([k,v])=> qs.append(k, String(v)));
 
         try{
-          const res = await fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-            body: params.toString()
-          });
-
-          const text = await res.text();
-          let data;
-          try { data = JSON.parse(text); }
-          catch(e){ data = null; }
+          const data = await jsonp(API_URL + "?" + qs.toString());
 
           if(!data || !data.ok){
             msgEl.textContent = (data && data.error) ? data.error : "error, try again";
@@ -1391,7 +1392,7 @@
           submitBtn.disabled = false;
 
           await loadBusy();
-        } catch (e) {
+        } catch(e){
           msgEl.textContent = "error, try again";
           submitBtn.disabled = false;
         }
@@ -1424,5 +1425,3 @@
   </script>
 </body>
 </html>
-
-
