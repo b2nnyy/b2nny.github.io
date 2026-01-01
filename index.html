@@ -7,8 +7,7 @@
   <meta name="description" content="Official links for b2nny | Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
   <meta name="theme-color" content="#07080b" />
 
-  <!-- fixes the favicon 404 without adding a file -->
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='16' fill='%2307080b'/%3E%3Cpath d='M18 40c9 8 19 8 28 0' stroke='%2350beff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='26' r='3' fill='%23ff46be'/%3E%3Ccircle cx='38' cy='26' r='3' fill='%2395ff8c'/%3E%3C/svg%3E" />
 
   <style>
     :root{
@@ -19,14 +18,15 @@
       --bg0: #07080b;
       --bg1: #0c0e14;
 
-      --mag: rgba(255, 70, 190, 0.22);
-      --cyan: rgba(80, 190, 255, 0.26);
-      --lime: rgba(95, 255, 140, 0.22);
-      --acid: rgba(255, 255, 170, 0.18);
+      --mag: rgba(255, 70, 190, 0.20);
+      --cyan: rgba(80, 190, 255, 0.22);
+      --lime: rgba(95, 255, 140, 0.18);
+      --acid: rgba(255, 255, 170, 0.14);
 
       --cardA: rgba(7,8,11,0.68);
-      --cardB: rgba(7,8,11,0.90);
+      --cardB: rgba(7,8,11,0.88);
 
+      --radius: 18px;
       --radius2: 26px;
 
       --shadowA: 0 0 0 1px rgba(0,0,0,0.55);
@@ -54,23 +54,23 @@
 
     .colorFX{
       position:fixed;
-      inset:-25%;
+      inset:-20%;
       z-index:-3;
       pointer-events:none;
       background:
-        radial-gradient(560px 560px at 16% 18%, rgba(255,70,190,0.22), transparent 62%),
-        radial-gradient(720px 720px at 74% 16%, rgba(80,190,255,0.26), transparent 62%),
-        radial-gradient(620px 620px at 84% 72%, rgba(95,255,140,0.22), transparent 62%),
-        radial-gradient(820px 820px at 40% 86%, rgba(255,255,170,0.18), transparent 62%);
-      filter: blur(14px) saturate(160%);
-      opacity: 0.92;
-      animation: swirl 12s ease-in-out infinite alternate;
+        radial-gradient(520px 520px at 18% 22%, rgba(255,70,190,0.18), transparent 62%),
+        radial-gradient(620px 620px at 72% 20%, rgba(80,190,255,0.20), transparent 62%),
+        radial-gradient(540px 540px at 82% 70%, rgba(95,255,140,0.16), transparent 62%),
+        radial-gradient(700px 700px at 40% 82%, rgba(255,255,170,0.12), transparent 62%);
+      filter: blur(12px) saturate(140%);
+      opacity: 0.9;
+      animation: swirl 14s ease-in-out infinite alternate;
     }
 
     @keyframes swirl{
       0%{ transform: translate3d(0,0,0) scale(1); }
-      50%{ transform: translate3d(24px,-18px,0) scale(1.04); }
-      100%{ transform: translate3d(-20px,18px,0) scale(1.03); }
+      50%{ transform: translate3d(22px,-14px,0) scale(1.03); }
+      100%{ transform: translate3d(-18px,16px,0) scale(1.02); }
     }
 
     .bgFX{
@@ -79,11 +79,10 @@
       z-index:-2;
       pointer-events:none;
       opacity:0.95;
-      filter:saturate(135%);
+      filter:saturate(125%);
       background:
         radial-gradient(900px 700px at 20% 30%, rgba(255,255,255,0.07), transparent 62%),
         radial-gradient(850px 650px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
-
         repeating-linear-gradient(0deg,
           rgba(255,255,255,0.10) 0px,
           rgba(255,255,255,0.10) 1px,
@@ -95,43 +94,13 @@
           rgba(255,255,255,0.10) 1px,
           transparent 1px,
           transparent 44px
-        ),
-
-        radial-gradient(220px 220px at 18% 72%, rgba(255,255,255,0.12), transparent 62%),
-        radial-gradient(280px 280px at 62% 34%, rgba(255,255,255,0.10), transparent 60%),
-        radial-gradient(260px 260px at 82% 18%, rgba(255,255,255,0.10), transparent 62%),
-
-        repeating-linear-gradient(90deg,
-          transparent 0px,
-          transparent 96px,
-          rgba(80,190,255,0.16) 96px,
-          rgba(80,190,255,0.16) 98px,
-          transparent 98px,
-          transparent 112px,
-          rgba(255,70,190,0.14) 112px,
-          rgba(255,70,190,0.14) 114px,
-          transparent 114px,
-          transparent 176px
-        ),
-        repeating-linear-gradient(0deg,
-          transparent 0px,
-          transparent 96px,
-          rgba(95,255,140,0.14) 96px,
-          rgba(95,255,140,0.14) 98px,
-          transparent 98px,
-          transparent 112px,
-          rgba(255,255,170,0.12) 112px,
-          rgba(255,255,170,0.12) 114px,
-          transparent 114px,
-          transparent 176px
         );
-      transform: translate3d(0,0,0);
-      animation: driftGrid 16s linear infinite;
+      animation: driftGrid 18s linear infinite;
     }
 
     @keyframes driftGrid{
       0%{ transform: translate3d(0,0,0); }
-      50%{ transform: translate3d(-26px, 18px, 0); }
+      50%{ transform: translate3d(-22px, 14px, 0); }
       100%{ transform: translate3d(0,0,0); }
     }
 
@@ -199,35 +168,18 @@
       color: var(--fg);
       border: 1px solid rgba(255,255,255,0.22);
       background:
-        radial-gradient(160px 110px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
-        linear-gradient(135deg, rgba(255,70,190,0.26), rgba(80,190,255,0.24), rgba(95,255,140,0.20));
+        radial-gradient(140px 100px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
+        linear-gradient(135deg, rgba(255,70,190,0.22), rgba(80,190,255,0.20), rgba(95,255,140,0.18));
       box-shadow: var(--shadowA), var(--shadowB);
       position:relative;
       overflow:hidden;
-      transform: translateY(0);
       transition: transform 140ms ease, filter 140ms ease, border-color 140ms ease;
-    }
-
-    .topBtn::after{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.24) 28%, transparent 58%);
-      opacity:0.14;
-      transform: translateX(-55%);
-      transition: transform 360ms ease, opacity 160ms ease;
-      pointer-events:none;
     }
 
     .topBtn:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.40);
-      filter: saturate(140%) contrast(106%);
-    }
-
-    .topBtn:hover::after{
-      transform: translateX(55%);
-      opacity:0.22;
+      filter: saturate(130%) contrast(104%);
     }
 
     .topLabel{
@@ -288,26 +240,13 @@
       box-shadow: var(--shadowA), 0 14px 34px rgba(0,0,0,0.68);
       position:relative;
       overflow:hidden;
-      transform: translateY(0);
       transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
-    }
-
-    .link::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(130px 130px at 14% 50%, rgba(95,255,140,0.20), transparent 62%),
-        radial-gradient(140px 140px at 80% 30%, rgba(255,70,190,0.18), transparent 60%),
-        radial-gradient(120px 120px at 72% 90%, rgba(80,190,255,0.20), transparent 60%);
-      opacity:0.55;
-      pointer-events:none;
     }
 
     .link:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.34);
-      filter: saturate(130%);
+      filter: saturate(120%);
     }
 
     .link img{
@@ -319,13 +258,9 @@
       box-shadow: 0 0 0 2px rgba(0,0,0,0.28);
       background: rgba(0,0,0,0.20);
       flex: 0 0 auto;
-      position:relative;
-      z-index:1;
     }
 
     .link span{
-      position:relative;
-      z-index:1;
       font-weight: 850;
       letter-spacing: 0.01em;
     }
@@ -342,9 +277,8 @@
 
     .backRow{
       display:flex;
-      justify-content:space-between;
+      justify-content:flex-start;
       align-items:center;
-      gap: 10px;
       margin: 10px 0 12px;
     }
 
@@ -462,7 +396,7 @@
       border: 1px solid rgba(255,255,255,0.20);
       background:
         radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.18), transparent 62%),
-        linear-gradient(135deg, rgba(255,70,190,0.28), rgba(80,190,255,0.24), rgba(95,255,140,0.20));
+        linear-gradient(135deg, rgba(255,70,190,0.26), rgba(80,190,255,0.22), rgba(95,255,140,0.18));
       color: var(--fg);
       padding: 12px 14px;
       border-radius: 16px;
@@ -477,7 +411,7 @@
     .btn:hover{
       transform: translateY(-1px);
       border-color: rgba(255,255,255,0.38);
-      filter: saturate(140%);
+      filter: saturate(130%);
     }
 
     .btn:disabled{
@@ -487,31 +421,10 @@
       transform:none;
     }
 
-    .btnSecondary{
-      border: 1px solid rgba(255,255,255,0.18);
-      background:
-        radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.14), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.55), rgba(7,8,11,0.85));
-      color: rgba(255,255,255,0.92);
-      padding: 12px 14px;
-      border-radius: 16px;
-      cursor:pointer;
-      font: inherit;
-      font-weight: 950;
-      letter-spacing: 0.03em;
-      box-shadow: 0 12px 26px rgba(0,0,0,0.66);
-      transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
-    }
-
-    .btnSecondary:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.34);
-      filter: saturate(120%);
-    }
-
     .msg{
       font-size: 13px;
       opacity: 0.92;
+      white-space: pre-wrap;
     }
 
     .modalBackdrop{
@@ -619,63 +532,6 @@
       white-space:nowrap;
     }
 
-    .bkSuccess{
-      margin-top: 14px;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.20);
-      background:
-        radial-gradient(260px 180px at 14% 0%, rgba(255,255,255,0.14), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.70), rgba(7,8,11,0.92));
-      box-shadow: var(--shadowA), var(--shadowB);
-      padding: 16px;
-      display:none;
-    }
-
-    .bkSuccess.active{ display:block; }
-
-    .bkSuccess h3{
-      font-size: 20px;
-      font-weight: 950;
-      letter-spacing: 0.03em;
-      margin-bottom: 8px;
-      text-transform: lowercase;
-    }
-
-    .bkSuccess .line{
-      font-size: 13px;
-      opacity: 0.92;
-      margin: 6px 0;
-      line-height: 1.35;
-    }
-
-    .chipRow{
-      margin-top: 10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-    }
-
-    .bkChip{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.03em;
-      text-transform: lowercase;
-    }
-
-    .btnRow{
-      margin-top: 12px;
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-    }
-
     @media (max-width: 480px){
       .pfp img{ width: 102px; height: 102px; }
       h1{ font-size: 26px; }
@@ -704,6 +560,11 @@
         <a href="#rap" class="topBtn">
           <span class="topLabel">Rap Dump</span>
           <span class="topSub">open</span>
+        </a>
+
+        <a href="#book" class="topBtn">
+          <span class="topLabel">Book a session</span>
+          <span class="topSub">$50 per hour</span>
         </a>
       </div>
 
@@ -757,18 +618,16 @@
     <section class="section" id="sectionBook">
       <div class="backRow">
         <a class="backBtn" href="#home">back</a>
-        <a class="backBtn" href="#pop">pop dump</a>
       </div>
 
-      <div class="card" id="bkCard">
+      <div class="card" id="bookFormCard">
         <div class="title2">request booking</div>
-        <div class="sub2">pick a date, start time, and end time</div>
-        <div class="tiny">no payment here. sessions are not confirmed until I text you back and confirm.</div>
+        <div class="sub2">pick a date then pick a start and end time</div>
+        <div class="tiny">no payment here. I will contact you to confirm.</div>
 
         <div class="priceRow">
           <strong>$50</strong>
           <span>per hour</span>
-          <span style="opacity:0.7;">hour blocks</span>
         </div>
 
         <div style="height:14px;"></div>
@@ -822,46 +681,33 @@
             <select id="bkEnd"></select>
           </div>
           <div>
-            <label>total</label>
-            <input id="bkTotal" type="text" disabled value="$0" />
+            <label for="bkNotes">about</label>
+            <textarea id="bkNotes" rows="3" placeholder="what you want to work on, references, any details"></textarea>
           </div>
         </div>
 
-        <div style="height:12px;"></div>
-
-        <div>
-          <label for="bkNotes">about</label>
-          <textarea id="bkNotes" rows="4" placeholder="what you want to work on, references, any details"></textarea>
-        </div>
-
         <div class="cta">
-          <button class="btn" id="bkSubmit" disabled>select times</button>
+          <button class="btn" id="bkSubmit">request booking</button>
           <div class="msg" id="bkMsg"></div>
         </div>
 
         <div class="tiny" style="margin-top:10px;">
-          if anything is already booked, it will block that range
+          booked time blocks will be unavailable
         </div>
       </div>
 
-      <div class="bkSuccess" id="bkSuccess">
-        <h3>you are booked</h3>
-        <div class="line" id="bkSuccessLine1"></div>
-        <div class="line" id="bkSuccessLine2"></div>
+      <div class="card" id="bookSuccessCard" style="display:none;">
+        <div class="title2">request received</div>
+        <div class="sub2" id="bkSuccessLine"></div>
+        <div class="tiny">I will contact you to confirm and lock it in.</div>
 
-        <div class="chipRow">
-          <div class="bkChip" id="bkSuccessChipTime"></div>
-          <div class="bkChip" id="bkSuccessChipHours"></div>
-          <div class="bkChip" id="bkSuccessChipTotal"></div>
-        </div>
+        <div style="height:12px;"></div>
 
-        <div class="btnRow">
-          <button class="btn" type="button" id="bkBookAnother">book another session</button>
-          <button class="btnSecondary" type="button" id="bkBackHome">back to links</button>
-        </div>
+        <div class="priceRow" id="bkSuccessPrice"></div>
 
-        <div class="line" style="opacity:0.72;margin-top:10px;">
-          you will still get a text from me to confirm details
+        <div class="cta" style="margin-top:14px;">
+          <button class="btn" id="bkAnother">book another session</button>
+          <a class="backBtn" href="#home">back home</a>
         </div>
       </div>
     </section>
@@ -874,7 +720,7 @@
           <div class="modalTitle" id="popTitle">Pop Dump</div>
           <div class="modalSub">Pick your platform and stream the EP.</div>
         </div>
-        <button class="modalClose" type="button" data-close="popModal">×</button>
+        <button class="modalClose" type="button" dataClose="popModal">×</button>
       </div>
 
       <div class="modalLinks">
@@ -903,7 +749,7 @@
           <div class="modalTitle" id="rapTitle">Rap Dump</div>
           <div class="modalSub">Pick your platform and stream the EP.</div>
         </div>
-        <button class="modalClose" type="button" data-close="rapModal">×</button>
+        <button class="modalClose" type="button" dataClose="rapModal">×</button>
       </div>
 
       <div class="modalLinks">
@@ -928,7 +774,6 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec";
     const PRICE_PER_HOUR = 50;
-
     const START_HOUR = 12;
     const END_HOUR = 22;
 
@@ -938,8 +783,26 @@
       return hh + ":00 " + ap;
     }
 
-    function money(n){
-      return "$" + Number(n).toFixed(0);
+    function isoToday(){
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2,"0");
+      const day = String(d.getDate()).padStart(2,"0");
+      return y + "-" + m + "-" + day;
+    }
+
+    function pad2(n){ return String(n).padStart(2,"0"); }
+
+    function fmtLocalFromIso(iso){
+      const d = new Date(iso);
+      const y = d.getFullYear();
+      const m = pad2(d.getMonth() + 1);
+      const day = pad2(d.getDate());
+      let hh = d.getHours();
+      const ap = hh >= 12 ? "PM" : "AM";
+      hh = ((hh + 11) % 12) + 1;
+      const mm = pad2(d.getMinutes());
+      return { date: y + "-" + m + "-" + day, time: hh + ":" + mm + " " + ap };
     }
 
     function openModal(id){
@@ -952,51 +815,13 @@
       if(el) el.classList.remove("open");
     }
 
-    function jsonp(url, params){
-      return new Promise((resolve, reject)=>{
-        const cbName = "cb_" + Math.random().toString(36).slice(2);
-        const script = document.createElement("script");
-
-        const qs = new URLSearchParams();
-        Object.entries(params || {}).forEach(([k,v])=> qs.append(k, String(v)));
-        qs.append("callback", cbName);
-
-        const full = url + (url.includes("?") ? "&" : "?") + qs.toString();
-
-        const timeout = setTimeout(()=>{
-          cleanup();
-          reject(new Error("jsonp timeout"));
-        }, 12000);
-
-        function cleanup(){
-          clearTimeout(timeout);
-          try{ delete window[cbName]; } catch(_){}
-          if(script.parentNode) script.parentNode.removeChild(script);
-        }
-
-        window[cbName] = (data)=>{
-          cleanup();
-          resolve(data);
-        };
-
-        script.onerror = ()=>{
-          cleanup();
-          reject(new Error("jsonp error"));
-        };
-
-        script.src = full;
-        document.body.appendChild(script);
-      });
-    }
-
     (function modals(){
-      document.querySelectorAll("[data-close]").forEach(btn=>{
-        btn.addEventListener("click", ()=> closeModal(btn.getAttribute("data-close")));
+      document.querySelectorAll("[dataClose]").forEach(btn=>{
+        btn.addEventListener("click", ()=> closeModal(btn.getAttribute("dataClose")));
       });
 
       ["popModal","rapModal"].forEach(id=>{
         const el = document.getElementById(id);
-        if(!el) return;
         el.addEventListener("click", (e)=>{ if(e.target === el) closeModal(id); });
       });
 
@@ -1023,20 +848,9 @@
 
       function onHash(){
         const h = (location.hash || "#home").replace("#","");
-        if(h === "pop"){
-          window.openPop();
-          show(home);
-          return;
-        }
-        if(h === "rap"){
-          window.openRap();
-          show(home);
-          return;
-        }
-        if(h === "book"){
-          show(book);
-          return;
-        }
+        if(h === "pop"){ window.openPop(); show(home); return; }
+        if(h === "rap"){ window.openRap(); show(home); return; }
+        if(h === "book"){ show(book); return; }
         show(home);
       }
 
@@ -1044,14 +858,51 @@
       onHash();
     })();
 
+    function jsonp(url){
+      return new Promise((resolve, reject)=>{
+        const cb = "cb" + Math.random().toString(36).slice(2);
+        const sep = url.includes("?") ? "&" : "?";
+        const full = url + sep + "callback=" + cb;
+
+        const s = document.createElement("script");
+        s.src = full;
+        s.async = true;
+
+        const t = setTimeout(()=>{
+          cleanup();
+          reject(new Error("timeout"));
+        }, 12000);
+
+        function cleanup(){
+          clearTimeout(t);
+          delete window[cb];
+          if(s && s.parentNode) s.parentNode.removeChild(s);
+        }
+
+        window[cb] = (data)=>{
+          cleanup();
+          resolve(data);
+        };
+
+        s.onerror = ()=>{
+          cleanup();
+          reject(new Error("load error"));
+        };
+
+        document.head.appendChild(s);
+      });
+    }
+
     (function booking(){
+      const formCard = document.getElementById("bookFormCard");
+      const successCard = document.getElementById("bookSuccessCard");
+      const successLine = document.getElementById("bkSuccessLine");
+      const successPrice = document.getElementById("bkSuccessPrice");
+      const anotherBtn = document.getElementById("bkAnother");
+
       const dateEl = document.getElementById("bkDate");
       const startEl = document.getElementById("bkStart");
       const endEl = document.getElementById("bkEnd");
-      const totalEl = document.getElementById("bkTotal");
-
-      const submitBtn = document.getElementById("bkSubmit");
-      const msgEl = document.getElementById("bkMsg");
 
       const firstEl = document.getElementById("bkFirst");
       const lastEl = document.getElementById("bkLast");
@@ -1060,83 +911,16 @@
       const igEl = document.getElementById("bkIg");
       const notesEl = document.getElementById("bkNotes");
 
-      const cardEl = document.getElementById("bkCard");
-      const successEl = document.getElementById("bkSuccess");
-
-      const sL1 = document.getElementById("bkSuccessLine1");
-      const sL2 = document.getElementById("bkSuccessLine2");
-      const sC1 = document.getElementById("bkSuccessChipTime");
-      const sC2 = document.getElementById("bkSuccessChipHours");
-      const sC3 = document.getElementById("bkSuccessChipTotal");
+      const submitBtn = document.getElementById("bkSubmit");
+      const msgEl = document.getElementById("bkMsg");
 
       let busy = new Set();
 
-      function todayISO(){
-        const d = new Date();
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2,"0");
-        const day = String(d.getDate()).padStart(2,"0");
-        return y + "-" + m + "-" + day;
-      }
-
       function setMinDate(){
-        const start = "2026-01-01";
-        dateEl.min = start;
-        const t = todayISO();
-        dateEl.value = t < start ? start : t;
-      }
-
-      function prettyDate(iso){
-        const d = new Date(iso + "T00:00:00");
-        return d.toLocaleDateString(undefined, { weekday:"long", month:"long", day:"numeric", year:"numeric" });
-      }
-
-      function chosenStartHour(){
-        return Number(startEl.value);
-      }
-
-      function chosenEndHour(){
-        return Number(endEl.value);
-      }
-
-      function hoursBooked(){
-        return chosenEndHour() - chosenStartHour();
-      }
-
-      function isRangeValid(s, e){
-        if(!Number.isFinite(s) || !Number.isFinite(e)) return false;
-        if(e <= s) return false;
-        for(let h = s; h < e; h++){
-          if(busy.has(timeLabel(h))) return false;
-        }
-        return true;
-      }
-
-      function updateTotalsAndButton(){
-        const s = chosenStartHour();
-        const e = chosenEndHour();
-
-        if(!Number.isFinite(s) || !Number.isFinite(e)){
-          totalEl.value = "$0";
-          submitBtn.disabled = true;
-          submitBtn.textContent = "select times";
-          return;
-        }
-
-        const hrs = e - s;
-        const total = Math.max(0, hrs) * PRICE_PER_HOUR;
-        totalEl.value = money(total);
-
-        const ok = isRangeValid(s, e);
-
-        if(!ok){
-          submitBtn.disabled = true;
-          submitBtn.textContent = "pick a different time";
-          return;
-        }
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = "request booking (" + money(total) + ")";
+        const min = "2026-01-01";
+        dateEl.min = min;
+        const t = isoToday();
+        dateEl.value = (t < min) ? min : t;
       }
 
       function buildStartOptions(){
@@ -1150,10 +934,8 @@
         startEl.value = String(START_HOUR);
       }
 
-      function buildEndOptionsFromStart(){
-        const s = chosenStartHour();
-        const currentE = Number(endEl.value) || (s + 1);
-
+      function rebuildEndOptions(){
+        const s = Number(startEl.value);
         endEl.innerHTML = "";
         for(let h = s + 1; h <= END_HOUR; h++){
           const opt = document.createElement("option");
@@ -1161,59 +943,36 @@
           opt.textContent = timeLabel(h);
           endEl.appendChild(opt);
         }
+        endEl.value = String(Math.min(s + 2, END_HOUR));
+      }
 
-        const nextE = Math.max(s + 1, Math.min(currentE, END_HOUR));
-        endEl.value = String(nextE);
+      function isRangeFree(s, e){
+        for(let h = s; h < e; h++){
+          if(busy.has(timeLabel(h))) return false;
+        }
+        return true;
       }
 
       async function loadBusy(){
-        busy = new Set();
         msgEl.textContent = "";
+        busy = new Set();
+
+        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+          msgEl.textContent = "backend not set";
+          return;
+        }
 
         const date = dateEl.value;
         if(!date) return;
 
-        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
-          msgEl.textContent = "backend not set";
-          updateTotalsAndButton();
-          return;
-        }
-
         try{
-          const data = await jsonp(API_URL, { mode: "busy", date });
+          const data = await jsonp(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
           if(data && data.ok && Array.isArray(data.busy)){
             busy = new Set(data.busy);
           }
-        } catch (e) {
+        } catch(e){
           busy = new Set();
         }
-
-        updateTotalsAndButton();
-      }
-
-      function showSuccess(){
-        const datePretty = prettyDate(dateEl.value);
-        const s = chosenStartHour();
-        const e = chosenEndHour();
-        const hrs = e - s;
-        const total = hrs * PRICE_PER_HOUR;
-        const range = timeLabel(s) + " to " + timeLabel(e);
-
-        sL1.textContent = datePretty;
-        sL2.textContent = range;
-
-        sC1.textContent = range;
-        sC2.textContent = hrs + " hour" + (hrs === 1 ? "" : "s");
-        sC3.textContent = money(total);
-
-        cardEl.style.display = "none";
-        successEl.classList.add("active");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-
-      function hideSuccess(){
-        successEl.classList.remove("active");
-        cardEl.style.display = "";
       }
 
       function validate(){
@@ -1224,10 +983,40 @@
         if(!igEl.value.trim()) return "enter instagram";
         if(!dateEl.value) return "pick a date";
 
-        const s = chosenStartHour();
-        const e = chosenEndHour();
-        if(!isRangeValid(s, e)) return "that time is not available";
+        const s = Number(startEl.value);
+        const e = Number(endEl.value);
+        if(!Number.isFinite(s) || !Number.isFinite(e) || e <= s) return "pick start and end time";
+        if(!isRangeFree(s, e)) return "that time is already booked";
+
         return "";
+      }
+
+      function showSuccess(data, sHour, eHour){
+        const hours = eHour - sHour;
+        const total = hours * PRICE_PER_HOUR;
+
+        formCard.style.display = "none";
+        successCard.style.display = "block";
+
+        const st = data && data.start ? fmtLocalFromIso(data.start) : null;
+        const en = data && data.end ? fmtLocalFromIso(data.end) : null;
+
+        const dateText = st ? st.date : dateEl.value;
+        const startText = st ? st.time : timeLabel(sHour);
+        const endText = en ? en.time : timeLabel(eHour);
+
+        successLine.textContent =
+          dateText + " " + startText + " to " + endText + " (" + hours + " hour" + (hours === 1 ? "" : "s") + ")";
+
+        successPrice.innerHTML = "<strong>$" + total + "</strong><span>estimated total</span>";
+        msgEl.textContent = "";
+      }
+
+      function resetFormView(){
+        successCard.style.display = "none";
+        formCard.style.display = "block";
+        msgEl.textContent = "";
+        notesEl.value = "";
       }
 
       async function submit(){
@@ -1240,90 +1029,65 @@
         }
 
         const fullName = firstEl.value.trim() + " " + lastEl.value.trim();
-        const s = chosenStartHour();
-        const e = chosenEndHour();
-        const hrs = e - s;
-        const durationMinutes = hrs * 60;
-        const total = hrs * PRICE_PER_HOUR;
+        const sHour = Number(startEl.value);
+        const eHour = Number(endEl.value);
+        const hours = eHour - sHour;
+        const durationMinutes = hours * 60;
 
         submitBtn.disabled = true;
-        msgEl.textContent = "booking...";
+        submitBtn.textContent = "sending...";
+        msgEl.textContent = "";
 
-        const payload = {
-          mode: "book",
-          name: fullName,
-          email: emailEl.value.trim(),
-          phone: phoneEl.value.trim(),
-          instagram: igEl.value.trim(),
-          date: dateEl.value,
-          time: timeLabel(s),
-          durationMinutes: String(durationMinutes),
-          notes: [
-            "price per hour: $" + PRICE_PER_HOUR,
-            "total: $" + total,
-            "hours booked: " + hrs,
-            "range: " + timeLabel(s) + " to " + timeLabel(e),
-            "",
-            String(notesEl.value || "").trim()
-          ].join("\n")
-        };
+        const q = new URLSearchParams();
+        q.set("mode","book");
+        q.set("name", fullName);
+        q.set("email", emailEl.value.trim());
+        q.set("phone", phoneEl.value.trim());
+        q.set("instagram", igEl.value.trim());
+        q.set("date", dateEl.value);
+        q.set("time", timeLabel(sHour));
+        q.set("durationMinutes", String(durationMinutes));
+        q.set("notes", String(notesEl.value || "").trim());
 
         try{
-          const data = await jsonp(API_URL, payload);
-
+          const data = await jsonp(API_URL + "?" + q.toString());
           if(!data || !data.ok){
             msgEl.textContent = (data && data.error) ? data.error : "error, try again";
             submitBtn.disabled = false;
+            submitBtn.textContent = "request booking";
             return;
           }
 
-          msgEl.textContent = "";
-          showSuccess();
-          submitBtn.disabled = false;
-
+          showSuccess(data, sHour, eHour);
           await loadBusy();
-        } catch (e) {
+        } catch(e){
           msgEl.textContent = "error, try again";
           submitBtn.disabled = false;
+          submitBtn.textContent = "request booking";
         }
       }
 
-      document.getElementById("bkBookAnother").addEventListener("click", ()=>{
-        hideSuccess();
-        msgEl.textContent = "";
-      });
-
-      document.getElementById("bkBackHome").addEventListener("click", ()=>{
-        location.hash = "#home";
+      anotherBtn.addEventListener("click", async ()=>{
+        resetFormView();
+        await loadBusy();
       });
 
       setMinDate();
       buildStartOptions();
-      buildEndOptionsFromStart();
-      updateTotalsAndButton();
-      loadBusy();
+      rebuildEndOptions();
 
-      dateEl.addEventListener("change", ()=>{
-        hideSuccess();
-        loadBusy();
+      dateEl.addEventListener("change", async ()=>{
+        await loadBusy();
       });
 
       startEl.addEventListener("change", ()=>{
-        hideSuccess();
-        buildEndOptionsFromStart();
-        updateTotalsAndButton();
-      });
-
-      endEl.addEventListener("change", ()=>{
-        hideSuccess();
-        updateTotalsAndButton();
+        rebuildEndOptions();
       });
 
       submitBtn.addEventListener("click", submit);
+
+      loadBusy();
     })();
   </script>
 </body>
 </html>
-
-
-
