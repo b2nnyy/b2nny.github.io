@@ -5,419 +5,632 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>b2nny | links</title>
   <meta name="description" content="Official links for b2nny | Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
-  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="theme-color" content="#07080b" />
 
   <style>
-    :root {
-      --fg: #fff;
-      --maxw: 720px;
-      --c1: #CFEAFF;
-      --c2: #AEE4FF;
-      --c3: #D6FFEF;
-      --c4: #BFF7D9;
-      --btnBg: rgba(0, 0, 0, 0.65);
-      --btnHover: rgba(0, 0, 0, 0.85);
-      --radius: 16px;
+    :root{
+      --maxw: 760px;
+      --fg: #f7fbff;
+      --muted: rgba(247,251,255,0.72);
+
+      --bg0: #07080b;
+      --bg1: #0c0e14;
+
+      --mag: rgb(83, 34, 67);
+      --cyan: rgb(73, 130, 171);
+      --lime: rgb(36, 169, 35);
+      --acid: rgb(195, 202, 133);
+
+      --chrome0: rgba(255,255,255,0.08);
+      --chrome1: rgba(255,255,255,0.14);
+      --chrome2: rgba(255,255,255,0.22);
+
+      --card: rgba(7,8,11,0.72);
+      --card2: rgba(7,8,11,0.86);
+
+      --radius: 18px;
+      --radius2: 26px;
+
+      --shadowA: 0 0 0 1px rgba(0,0,0,0.55);
+      --shadowB: 0 18px 46px rgba(0,0,0,0.78);
+
+      --scan: rgba(255,255,255,0.06);
+      --glow: rgba(174,228,255,0.22);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-
-    body {
-      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial;
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html, body{ height:100%; }
+    body{
+      font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--fg);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      background: #0f1012;
-      overflow-x: hidden;
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(73,130,171,0.20), transparent 55%),
+                  radial-gradient(900px 700px at 85% 25%, rgba(36,169,35,0.16), transparent 58%),
+                  radial-gradient(1000px 900px at 65% 95%, rgba(83,34,67,0.20), transparent 60%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
     }
 
-    .bg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      overflow: hidden;
+    /* glossy tile grid + chrome haze + plus pattern */
+    .bgFX{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      background:
+        linear-gradient(0deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        radial-gradient(1200px 900px at 20% 30%, rgba(255,255,255,0.08), transparent 60%),
+        radial-gradient(900px 700px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
+
+        /* tile grid */
+        repeating-linear-gradient(0deg,
+          rgba(255,255,255,0.12) 0px,
+          rgba(255,255,255,0.12) 1px,
+          transparent 1px,
+          transparent 44px
+        ),
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.12) 0px,
+          rgba(255,255,255,0.12) 1px,
+          transparent 1px,
+          transparent 44px
+        ),
+
+        /* soft tile glow blocks */
+        radial-gradient(140px 140px at 18% 72%, rgba(255,255,255,0.10), transparent 60%),
+        radial-gradient(220px 220px at 62% 34%, rgba(255,255,255,0.08), transparent 55%),
+        radial-gradient(180px 180px at 82% 18%, rgba(255,255,255,0.08), transparent 62%),
+
+        /* plus pattern */
+        repeating-linear-gradient(90deg,
+          transparent 0px,
+          transparent 96px,
+          rgba(73,130,171,0.14) 96px,
+          rgba(73,130,171,0.14) 98px,
+          transparent 98px,
+          transparent 112px,
+          rgba(73,130,171,0.14) 112px,
+          rgba(73,130,171,0.14) 114px,
+          transparent 114px,
+          transparent 176px
+        ),
+        repeating-linear-gradient(0deg,
+          transparent 0px,
+          transparent 96px,
+          rgba(36,169,35,0.12) 96px,
+          rgba(36,169,35,0.12) 98px,
+          transparent 98px,
+          transparent 112px,
+          rgba(36,169,35,0.12) 112px,
+          rgba(36,169,35,0.12) 114px,
+          transparent 114px,
+          transparent 176px
+        );
+      opacity:0.85;
+      filter:saturate(120%);
     }
 
-    .blob {
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(10px) saturate(120%);
-      opacity: 0.9;
-      will-change: transform;
-      pointer-events: none;
+    /* scanline overlay */
+    .scanFX{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(0deg,
+          rgba(255,255,255,0.05) 0px,
+          rgba(255,255,255,0.05) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      opacity:0.18;
+      mix-blend-mode: overlay;
     }
 
-    .frost {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(22px) saturate(120%);
-      -webkit-backdrop-filter: blur(22px) saturate(120%);
-    }
-
-    .wrap {
-      width: 100%;
+    .wrap{
+      width:100%;
       max-width: var(--maxw);
-      padding: 32px 20px 48px;
+      padding: 34px 18px 56px;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 18px;
+    header{
+      text-align:center;
+      margin-bottom: 16px;
     }
 
-    .pfp img {
+    .pfp{
+      display:flex;
+      justify-content:center;
+      margin-bottom: 14px;
+    }
+
+    .pfp img{
       width: 120px;
       height: 120px;
       border-radius: 999px;
       object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.85);
-      opacity: 0;
-      transform: translateY(22px);
-      animation: snapUp .35s cubic-bezier(.2,.8,.2,1) .05s forwards;
-    }
-
-    .topRow {
-      margin-top: 18px;
-      display: grid;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .topBtn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 12px 22px;
-      border-radius: 999px;
-      font-size: 13px;
-      text-decoration: none;
-      color: #fdfdfd;
-      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.25), transparent 55%),
-                  rgba(0, 0, 0, 0.78);
-      border: 1px solid rgba(255,255,255,0.3);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      cursor: pointer;
-      transition: background .15s ease, transform .15s ease, border-color .15s ease, box-shadow .15s ease;
-      min-width: min(100%, 440px);
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.4),
-        0 18px 38px rgba(0,0,0,0.6);
-    }
-
-    .topBtn:hover {
-      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.32), transparent 55%),
-                  rgba(0, 0, 0, 0.95);
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.55);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.12),
-        0 22px 46px rgba(0,0,0,0.8);
-    }
-
-    .topLabel {
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-      font-size: 12px;
-      opacity: 0.9;
-      white-space: nowrap;
-    }
-
-    .topSub {
-      font-weight: 700;
-      font-size: 13px;
-      opacity: 0.9;
-      white-space: nowrap;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin: 16px 0 10px;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: snapUp .3s cubic-bezier(.2,.8,.2,1) .22s forwards;
-    }
-
-    @keyframes snapUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .links {
-      display: grid;
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--btnBg);
-      color: var(--fg);
-      text-decoration: none;
-      padding: 14px 18px;
-      border-radius: var(--radius);
+      background: rgba(0,0,0,0.25);
       border: 1px solid rgba(255,255,255,0.22);
-      opacity: 0;
-      transform: translateX(40px);
-      animation: snapInR .28s cubic-bezier(.2,.8,.2,1) forwards;
-      cursor: pointer;
-      font: inherit;
+      box-shadow:
+        0 0 0 3px rgba(255,255,255,0.06),
+        0 18px 46px rgba(0,0,0,0.75);
     }
 
-    .link:nth-child(even) {
-      transform: translateX(-40px);
-      animation-name: snapInL;
+    .topRow{
+      display:grid;
+      gap: 12px;
+      justify-content:center;
+      margin: 10px 0 14px;
     }
 
-    @keyframes snapInR { to { opacity: 1; transform: translateX(0); } }
-    @keyframes snapInL { to { opacity: 1; transform: translateX(0); } }
+    .topBtn{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 12px 18px;
+      min-width: min(100%, 460px);
+      border-radius: 999px;
+      text-decoration:none;
+      color: var(--fg);
+      border: 1px solid rgba(255,255,255,0.22);
+      background:
+        radial-gradient(120px 90px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
+        linear-gradient(135deg, rgba(83,34,67,0.55), rgba(73,130,171,0.48), rgba(36,169,35,0.42));
+      box-shadow: var(--shadowA), var(--shadowB);
+      position:relative;
+      overflow:hidden;
+      transform: translateY(0);
+      transition: transform 140ms ease, filter 140ms ease, border-color 140ms ease;
+    }
 
-    .link:hover { background: var(--btnHover); }
+    .topBtn::after{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 28%, transparent 58%);
+      opacity:0.14;
+      transform: translateX(-55%);
+      transition: transform 360ms ease, opacity 160ms ease;
+      pointer-events:none;
+    }
 
-    .link img {
+    .topBtn:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.40);
+      filter: saturate(125%) contrast(104%);
+    }
+
+    .topBtn:hover::after{
+      transform: translateX(55%);
+      opacity:0.20;
+    }
+
+    .topLabel{
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 800;
+      font-size: 12px;
+      white-space:nowrap;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.45),
+        0 0 14px rgba(174,228,255,0.20);
+    }
+
+    .topSub{
+      font-weight: 800;
+      font-size: 13px;
+      opacity: 0.95;
+      white-space:nowrap;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.45);
+    }
+
+    h1{
+      font-size: 30px;
+      margin: 8px 0 10px;
+      letter-spacing: 0.04em;
+      font-weight: 900;
+      text-shadow:
+        0 2px 0 rgba(0,0,0,0.55),
+        0 0 22px rgba(73,130,171,0.22);
+    }
+
+    .subHead{
+      font-size: 12px;
+      opacity: 0.80;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .links{
+      display:grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .link{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius2);
+      text-decoration:none;
+      color: var(--fg);
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        radial-gradient(140px 110px at 18% 0%, rgba(255,255,255,0.18), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.70), rgba(7,8,11,0.84));
+      box-shadow: var(--shadowA), 0 14px 34px rgba(0,0,0,0.68);
+      position:relative;
+      overflow:hidden;
+      transform: translateY(0);
+      transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
+    }
+
+    .link::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(120px 120px at 14% 50%, rgba(36,169,35,0.18), transparent 62%),
+        radial-gradient(130px 130px at 80% 30%, rgba(83,34,67,0.18), transparent 60%),
+        radial-gradient(110px 110px at 72% 90%, rgba(73,130,171,0.18), transparent 60%);
+      opacity:0.55;
+      pointer-events:none;
+    }
+
+    .link:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.34);
+      filter: saturate(115%);
+    }
+
+    .link img{
       width: 28px;
       height: 28px;
-      border-radius: 6px;
+      border-radius: 10px;
       object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.28);
+      background: rgba(0,0,0,0.20);
+      flex: 0 0 auto;
     }
 
-    footer {
+    .link span{
+      position:relative;
+      z-index:1;
+      font-weight: 750;
+      letter-spacing: 0.01em;
+    }
+
+    footer{
       font-size: 12px;
-      color: #1f1f1f;
-      margin-top: 32px;
-      text-align: left;
-      opacity: 0;
-      animation: fadeIn .25s .72s forwards;
+      color: rgba(255,255,255,0.55);
+      margin-top: 26px;
+      text-align:left;
     }
 
-    @keyframes fadeIn { to { opacity: 1; } }
+    .section{ display:none; }
+    .section.active{ display:block; }
 
-    .section { display: none; }
-    .section.active { display: block; }
-
-    .backRow {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .backRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
       margin: 10px 0 12px;
     }
 
-    .backBtn {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-      color: #fff;
-      background: rgba(0,0,0,0.55);
-      border: 1px solid rgba(255,255,255,0.18);
+    .backBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding: 10px 12px;
-      border-radius: 14px;
-    }
-
-    .backBtn:hover { background: rgba(0,0,0,0.85); }
-
-    .card {
-      background: rgba(0,0,0,0.55);
+      border-radius: 999px;
+      text-decoration:none;
+      color: var(--fg);
       border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.4),
-        0 18px 38px rgba(0,0,0,0.6);
+      background:
+        radial-gradient(110px 80px at 20% 0%, rgba(255,255,255,0.16), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.62), rgba(7,8,11,0.86));
+      box-shadow: var(--shadowA), 0 12px 28px rgba(0,0,0,0.70);
     }
 
-    .title2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
-    .sub2 { font-size: 13px; opacity: 0.82; margin-bottom: 10px; }
-    .tiny { font-size: 12px; opacity: 0.7; line-height: 1.35; }
+    .backBtn:hover{
+      border-color: rgba(255,255,255,0.34);
+      transform: translateY(-1px);
+    }
 
-    .priceRow {
+    .card{
+      border-radius: 22px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        radial-gradient(240px 180px at 10% 0%, rgba(255,255,255,0.12), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.66), rgba(7,8,11,0.90));
+      box-shadow: var(--shadowA), var(--shadowB);
+    }
+
+    .title2{
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      text-shadow:
+        0 2px 0 rgba(0,0,0,0.55),
+        0 0 16px rgba(73,130,171,0.18);
+    }
+
+    .sub2{
+      font-size: 13px;
+      opacity: 0.82;
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tiny{
+      font-size: 12px;
+      opacity: 0.70;
+      line-height: 1.35;
+    }
+
+    .priceRow{
       margin-top: 10px;
-      display: inline-flex;
-      align-items: center;
+      display:inline-flex;
+      align-items:center;
       gap: 10px;
       padding: 8px 10px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(0,0,0,0.35);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    @media (max-width: 640px){
+      .grid2, .grid3{ grid-template-columns: 1fr; }
+    }
+
+    label{
       font-size: 12px;
-      opacity: 0.92;
+      opacity: 0.78;
+      display:block;
+      margin: 2px 0 6px;
+      letter-spacing: 0.03em;
+      text-transform: lowercase;
     }
 
-    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-
-    @media (max-width: 640px) {
-      .grid2, .grid3 { grid-template-columns: 1fr; }
-    }
-
-    label { font-size: 12px; opacity: 0.78; display: block; margin: 2px 0 6px; }
-
-    input, select, textarea {
-      width: 100%;
+    input, select, textarea{
+      width:100%;
       padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(0,0,0,0.45);
-      color: #fff;
-      outline: none;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.34);
+      color: var(--fg);
+      outline:none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
     }
 
-    textarea { resize: vertical; }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(174,228,255,0.45);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 0 0 3px rgba(73,130,171,0.18);
+    }
 
-    .slots {
-      display: grid;
+    textarea{ resize: vertical; }
+
+    .slots{
+      display:grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
       margin-top: 10px;
     }
 
-    @media (max-width: 640px) {
-      .slots { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 640px){
+      .slots{ grid-template-columns: repeat(2, 1fr); }
     }
 
-    .slot {
+    .slot{
       padding: 10px 10px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(0,0,0,0.45);
-      color: #fff;
-      cursor: pointer;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        radial-gradient(120px 90px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.60), rgba(7,8,11,0.86));
+      color: var(--fg);
+      cursor:pointer;
       font: inherit;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.58);
+      transition: transform 120ms ease, border-color 120ms ease, filter 120ms ease;
     }
 
-    .slot:hover { background: rgba(0,0,0,0.80); }
-    .slotBooked { opacity: 0.35; cursor: not-allowed; }
-    .slotSelected { outline: 2px solid rgba(255,255,255,0.65); }
+    .slot:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.30);
+      filter: saturate(120%);
+    }
 
-    .cta {
+    .slotBooked{
+      opacity: 0.30;
+      cursor:not-allowed;
+      filter: grayscale(40%);
+    }
+
+    .slotSelected{
+      outline: 2px solid rgba(174,228,255,0.72);
+      border-color: rgba(174,228,255,0.55);
+      box-shadow:
+        0 0 0 3px rgba(73,130,171,0.16),
+        0 14px 34px rgba(0,0,0,0.70);
+    }
+
+    .cta{
       margin-top: 14px;
-      display: flex;
+      display:flex;
       gap: 12px;
-      align-items: center;
+      align-items:center;
       flex-wrap: wrap;
     }
 
-    .btn {
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(0,0,0,0.75);
-      color: #fff;
+    .btn{
+      border: 1px solid rgba(255,255,255,0.20);
+      background:
+        radial-gradient(130px 90px at 18% 10%, rgba(255,255,255,0.18), transparent 62%),
+        linear-gradient(135deg, rgba(83,34,67,0.55), rgba(73,130,171,0.48), rgba(36,169,35,0.42));
+      color: var(--fg);
       padding: 12px 14px;
-      border-radius: 14px;
-      cursor: pointer;
+      border-radius: 16px;
+      cursor:pointer;
       font: inherit;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      box-shadow: var(--shadowA), 0 16px 36px rgba(0,0,0,0.72);
+      transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
     }
 
-    .btn:hover { background: rgba(0,0,0,0.92); }
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.38);
+      filter: saturate(125%);
+    }
 
-    .msg { font-size: 13px; opacity: 0.9; }
+    .btn:disabled{
+      opacity: 0.40;
+      cursor:not-allowed;
+      filter: grayscale(25%);
+      transform:none;
+    }
 
-    .modalBackdrop {
-      position: fixed;
-      inset: 0;
+    .msg{
+      font-size: 13px;
+      opacity: 0.92;
+    }
+
+    .modalBackdrop{
+      position:fixed;
+      inset:0;
       background: rgba(0,0,0,0.72);
-      display: none;
-      align-items: center;
-      justify-content: center;
+      display:none;
+      align-items:center;
+      justify-content:center;
       z-index: 10;
+      padding: 18px;
     }
 
-    .modalBackdrop.open { display: flex; }
+    .modalBackdrop.open{ display:flex; }
 
-    .modal {
-      background: rgba(10,10,14,0.98);
-      border-radius: 18px;
-      padding: 20px 22px 18px;
-      max-width: 380px;
-      width: calc(100% - 40px);
-      border: 1px solid rgba(255,255,255,0.22);
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.8),
-        0 22px 48px rgba(0,0,0,0.9);
+    .modal{
+      width: min(420px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background:
+        radial-gradient(240px 180px at 12% 0%, rgba(255,255,255,0.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.74), rgba(7,8,11,0.94));
+      box-shadow: var(--shadowA), 0 22px 56px rgba(0,0,0,0.86);
+      padding: 18px;
     }
 
-    .modalHeader {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .modalHeader{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
       margin-bottom: 10px;
     }
 
-    .modalTitle { font-size: 18px; font-weight: 700; }
-    .modalSub { font-size: 12px; opacity: 0.7; margin-bottom: 14px; }
+    .modalTitle{
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+    }
 
-    .modalClose {
-      border: none;
-      background: transparent;
-      color: #aaa;
-      cursor: pointer;
+    .modalSub{
+      font-size: 12px;
+      opacity: 0.75;
+      margin-top: 4px;
+    }
+
+    .modalClose{
+      border:none;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+      cursor:pointer;
       font-size: 18px;
       line-height: 1;
-      padding: 2px 6px;
+      padding: 6px 10px;
       border-radius: 999px;
-      transition: background .12s ease, color .12s ease;
+      border: 1px solid rgba(255,255,255,0.12);
     }
 
-    .modalClose:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .modalClose:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.22);
+    }
 
-    .modalLinks { display: grid; gap: 10px; margin-top: 6px; }
+    .modalLinks{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
 
-    .modalLink {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .modalLink{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap: 10px;
       padding: 10px 12px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 14px;
-      color: #fdfdfd;
-      background: rgba(20,20,25,0.9);
-      border: 1px solid rgba(255,255,255,0.14);
-      transition: background .12s ease, transform .12s ease, border-color .12s ease;
+      border-radius: 16px;
+      text-decoration:none;
+      color: var(--fg);
+      border: 1px solid rgba(255,255,255മയം18);
+      background:
+        radial-gradient(120px 90px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.56), rgba(7,8,11,0.86));
+      box-shadow: 0 12px 26px rgba(0,0,0,0.66);
+      transition: transform 130ms ease, border-color 130ms ease, filter 130ms ease;
     }
 
-    .modalLink span { display: inline-flex; align-items: center; gap: 8px; }
-    .modalLink strong { font-weight: 600; }
-    .modalLink small { font-size: 11px; opacity: 0.7; }
-
-    .modalLink:hover {
-      background: rgba(32,32,42,0.98);
-      border-color: rgba(255,255,255,0.3);
+    .modalLink:hover{
       transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.34);
+      filter: saturate(120%);
     }
 
-    .pill {
+    .modalLink strong{ font-weight: 950; }
+    .modalLink small{ font-size: 11px; opacity: 0.72; display:block; margin-top:2px; }
+
+    .pill{
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 3px 8px;
+      letter-spacing: 0.10em;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.3);
-      opacity: 0.85;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.06);
+      opacity: 0.95;
+      white-space:nowrap;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 24px; }
-      .pfp img { width: 100px; height: 100px; }
-      .link { padding: 12px 16px; }
-      .link img { width: 26px; height: 26px; }
-      .topBtn { min-width: 0; width: 100%; padding: 10px 16px; font-size: 12px; }
-      .topLabel { font-size: 11px; letter-spacing: 0.1em; }
-      .topSub { font-size: 12px; }
+    @media (max-width: 480px){
+      .pfp img{ width: 102px; height: 102px; }
+      h1{ font-size: 26px; }
+      .topBtn{ width:100%; min-width:0; }
     }
   </style>
 </head>
 
 <body>
-  <div class="bg" id="bg"></div>
-  <div class="frost"></div>
+  <div class="bgFX"></div>
+  <div class="scanFX"></div>
 
   <main class="wrap">
     <header>
@@ -443,6 +656,7 @@
       </div>
 
       <h1>@b2nny</h1>
+      <div class="subHead">links and booking</div>
     </header>
 
     <section class="section active" id="sectionHome">
@@ -498,7 +712,7 @@
         <div class="title2">rap dump</div>
         <div class="sub2">links</div>
 
-        <div class="links" style="margin-top: 0;">
+        <div class="links" style="margin-top:0;">
           <a class="link" href="https://distrokid.com/hyperfollow/b2nny/rap-dump" target="_blank" rel="noopener">
             <img src="Link.png" alt="Link">
             <span>hyperfollow</span>
@@ -520,7 +734,7 @@
           </a>
         </div>
 
-        <div class="tiny" style="margin-top: 10px;">
+        <div class="tiny" style="margin-top:10px;">
           swap those links when the official pages are live
         </div>
       </div>
@@ -534,7 +748,7 @@
 
       <div class="card">
         <div class="title2">request booking</div>
-        <div class="sub2">pick a date, then pick a block of hours like 12 to 3</div>
+        <div class="sub2">pick a date, then click hour slots that connect</div>
         <div class="tiny">no payment here. sessions are not confirmed until I text you back and confirm.</div>
 
         <div class="priceRow">
@@ -543,7 +757,7 @@
           <span style="opacity:0.7;">hour slots only</span>
         </div>
 
-        <div style="height: 14px;"></div>
+        <div style="height:14px;"></div>
 
         <div class="grid2">
           <div>
@@ -556,7 +770,7 @@
           </div>
         </div>
 
-        <div style="height: 12px;"></div>
+        <div style="height:12px;"></div>
 
         <div class="grid3">
           <div>
@@ -573,7 +787,7 @@
           </div>
         </div>
 
-        <div style="height: 12px;"></div>
+        <div style="height:12px;"></div>
 
         <div class="grid2">
           <div>
@@ -590,10 +804,10 @@
           </div>
         </div>
 
-        <div style="margin-top: 14px; font-size: 12px; opacity: 0.8;">available hour starts</div>
+        <div style="margin-top:14px; font-size:12px; opacity:0.82;">available hour starts</div>
         <div class="slots" id="bkSlots"></div>
 
-        <div style="height: 12px;"></div>
+        <div style="height:12px;"></div>
 
         <div>
           <label for="bkNotes">about</label>
@@ -605,7 +819,7 @@
           <div class="msg" id="bkMsg"></div>
         </div>
 
-        <div class="tiny" style="margin-top: 10px;">
+        <div class="tiny" style="margin-top:10px;">
           tip: click hours that connect, like 12 1 2 for 12 to 3
         </div>
       </div>
@@ -642,84 +856,8 @@
   </div>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxFDOixo0S5VNBJpWfThIAG1wa1FHoo_C-qRR7BYotkf_ZcC7ygOa-SIf48KLe126RP/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbyQfetK9SCZtHjxelb-KEJUfUZh3I_o9moHJwNk6bxcU2woZ_u5_OWPDSRcvs98V5xx/exec";
     const PRICE_PER_HOUR = 50;
-
-    (function glassBlobs(){
-      const bg = document.getElementById("bg");
-      const colors = ["var(--c1)","var(--c2)","var(--c3)","var(--c4)"];
-      const count = Math.floor(Math.random() * 2) + 3;
-      const blobs = [];
-      let W = window.innerWidth;
-      let H = window.innerHeight;
-
-      function makeGradient(c){
-        return "radial-gradient(45% 45% at 30% 30%,rgba(255,255,255,0.7)0%,rgba(255,255,255,0.25)38%,rgba(255,255,255,0)65%),radial-gradient(circle at 60% 60%," + c + "0%,rgba(255,255,255,0)70%)";
-      }
-
-      function createBlob(){
-        const el = document.createElement("div");
-        el.className = "blob";
-        const base = Math.max(W,H);
-        const size = Math.round(base * (0.36 + Math.random() * 0.20));
-        el.style.width = size + "px";
-        el.style.height = size + "px";
-        const x = Math.random() * (W - size);
-        const y = Math.random() * (H - size);
-        const sp = 0.025 + Math.random() * 0.035;
-        const ang = Math.random() * Math.PI * 2;
-        const vx = Math.cos(ang) * sp;
-        const vy = Math.sin(ang) * sp;
-        const c = colors[Math.floor(Math.random() * colors.length)];
-        el.style.background = makeGradient(c);
-        bg.appendChild(el);
-        return { el, x, y, vx, vy, r: size / 2, size };
-      }
-
-      for(let i = 0; i < count; i++) blobs.push(createBlob());
-
-      function tick(){
-        const dt = 16;
-        for(let i = 0; i < blobs.length; i++){
-          const b = blobs[i];
-          b.x += b.vx * dt;
-          b.y += b.vy * dt;
-          if(b.x < 0 || b.x + b.size > W) b.vx *= -1;
-          if(b.y < 0 || b.y + b.size > H) b.vy *= -1;
-
-          for(let j = i + 1; j < blobs.length; j++){
-            const c = blobs[j];
-            const dx = (b.x + b.r) - (c.x + c.r);
-            const dy = (b.y + b.r) - (c.y + c.r);
-            const dist = Math.hypot(dx, dy);
-            const min = (b.r + c.r) * 0.9;
-            if(dist < min){
-              const overlap = (min - dist) * 0.3;
-              if(dist > 0.0001){
-                const nx = dx / dist;
-                const ny = dy / dist;
-                b.x += nx * overlap;
-                b.y += ny * overlap;
-                c.x -= nx * overlap;
-                c.y -= ny * overlap;
-              }
-            }
-          }
-        }
-
-        for(const b of blobs){
-          b.el.style.transform = "translate(" + b.x + "px," + b.y + "px)";
-        }
-
-        requestAnimationFrame(tick);
-      }
-
-      requestAnimationFrame(tick);
-      window.addEventListener("resize", ()=>{
-        W = window.innerWidth;
-        H = window.innerHeight;
-      }, { passive: true });
-    })();
 
     (function popModal(){
       const modal = document.getElementById("popModal");
@@ -817,9 +955,7 @@
 
       function allTimes(){
         const out = [];
-        for(let h = START_HOUR; h < END_HOUR; h++){
-          out.push(timeLabel(h));
-        }
+        for(let h = START_HOUR; h < END_HOUR; h++) out.push(timeLabel(h));
         return out;
       }
 
@@ -827,9 +963,11 @@
         if(selected.size === 0) return null;
         const hours = Array.from(selected).map(parseHour).filter(v => v !== null).sort((a,b)=>a-b);
         if(hours.length === 0) return null;
+
         for(let i = 1; i < hours.length; i++){
           if(hours[i] !== hours[i - 1] + 1) return null;
         }
+
         const startHour = hours[0];
         const endHour = hours[hours.length - 1] + 1;
         const durationHours = endHour - startHour;
@@ -850,8 +988,7 @@
 
       function clearSelectionUi(){
         selected.clear();
-        const picked = document.querySelectorAll(".slotSelected");
-        for(const el of picked) el.classList.remove("slotSelected");
+        document.querySelectorAll(".slotSelected").forEach(el => el.classList.remove("slotSelected"));
         updateButton();
       }
 
@@ -860,8 +997,7 @@
         clearSelectionUi();
         msgEl.textContent = "";
 
-        const times = allTimes();
-        for(const t of times){
+        for(const t of allTimes()){
           const b = document.createElement("button");
           b.type = "button";
           b.className = "slot";
@@ -887,8 +1023,7 @@
             if(selected.size > 0 && !range){
               msgEl.textContent = "pick hours that connect, like 12 1 2";
               const keep = t;
-              const picked = document.querySelectorAll(".slotSelected");
-              for(const el of picked) el.classList.remove("slotSelected");
+              document.querySelectorAll(".slotSelected").forEach(el => el.classList.remove("slotSelected"));
               selected.clear();
               selected.add(keep);
               b.classList.add("slotSelected");
@@ -920,16 +1055,10 @@
         try{
           const res = await fetch(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
           const text = await res.text();
-let data;
+          let data;
 
-try {
-  data = JSON.parse(text);
-} catch (e) {
-  msgEl.textContent = "backend returned not json. check apps script deploy.";
-  console.log("backend raw response:", text);
-  submitBtn.disabled = false;
-  return;
-}
+          try { data = JSON.parse(text); }
+          catch(e){ busy = new Set(); renderSlots(); return; }
 
           if(data && data.ok && Array.isArray(data.busy)){
             busy = new Set(data.busy);
@@ -1002,17 +1131,13 @@ try {
           });
 
           const text = await res.text();
-let data;
-
-try {
-  data = JSON.parse(text);
-} catch (e) {
-  msgEl.textContent = "backend returned not json. check apps script deploy.";
-  console.log("backend raw response:", text);
-  submitBtn.disabled = false;
-  return;
-}
-
+          let data;
+          try { data = JSON.parse(text); }
+          catch(e){
+            msgEl.textContent = "backend returned not json";
+            submitBtn.disabled = false;
+            return;
+          }
 
           if(!data || !data.ok){
             msgEl.textContent = (data && data.error) ? data.error : "error, try again";
@@ -1037,5 +1162,3 @@ try {
   </script>
 </body>
 </html>
-
-
