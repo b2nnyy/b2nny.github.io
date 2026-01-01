@@ -7,6 +7,9 @@
   <meta name="description" content="Official links for b2nny | Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
   <meta name="theme-color" content="#07080b" />
 
+  <!-- fixes the favicon 404 without adding a file -->
+  <link rel="icon" href="data:,">
+
   <style>
     :root{
       --maxw: 780px;
@@ -24,7 +27,6 @@
       --cardA: rgba(7,8,11,0.68);
       --cardB: rgba(7,8,11,0.90);
 
-      --radius: 18px;
       --radius2: 26px;
 
       --shadowA: 0 0 0 1px rgba(0,0,0,0.55);
@@ -78,7 +80,6 @@
       pointer-events:none;
       opacity:0.95;
       filter:saturate(135%);
-
       background:
         radial-gradient(900px 700px at 20% 30%, rgba(255,255,255,0.07), transparent 62%),
         radial-gradient(850px 650px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
@@ -618,142 +619,6 @@
       white-space:nowrap;
     }
 
-    .timelineWrap{
-      margin-top: 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background:
-        radial-gradient(260px 160px at 12% 0%, rgba(255,255,255,0.10), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.42));
-      overflow:hidden;
-    }
-
-    .timelineHeader{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .timelineHeader .hint{
-      font-size: 12px;
-      opacity: 0.75;
-    }
-
-    .rangePill{
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      white-space:nowrap;
-    }
-
-    .timeline{
-      position:relative;
-      padding: 12px;
-      overflow-x:auto;
-    }
-
-    .ticks{
-      display:flex;
-      gap: 10px;
-      min-width: 720px;
-    }
-
-    .tick{
-      width: 84px;
-      flex: 0 0 84px;
-      text-align:center;
-      font-size: 12px;
-      opacity: 0.82;
-      letter-spacing: 0.04em;
-      text-transform: lowercase;
-    }
-
-    .barRow{
-      display:flex;
-      gap: 10px;
-      min-width: 720px;
-      padding: 8px 0 14px;
-    }
-
-    .bar{
-      width: 84px;
-      flex: 0 0 84px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background:
-        radial-gradient(120px 90px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.54), rgba(7,8,11,0.86));
-      cursor:pointer;
-      position:relative;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.55);
-      transition: transform 120ms ease, border-color 120ms ease, filter 120ms ease;
-    }
-
-    .bar:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.30);
-      filter: saturate(125%);
-    }
-
-    .barDisabled{
-      opacity: 0.26;
-      cursor:not-allowed;
-      filter: grayscale(35%);
-    }
-
-    .barStart{
-      outline: 2px solid rgba(80,190,255,0.72);
-      border-color: rgba(80,190,255,0.55);
-      box-shadow:
-        0 0 0 3px rgba(80,190,255,0.14),
-        0 14px 34px rgba(0,0,0,0.70);
-    }
-
-    .barEnd{
-      outline: 2px solid rgba(255,70,190,0.70);
-      border-color: rgba(255,70,190,0.55);
-      box-shadow:
-        0 0 0 3px rgba(255,70,190,0.12),
-        0 14px 34px rgba(0,0,0,0.70);
-    }
-
-    .barSelected{
-      background:
-        radial-gradient(140px 100px at 18% 10%, rgba(255,255,255,0.20), transparent 62%),
-        linear-gradient(135deg, rgba(80,190,255,0.34), rgba(255,70,190,0.24), rgba(95,255,140,0.16));
-      border-color: rgba(255,255,255,0.22);
-    }
-
-    .barSelected::after{
-      content:"";
-      position:absolute;
-      inset: 0;
-      border-radius: 14px;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
-      opacity: 0.16;
-    }
-
-    .miniRow{
-      display:flex;
-      gap: 12px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-      align-items:flex-end;
-    }
-
-    .miniRow .mini{
-      flex: 1 1 160px;
-      min-width: 160px;
-    }
-
     .bkSuccess{
       margin-top: 14px;
       border-radius: 22px;
@@ -783,7 +648,7 @@
       line-height: 1.35;
     }
 
-    .bkSuccess .chipRow{
+    .chipRow{
       margin-top: 10px;
       display:flex;
       flex-wrap:wrap;
@@ -804,7 +669,7 @@
       text-transform: lowercase;
     }
 
-    .bkSuccess .btnRow{
+    .btnRow{
       margin-top: 12px;
       display:flex;
       gap: 12px;
@@ -815,7 +680,6 @@
       .pfp img{ width: 102px; height: 102px; }
       h1{ font-size: 26px; }
       .topBtn{ width:100%; min-width:0; }
-      .tick, .bar{ width: 78px; flex-basis: 78px; }
     }
   </style>
 </head>
@@ -840,11 +704,6 @@
         <a href="#rap" class="topBtn">
           <span class="topLabel">Rap Dump</span>
           <span class="topSub">open</span>
-        </a>
-
-        <a href="#book" class="topBtn">
-          <span class="topLabel">Book a session</span>
-          <span class="topSub">$50 per hour</span>
         </a>
       </div>
 
@@ -903,7 +762,7 @@
 
       <div class="card" id="bkCard">
         <div class="title2">request booking</div>
-        <div class="sub2">pick a date then pick a start and end time</div>
+        <div class="sub2">pick a date, start time, and end time</div>
         <div class="tiny">no payment here. sessions are not confirmed until I text you back and confirm.</div>
 
         <div class="priceRow">
@@ -946,39 +805,25 @@
 
         <div class="grid2">
           <div>
-            <label for="bkRoom">preferred room</label>
-            <select id="bkRoom">
-              <option value="main room">main room</option>
-              <option value="b room">b room</option>
-              <option value="either">either</option>
-            </select>
-          </div>
-          <div>
             <label for="bkDate">date</label>
             <input id="bkDate" type="date" />
           </div>
-        </div>
-
-        <div class="miniRow">
-          <div class="mini">
+          <div>
             <label for="bkStart">start time</label>
             <select id="bkStart"></select>
           </div>
-          <div class="mini">
+        </div>
+
+        <div style="height:12px;"></div>
+
+        <div class="grid2">
+          <div>
             <label for="bkEnd">end time</label>
             <select id="bkEnd"></select>
           </div>
-        </div>
-
-        <div class="timelineWrap">
-          <div class="timelineHeader">
-            <div class="hint">tap a start block, then tap the last hour you want</div>
-            <div class="rangePill" id="bkRangePill">select a time</div>
-          </div>
-
-          <div class="timeline">
-            <div class="ticks" id="bkTicks"></div>
-            <div class="barRow" id="bkBars"></div>
+          <div>
+            <label>total</label>
+            <input id="bkTotal" type="text" disabled value="$0" />
           </div>
         </div>
 
@@ -990,7 +835,7 @@
         </div>
 
         <div class="cta">
-          <button class="btn" id="bkSubmit" disabled>select time</button>
+          <button class="btn" id="bkSubmit" disabled>select times</button>
           <div class="msg" id="bkMsg"></div>
         </div>
 
@@ -1203,11 +1048,8 @@
       const dateEl = document.getElementById("bkDate");
       const startEl = document.getElementById("bkStart");
       const endEl = document.getElementById("bkEnd");
+      const totalEl = document.getElementById("bkTotal");
 
-      const ticksEl = document.getElementById("bkTicks");
-      const barsEl = document.getElementById("bkBars");
-
-      const rangePill = document.getElementById("bkRangePill");
       const submitBtn = document.getElementById("bkSubmit");
       const msgEl = document.getElementById("bkMsg");
 
@@ -1216,7 +1058,6 @@
       const emailEl = document.getElementById("bkEmail");
       const phoneEl = document.getElementById("bkPhone");
       const igEl = document.getElementById("bkIg");
-      const roomEl = document.getElementById("bkRoom");
       const notesEl = document.getElementById("bkNotes");
 
       const cardEl = document.getElementById("bkCard");
@@ -1229,8 +1070,6 @@
       const sC3 = document.getElementById("bkSuccessChipTotal");
 
       let busy = new Set();
-      let chosenStart = null;
-      let chosenEnd = null;
 
       function todayISO(){
         const d = new Date();
@@ -1252,104 +1091,20 @@
         return d.toLocaleDateString(undefined, { weekday:"long", month:"long", day:"numeric", year:"numeric" });
       }
 
-      function showSuccess(){
-        const hours = chosenEnd - chosenStart;
-        const total = hours * PRICE_PER_HOUR;
-
-        const datePretty = prettyDate(dateEl.value);
-        const rangePretty = timeLabel(chosenStart) + " to " + timeLabel(chosenEnd);
-
-        sL1.textContent = datePretty;
-        sL2.textContent = rangePretty;
-
-        sC1.textContent = rangePretty;
-        sC2.textContent = hours + " hour" + (hours === 1 ? "" : "s");
-        sC3.textContent = money(total);
-
-        cardEl.style.display = "none";
-        successEl.classList.add("active");
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      function chosenStartHour(){
+        return Number(startEl.value);
       }
 
-      function hideSuccess(){
-        successEl.classList.remove("active");
-        cardEl.style.display = "";
+      function chosenEndHour(){
+        return Number(endEl.value);
       }
 
-      document.getElementById("bkBookAnother").addEventListener("click", ()=>{
-        hideSuccess();
-        resetForAnother();
-      });
-
-      document.getElementById("bkBackHome").addEventListener("click", ()=>{
-        location.hash = "#home";
-      });
-
-      function buildOptions(){
-        startEl.innerHTML = "";
-        endEl.innerHTML = "";
-
-        for(let h = START_HOUR; h < END_HOUR; h++){
-          const opt = document.createElement("option");
-          opt.value = String(h);
-          opt.textContent = timeLabel(h);
-          startEl.appendChild(opt);
-        }
-
-        chosenStart = START_HOUR;
-        chosenEnd = START_HOUR + 2;
-
-        startEl.value = String(chosenStart);
-        clampEndOptions();
-        endEl.value = String(chosenEnd);
-      }
-
-      function buildTimeline(){
-        ticksEl.innerHTML = "";
-        barsEl.innerHTML = "";
-
-        for(let h = START_HOUR; h < END_HOUR; h++){
-          const t = document.createElement("div");
-          t.className = "tick";
-          t.textContent = timeLabel(h).toLowerCase();
-          ticksEl.appendChild(t);
-
-          const b = document.createElement("div");
-          b.className = "bar";
-          b.dataset.hour = String(h);
-
-          b.addEventListener("click", ()=>{
-            if(b.classList.contains("barDisabled")) return;
-
-            const hh = Number(b.dataset.hour);
-
-            if(chosenStart === null || (chosenStart !== null && chosenEnd !== null)){
-              chosenStart = hh;
-              chosenEnd = null;
-            } else {
-              if(hh === chosenStart) return;
-
-              if(hh < chosenStart){
-                chosenEnd = chosenStart + 1;
-                chosenStart = hh;
-              } else {
-                chosenEnd = hh + 1;
-              }
-
-              if(chosenEnd > END_HOUR) chosenEnd = END_HOUR;
-              if(chosenEnd <= chosenStart) chosenEnd = null;
-            }
-
-            syncSelectsFromRange();
-            renderSelection();
-          });
-
-          barsEl.appendChild(b);
-        }
+      function hoursBooked(){
+        return chosenEndHour() - chosenStartHour();
       }
 
       function isRangeValid(s, e){
-        if(s === null || e === null) return false;
+        if(!Number.isFinite(s) || !Number.isFinite(e)) return false;
         if(e <= s) return false;
         for(let h = s; h < e; h++){
           if(busy.has(timeLabel(h))) return false;
@@ -1357,62 +1112,46 @@
         return true;
       }
 
-      function renderBusy(){
-        const bars = barsEl.querySelectorAll(".bar");
-        bars.forEach(b=>{
-          b.classList.remove("barDisabled","barSelected","barStart","barEnd");
-          const h = Number(b.dataset.hour);
-          if(busy.has(timeLabel(h))){
-            b.classList.add("barDisabled");
-          }
-        });
-      }
+      function updateTotalsAndButton(){
+        const s = chosenStartHour();
+        const e = chosenEndHour();
 
-      function renderSelection(){
-        renderBusy();
-
-        const s = chosenStart;
-        const e = chosenEnd;
-
-        const bars = barsEl.querySelectorAll(".bar");
-
-        if(s === null){
-          rangePill.textContent = "select a time";
+        if(!Number.isFinite(s) || !Number.isFinite(e)){
+          totalEl.value = "$0";
           submitBtn.disabled = true;
-          submitBtn.textContent = "select time";
+          submitBtn.textContent = "select times";
           return;
         }
 
-        if(e === null){
-          rangePill.textContent = timeLabel(s) + " start selected";
-          submitBtn.disabled = true;
-          submitBtn.textContent = "select end time";
-          bars.forEach(b=>{
-            const h = Number(b.dataset.hour);
-            if(h === s) b.classList.add("barStart");
-          });
-          return;
-        }
+        const hrs = e - s;
+        const total = Math.max(0, hrs) * PRICE_PER_HOUR;
+        totalEl.value = money(total);
 
         const ok = isRangeValid(s, e);
 
-        bars.forEach(b=>{
-          const h = Number(b.dataset.hour);
-          if(h === s) b.classList.add("barStart");
-          if(h === (e - 1)) b.classList.add("barEnd");
-          if(h >= s && h < e) b.classList.add("barSelected");
-        });
+        if(!ok){
+          submitBtn.disabled = true;
+          submitBtn.textContent = "pick a different time";
+          return;
+        }
 
-        const hours = e - s;
-        const total = hours * PRICE_PER_HOUR;
-
-        rangePill.textContent = timeLabel(s) + " to " + timeLabel(e) + " (" + hours + "h)";
-        submitBtn.textContent = ok ? ("request booking (" + money(total) + ")") : "pick a different time";
-        submitBtn.disabled = !ok;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "request booking (" + money(total) + ")";
       }
 
-      function clampEndOptions(){
-        const s = Number(startEl.value);
+      function buildStartOptions(){
+        startEl.innerHTML = "";
+        for(let h = START_HOUR; h < END_HOUR; h++){
+          const opt = document.createElement("option");
+          opt.value = String(h);
+          opt.textContent = timeLabel(h);
+          startEl.appendChild(opt);
+        }
+        startEl.value = String(START_HOUR);
+      }
+
+      function buildEndOptionsFromStart(){
+        const s = chosenStartHour();
         const currentE = Number(endEl.value) || (s + 1);
 
         endEl.innerHTML = "";
@@ -1423,30 +1162,8 @@
           endEl.appendChild(opt);
         }
 
-        endEl.value = String(Math.max(s + 1, Math.min(currentE, END_HOUR)));
-      }
-
-      function syncSelectsFromRange(){
-        if(chosenStart !== null){
-          startEl.value = String(chosenStart);
-          clampEndOptions();
-          if(chosenEnd !== null){
-            endEl.value = String(chosenEnd);
-          }
-        }
-      }
-
-      function resetForAnother(){
-        msgEl.textContent = "";
-        chosenStart = START_HOUR;
-        chosenEnd = START_HOUR + 2;
-
-        startEl.value = String(chosenStart);
-        clampEndOptions();
-        endEl.value = String(chosenEnd);
-
-        renderSelection();
-        loadBusy();
+        const nextE = Math.max(s + 1, Math.min(currentE, END_HOUR));
+        endEl.value = String(nextE);
       }
 
       async function loadBusy(){
@@ -1458,7 +1175,7 @@
 
         if(!API_URL || API_URL.indexOf("PASTE_") === 0){
           msgEl.textContent = "backend not set";
-          renderSelection();
+          updateTotalsAndButton();
           return;
         }
 
@@ -1471,7 +1188,32 @@
           busy = new Set();
         }
 
-        renderSelection();
+        updateTotalsAndButton();
+      }
+
+      function showSuccess(){
+        const datePretty = prettyDate(dateEl.value);
+        const s = chosenStartHour();
+        const e = chosenEndHour();
+        const hrs = e - s;
+        const total = hrs * PRICE_PER_HOUR;
+        const range = timeLabel(s) + " to " + timeLabel(e);
+
+        sL1.textContent = datePretty;
+        sL2.textContent = range;
+
+        sC1.textContent = range;
+        sC2.textContent = hrs + " hour" + (hrs === 1 ? "" : "s");
+        sC3.textContent = money(total);
+
+        cardEl.style.display = "none";
+        successEl.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function hideSuccess(){
+        successEl.classList.remove("active");
+        cardEl.style.display = "";
       }
 
       function validate(){
@@ -1481,8 +1223,10 @@
         if(!phoneEl.value.trim()) return "enter phone";
         if(!igEl.value.trim()) return "enter instagram";
         if(!dateEl.value) return "pick a date";
-        if(chosenStart === null || chosenEnd === null) return "pick start and end time";
-        if(!isRangeValid(chosenStart, chosenEnd)) return "that time is not available";
+
+        const s = chosenStartHour();
+        const e = chosenEndHour();
+        if(!isRangeValid(s, e)) return "that time is not available";
         return "";
       }
 
@@ -1496,9 +1240,11 @@
         }
 
         const fullName = firstEl.value.trim() + " " + lastEl.value.trim();
-        const hours = chosenEnd - chosenStart;
-        const durationMinutes = hours * 60;
-        const total = hours * PRICE_PER_HOUR;
+        const s = chosenStartHour();
+        const e = chosenEndHour();
+        const hrs = e - s;
+        const durationMinutes = hrs * 60;
+        const total = hrs * PRICE_PER_HOUR;
 
         submitBtn.disabled = true;
         msgEl.textContent = "booking...";
@@ -1510,14 +1256,13 @@
           phone: phoneEl.value.trim(),
           instagram: igEl.value.trim(),
           date: dateEl.value,
-          time: timeLabel(chosenStart),
+          time: timeLabel(s),
           durationMinutes: String(durationMinutes),
           notes: [
             "price per hour: $" + PRICE_PER_HOUR,
             "total: $" + total,
-            "hours booked: " + hours,
-            "range: " + timeLabel(chosenStart) + " to " + timeLabel(chosenEnd),
-            "preferred room: " + String(roomEl.value),
+            "hours booked: " + hrs,
+            "range: " + timeLabel(s) + " to " + timeLabel(e),
             "",
             String(notesEl.value || "").trim()
           ].join("\n")
@@ -1543,11 +1288,19 @@
         }
       }
 
+      document.getElementById("bkBookAnother").addEventListener("click", ()=>{
+        hideSuccess();
+        msgEl.textContent = "";
+      });
+
+      document.getElementById("bkBackHome").addEventListener("click", ()=>{
+        location.hash = "#home";
+      });
+
       setMinDate();
-      buildOptions();
-      buildTimeline();
-      clampEndOptions();
-      renderSelection();
+      buildStartOptions();
+      buildEndOptionsFromStart();
+      updateTotalsAndButton();
       loadBusy();
 
       dateEl.addEventListener("change", ()=>{
@@ -1557,26 +1310,16 @@
 
       startEl.addEventListener("change", ()=>{
         hideSuccess();
-        clampEndOptions();
-        chosenStart = Number(startEl.value);
-        chosenEnd = Number(endEl.value);
-        renderSelection();
+        buildEndOptionsFromStart();
+        updateTotalsAndButton();
       });
 
       endEl.addEventListener("change", ()=>{
         hideSuccess();
-        chosenStart = Number(startEl.value);
-        chosenEnd = Number(endEl.value);
-        renderSelection();
+        updateTotalsAndButton();
       });
 
       submitBtn.addEventListener("click", submit);
-
-      window.addEventListener("hashchange", ()=>{
-        if(location.hash === "#book"){
-          hideSuccess();
-        }
-      });
     })();
   </script>
 </body>
