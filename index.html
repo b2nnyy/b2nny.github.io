@@ -9,24 +9,24 @@
 
   <style>
     :root{
-      --maxw: 760px;
+      --maxw: 780px;
       --fg: #f7fbff;
       --muted: rgba(247,251,255,0.72);
 
       --bg0: #07080b;
       --bg1: #0c0e14;
 
-      --mag: rgb(83, 34, 67);
-      --cyan: rgb(73, 130, 171);
-      --lime: rgb(36, 169, 35);
-      --acid: rgb(195, 202, 133);
+      --mag: rgba(255, 70, 190, 0.20);
+      --cyan: rgba(80, 190, 255, 0.22);
+      --lime: rgba(95, 255, 140, 0.18);
+      --acid: rgba(255, 255, 170, 0.14);
 
       --chrome0: rgba(255,255,255,0.08);
       --chrome1: rgba(255,255,255,0.14);
       --chrome2: rgba(255,255,255,0.22);
 
-      --card: rgba(7,8,11,0.72);
-      --card2: rgba(7,8,11,0.86);
+      --cardA: rgba(7,8,11,0.68);
+      --cardB: rgba(7,8,11,0.88);
 
       --radius: 18px;
       --radius2: 26px;
@@ -34,85 +34,111 @@
       --shadowA: 0 0 0 1px rgba(0,0,0,0.55);
       --shadowB: 0 18px 46px rgba(0,0,0,0.78);
 
-      --scan: rgba(255,255,255,0.06);
-      --glow: rgba(174,228,255,0.22);
+      --focusRing: rgba(80, 190, 255, 0.34);
+      --focusRing2: rgba(255, 70, 190, 0.20);
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
     html, body{ height:100%; }
+
     body{
       font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--fg);
-      background: radial-gradient(1200px 800px at 20% 10%, rgba(73,130,171,0.20), transparent 55%),
-                  radial-gradient(900px 700px at 85% 25%, rgba(36,169,35,0.16), transparent 58%),
-                  radial-gradient(1000px 900px at 65% 95%, rgba(83,34,67,0.20), transparent 60%),
-                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      background:
+        radial-gradient(1100px 900px at 18% 12%, var(--cyan), transparent 55%),
+        radial-gradient(900px 800px at 85% 18%, var(--lime), transparent 58%),
+        radial-gradient(1000px 900px at 70% 95%, var(--mag), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
       display:flex;
       justify-content:center;
       align-items:flex-start;
     }
 
-    /* glossy tile grid + chrome haze + plus pattern */
     .bgFX{
       position:fixed;
       inset:0;
       z-index:-2;
       pointer-events:none;
-      background:
-        linear-gradient(0deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
-        radial-gradient(1200px 900px at 20% 30%, rgba(255,255,255,0.08), transparent 60%),
-        radial-gradient(900px 700px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
+      opacity:0.95;
+      filter:saturate(125%);
 
-        /* tile grid */
+      background:
+        radial-gradient(900px 700px at 20% 30%, rgba(255,255,255,0.07), transparent 62%),
+        radial-gradient(850px 650px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
+
         repeating-linear-gradient(0deg,
-          rgba(255,255,255,0.12) 0px,
-          rgba(255,255,255,0.12) 1px,
+          rgba(255,255,255,0.10) 0px,
+          rgba(255,255,255,0.10) 1px,
           transparent 1px,
           transparent 44px
         ),
         repeating-linear-gradient(90deg,
-          rgba(255,255,255,0.12) 0px,
-          rgba(255,255,255,0.12) 1px,
+          rgba(255,255,255,0.10) 0px,
+          rgba(255,255,255,0.10) 1px,
           transparent 1px,
           transparent 44px
         ),
 
-        /* soft tile glow blocks */
-        radial-gradient(140px 140px at 18% 72%, rgba(255,255,255,0.10), transparent 60%),
-        radial-gradient(220px 220px at 62% 34%, rgba(255,255,255,0.08), transparent 55%),
-        radial-gradient(180px 180px at 82% 18%, rgba(255,255,255,0.08), transparent 62%),
+        radial-gradient(180px 180px at 18% 72%, rgba(255,255,255,0.10), transparent 62%),
+        radial-gradient(240px 240px at 62% 34%, rgba(255,255,255,0.08), transparent 60%),
+        radial-gradient(220px 220px at 82% 18%, rgba(255,255,255,0.08), transparent 62%),
 
-        /* plus pattern */
         repeating-linear-gradient(90deg,
           transparent 0px,
           transparent 96px,
-          rgba(73,130,171,0.14) 96px,
-          rgba(73,130,171,0.14) 98px,
+          rgba(80,190,255,0.14) 96px,
+          rgba(80,190,255,0.14) 98px,
           transparent 98px,
           transparent 112px,
-          rgba(73,130,171,0.14) 112px,
-          rgba(73,130,171,0.14) 114px,
+          rgba(80,190,255,0.14) 112px,
+          rgba(80,190,255,0.14) 114px,
           transparent 114px,
           transparent 176px
         ),
         repeating-linear-gradient(0deg,
           transparent 0px,
           transparent 96px,
-          rgba(36,169,35,0.12) 96px,
-          rgba(36,169,35,0.12) 98px,
+          rgba(95,255,140,0.10) 96px,
+          rgba(95,255,140,0.10) 98px,
           transparent 98px,
           transparent 112px,
-          rgba(36,169,35,0.12) 112px,
-          rgba(36,169,35,0.12) 114px,
+          rgba(95,255,140,0.10) 112px,
+          rgba(95,255,140,0.10) 114px,
           transparent 114px,
           transparent 176px
         );
-      opacity:0.85;
-      filter:saturate(120%);
+      transform: translate3d(0,0,0);
+      animation: driftGrid 18s linear infinite;
     }
 
-    /* scanline overlay */
+    @keyframes driftGrid{
+      0%{ transform: translate3d(0,0,0); }
+      50%{ transform: translate3d(-22px, 14px, 0); }
+      100%{ transform: translate3d(0,0,0); }
+    }
+
+    .colorFX{
+      position:fixed;
+      inset:-20%;
+      z-index:-3;
+      pointer-events:none;
+      background:
+        radial-gradient(520px 520px at 18% 22%, rgba(255,70,190,0.18), transparent 62%),
+        radial-gradient(620px 620px at 72% 20%, rgba(80,190,255,0.20), transparent 62%),
+        radial-gradient(540px 540px at 82% 70%, rgba(95,255,140,0.16), transparent 62%),
+        radial-gradient(700px 700px at 40% 82%, rgba(255,255,170,0.12), transparent 62%);
+      filter: blur(12px) saturate(140%);
+      opacity: 0.9;
+      animation: swirl 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes swirl{
+      0%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(22px,-14px,0) scale(1.03); }
+      100%{ transform: translate3d(-18px,16px,0) scale(1.02); }
+    }
+
     .scanFX{
       position:fixed;
       inset:0;
@@ -151,11 +177,11 @@
       height: 120px;
       border-radius: 999px;
       object-fit: cover;
-      background: rgba(0,0,0,0.25);
       border: 1px solid rgba(255,255,255,0.22);
       box-shadow:
         0 0 0 3px rgba(255,255,255,0.06),
         0 18px 46px rgba(0,0,0,0.75);
+      background: rgba(0,0,0,0.25);
     }
 
     .topRow{
@@ -171,14 +197,14 @@
       justify-content:space-between;
       gap: 14px;
       padding: 12px 18px;
-      min-width: min(100%, 460px);
+      min-width: min(100%, 480px);
       border-radius: 999px;
       text-decoration:none;
       color: var(--fg);
       border: 1px solid rgba(255,255,255,0.22);
       background:
-        radial-gradient(120px 90px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
-        linear-gradient(135deg, rgba(83,34,67,0.55), rgba(73,130,171,0.48), rgba(36,169,35,0.42));
+        radial-gradient(140px 100px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
+        linear-gradient(135deg, rgba(255,70,190,0.22), rgba(80,190,255,0.20), rgba(95,255,140,0.18));
       box-shadow: var(--shadowA), var(--shadowB);
       position:relative;
       overflow:hidden;
@@ -190,8 +216,7 @@
       content:"";
       position:absolute;
       inset:-1px;
-      background:
-        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 28%, transparent 58%);
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 28%, transparent 58%);
       opacity:0.14;
       transform: translateX(-55%);
       transition: transform 360ms ease, opacity 160ms ease;
@@ -201,7 +226,7 @@
     .topBtn:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.40);
-      filter: saturate(125%) contrast(104%);
+      filter: saturate(130%) contrast(104%);
     }
 
     .topBtn:hover::after{
@@ -212,31 +237,30 @@
     .topLabel{
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12px;
       white-space:nowrap;
       text-shadow:
         0 1px 0 rgba(0,0,0,0.45),
-        0 0 14px rgba(174,228,255,0.20);
+        0 0 14px rgba(80,190,255,0.24);
     }
 
     .topSub{
-      font-weight: 800;
+      font-weight: 900;
       font-size: 13px;
       opacity: 0.95;
       white-space:nowrap;
-      text-shadow:
-        0 1px 0 rgba(0,0,0,0.45);
+      text-shadow: 0 1px 0 rgba(0,0,0,0.45);
     }
 
     h1{
       font-size: 30px;
       margin: 8px 0 10px;
       letter-spacing: 0.04em;
-      font-weight: 900;
+      font-weight: 950;
       text-shadow:
         0 2px 0 rgba(0,0,0,0.55),
-        0 0 22px rgba(73,130,171,0.22);
+        0 0 22px rgba(80,190,255,0.22);
     }
 
     .subHead{
@@ -263,8 +287,8 @@
       color: var(--fg);
       border: 1px solid rgba(255,255,255,0.18);
       background:
-        radial-gradient(140px 110px at 18% 0%, rgba(255,255,255,0.18), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.70), rgba(7,8,11,0.84));
+        radial-gradient(160px 120px at 18% 0%, rgba(255,255,255,0.18), transparent 62%),
+        linear-gradient(180deg, var(--cardA), var(--cardB));
       box-shadow: var(--shadowA), 0 14px 34px rgba(0,0,0,0.68);
       position:relative;
       overflow:hidden;
@@ -277,9 +301,9 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(120px 120px at 14% 50%, rgba(36,169,35,0.18), transparent 62%),
-        radial-gradient(130px 130px at 80% 30%, rgba(83,34,67,0.18), transparent 60%),
-        radial-gradient(110px 110px at 72% 90%, rgba(73,130,171,0.18), transparent 60%);
+        radial-gradient(130px 130px at 14% 50%, rgba(95,255,140,0.18), transparent 62%),
+        radial-gradient(140px 140px at 80% 30%, rgba(255,70,190,0.16), transparent 60%),
+        radial-gradient(120px 120px at 72% 90%, rgba(80,190,255,0.18), transparent 60%);
       opacity:0.55;
       pointer-events:none;
     }
@@ -287,7 +311,7 @@
     .link:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.34);
-      filter: saturate(115%);
+      filter: saturate(120%);
     }
 
     .link img{
@@ -299,12 +323,14 @@
       box-shadow: 0 0 0 2px rgba(0,0,0,0.28);
       background: rgba(0,0,0,0.20);
       flex: 0 0 auto;
+      position:relative;
+      z-index:1;
     }
 
     .link span{
       position:relative;
       z-index:1;
-      font-weight: 750;
+      font-weight: 850;
       letter-spacing: 0.01em;
     }
 
@@ -336,14 +362,16 @@
       color: var(--fg);
       border: 1px solid rgba(255,255,255,0.18);
       background:
-        radial-gradient(110px 80px at 20% 0%, rgba(255,255,255,0.16), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.62), rgba(7,8,11,0.86));
+        radial-gradient(120px 90px at 20% 0%, rgba(255,255,255,0.16), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.60), rgba(7,8,11,0.88));
       box-shadow: var(--shadowA), 0 12px 28px rgba(0,0,0,0.70);
+      transition: transform 130ms ease, border-color 130ms ease, filter 130ms ease;
     }
 
     .backBtn:hover{
       border-color: rgba(255,255,255,0.34);
       transform: translateY(-1px);
+      filter: saturate(120%);
     }
 
     .card{
@@ -351,8 +379,8 @@
       padding: 16px;
       border: 1px solid rgba(255,255,255,0.18);
       background:
-        radial-gradient(240px 180px at 10% 0%, rgba(255,255,255,0.12), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.66), rgba(7,8,11,0.90));
+        radial-gradient(260px 190px at 12% 0%, rgba(255,255,255,0.12), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.66), rgba(7,8,11,0.92));
       box-shadow: var(--shadowA), var(--shadowB);
     }
 
@@ -363,7 +391,7 @@
       text-transform: lowercase;
       text-shadow:
         0 2px 0 rgba(0,0,0,0.55),
-        0 0 16px rgba(73,130,171,0.18);
+        0 0 16px rgba(80,190,255,0.18);
     }
 
     .sub2{
@@ -387,7 +415,7 @@
       padding: 8px 10px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.06);
     }
 
     .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -418,60 +446,13 @@
     }
 
     input:focus, select:focus, textarea:focus{
-      border-color: rgba(174,228,255,0.45);
+      border-color: rgba(80,190,255,0.55);
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.08),
-        0 0 0 3px rgba(73,130,171,0.18);
+        0 0 0 3px var(--focusRing);
     }
 
     textarea{ resize: vertical; }
-
-    .slots{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 640px){
-      .slots{ grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .slot{
-      padding: 10px 10px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background:
-        radial-gradient(120px 90px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.60), rgba(7,8,11,0.86));
-      color: var(--fg);
-      cursor:pointer;
-      font: inherit;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.58);
-      transition: transform 120ms ease, border-color 120ms ease, filter 120ms ease;
-    }
-
-    .slot:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.30);
-      filter: saturate(120%);
-    }
-
-    .slotBooked{
-      opacity: 0.30;
-      cursor:not-allowed;
-      filter: grayscale(40%);
-    }
-
-    .slotSelected{
-      outline: 2px solid rgba(174,228,255,0.72);
-      border-color: rgba(174,228,255,0.55);
-      box-shadow:
-        0 0 0 3px rgba(73,130,171,0.16),
-        0 14px 34px rgba(0,0,0,0.70);
-    }
 
     .cta{
       margin-top: 14px;
@@ -484,14 +465,14 @@
     .btn{
       border: 1px solid rgba(255,255,255,0.20);
       background:
-        radial-gradient(130px 90px at 18% 10%, rgba(255,255,255,0.18), transparent 62%),
-        linear-gradient(135deg, rgba(83,34,67,0.55), rgba(73,130,171,0.48), rgba(36,169,35,0.42));
+        radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.18), transparent 62%),
+        linear-gradient(135deg, rgba(255,70,190,0.26), rgba(80,190,255,0.22), rgba(95,255,140,0.18));
       color: var(--fg);
       padding: 12px 14px;
       border-radius: 16px;
       cursor:pointer;
       font: inherit;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: 0.03em;
       box-shadow: var(--shadowA), 0 16px 36px rgba(0,0,0,0.72);
       transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
@@ -500,7 +481,7 @@
     .btn:hover{
       transform: translateY(-1px);
       border-color: rgba(255,255,255,0.38);
-      filter: saturate(125%);
+      filter: saturate(130%);
     }
 
     .btn:disabled{
@@ -533,7 +514,7 @@
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,0.20);
       background:
-        radial-gradient(240px 180px at 12% 0%, rgba(255,255,255,0.14), transparent 62%),
+        radial-gradient(280px 200px at 12% 0%, rgba(255,255,255,0.14), transparent 62%),
         linear-gradient(180deg, rgba(7,8,11,0.74), rgba(7,8,11,0.94));
       box-shadow: var(--shadowA), 0 22px 56px rgba(0,0,0,0.86);
       padding: 18px;
@@ -591,9 +572,9 @@
       border-radius: 16px;
       text-decoration:none;
       color: var(--fg);
-      border: 1px solid rgba(255,255,255മയം18);
+      border: 1px solid rgba(255,255,255,0.16);
       background:
-        radial-gradient(120px 90px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
+        radial-gradient(160px 110px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
         linear-gradient(180deg, rgba(7,8,11,0.56), rgba(7,8,11,0.86));
       box-shadow: 0 12px 26px rgba(0,0,0,0.66);
       transition: transform 130ms ease, border-color 130ms ease, filter 130ms ease;
@@ -602,7 +583,7 @@
     .modalLink:hover{
       transform: translateY(-1px);
       border-color: rgba(255,255,255,0.34);
-      filter: saturate(120%);
+      filter: saturate(125%);
     }
 
     .modalLink strong{ font-weight: 950; }
@@ -620,15 +601,158 @@
       white-space:nowrap;
     }
 
+    /* booking timeline */
+    .timelineWrap{
+      margin-top: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        radial-gradient(260px 160px at 12% 0%, rgba(255,255,255,0.10), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.42));
+      overflow:hidden;
+    }
+
+    .timelineHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .timelineHeader .hint{
+      font-size: 12px;
+      opacity: 0.75;
+    }
+
+    .rangePill{
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      white-space:nowrap;
+    }
+
+    .timeline{
+      position:relative;
+      padding: 12px;
+      overflow-x:auto;
+    }
+
+    .ticks{
+      display:flex;
+      gap: 10px;
+      min-width: 720px;
+    }
+
+    .tick{
+      width: 84px;
+      flex: 0 0 84px;
+      text-align:center;
+      font-size: 12px;
+      opacity: 0.82;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+
+    .barRow{
+      display:flex;
+      gap: 10px;
+      min-width: 720px;
+      padding: 8px 0 14px;
+    }
+
+    .bar{
+      width: 84px;
+      flex: 0 0 84px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background:
+        radial-gradient(120px 90px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.54), rgba(7,8,11,0.86));
+      cursor:pointer;
+      position:relative;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.55);
+      transition: transform 120ms ease, border-color 120ms ease, filter 120ms ease;
+    }
+
+    .bar:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.30);
+      filter: saturate(125%);
+    }
+
+    .barDisabled{
+      opacity: 0.26;
+      cursor:not-allowed;
+      filter: grayscale(35%);
+    }
+
+    .barStart{
+      outline: 2px solid rgba(80,190,255,0.72);
+      border-color: rgba(80,190,255,0.55);
+      box-shadow:
+        0 0 0 3px rgba(80,190,255,0.14),
+        0 14px 34px rgba(0,0,0,0.70);
+    }
+
+    .barEnd{
+      outline: 2px solid rgba(255,70,190,0.70);
+      border-color: rgba(255,70,190,0.55);
+      box-shadow:
+        0 0 0 3px rgba(255,70,190,0.12),
+        0 14px 34px rgba(0,0,0,0.70);
+    }
+
+    .barSelected{
+      background:
+        radial-gradient(140px 100px at 18% 10%, rgba(255,255,255,0.20), transparent 62%),
+        linear-gradient(135deg, rgba(80,190,255,0.34), rgba(255,70,190,0.22), rgba(95,255,140,0.14));
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .barSelected::after{
+      content:"";
+      position:absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+      opacity: 0.16;
+    }
+
+    .miniRow{
+      display:flex;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      align-items:flex-end;
+    }
+
+    .miniRow .mini{
+      flex: 1 1 160px;
+      min-width: 160px;
+    }
+
+    .miniRow .mini select{
+      width:100%;
+    }
+
     @media (max-width: 480px){
       .pfp img{ width: 102px; height: 102px; }
       h1{ font-size: 26px; }
       .topBtn{ width:100%; min-width:0; }
+      .tick, .bar{ width: 78px; flex-basis: 78px; }
     }
   </style>
 </head>
 
 <body>
+  <div class="colorFX"></div>
   <div class="bgFX"></div>
   <div class="scanFX"></div>
 
@@ -662,82 +786,54 @@
     <section class="section active" id="sectionHome">
       <section class="links">
         <a class="link" href="#book">
-          <img src="Calendar.png" alt="Book">
+          <img src="calendar.png" alt="Book">
           <span>book a session</span>
+        </a>
+
+        <a class="link" href="#pop">
+          <img src="Link.png" alt="Pop Dump">
+          <span>pop dump</span>
+        </a>
+
+        <a class="link" href="#rap">
+          <img src="Link.png" alt="Rap Dump">
+          <span>rap dump</span>
         </a>
 
         <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
           <img src="Spotify.png" alt="Spotify">
-          <span>b2nny | Spotify</span>
+          <span>b2nny | spotify</span>
         </a>
 
         <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
           <img src="Apple.png" alt="Apple Music">
-          <span>b2nny | Apple Music</span>
+          <span>b2nny | apple music</span>
         </a>
 
         <a class="link" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
           <img src="Soundcloud.png" alt="SoundCloud">
-          <span>b2nny | SoundCloud</span>
+          <span>b2nny | soundcloud</span>
         </a>
 
         <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
           <img src="Youtube.jpg" alt="YouTube">
-          <span>b2nny | YouTube</span>
+          <span>b2nny | youtube</span>
         </a>
 
         <a class="link" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
           <img src="Instagram.png" alt="Instagram">
-          <span>b2nny | Instagram</span>
+          <span>b2nny | instagram</span>
         </a>
 
         <a class="link" href="https://x.com/b2nnny" target="_blank" rel="noopener">
           <img src="Twitter.jpg" alt="X">
-          <span>b2nny | X</span>
+          <span>b2nny | x</span>
         </a>
       </section>
 
       <footer>
         © <script>document.write(new Date().getFullYear());</script> Harmony Hill
       </footer>
-    </section>
-
-    <section class="section" id="sectionRap">
-      <div class="backRow">
-        <a class="backBtn" href="#home">back</a>
-        <a class="backBtn" href="https://distrokid.com/hyperfollow/b2nny/rap-dump" target="_blank" rel="noopener">hyperfollow</a>
-      </div>
-
-      <div class="card">
-        <div class="title2">rap dump</div>
-        <div class="sub2">links</div>
-
-        <div class="links" style="margin-top:0;">
-          <a class="link" href="https://distrokid.com/hyperfollow/b2nny/rap-dump" target="_blank" rel="noopener">
-            <img src="Link.png" alt="Link">
-            <span>hyperfollow</span>
-          </a>
-
-          <a class="link" href="#" target="_blank" rel="noopener">
-            <img src="Spotify.png" alt="Spotify">
-            <span>rap dump | spotify</span>
-          </a>
-
-          <a class="link" href="#" target="_blank" rel="noopener">
-            <img src="Apple.png" alt="Apple Music">
-            <span>rap dump | apple music</span>
-          </a>
-
-          <a class="link" href="#" target="_blank" rel="noopener">
-            <img src="Soundcloud.png" alt="SoundCloud">
-            <span>rap dump | soundcloud</span>
-          </a>
-        </div>
-
-        <div class="tiny" style="margin-top:10px;">
-          swap those links when the official pages are live
-        </div>
-      </div>
     </section>
 
     <section class="section" id="sectionBook">
@@ -748,13 +844,13 @@
 
       <div class="card">
         <div class="title2">request booking</div>
-        <div class="sub2">pick a date, then click hour slots that connect</div>
+        <div class="sub2">pick a date then pick a start and end time</div>
         <div class="tiny">no payment here. sessions are not confirmed until I text you back and confirm.</div>
 
         <div class="priceRow">
           <strong>$50</strong>
           <span>per hour</span>
-          <span style="opacity:0.7;">hour slots only</span>
+          <span style="opacity:0.7;">hour blocks</span>
         </div>
 
         <div style="height:14px;"></div>
@@ -804,8 +900,28 @@
           </div>
         </div>
 
-        <div style="margin-top:14px; font-size:12px; opacity:0.82;">available hour starts</div>
-        <div class="slots" id="bkSlots"></div>
+        <div class="miniRow">
+          <div class="mini">
+            <label for="bkStart">start time</label>
+            <select id="bkStart"></select>
+          </div>
+          <div class="mini">
+            <label for="bkEnd">end time</label>
+            <select id="bkEnd"></select>
+          </div>
+        </div>
+
+        <div class="timelineWrap">
+          <div class="timelineHeader">
+            <div class="hint">tap the bar to set start, tap again to set end</div>
+            <div class="rangePill" id="bkRangePill">select a time</div>
+          </div>
+
+          <div class="timeline">
+            <div class="ticks" id="bkTicks"></div>
+            <div class="barRow" id="bkBars"></div>
+          </div>
+        </div>
 
         <div style="height:12px;"></div>
 
@@ -815,17 +931,18 @@
         </div>
 
         <div class="cta">
-          <button class="btn" id="bkSubmit" disabled>select hours</button>
+          <button class="btn" id="bkSubmit" disabled>select time</button>
           <div class="msg" id="bkMsg"></div>
         </div>
 
         <div class="tiny" style="margin-top:10px;">
-          tip: click hours that connect, like 12 1 2 for 12 to 3
+          if anything is already booked, it will block that range
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Pop modal -->
   <div class="modalBackdrop" id="popModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popTitle">
       <div class="modalHeader">
@@ -833,7 +950,7 @@
           <div class="modalTitle" id="popTitle">Pop Dump</div>
           <div class="modalSub">Pick your platform and stream the EP.</div>
         </div>
-        <button class="modalClose" type="button" id="popCloseBtn">×</button>
+        <button class="modalClose" type="button" data-close="popModal">×</button>
       </div>
 
       <div class="modalLinks">
@@ -855,32 +972,97 @@
     </div>
   </div>
 
+  <!-- Rap modal -->
+  <div class="modalBackdrop" id="rapModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rapTitle">
+      <div class="modalHeader">
+        <div>
+          <div class="modalTitle" id="rapTitle">Rap Dump</div>
+          <div class="modalSub">Pick your platform and stream the EP.</div>
+        </div>
+        <button class="modalClose" type="button" data-close="rapModal">×</button>
+      </div>
+
+      <div class="modalLinks">
+        <a class="modalLink" href="https://open.spotify.com/album/7jd2Z6etB43TvzNZ2Qx4fV?si=dph-E2EQTL6pDoXsrmNNRQ" target="_blank" rel="noopener">
+          <span><strong>Spotify</strong><small>Open in app or browser</small></span>
+          <span class="pill">Listen</span>
+        </a>
+
+        <a class="modalLink" href="https://music.apple.com/ca/album/rap-dump/1862592487" target="_blank" rel="noopener">
+          <span><strong>Apple Music</strong><small>Stream the EP</small></span>
+          <span class="pill">Listen</span>
+        </a>
+
+        <a class="modalLink" href="https://soundcloud.com/b2nny/sets/rapdump?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
+          <span><strong>SoundCloud</strong><small>Full Rap Dump set</small></span>
+          <span class="pill">Listen</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbyQfetK9SCZtHjxelb-KEJUfUZh3I_o9moHJwNk6bxcU2woZ_u5_OWPDSRcvs98V5xx/exec";
+    const API_URL = "PASTE_APPS_SCRIPT_WEB_APP_URL_HERE";
     const PRICE_PER_HOUR = 50;
 
-    (function popModal(){
-      const modal = document.getElementById("popModal");
-      const closeBtn = document.getElementById("popCloseBtn");
+    const START_HOUR = 12;
+    const END_HOUR = 22;
 
-      function open(){ modal.classList.add("open"); }
-      function close(){ modal.classList.remove("open"); }
+    function timeLabel(h){
+      const ap = h >= 12 ? "PM" : "AM";
+      const hh = ((h + 11) % 12) + 1;
+      return hh + ":00 " + ap;
+    }
 
-      window.openPop = open;
+    function parseHour(label){
+      const m = String(label).trim().match(/^(\d{1,2}):00\s*(AM|PM)$/i);
+      if(!m) return null;
+      let hh = Number(m[1]);
+      const ap = m[2].toUpperCase();
+      if(hh < 1 || hh > 12) return null;
+      if(ap === "PM" && hh !== 12) hh += 12;
+      if(ap === "AM" && hh === 12) hh = 0;
+      return hh;
+    }
 
-      closeBtn.addEventListener("click", close);
-      modal.addEventListener("click", (e)=>{ if(e.target === modal) close(); });
-      document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") close(); });
+    function openModal(id){
+      const el = document.getElementById(id);
+      if(el) el.classList.add("open");
+    }
+
+    function closeModal(id){
+      const el = document.getElementById(id);
+      if(el) el.classList.remove("open");
+    }
+
+    (function modals(){
+      document.querySelectorAll("[data-close]").forEach(btn=>{
+        btn.addEventListener("click", ()=> closeModal(btn.getAttribute("data-close")));
+      });
+
+      ["popModal","rapModal"].forEach(id=>{
+        const el = document.getElementById(id);
+        el.addEventListener("click", (e)=>{ if(e.target === el) closeModal(id); });
+      });
+
+      document.addEventListener("keydown", (e)=>{
+        if(e.key === "Escape"){
+          closeModal("popModal");
+          closeModal("rapModal");
+        }
+      });
+
+      window.openPop = ()=> openModal("popModal");
+      window.openRap = ()=> openModal("rapModal");
     })();
 
     (function router(){
       const home = document.getElementById("sectionHome");
-      const rap = document.getElementById("sectionRap");
       const book = document.getElementById("sectionBook");
 
       function show(el){
         home.classList.remove("active");
-        rap.classList.remove("active");
         book.classList.remove("active");
         el.classList.add("active");
       }
@@ -892,8 +1074,15 @@
           show(home);
           return;
         }
-        if(h === "rap"){ show(rap); return; }
-        if(h === "book"){ show(book); return; }
+        if(h === "rap"){
+          window.openRap();
+          show(home);
+          return;
+        }
+        if(h === "book"){
+          show(book);
+          return;
+        }
         show(home);
       }
 
@@ -903,7 +1092,13 @@
 
     (function booking(){
       const dateEl = document.getElementById("bkDate");
-      const slotsEl = document.getElementById("bkSlots");
+      const startEl = document.getElementById("bkStart");
+      const endEl = document.getElementById("bkEnd");
+
+      const ticksEl = document.getElementById("bkTicks");
+      const barsEl = document.getElementById("bkBars");
+
+      const rangePill = document.getElementById("bkRangePill");
       const submitBtn = document.getElementById("bkSubmit");
       const msgEl = document.getElementById("bkMsg");
 
@@ -915,11 +1110,9 @@
       const roomEl = document.getElementById("bkRoom");
       const notesEl = document.getElementById("bkNotes");
 
-      const START_HOUR = 12;
-      const END_HOUR = 22;
-
       let busy = new Set();
-      let selected = new Set();
+      let chosenStart = null; // hour int
+      let chosenEnd = null;   // hour int
 
       function todayISO(){
         const d = new Date();
@@ -936,119 +1129,184 @@
         dateEl.value = t < start ? start : t;
       }
 
-      function timeLabel(h){
-        const ap = h >= 12 ? "PM" : "AM";
-        const hh = ((h + 11) % 12) + 1;
-        return hh + ":00 " + ap;
-      }
+      function buildOptions(){
+        startEl.innerHTML = "";
+        endEl.innerHTML = "";
 
-      function parseHour(label){
-        const m = String(label).trim().match(/^(\d{1,2}):00\s*(AM|PM)$/i);
-        if(!m) return null;
-        let hh = Number(m[1]);
-        const ap = m[2].toUpperCase();
-        if(hh < 1 || hh > 12) return null;
-        if(ap === "PM" && hh !== 12) hh += 12;
-        if(ap === "AM" && hh === 12) hh = 0;
-        return hh;
-      }
-
-      function allTimes(){
-        const out = [];
-        for(let h = START_HOUR; h < END_HOUR; h++) out.push(timeLabel(h));
-        return out;
-      }
-
-      function selectionRange(){
-        if(selected.size === 0) return null;
-        const hours = Array.from(selected).map(parseHour).filter(v => v !== null).sort((a,b)=>a-b);
-        if(hours.length === 0) return null;
-
-        for(let i = 1; i < hours.length; i++){
-          if(hours[i] !== hours[i - 1] + 1) return null;
+        for(let h = START_HOUR; h < END_HOUR; h++){
+          const opt = document.createElement("option");
+          opt.value = String(h);
+          opt.textContent = timeLabel(h);
+          startEl.appendChild(opt);
         }
 
-        const startHour = hours[0];
-        const endHour = hours[hours.length - 1] + 1;
-        const durationHours = endHour - startHour;
-        return { startHour, endHour, durationHours };
-      }
-
-      function updateButton(){
-        const range = selectionRange();
-        if(!range){
-          submitBtn.disabled = true;
-          submitBtn.textContent = selected.size ? "select connected hours" : "select hours";
-          return;
+        for(let h = START_HOUR + 1; h <= END_HOUR; h++){
+          const opt = document.createElement("option");
+          opt.value = String(h);
+          opt.textContent = timeLabel(h);
+          endEl.appendChild(opt);
         }
-        const total = range.durationHours * PRICE_PER_HOUR;
-        submitBtn.disabled = false;
-        submitBtn.textContent = "request booking ($" + total + ")";
+
+        chosenStart = START_HOUR;
+        chosenEnd = START_HOUR + 2;
+
+        startEl.value = String(chosenStart);
+        endEl.value = String(chosenEnd);
       }
 
-      function clearSelectionUi(){
-        selected.clear();
-        document.querySelectorAll(".slotSelected").forEach(el => el.classList.remove("slotSelected"));
-        updateButton();
-      }
+      function buildTimeline(){
+        ticksEl.innerHTML = "";
+        barsEl.innerHTML = "";
 
-      function renderSlots(){
-        slotsEl.innerHTML = "";
-        clearSelectionUi();
-        msgEl.textContent = "";
+        for(let h = START_HOUR; h < END_HOUR; h++){
+          const t = document.createElement("div");
+          t.className = "tick";
+          t.textContent = timeLabel(h).toLowerCase();
+          ticksEl.appendChild(t);
 
-        for(const t of allTimes()){
-          const b = document.createElement("button");
-          b.type = "button";
-          b.className = "slot";
-          b.textContent = t;
-
-          if(busy.has(t)){
-            b.classList.add("slotBooked");
-            b.disabled = true;
-          }
+          const b = document.createElement("div");
+          b.className = "bar";
+          b.dataset.hour = String(h);
 
           b.addEventListener("click", ()=>{
-            if(b.disabled) return;
+            if(b.classList.contains("barDisabled")) return;
 
-            if(selected.has(t)){
-              selected.delete(t);
-              b.classList.remove("slotSelected");
+            const hh = Number(b.dataset.hour);
+
+            if(chosenStart === null || (chosenStart !== null && chosenEnd !== null)){
+              chosenStart = hh;
+              chosenEnd = null;
             } else {
-              selected.add(t);
-              b.classList.add("slotSelected");
+              if(hh === chosenStart){
+                return;
+              }
+              if(hh < chosenStart){
+                chosenEnd = chosenStart;
+                chosenStart = hh;
+              } else {
+                chosenEnd = hh;
+              }
+              if(chosenEnd === chosenStart) chosenEnd = null;
+              if(chosenEnd !== null && chosenEnd <= chosenStart) chosenEnd = null;
             }
 
-            const range = selectionRange();
-            if(selected.size > 0 && !range){
-              msgEl.textContent = "pick hours that connect, like 12 1 2";
-              const keep = t;
-              document.querySelectorAll(".slotSelected").forEach(el => el.classList.remove("slotSelected"));
-              selected.clear();
-              selected.add(keep);
-              b.classList.add("slotSelected");
-            } else {
-              msgEl.textContent = "";
-            }
-
-            updateButton();
+            syncSelectsFromRange();
+            renderSelection();
           });
 
-          slotsEl.appendChild(b);
+          barsEl.appendChild(b);
+        }
+      }
+
+      function isRangeValid(s, e){
+        if(s === null || e === null) return false;
+        if(e <= s) return false;
+        for(let h = s; h < e; h++){
+          if(busy.has(timeLabel(h))) return false;
+        }
+        return true;
+      }
+
+      function renderBusy(){
+        const bars = barsEl.querySelectorAll(".bar");
+        bars.forEach(b=>{
+          b.classList.remove("barDisabled","barSelected","barStart","barEnd");
+          const h = Number(b.dataset.hour);
+          if(busy.has(timeLabel(h))){
+            b.classList.add("barDisabled");
+          }
+        });
+      }
+
+      function renderSelection(){
+        renderBusy();
+
+        const s = chosenStart;
+        const e = chosenEnd;
+
+        const bars = barsEl.querySelectorAll(".bar");
+
+        if(s === null){
+          rangePill.textContent = "select a time";
+          submitBtn.disabled = true;
+          submitBtn.textContent = "select time";
+          return;
         }
 
-        updateButton();
+        if(e === null){
+          rangePill.textContent = timeLabel(s) + " start selected";
+          submitBtn.disabled = true;
+          submitBtn.textContent = "select end time";
+          bars.forEach(b=>{
+            const h = Number(b.dataset.hour);
+            if(h === s) b.classList.add("barStart");
+          });
+          return;
+        }
+
+        const ok = isRangeValid(s, e);
+
+        bars.forEach(b=>{
+          const h = Number(b.dataset.hour);
+          if(h === s) b.classList.add("barStart");
+          if(h === (e - 1)) b.classList.add("barEnd");
+          if(h >= s && h < e) b.classList.add("barSelected");
+        });
+
+        const hours = e - s;
+        const total = hours * PRICE_PER_HOUR;
+
+        rangePill.textContent = timeLabel(s) + " to " + timeLabel(e) + " (" + hours + "h)";
+        submitBtn.textContent = ok ? ("request booking ($" + total + ")") : "pick a different time";
+        submitBtn.disabled = !ok;
+      }
+
+      function clampEndOptions(){
+        const s = Number(startEl.value);
+        const currentE = Number(endEl.value);
+
+        endEl.innerHTML = "";
+        for(let h = s + 1; h <= END_HOUR; h++){
+          const opt = document.createElement("option");
+          opt.value = String(h);
+          opt.textContent = timeLabel(h);
+          endEl.appendChild(opt);
+        }
+
+        if(currentE > s){
+          endEl.value = String(Math.min(currentE, END_HOUR));
+        } else {
+          endEl.value = String(Math.min(s + 2, END_HOUR));
+        }
+      }
+
+      function syncRangeFromSelects(){
+        chosenStart = Number(startEl.value);
+        chosenEnd = Number(endEl.value);
+        renderSelection();
+      }
+
+      function syncSelectsFromRange(){
+        if(chosenStart !== null){
+          startEl.value = String(chosenStart);
+          clampEndOptions();
+
+          if(chosenEnd !== null){
+            endEl.value = String(chosenEnd);
+          }
+        }
       }
 
       async function loadBusy(){
         busy = new Set();
-        renderSlots();
+        msgEl.textContent = "";
 
         const date = dateEl.value;
         if(!date) return;
 
         if(!API_URL || API_URL.indexOf("PASTE_") === 0){
           msgEl.textContent = "backend not set";
+          renderSelection();
           return;
         }
 
@@ -1058,7 +1316,7 @@
           let data;
 
           try { data = JSON.parse(text); }
-          catch(e){ busy = new Set(); renderSlots(); return; }
+          catch(e){ data = null; }
 
           if(data && data.ok && Array.isArray(data.busy)){
             busy = new Set(data.busy);
@@ -1067,7 +1325,7 @@
           busy = new Set();
         }
 
-        renderSlots();
+        renderSelection();
       }
 
       function validate(){
@@ -1077,8 +1335,8 @@
         if(!phoneEl.value.trim()) return "enter phone";
         if(!igEl.value.trim()) return "enter instagram";
         if(!dateEl.value) return "pick a date";
-        const range = selectionRange();
-        if(!range) return "pick connected hours";
+        if(chosenStart === null || chosenEnd === null) return "pick start and end time";
+        if(!isRangeValid(chosenStart, chosenEnd)) return "that time is not available";
         return "";
       }
 
@@ -1091,12 +1349,10 @@
           return;
         }
 
-        const range = selectionRange();
-        if(!range){ msgEl.textContent = "pick connected hours"; return; }
-
         const fullName = firstEl.value.trim() + " " + lastEl.value.trim();
-        const durationMinutes = range.durationHours * 60;
-        const total = range.durationHours * PRICE_PER_HOUR;
+        const hours = chosenEnd - chosenStart;
+        const durationMinutes = hours * 60;
+        const total = hours * PRICE_PER_HOUR;
 
         submitBtn.disabled = true;
         msgEl.textContent = "sending...";
@@ -1107,13 +1363,13 @@
           phone: phoneEl.value.trim(),
           instagram: igEl.value.trim(),
           date: dateEl.value,
-          time: timeLabel(range.startHour),
+          time: timeLabel(chosenStart),
           durationMinutes: String(durationMinutes),
           notes: [
             "price per hour: $" + PRICE_PER_HOUR,
             "total: $" + total,
-            "hours booked: " + range.durationHours,
-            "range: " + timeLabel(range.startHour) + " to " + timeLabel(range.endHour),
+            "hours booked: " + hours,
+            "range: " + timeLabel(chosenStart) + " to " + timeLabel(chosenEnd),
             "preferred room: " + String(roomEl.value),
             "",
             String(notesEl.value || "").trim()
@@ -1133,11 +1389,7 @@
           const text = await res.text();
           let data;
           try { data = JSON.parse(text); }
-          catch(e){
-            msgEl.textContent = "backend returned not json";
-            submitBtn.disabled = false;
-            return;
-          }
+          catch(e){ data = null; }
 
           if(!data || !data.ok){
             msgEl.textContent = (data && data.error) ? data.error : "error, try again";
@@ -1146,6 +1398,8 @@
           }
 
           msgEl.textContent = "request sent. I will text you to confirm.";
+          submitBtn.disabled = false;
+
           await loadBusy();
         } catch (e) {
           msgEl.textContent = "error, try again";
@@ -1154,9 +1408,27 @@
       }
 
       setMinDate();
+      buildOptions();
+      buildTimeline();
+      clampEndOptions();
+      renderSelection();
       loadBusy();
 
       dateEl.addEventListener("change", loadBusy);
+
+      startEl.addEventListener("change", ()=>{
+        clampEndOptions();
+        chosenStart = Number(startEl.value);
+        chosenEnd = Number(endEl.value);
+        renderSelection();
+      });
+
+      endEl.addEventListener("change", ()=>{
+        chosenStart = Number(startEl.value);
+        chosenEnd = Number(endEl.value);
+        renderSelection();
+      });
+
       submitBtn.addEventListener("click", submit);
     })();
   </script>
