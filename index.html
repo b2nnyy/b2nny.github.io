@@ -16,17 +16,13 @@
       --bg0: #07080b;
       --bg1: #0c0e14;
 
-      --mag: rgba(255, 70, 190, 0.20);
-      --cyan: rgba(80, 190, 255, 0.22);
-      --lime: rgba(95, 255, 140, 0.18);
-      --acid: rgba(255, 255, 170, 0.14);
-
-      --chrome0: rgba(255,255,255,0.08);
-      --chrome1: rgba(255,255,255,0.14);
-      --chrome2: rgba(255,255,255,0.22);
+      --mag: rgba(255, 70, 190, 0.22);
+      --cyan: rgba(80, 190, 255, 0.26);
+      --lime: rgba(95, 255, 140, 0.22);
+      --acid: rgba(255, 255, 170, 0.18);
 
       --cardA: rgba(7,8,11,0.68);
-      --cardB: rgba(7,8,11,0.88);
+      --cardB: rgba(7,8,11,0.90);
 
       --radius: 18px;
       --radius2: 26px;
@@ -35,7 +31,6 @@
       --shadowB: 0 18px 46px rgba(0,0,0,0.78);
 
       --focusRing: rgba(80, 190, 255, 0.34);
-      --focusRing2: rgba(255, 70, 190, 0.20);
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
@@ -55,13 +50,35 @@
       align-items:flex-start;
     }
 
+    .colorFX{
+      position:fixed;
+      inset:-25%;
+      z-index:-3;
+      pointer-events:none;
+      background:
+        radial-gradient(560px 560px at 16% 18%, rgba(255,70,190,0.22), transparent 62%),
+        radial-gradient(720px 720px at 74% 16%, rgba(80,190,255,0.26), transparent 62%),
+        radial-gradient(620px 620px at 84% 72%, rgba(95,255,140,0.22), transparent 62%),
+        radial-gradient(820px 820px at 40% 86%, rgba(255,255,170,0.18), transparent 62%);
+      filter: blur(14px) saturate(160%);
+      opacity: 0.92;
+      animation: swirl 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes swirl{
+      0%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(24px,-18px,0) scale(1.04); }
+      100%{ transform: translate3d(-20px,18px,0) scale(1.03); }
+    }
+
     .bgFX{
       position:fixed;
       inset:0;
       z-index:-2;
       pointer-events:none;
       opacity:0.95;
-      filter:saturate(125%);
+      filter:saturate(135%);
+
       background:
         radial-gradient(900px 700px at 20% 30%, rgba(255,255,255,0.07), transparent 62%),
         radial-gradient(850px 650px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
@@ -79,63 +96,42 @@
           transparent 44px
         ),
 
-        radial-gradient(180px 180px at 18% 72%, rgba(255,255,255,0.10), transparent 62%),
-        radial-gradient(240px 240px at 62% 34%, rgba(255,255,255,0.08), transparent 60%),
-        radial-gradient(220px 220px at 82% 18%, rgba(255,255,255,0.08), transparent 62%),
+        radial-gradient(220px 220px at 18% 72%, rgba(255,255,255,0.12), transparent 62%),
+        radial-gradient(280px 280px at 62% 34%, rgba(255,255,255,0.10), transparent 60%),
+        radial-gradient(260px 260px at 82% 18%, rgba(255,255,255,0.10), transparent 62%),
 
         repeating-linear-gradient(90deg,
           transparent 0px,
           transparent 96px,
-          rgba(80,190,255,0.14) 96px,
-          rgba(80,190,255,0.14) 98px,
+          rgba(80,190,255,0.16) 96px,
+          rgba(80,190,255,0.16) 98px,
           transparent 98px,
           transparent 112px,
-          rgba(80,190,255,0.14) 112px,
-          rgba(80,190,255,0.14) 114px,
+          rgba(255,70,190,0.14) 112px,
+          rgba(255,70,190,0.14) 114px,
           transparent 114px,
           transparent 176px
         ),
         repeating-linear-gradient(0deg,
           transparent 0px,
           transparent 96px,
-          rgba(95,255,140,0.10) 96px,
-          rgba(95,255,140,0.10) 98px,
+          rgba(95,255,140,0.14) 96px,
+          rgba(95,255,140,0.14) 98px,
           transparent 98px,
           transparent 112px,
-          rgba(95,255,140,0.10) 112px,
-          rgba(95,255,140,0.10) 114px,
+          rgba(255,255,170,0.12) 112px,
+          rgba(255,255,170,0.12) 114px,
           transparent 114px,
           transparent 176px
         );
       transform: translate3d(0,0,0);
-      animation: driftGrid 18s linear infinite;
+      animation: driftGrid 16s linear infinite;
     }
 
     @keyframes driftGrid{
       0%{ transform: translate3d(0,0,0); }
-      50%{ transform: translate3d(-22px, 14px, 0); }
+      50%{ transform: translate3d(-26px, 18px, 0); }
       100%{ transform: translate3d(0,0,0); }
-    }
-
-    .colorFX{
-      position:fixed;
-      inset:-20%;
-      z-index:-3;
-      pointer-events:none;
-      background:
-        radial-gradient(520px 520px at 18% 22%, rgba(255,70,190,0.18), transparent 62%),
-        radial-gradient(620px 620px at 72% 20%, rgba(80,190,255,0.20), transparent 62%),
-        radial-gradient(540px 540px at 82% 70%, rgba(95,255,140,0.16), transparent 62%),
-        radial-gradient(700px 700px at 40% 82%, rgba(255,255,170,0.12), transparent 62%);
-      filter: blur(12px) saturate(140%);
-      opacity: 0.9;
-      animation: swirl 14s ease-in-out infinite alternate;
-    }
-
-    @keyframes swirl{
-      0%{ transform: translate3d(0,0,0) scale(1); }
-      50%{ transform: translate3d(22px,-14px,0) scale(1.03); }
-      100%{ transform: translate3d(-18px,16px,0) scale(1.02); }
     }
 
     .scanFX{
@@ -202,8 +198,8 @@
       color: var(--fg);
       border: 1px solid rgba(255,255,255,0.22);
       background:
-        radial-gradient(140px 100px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
-        linear-gradient(135deg, rgba(255,70,190,0.22), rgba(80,190,255,0.20), rgba(95,255,140,0.18));
+        radial-gradient(160px 110px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
+        linear-gradient(135deg, rgba(255,70,190,0.26), rgba(80,190,255,0.24), rgba(95,255,140,0.20));
       box-shadow: var(--shadowA), var(--shadowB);
       position:relative;
       overflow:hidden;
@@ -215,7 +211,7 @@
       content:"";
       position:absolute;
       inset:-1px;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 28%, transparent 58%);
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.24) 28%, transparent 58%);
       opacity:0.14;
       transform: translateX(-55%);
       transition: transform 360ms ease, opacity 160ms ease;
@@ -225,12 +221,12 @@
     .topBtn:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.40);
-      filter: saturate(130%) contrast(104%);
+      filter: saturate(140%) contrast(106%);
     }
 
     .topBtn:hover::after{
       transform: translateX(55%);
-      opacity:0.20;
+      opacity:0.22;
     }
 
     .topLabel{
@@ -300,9 +296,9 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(130px 130px at 14% 50%, rgba(95,255,140,0.18), transparent 62%),
-        radial-gradient(140px 140px at 80% 30%, rgba(255,70,190,0.16), transparent 60%),
-        radial-gradient(120px 120px at 72% 90%, rgba(80,190,255,0.18), transparent 60%);
+        radial-gradient(130px 130px at 14% 50%, rgba(95,255,140,0.20), transparent 62%),
+        radial-gradient(140px 140px at 80% 30%, rgba(255,70,190,0.18), transparent 60%),
+        radial-gradient(120px 120px at 72% 90%, rgba(80,190,255,0.20), transparent 60%);
       opacity:0.55;
       pointer-events:none;
     }
@@ -310,7 +306,7 @@
     .link:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.34);
-      filter: saturate(120%);
+      filter: saturate(130%);
     }
 
     .link img{
@@ -465,7 +461,7 @@
       border: 1px solid rgba(255,255,255,0.20);
       background:
         radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.18), transparent 62%),
-        linear-gradient(135deg, rgba(255,70,190,0.26), rgba(80,190,255,0.22), rgba(95,255,140,0.18));
+        linear-gradient(135deg, rgba(255,70,190,0.28), rgba(80,190,255,0.24), rgba(95,255,140,0.20));
       color: var(--fg);
       padding: 12px 14px;
       border-radius: 16px;
@@ -480,7 +476,7 @@
     .btn:hover{
       transform: translateY(-1px);
       border-color: rgba(255,255,255,0.38);
-      filter: saturate(130%);
+      filter: saturate(140%);
     }
 
     .btn:disabled{
@@ -488,6 +484,28 @@
       cursor:not-allowed;
       filter: grayscale(25%);
       transform:none;
+    }
+
+    .btnSecondary{
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.55), rgba(7,8,11,0.85));
+      color: rgba(255,255,255,0.92);
+      padding: 12px 14px;
+      border-radius: 16px;
+      cursor:pointer;
+      font: inherit;
+      font-weight: 950;
+      letter-spacing: 0.03em;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.66);
+      transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
+    }
+
+    .btnSecondary:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.34);
+      filter: saturate(120%);
     }
 
     .msg{
@@ -600,7 +618,6 @@
       white-space:nowrap;
     }
 
-    /* booking timeline */
     .timelineWrap{
       margin-top: 12px;
       border-radius: 18px;
@@ -711,7 +728,7 @@
     .barSelected{
       background:
         radial-gradient(140px 100px at 18% 10%, rgba(255,255,255,0.20), transparent 62%),
-        linear-gradient(135deg, rgba(80,190,255,0.34), rgba(255,70,190,0.22), rgba(95,255,140,0.14));
+        linear-gradient(135deg, rgba(80,190,255,0.34), rgba(255,70,190,0.24), rgba(95,255,140,0.16));
       border-color: rgba(255,255,255,0.22);
     }
 
@@ -737,8 +754,61 @@
       min-width: 160px;
     }
 
-    .miniRow .mini select{
-      width:100%;
+    .bkSuccess{
+      margin-top: 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background:
+        radial-gradient(260px 180px at 14% 0%, rgba(255,255,255,0.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.70), rgba(7,8,11,0.92));
+      box-shadow: var(--shadowA), var(--shadowB);
+      padding: 16px;
+      display:none;
+    }
+
+    .bkSuccess.active{ display:block; }
+
+    .bkSuccess h3{
+      font-size: 20px;
+      font-weight: 950;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+      text-transform: lowercase;
+    }
+
+    .bkSuccess .line{
+      font-size: 13px;
+      opacity: 0.92;
+      margin: 6px 0;
+      line-height: 1.35;
+    }
+
+    .bkSuccess .chipRow{
+      margin-top: 10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+
+    .bkChip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: lowercase;
+    }
+
+    .bkSuccess .btnRow{
+      margin-top: 12px;
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
     }
 
     @media (max-width: 480px){
@@ -831,7 +901,7 @@
         <a class="backBtn" href="#pop">pop dump</a>
       </div>
 
-      <div class="card">
+      <div class="card" id="bkCard">
         <div class="title2">request booking</div>
         <div class="sub2">pick a date then pick a start and end time</div>
         <div class="tiny">no payment here. sessions are not confirmed until I text you back and confirm.</div>
@@ -902,7 +972,7 @@
 
         <div class="timelineWrap">
           <div class="timelineHeader">
-            <div class="hint">tap the bar to set start, tap again to set end</div>
+            <div class="hint">tap a start block, then tap the last hour you want</div>
             <div class="rangePill" id="bkRangePill">select a time</div>
           </div>
 
@@ -928,10 +998,30 @@
           if anything is already booked, it will block that range
         </div>
       </div>
+
+      <div class="bkSuccess" id="bkSuccess">
+        <h3>you are booked</h3>
+        <div class="line" id="bkSuccessLine1"></div>
+        <div class="line" id="bkSuccessLine2"></div>
+
+        <div class="chipRow">
+          <div class="bkChip" id="bkSuccessChipTime"></div>
+          <div class="bkChip" id="bkSuccessChipHours"></div>
+          <div class="bkChip" id="bkSuccessChipTotal"></div>
+        </div>
+
+        <div class="btnRow">
+          <button class="btn" type="button" id="bkBookAnother">book another session</button>
+          <button class="btnSecondary" type="button" id="bkBackHome">back to links</button>
+        </div>
+
+        <div class="line" style="opacity:0.72;margin-top:10px;">
+          you will still get a text from me to confirm details
+        </div>
+      </div>
     </section>
   </main>
 
-  <!-- Pop modal -->
   <div class="modalBackdrop" id="popModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popTitle">
       <div class="modalHeader">
@@ -961,7 +1051,6 @@
     </div>
   </div>
 
-  <!-- Rap modal -->
   <div class="modalBackdrop" id="rapModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rapTitle">
       <div class="modalHeader">
@@ -992,8 +1081,6 @@
   </div>
 
   <script>
-    // IMPORTANT: this must be your deployed Apps Script Web App URL
-    // Leave the quotes, replace the URL inside them.
     const API_URL = "https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec";
     const PRICE_PER_HOUR = 50;
 
@@ -1006,6 +1093,10 @@
       return hh + ":00 " + ap;
     }
 
+    function money(n){
+      return "$" + Number(n).toFixed(0);
+    }
+
     function openModal(id){
       const el = document.getElementById(id);
       if(el) el.classList.add("open");
@@ -1016,36 +1107,40 @@
       if(el) el.classList.remove("open");
     }
 
-    function jsonp(url){
+    function jsonp(url, params){
       return new Promise((resolve, reject)=>{
-        const cb = "cb" + Math.random().toString(16).slice(2);
-        const s = document.createElement("script");
-        const sep = url.includes("?") ? "&" : "?";
-        const full = url + sep + "callback=" + encodeURIComponent(cb);
+        const cbName = "cb_" + Math.random().toString(36).slice(2);
+        const script = document.createElement("script");
 
-        const timer = setTimeout(()=>{
+        const qs = new URLSearchParams();
+        Object.entries(params || {}).forEach(([k,v])=> qs.append(k, String(v)));
+        qs.append("callback", cbName);
+
+        const full = url + (url.includes("?") ? "&" : "?") + qs.toString();
+
+        const timeout = setTimeout(()=>{
           cleanup();
-          reject(new Error("timeout"));
+          reject(new Error("jsonp timeout"));
         }, 12000);
 
         function cleanup(){
-          clearTimeout(timer);
-          try{ delete window[cb]; } catch(e){}
-          if(s && s.parentNode) s.parentNode.removeChild(s);
+          clearTimeout(timeout);
+          try{ delete window[cbName]; } catch(_){}
+          if(script.parentNode) script.parentNode.removeChild(script);
         }
 
-        window[cb] = (data)=>{
+        window[cbName] = (data)=>{
           cleanup();
           resolve(data);
         };
 
-        s.onerror = ()=>{
+        script.onerror = ()=>{
           cleanup();
-          reject(new Error("load error"));
+          reject(new Error("jsonp error"));
         };
 
-        s.src = full;
-        document.body.appendChild(s);
+        script.src = full;
+        document.body.appendChild(script);
       });
     }
 
@@ -1124,6 +1219,15 @@
       const roomEl = document.getElementById("bkRoom");
       const notesEl = document.getElementById("bkNotes");
 
+      const cardEl = document.getElementById("bkCard");
+      const successEl = document.getElementById("bkSuccess");
+
+      const sL1 = document.getElementById("bkSuccessLine1");
+      const sL2 = document.getElementById("bkSuccessLine2");
+      const sC1 = document.getElementById("bkSuccessChipTime");
+      const sC2 = document.getElementById("bkSuccessChipHours");
+      const sC3 = document.getElementById("bkSuccessChipTotal");
+
       let busy = new Set();
       let chosenStart = null;
       let chosenEnd = null;
@@ -1143,6 +1247,44 @@
         dateEl.value = t < start ? start : t;
       }
 
+      function prettyDate(iso){
+        const d = new Date(iso + "T00:00:00");
+        return d.toLocaleDateString(undefined, { weekday:"long", month:"long", day:"numeric", year:"numeric" });
+      }
+
+      function showSuccess(){
+        const hours = chosenEnd - chosenStart;
+        const total = hours * PRICE_PER_HOUR;
+
+        const datePretty = prettyDate(dateEl.value);
+        const rangePretty = timeLabel(chosenStart) + " to " + timeLabel(chosenEnd);
+
+        sL1.textContent = datePretty;
+        sL2.textContent = rangePretty;
+
+        sC1.textContent = rangePretty;
+        sC2.textContent = hours + " hour" + (hours === 1 ? "" : "s");
+        sC3.textContent = money(total);
+
+        cardEl.style.display = "none";
+        successEl.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function hideSuccess(){
+        successEl.classList.remove("active");
+        cardEl.style.display = "";
+      }
+
+      document.getElementById("bkBookAnother").addEventListener("click", ()=>{
+        hideSuccess();
+        resetForAnother();
+      });
+
+      document.getElementById("bkBackHome").addEventListener("click", ()=>{
+        location.hash = "#home";
+      });
+
       function buildOptions(){
         startEl.innerHTML = "";
         endEl.innerHTML = "";
@@ -1154,17 +1296,11 @@
           startEl.appendChild(opt);
         }
 
-        for(let h = START_HOUR + 1; h <= END_HOUR; h++){
-          const opt = document.createElement("option");
-          opt.value = String(h);
-          opt.textContent = timeLabel(h);
-          endEl.appendChild(opt);
-        }
-
         chosenStart = START_HOUR;
         chosenEnd = START_HOUR + 2;
 
         startEl.value = String(chosenStart);
+        clampEndOptions();
         endEl.value = String(chosenEnd);
       }
 
@@ -1200,6 +1336,7 @@
                 chosenEnd = hh + 1;
               }
 
+              if(chosenEnd > END_HOUR) chosenEnd = END_HOUR;
               if(chosenEnd <= chosenStart) chosenEnd = null;
             }
 
@@ -1236,6 +1373,7 @@
 
         const s = chosenStart;
         const e = chosenEnd;
+
         const bars = barsEl.querySelectorAll(".bar");
 
         if(s === null){
@@ -1269,13 +1407,13 @@
         const total = hours * PRICE_PER_HOUR;
 
         rangePill.textContent = timeLabel(s) + " to " + timeLabel(e) + " (" + hours + "h)";
-        submitBtn.textContent = ok ? ("request booking ($" + total + ")") : "pick a different time";
+        submitBtn.textContent = ok ? ("request booking (" + money(total) + ")") : "pick a different time";
         submitBtn.disabled = !ok;
       }
 
       function clampEndOptions(){
         const s = Number(startEl.value);
-        const currentE = Number(endEl.value);
+        const currentE = Number(endEl.value) || (s + 1);
 
         endEl.innerHTML = "";
         for(let h = s + 1; h <= END_HOUR; h++){
@@ -1285,11 +1423,7 @@
           endEl.appendChild(opt);
         }
 
-        if(currentE > s){
-          endEl.value = String(Math.min(currentE, END_HOUR));
-        } else {
-          endEl.value = String(Math.min(s + 2, END_HOUR));
-        }
+        endEl.value = String(Math.max(s + 1, Math.min(currentE, END_HOUR)));
       }
 
       function syncSelectsFromRange(){
@@ -1302,6 +1436,19 @@
         }
       }
 
+      function resetForAnother(){
+        msgEl.textContent = "";
+        chosenStart = START_HOUR;
+        chosenEnd = START_HOUR + 2;
+
+        startEl.value = String(chosenStart);
+        clampEndOptions();
+        endEl.value = String(chosenEnd);
+
+        renderSelection();
+        loadBusy();
+      }
+
       async function loadBusy(){
         busy = new Set();
         msgEl.textContent = "";
@@ -1309,18 +1456,18 @@
         const date = dateEl.value;
         if(!date) return;
 
-        if(!API_URL){
+        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
           msgEl.textContent = "backend not set";
           renderSelection();
           return;
         }
 
         try{
-          const data = await jsonp(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
+          const data = await jsonp(API_URL, { mode: "busy", date });
           if(data && data.ok && Array.isArray(data.busy)){
             busy = new Set(data.busy);
           }
-        } catch(e){
+        } catch (e) {
           busy = new Set();
         }
 
@@ -1343,7 +1490,7 @@
         const err = validate();
         if(err){ msgEl.textContent = err; return; }
 
-        if(!API_URL){
+        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
           msgEl.textContent = "backend not set";
           return;
         }
@@ -1354,7 +1501,7 @@
         const total = hours * PRICE_PER_HOUR;
 
         submitBtn.disabled = true;
-        msgEl.textContent = "sending...";
+        msgEl.textContent = "booking...";
 
         const payload = {
           mode: "book",
@@ -1376,11 +1523,8 @@
           ].join("\n")
         };
 
-        const qs = new URLSearchParams();
-        Object.entries(payload).forEach(([k,v])=> qs.append(k, String(v)));
-
         try{
-          const data = await jsonp(API_URL + "?" + qs.toString());
+          const data = await jsonp(API_URL, payload);
 
           if(!data || !data.ok){
             msgEl.textContent = (data && data.error) ? data.error : "error, try again";
@@ -1388,11 +1532,12 @@
             return;
           }
 
-          msgEl.textContent = "request sent. I will text you to confirm.";
+          msgEl.textContent = "";
+          showSuccess();
           submitBtn.disabled = false;
 
           await loadBusy();
-        } catch(e){
+        } catch (e) {
           msgEl.textContent = "error, try again";
           submitBtn.disabled = false;
         }
@@ -1405,9 +1550,13 @@
       renderSelection();
       loadBusy();
 
-      dateEl.addEventListener("change", loadBusy);
+      dateEl.addEventListener("change", ()=>{
+        hideSuccess();
+        loadBusy();
+      });
 
       startEl.addEventListener("change", ()=>{
+        hideSuccess();
         clampEndOptions();
         chosenStart = Number(startEl.value);
         chosenEnd = Number(endEl.value);
@@ -1415,14 +1564,20 @@
       });
 
       endEl.addEventListener("change", ()=>{
+        hideSuccess();
         chosenStart = Number(startEl.value);
         chosenEnd = Number(endEl.value);
         renderSelection();
       });
 
       submitBtn.addEventListener("click", submit);
+
+      window.addEventListener("hashchange", ()=>{
+        if(location.hash === "#book"){
+          hideSuccess();
+        }
+      });
     })();
   </script>
 </body>
 </html>
-
