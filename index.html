@@ -919,26 +919,88 @@
       }
 
       function buildStartOptions(){
+        const prev = startEl.value;
         startEl.innerHTML = "";
+
+        const availGroup = document.createElement("optgroup");
+        availGroup.label = "Available";
+        const unavailGroup = document.createElement("optgroup");
+        unavailGroup.label = "Unavailable";
+
         for(let h = START_HOUR; h < END_HOUR; h++){
+          const label = timeLabel(h);
+          const isBusy = busy.has(label);
+
           const opt = document.createElement("option");
           opt.value = String(h);
-          opt.textContent = timeLabel(h);
-          startEl.appendChild(opt);
+          opt.textContent = label + (isBusy ? " (Unavailable)" : " (Available)");
+          if(isBusy) opt.disabled = true;
+
+          (isBusy ? unavailGroup : availGroup).appendChild(opt);
         }
-        startEl.value = String(START_HOUR);
+
+        if(availGroup.children.length) startEl.appendChild(availGroup);
+        if(unavailGroup.children.length) startEl.appendChild(unavailGroup);
+
+        // Keep previous selection if it's still available; otherwise pick first available.
+        const prevHour = Number(prev);
+        const canKeepPrev = Number.isFinite(prevHour) && !busy.has(timeLabel(prevHour));
+        if(canKeepPrev && startEl.querySelector('option[value="' + prev + '"]:not([disabled])')){
+          startEl.value = prev;
+          return;
+        }
+
+        const firstAvail = startEl.querySelector('optgroup[label="Available"] option:not([disabled])') ||
+                           startEl.querySelector('option:not([disabled])');
+        if(firstAvail){
+          startEl.value = firstAvail.value;
+        } else {
+          startEl.value = String(START_HOUR);
+        }
       }
 
       function rebuildEndOptions(){
         const s = Number(startEl.value);
+        const prev = endEl.value;
         endEl.innerHTML = "";
+
+        const availGroup = document.createElement("optgroup");
+        availGroup.label = "Available";
+        const unavailGroup = document.createElement("optgroup");
+        unavailGroup.label = "Unavailable";
+
         for(let h = s + 1; h <= END_HOUR; h++){
+          const ok = isRangeFree(s, h);
+
           const opt = document.createElement("option");
           opt.value = String(h);
-          opt.textContent = timeLabel(h);
-          endEl.appendChild(opt);
+          opt.textContent = timeLabel(h) + (ok ? " (Available)" : " (Unavailable)");
+          if(!ok) opt.disabled = true;
+
+          (ok ? availGroup : unavailGroup).appendChild(opt);
         }
-        endEl.value = String(Math.min(s + 2, END_HOUR));
+
+        if(availGroup.children.length) endEl.appendChild(availGroup);
+        if(unavailGroup.children.length) endEl.appendChild(unavailGroup);
+
+        // Keep previous selection if it's still available; otherwise pick a sensible default.
+        const prevEnd = prev;
+        if(prevEnd && endEl.querySelector('option[value="' + prevEnd + '"]:not([disabled])')){
+          endEl.value = prevEnd;
+          return;
+        }
+
+        const preferred = String(Math.min(s + 2, END_HOUR));
+        if(endEl.querySelector('option[value="' + preferred + '"]:not([disabled])')){
+          endEl.value = preferred;
+          return;
+        }
+
+        const firstAvail = endEl.querySelector('optgroup[label="Available"] option:not([disabled])') ||
+                           endEl.querySelector('option:not([disabled])');
+        if(firstAvail){
+          endEl.value = firstAvail.value;
+        }
       }
 
       function isRangeFree(s, e){
@@ -1055,6 +1117,8 @@
 
           showSuccess(data, sHour, eHour);
           await loadBusy();
+          buildStartOptions();
+          rebuildEndOptions();
         } catch(e){
           msgEl.textContent = "error, try again";
           submitBtn.disabled = false;
@@ -1065,6 +1129,8 @@
       anotherBtn.addEventListener("click", async ()=>{
         resetFormView();
         await loadBusy();
+        buildStartOptions();
+        rebuildEndOptions();
       });
 
       setMinDate();
@@ -1073,6 +1139,8 @@
 
       dateEl.addEventListener("change", async ()=>{
         await loadBusy();
+        buildStartOptions();
+        rebuildEndOptions();
       });
 
       startEl.addEventListener("change", ()=>{
@@ -1081,7 +1149,10 @@
 
       submitBtn.addEventListener("click", submit);
 
-      loadBusy();
+      loadBusy().then(()=>{
+        buildStartOptions();
+        rebuildEndOptions();
+      });
     })();
   </script>
 </body>
