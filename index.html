@@ -23,6 +23,10 @@
   <meta name="twitter:description" content="Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here." />
   <meta name="twitter:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='16' fill='%2307080b'/%3E%3Cpath d='M18 40c9 8 19 8 28 0' stroke='%2350beff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='26' r='3' fill='%23ff46be'/%3E%3Ccircle cx='38' cy='26' r='3' fill='%2395ff8c'/%3E%3C/svg%3E" />
 
   <style>
@@ -49,13 +53,19 @@
       --shadowB: 0 18px 46px rgba(0,0,0,0.78);
 
       --focusRing: rgba(80, 190, 255, 0.34);
+
+      --neonC: rgba(80,190,255,0.45);
+      --neonM: rgba(255,70,190,0.34);
+      --neonG: rgba(95,255,140,0.30);
+      --glass: rgba(12,14,20,0.46);
+      --glass2: rgba(12,14,20,0.70);
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
     html, body{ height:100%; }
 
     body{
-      font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: "Space Grotesk", ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--fg);
       background:
         radial-gradient(1100px 900px at 18% 12%, var(--cyan), transparent 55%),
@@ -66,6 +76,32 @@
       display:flex;
       justify-content:center;
       align-items:flex-start;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-4;
+      pointer-events:none;
+      opacity: 0.16;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.55), transparent 60%),
+        radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.35), transparent 60%),
+        radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.45), transparent 60%),
+        radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.30), transparent 60%),
+        radial-gradient(2px 2px at 25% 55%, rgba(255,255,255,0.25), transparent 55%),
+        radial-gradient(2px 2px at 55% 35%, rgba(255,255,255,0.22), transparent 55%),
+        radial-gradient(2px 2px at 15% 75%, rgba(255,255,255,0.18), transparent 55%),
+        radial-gradient(2px 2px at 75% 85%, rgba(255,255,255,0.16), transparent 55%);
+      filter: blur(0.2px);
+      mix-blend-mode: screen;
+      animation: starDrift 18s linear infinite;
+    }
+
+    @keyframes starDrift{
+      0%{ transform: translate3d(0,0,0); }
+      100%{ transform: translate3d(-28px, 18px, 0); }
     }
 
     .colorFX{
@@ -142,6 +178,10 @@
       padding: 34px 18px 56px;
     }
 
+    main.wrap{
+      position:relative;
+    }
+
     header{
       text-align:center;
       margin-bottom: 16px;
@@ -151,6 +191,43 @@
       display:flex;
       justify-content:center;
       margin-bottom: 14px;
+      position:relative;
+    }
+
+    .pfpRing{
+      position:relative;
+      padding: 4px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg,
+        rgba(80,190,255,0.75),
+        rgba(255,70,190,0.72),
+        rgba(95,255,140,0.62),
+        rgba(255,255,170,0.55),
+        rgba(80,190,255,0.75)
+      );
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 0 22px var(--neonC),
+        0 14px 44px rgba(0,0,0,0.75);
+      animation: ringSpin 10s linear infinite;
+    }
+
+    @keyframes ringSpin{
+      from{ filter: hue-rotate(0deg); }
+      to{ filter: hue-rotate(360deg); }
+    }
+
+    .pfpRing::after{
+      content:"";
+      position:absolute;
+      inset:-8px;
+      border-radius: 999px;
+      background:
+        radial-gradient(closest-side, rgba(80,190,255,0.18), transparent 68%),
+        radial-gradient(closest-side, rgba(255,70,190,0.14), transparent 70%);
+      filter: blur(10px);
+      z-index:-1;
+      opacity: 0.85;
     }
 
     .pfp img{
@@ -158,11 +235,12 @@
       height: 120px;
       border-radius: 999px;
       object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.18);
       box-shadow:
         0 0 0 3px rgba(255,255,255,0.06),
         0 18px 46px rgba(0,0,0,0.75);
       background: rgba(0,0,0,0.25);
+      display:block;
     }
 
     .topRow{
@@ -202,9 +280,11 @@
       margin: 8px 0 10px;
       letter-spacing: 0.04em;
       font-weight: 950;
-      text-shadow:
-        0 2px 0 rgba(0,0,0,0.55),
-        0 0 22px rgba(80,190,255,0.22);
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(180,235,255,0.90), rgba(255,195,235,0.88));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 22px rgba(80,190,255,0.10);
     }
 
     .subHead{
@@ -232,11 +312,42 @@
       border: 1px solid rgba(255,255,255,0.18);
       background:
         radial-gradient(160px 120px at 18% 0%, rgba(255,255,255,0.18), transparent 62%),
-        linear-gradient(180deg, var(--cardA), var(--cardB));
+        linear-gradient(180deg, var(--glass), var(--glass2));
       box-shadow: var(--shadowA), 0 14px 34px rgba(0,0,0,0.68);
       position:relative;
       overflow:hidden;
       transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+      .link, .card, .modal{
+        -webkit-backdrop-filter: blur(14px) saturate(140%);
+        backdrop-filter: blur(14px) saturate(140%);
+      }
+    }
+
+    .link::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: conic-gradient(from 180deg, rgba(80,190,255,0.00), rgba(80,190,255,0.35), rgba(255,70,190,0.26), rgba(95,255,140,0.22), rgba(80,190,255,0.35), rgba(80,190,255,0.00));
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 180ms ease;
+      pointer-events:none;
+    }
+
+    .link::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.14) 45%, transparent 70%);
+      transform: translateX(-120%);
+      opacity: 0.0;
+      transition: transform 420ms ease, opacity 220ms ease;
+      pointer-events:none;
+      mix-blend-mode: overlay;
     }
 
     .link:hover{
@@ -244,6 +355,9 @@
       border-color: rgba(255,255,255,0.34);
       filter: saturate(120%);
     }
+
+    .link:hover::before{ opacity: 0.9; }
+    .link:hover::after{ transform: translateX(120%); opacity: 0.45; }
 
     .link img{
       width: 28px;
@@ -288,7 +402,7 @@
       border: 1px solid rgba(255,255,255,0.18);
       background:
         radial-gradient(260px 190px at 12% 0%, rgba(255,255,255,0.12), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.66), rgba(7,8,11,0.92));
+        linear-gradient(180deg, var(--glass), var(--glass2));
       box-shadow: var(--shadowA), var(--shadowB);
     }
 
@@ -378,7 +492,7 @@
       border: 1px solid rgba(255,255,255,0.20);
       background:
         radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.18), transparent 62%),
-        linear-gradient(135deg, rgba(255,70,190,0.26), rgba(80,190,255,0.22), rgba(95,255,140,0.18));
+        linear-gradient(135deg, rgba(255,70,190,0.30), rgba(80,190,255,0.26), rgba(95,255,140,0.22));
       color: var(--fg);
       padding: 12px 14px;
       border-radius: 16px;
@@ -443,6 +557,126 @@
       font-size: 13px;
       opacity: 0.92;
       white-space: pre-wrap;
+    }
+
+    .timePick{
+      margin-top: 12px;
+    }
+
+    .timeLegend{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      opacity: 0.86;
+      letter-spacing: 0.02em;
+      margin-top: 6px;
+    }
+
+    .timeLegendItem{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+
+    .timeSwatch{
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.24);
+    }
+
+    .timeSwatch--avail{ background: rgba(95,255,140,0.26); border-color: rgba(95,255,140,0.35); }
+    .timeSwatch--busy{ background: rgba(255, 70, 70, 0.26); border-color: rgba(255, 70, 70, 0.35); }
+    .timeSwatch--sel{ background: rgba(80,190,255,0.26); border-color: rgba(80,190,255,0.40); }
+
+    .timeGrid{
+      margin-top: 10px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+      gap: 10px;
+    }
+
+    .timeTile{
+      width:100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.26);
+      color: var(--fg);
+      padding: 10px 10px;
+      text-align:left;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: transform 120ms ease, border-color 120ms ease, filter 120ms ease;
+      box-shadow: var(--shadowA), 0 10px 24px rgba(0,0,0,0.55);
+    }
+
+    .timeTile:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.32); filter:saturate(120%); }
+    .timeTile:active{ transform: translateY(1px) scale(0.99); }
+    .timeTile:focus-visible{
+      outline:none;
+      box-shadow: var(--shadowA), 0 10px 24px rgba(0,0,0,0.55), 0 0 0 3px var(--focusRing);
+    }
+
+    .timeTile--avail{
+      border-color: rgba(95,255,140,0.22);
+      background:
+        radial-gradient(140px 90px at 18% 10%, rgba(95,255,140,0.16), transparent 62%),
+        rgba(0,0,0,0.26);
+    }
+
+    .timeTile--busy{
+      border-color: rgba(255, 70, 70, 0.22);
+      background:
+        radial-gradient(140px 90px at 18% 10%, rgba(255,70,70,0.16), transparent 62%),
+        rgba(0,0,0,0.26);
+      opacity: 0.55;
+      cursor:not-allowed;
+      filter: grayscale(10%);
+    }
+
+    .timeTile--sel{
+      border-color: rgba(80,190,255,0.55);
+      background:
+        radial-gradient(140px 90px at 18% 10%, rgba(80,190,255,0.20), transparent 62%),
+        rgba(0,0,0,0.26);
+    }
+
+    .timeTile .tMain{
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      font-size: 13px;
+      line-height: 1.15;
+    }
+
+    .timeTile .tSub{
+      margin-top: 3px;
+      font-size: 11px;
+      opacity: 0.72;
+      line-height: 1.15;
+    }
+
+    .timeSummary{
+      margin-top: 10px;
+      font-size: 12px;
+      opacity: 0.86;
+      letter-spacing: 0.02em;
+    }
+
+    .srOnly{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
     }
 
     .modalBackdrop{
@@ -549,7 +783,8 @@
     }
 
     @media (prefers-reduced-motion: reduce){
-      .colorFX, .bgFX{ animation: none !important; }
+      body::before{ animation: none !important; }
+      .colorFX, .bgFX, .pfpRing{ animation: none !important; }
       *{ scroll-behavior: auto !important; transition: none !important; }
     }
 
@@ -569,7 +804,9 @@
   <main class="wrap">
     <header>
       <div class="pfp">
-        <img src="apple music.jpg" alt="b2nny profile" width="120" height="120" decoding="async" fetchpriority="high">
+        <div class="pfpRing">
+          <img src="apple music.jpg" alt="b2nny profile" width="120" height="120" decoding="async" fetchpriority="high">
+        </div>
       </div>
 
       <div class="topRow">
@@ -679,28 +916,34 @@
 
           <div style="height:12px;"></div>
 
-          <div class="grid2">
-            <div>
-              <label for="bkDate">date</label>
-              <input id="bkDate" type="date" required />
+          <div>
+            <label for="bkDate">date</label>
+            <input id="bkDate" type="date" required />
+          </div>
+
+          <div class="timePick">
+            <div class="timeLegend" aria-hidden="true">
+              <span class="timeLegendItem"><span class="timeSwatch timeSwatch--avail"></span>available</span>
+              <span class="timeLegendItem"><span class="timeSwatch timeSwatch--busy"></span>unavailable</span>
+              <span class="timeLegendItem"><span class="timeSwatch timeSwatch--sel"></span>selected</span>
             </div>
-            <div>
+
+            <div class="timeGrid" id="bkTiles"></div>
+            <div class="timeSummary" id="bkTimeSummary"></div>
+
+            <div class="srOnly">
               <label for="bkStart">start time</label>
               <select id="bkStart" required></select>
+              <label for="bkEnd">end time</label>
+              <select id="bkEnd" required></select>
             </div>
           </div>
 
           <div style="height:12px;"></div>
 
-          <div class="grid2">
-            <div>
-              <label for="bkEnd">end time</label>
-              <select id="bkEnd" required></select>
-            </div>
-            <div>
-              <label for="bkNotes">about</label>
-              <textarea id="bkNotes" rows="3" placeholder="what you want to work on, references, any details"></textarea>
-            </div>
+          <div>
+            <label for="bkNotes">about</label>
+            <textarea id="bkNotes" rows="3" placeholder="what you want to work on, references, any details"></textarea>
           </div>
 
           <div class="cta">
@@ -792,8 +1035,8 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec";
     const PRICE_PER_HOUR = 50;
-    const START_HOUR = 12;
-    const END_HOUR = 22;
+    const START_HOUR = 11;
+    const END_HOUR = 23;
 
     function timeLabel(h){
       const ap = h >= 12 ? "PM" : "AM";
@@ -1053,6 +1296,8 @@
       const dateEl = document.getElementById("bkDate");
       const startEl = document.getElementById("bkStart");
       const endEl = document.getElementById("bkEnd");
+      const tilesEl = document.getElementById("bkTiles");
+      const timeSummaryEl = document.getElementById("bkTimeSummary");
 
       const firstEl = document.getElementById("bkFirst");
       const lastEl = document.getElementById("bkLast");
@@ -1066,6 +1311,8 @@
       const tzEl = document.getElementById("bkTz");
 
       let busy = new Set();
+      let selStart = null; // number (hour, 24h)
+      let selEnd = null;   // number (hour, 24h), end hour, exclusive
 
       function setTimezoneLabel(){
         if(!tzEl) return;
@@ -1074,6 +1321,160 @@
           tzEl.textContent = tz || "your timezone";
         } catch(e){
           tzEl.textContent = "your timezone";
+        }
+      }
+
+      function clampSelection(){
+        if(selStart == null || selEnd == null) return;
+        if(selStart < START_HOUR) selStart = START_HOUR;
+        if(selEnd > END_HOUR) selEnd = END_HOUR;
+        if(selEnd <= selStart) selEnd = Math.min(selStart + 1, END_HOUR);
+      }
+
+      function selectionText(){
+        if(selStart == null || selEnd == null) return "tap a green tile to pick a time";
+        const hours = selEnd - selStart;
+        const startText = timeLabel(selStart);
+        const endText = timeLabel(selEnd);
+        return "selected: " + startText + " – " + endText + " (" + hours + " hour" + (hours === 1 ? "" : "s") + ")";
+      }
+
+      function updateTimeSummary(){
+        if(!timeSummaryEl) return;
+        timeSummaryEl.textContent = selectionText();
+      }
+
+      function setSelection(startHour, endHour){
+        selStart = (startHour == null) ? null : Number(startHour);
+        selEnd = (endHour == null) ? null : Number(endHour);
+        if(selStart != null && selEnd == null){
+          selEnd = Math.min(selStart + 1, END_HOUR);
+        }
+        if(selStart != null && selEnd != null){
+          clampSelection();
+          // Hard rule: don't allow selection across busy slots.
+          if(!isRangeFree(selStart, selEnd)){
+            // fallback to 1-hour slot if possible
+            const fallbackEnd = Math.min(selStart + 1, END_HOUR);
+            if(isRangeFree(selStart, fallbackEnd)){
+              selEnd = fallbackEnd;
+            } else {
+              selStart = null;
+              selEnd = null;
+            }
+          }
+        }
+        msgEl.textContent = "";
+        syncSelectsFromSelection();
+        renderTiles();
+        updateTimeSummary();
+      }
+
+      function syncSelectionFromSelects(){
+        const s = Number(startEl && startEl.value);
+        const e = Number(endEl && endEl.value);
+        if(Number.isFinite(s) && Number.isFinite(e) && e > s){
+          selStart = s;
+          selEnd = e;
+          clampSelection();
+        } else {
+          selStart = null;
+          selEnd = null;
+        }
+        renderTiles();
+        updateTimeSummary();
+      }
+
+      function syncSelectsFromSelection(){
+        if(!startEl || !endEl) return;
+        if(selStart == null || selEnd == null) return;
+
+        // Ensure start options exist and select a valid start.
+        buildStartOptions();
+        if(startEl.querySelector('option[value="' + String(selStart) + '"]:not([disabled])')){
+          startEl.value = String(selStart);
+        }
+
+        // Ensure end options exist for this start.
+        rebuildEndOptions();
+        if(endEl.querySelector('option[value="' + String(selEnd) + '"]:not([disabled])')){
+          endEl.value = String(selEnd);
+        } else {
+          // pick nearest available end >= selStart+1
+          const firstAvail = endEl.querySelector('optgroup[label="Available"] option:not([disabled])') ||
+                             endEl.querySelector('option:not([disabled])');
+          if(firstAvail){
+            endEl.value = firstAvail.value;
+            selEnd = Number(firstAvail.value);
+          }
+        }
+      }
+
+      function renderTiles(){
+        if(!tilesEl) return;
+        tilesEl.innerHTML = "";
+
+        for(let h = START_HOUR; h < END_HOUR; h++){
+          const label = timeLabel(h);
+          const isBusy = busy.has(label);
+          const inSel = (selStart != null && selEnd != null && h >= selStart && h < selEnd);
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "timeTile " + (isBusy ? "timeTile--busy" : "timeTile--avail") + (inSel ? " timeTile--sel" : "");
+          btn.disabled = isBusy;
+          btn.setAttribute("aria-pressed", inSel ? "true" : "false");
+          btn.dataset.hour = String(h);
+
+          const main = document.createElement("div");
+          main.className = "tMain";
+          main.textContent = label;
+
+          const sub = document.createElement("div");
+          sub.className = "tSub";
+          sub.textContent = isBusy ? "unavailable" : "available";
+
+          btn.appendChild(main);
+          btn.appendChild(sub);
+
+          btn.addEventListener("click", ()=>{
+            if(isBusy) return;
+
+            // First pick, or reset after a finished range.
+            if(selStart == null || selEnd == null){
+              setSelection(h, Math.min(h + 1, END_HOUR));
+              return;
+            }
+
+            // If clicking inside the current range, shrink to 1 hour at that tile.
+            if(h >= selStart && h < selEnd){
+              setSelection(h, Math.min(h + 1, END_HOUR));
+              return;
+            }
+
+            // Extend left
+            if(h < selStart){
+              if(isRangeFree(h, selEnd)){
+                setSelection(h, selEnd);
+              } else {
+                msgEl.textContent = "that range includes unavailable time";
+              }
+              return;
+            }
+
+            // Extend right
+            if(h >= selEnd){
+              const newEnd = Math.min(h + 1, END_HOUR);
+              if(isRangeFree(selStart, newEnd)){
+                setSelection(selStart, newEnd);
+              } else {
+                msgEl.textContent = "that range includes unavailable time";
+              }
+              return;
+            }
+          });
+
+          tilesEl.appendChild(btn);
         }
       }
 
@@ -1208,7 +1609,7 @@
 
         const s = Number(startEl.value);
         const e = Number(endEl.value);
-        if(!Number.isFinite(s) || !Number.isFinite(e) || e <= s) return "pick start and end time";
+        if(!Number.isFinite(s) || !Number.isFinite(e) || e <= s) return "select a time range";
         if(!isRangeFree(s, e)) return "that time is already booked";
 
         return "";
@@ -1302,15 +1703,18 @@
       setMinDate();
       buildStartOptions();
       rebuildEndOptions();
+      syncSelectionFromSelects();
 
       dateEl.addEventListener("change", async ()=>{
         await loadBusy();
         buildStartOptions();
         rebuildEndOptions();
+        syncSelectionFromSelects();
       });
 
       startEl.addEventListener("change", ()=>{
         rebuildEndOptions();
+        syncSelectionFromSelects();
       });
 
       if(formEl){
@@ -1325,6 +1729,7 @@
       loadBusy().then(()=>{
         buildStartOptions();
         rebuildEndOptions();
+        syncSelectionFromSelects();
       });
 
       setTimezoneLabel();
