@@ -65,7 +65,17 @@
     html, body{ height:100%; }
 
     body{
-      font-family: "Space Grotesk", ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial;
+      font-family:
+        "Space Grotesk",
+        system-ui,
+        "Segoe UI",
+        Roboto,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
       color: var(--fg);
       background:
         radial-gradient(1100px 900px at 18% 12%, var(--cyan), transparent 55%),
@@ -76,6 +86,12 @@
       display:flex;
       justify-content:center;
       align-items:flex-start;
+    }
+
+    html{
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
     body::before{
