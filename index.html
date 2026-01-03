@@ -4,8 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>b2nny | links</title>
-  <meta name="description" content="Official links for b2nny | Spotify, Apple Music, SoundCloud, YouTube, Instagram, X." />
+  <meta name="description" content="Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here." />
   <meta name="theme-color" content="#07080b" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://b2nny.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="b2nny" />
+  <meta property="og:url" content="https://b2nny.com/" />
+  <meta property="og:title" content="b2nny | links" />
+  <meta property="og:description" content="Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here." />
+  <meta property="og:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
+  <meta property="og:image:alt" content="b2nny — official links" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="b2nny | links" />
+  <meta name="twitter:description" content="Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here." />
+  <meta name="twitter:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='16' fill='%2307080b'/%3E%3Cpath d='M18 40c9 8 19 8 28 0' stroke='%2350beff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='26' r='3' fill='%23ff46be'/%3E%3Ccircle cx='38' cy='26' r='3' fill='%2395ff8c'/%3E%3C/svg%3E" />
 
@@ -157,29 +173,9 @@
     }
 
     .topBtn{
-      display:flex;
-      align-items:center;
       justify-content:space-between;
       gap: 14px;
-      padding: 12px 18px;
-      min-width: min(100%, 480px);
-      border-radius: 999px;
-      text-decoration:none;
-      color: var(--fg);
-      border: 1px solid rgba(255,255,255,0.22);
-      background:
-        radial-gradient(140px 100px at 22% 10%, rgba(255,255,255,0.20), transparent 65%),
-        linear-gradient(135deg, rgba(255,70,190,0.22), rgba(80,190,255,0.20), rgba(95,255,140,0.18));
-      box-shadow: var(--shadowA), var(--shadowB);
-      position:relative;
-      overflow:hidden;
-      transition: transform 140ms ease, filter 140ms ease, border-color 140ms ease;
-    }
-
-    .topBtn:hover{
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.40);
-      filter: saturate(130%) contrast(104%);
+      width: min(100%, 480px);
     }
 
     .topLabel{
@@ -279,29 +275,11 @@
       display:flex;
       justify-content:flex-start;
       align-items:center;
-      margin: 10px 0 12px;
-    }
-
-    .backBtn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 12px;
-      border-radius: 999px;
-      text-decoration:none;
-      color: var(--fg);
-      border: 1px solid rgba(255,255,255,0.18);
-      background:
-        radial-gradient(120px 90px at 20% 0%, rgba(255,255,255,0.16), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.60), rgba(7,8,11,0.88));
-      box-shadow: var(--shadowA), 0 12px 28px rgba(0,0,0,0.70);
-      transition: transform 130ms ease, border-color 130ms ease, filter 130ms ease;
-    }
-
-    .backBtn:hover{
-      border-color: rgba(255,255,255,0.34);
-      transform: translateY(-1px);
-      filter: saturate(120%);
+      position: sticky;
+      top: 14px;
+      z-index: 6;
+      margin: 0 0 12px;
+      padding: 6px 0;
     }
 
     .card{
@@ -393,6 +371,10 @@
     }
 
     .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
       border: 1px solid rgba(255,255,255,0.20);
       background:
         radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.18), transparent 62%),
@@ -406,12 +388,29 @@
       letter-spacing: 0.03em;
       box-shadow: var(--shadowA), 0 16px 36px rgba(0,0,0,0.72);
       transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
+      text-decoration:none;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .btn:hover{
-      transform: translateY(-1px);
+      transform: translateY(-2px);
       border-color: rgba(255,255,255,0.38);
       filter: saturate(130%);
+    }
+
+    .btn:active{
+      transform: translateY(1px) scale(0.99);
+      filter: saturate(120%);
+    }
+
+    .btn:focus-visible{
+      outline:none;
+      box-shadow:
+        var(--shadowA),
+        0 16px 36px rgba(0,0,0,0.72),
+        0 0 0 3px var(--focusRing);
     }
 
     .btn:disabled{
@@ -419,6 +418,25 @@
       cursor:not-allowed;
       filter: grayscale(25%);
       transform:none;
+    }
+
+    .btn--pill{
+      border-radius: 999px;
+      padding: 12px 18px;
+    }
+
+    .btn--ghost{
+      border-color: rgba(255,255,255,0.18);
+      background:
+        radial-gradient(160px 110px at 18% 10%, rgba(255,255,255,0.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.58), rgba(7,8,11,0.90));
+      box-shadow: var(--shadowA), 0 12px 28px rgba(0,0,0,0.70);
+      filter: none;
+    }
+
+    .btn--ghost:hover{
+      border-color: rgba(255,255,255,0.32);
+      filter: saturate(118%);
     }
 
     .msg{
@@ -481,11 +499,21 @@
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
+      transition: transform 120ms ease, background 130ms ease, border-color 130ms ease;
     }
 
     .modalClose:hover{
       background: rgba(255,255,255,0.10);
       border-color: rgba(255,255,255,0.22);
+    }
+
+    .modalClose:active{
+      transform: translateY(1px);
+    }
+
+    .modalClose:focus-visible{
+      outline:none;
+      box-shadow: 0 0 0 3px var(--focusRing);
     }
 
     .modalLinks{
@@ -495,26 +523,10 @@
     }
 
     .modalLink{
-      display:flex;
-      align-items:center;
       justify-content:space-between;
       gap: 10px;
-      padding: 10px 12px;
+      width: 100%;
       border-radius: 16px;
-      text-decoration:none;
-      color: var(--fg);
-      border: 1px solid rgba(255,255,255,0.16);
-      background:
-        radial-gradient(160px 110px at 18% 0%, rgba(255,255,255,0.14), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.56), rgba(7,8,11,0.86));
-      box-shadow: 0 12px 26px rgba(0,0,0,0.66);
-      transition: transform 130ms ease, border-color 130ms ease, filter 130ms ease;
-    }
-
-    .modalLink:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.34);
-      filter: saturate(125%);
     }
 
     .modalLink strong{ font-weight: 950; }
@@ -532,10 +544,19 @@
       white-space:nowrap;
     }
 
+    body.modalOpen{
+      overflow: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .colorFX, .bgFX{ animation: none !important; }
+      *{ scroll-behavior: auto !important; transition: none !important; }
+    }
+
     @media (max-width: 480px){
       .pfp img{ width: 102px; height: 102px; }
       h1{ font-size: 26px; }
-      .topBtn{ width:100%; min-width:0; }
+      .topBtn{ width:100%; }
     }
   </style>
 </head>
@@ -548,16 +569,16 @@
   <main class="wrap">
     <header>
       <div class="pfp">
-        <img src="apple music.jpg" alt="b2nny profile">
+        <img src="apple music.jpg" alt="b2nny profile" width="120" height="120" decoding="async" fetchpriority="high">
       </div>
 
       <div class="topRow">
-        <a href="#pop" class="topBtn">
+        <a href="pop.html" class="btn btn--pill topBtn">
           <span class="topLabel">Pop Dump</span>
           <span class="topSub">open</span>
         </a>
 
-        <a href="#rap" class="topBtn">
+        <a href="rap.html" class="btn btn--pill topBtn">
           <span class="topLabel">Rap Dump</span>
           <span class="topSub">open</span>
         </a>
@@ -570,37 +591,37 @@
     <section class="section active" id="sectionHome">
       <section class="links">
         <a class="link" href="#book">
-          <img src="calendar.png" alt="Book">
+          <img src="calendar.png" alt="Book" width="28" height="28" loading="lazy" decoding="async">
           <span>book a session</span>
         </a>
 
         <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
-          <img src="Spotify.png" alt="Spotify">
+          <img src="Spotify.png" alt="Spotify" width="28" height="28" loading="lazy" decoding="async">
           <span>b2nny | spotify</span>
         </a>
 
         <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
-          <img src="Apple.png" alt="Apple Music">
+          <img src="Apple.png" alt="Apple Music" width="28" height="28" loading="lazy" decoding="async">
           <span>b2nny | apple music</span>
         </a>
 
         <a class="link" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
-          <img src="Soundcloud.png" alt="SoundCloud">
+          <img src="Soundcloud.png" alt="SoundCloud" width="28" height="28" loading="lazy" decoding="async">
           <span>b2nny | soundcloud</span>
         </a>
 
         <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
-          <img src="Youtube.jpg" alt="YouTube">
+          <img src="Youtube.jpg" alt="YouTube" width="28" height="28" loading="lazy" decoding="async">
           <span>b2nny | youtube</span>
         </a>
 
         <a class="link" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
-          <img src="Instagram.png" alt="Instagram">
+          <img src="Instagram.png" alt="Instagram" width="28" height="28" loading="lazy" decoding="async">
           <span>b2nny | instagram</span>
         </a>
 
         <a class="link" href="https://x.com/b2nnny" target="_blank" rel="noopener">
-          <img src="Twitter.jpg" alt="X">
+          <img src="Twitter.jpg" alt="X" width="28" height="28" loading="lazy" decoding="async">
           <span>b2nny | x</span>
         </a>
       </section>
@@ -612,7 +633,7 @@
 
     <section class="section" id="sectionBook">
       <div class="backRow">
-        <a class="backBtn" href="#home">back</a>
+        <a class="btn btn--pill btn--ghost backBtn" href="#home">back</a>
       </div>
 
       <div class="card" id="bookFormCard">
@@ -625,70 +646,73 @@
           <span>per hour</span>
         </div>
 
-        <div style="height:14px;"></div>
+        <form id="bkForm" novalidate>
+          <div style="height:14px;"></div>
 
-        <div class="grid2">
-          <div>
-            <label for="bkFirst">first name</label>
-            <input id="bkFirst" type="text" autocomplete="given-name" />
+          <div class="grid2">
+            <div>
+              <label for="bkFirst">first name</label>
+              <input id="bkFirst" type="text" autocomplete="given-name" required />
+            </div>
+            <div>
+              <label for="bkLast">last name</label>
+              <input id="bkLast" type="text" autocomplete="family-name" required />
+            </div>
           </div>
-          <div>
-            <label for="bkLast">last name</label>
-            <input id="bkLast" type="text" autocomplete="family-name" />
-          </div>
-        </div>
 
-        <div style="height:12px;"></div>
+          <div style="height:12px;"></div>
 
-        <div class="grid3">
-          <div>
-            <label for="bkEmail">email</label>
-            <input id="bkEmail" type="email" autocomplete="email" />
+          <div class="grid3">
+            <div>
+              <label for="bkEmail">email</label>
+              <input id="bkEmail" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="bkPhone">phone</label>
+              <input id="bkPhone" type="tel" autocomplete="tel" inputmode="tel" required />
+            </div>
+            <div>
+              <label for="bkIg">instagram</label>
+              <input id="bkIg" type="text" placeholder="@handle" autocomplete="username" required />
+            </div>
           </div>
-          <div>
-            <label for="bkPhone">phone</label>
-            <input id="bkPhone" type="tel" autocomplete="tel" />
-          </div>
-          <div>
-            <label for="bkIg">instagram</label>
-            <input id="bkIg" type="text" placeholder="@handle" />
-          </div>
-        </div>
 
-        <div style="height:12px;"></div>
+          <div style="height:12px;"></div>
 
-        <div class="grid2">
-          <div>
-            <label for="bkDate">date</label>
-            <input id="bkDate" type="date" />
+          <div class="grid2">
+            <div>
+              <label for="bkDate">date</label>
+              <input id="bkDate" type="date" required />
+            </div>
+            <div>
+              <label for="bkStart">start time</label>
+              <select id="bkStart" required></select>
+            </div>
           </div>
-          <div>
-            <label for="bkStart">start time</label>
-            <select id="bkStart"></select>
+
+          <div style="height:12px;"></div>
+
+          <div class="grid2">
+            <div>
+              <label for="bkEnd">end time</label>
+              <select id="bkEnd" required></select>
+            </div>
+            <div>
+              <label for="bkNotes">about</label>
+              <textarea id="bkNotes" rows="3" placeholder="what you want to work on, references, any details"></textarea>
+            </div>
           </div>
-        </div>
 
-        <div style="height:12px;"></div>
-
-        <div class="grid2">
-          <div>
-            <label for="bkEnd">end time</label>
-            <select id="bkEnd"></select>
+          <div class="cta">
+            <button class="btn" id="bkSubmit" type="submit">request booking</button>
+            <div class="msg" id="bkMsg" role="status" aria-live="polite"></div>
           </div>
-          <div>
-            <label for="bkNotes">about</label>
-            <textarea id="bkNotes" rows="3" placeholder="what you want to work on, references, any details"></textarea>
+
+          <div class="tiny" style="margin-top:10px;">
+            times shown in your local timezone: <span id="bkTz"></span><br>
+            booked time blocks will be unavailable
           </div>
-        </div>
-
-        <div class="cta">
-          <button class="btn" id="bkSubmit">request booking</button>
-          <div class="msg" id="bkMsg"></div>
-        </div>
-
-        <div class="tiny" style="margin-top:10px;">
-          booked time blocks will be unavailable
-        </div>
+        </form>
       </div>
 
       <div class="card" id="bookSuccessCard" style="display:none;">
@@ -702,34 +726,33 @@
 
         <div class="cta" style="margin-top:14px;">
           <button class="btn" id="bkAnother">book another session</button>
-          <a class="backBtn" href="#home">back home</a>
         </div>
       </div>
     </section>
   </main>
 
   <div class="modalBackdrop" id="popModal">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popTitle">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popTitle" tabindex="-1">
       <div class="modalHeader">
         <div>
           <div class="modalTitle" id="popTitle">Pop Dump</div>
           <div class="modalSub">Pick your platform and stream the EP.</div>
         </div>
-        <button class="modalClose" type="button" dataClose="popModal">×</button>
+        <button class="modalClose" type="button" dataClose="popModal" aria-label="Close">×</button>
       </div>
 
       <div class="modalLinks">
-        <a class="modalLink" href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">
+        <a class="btn btn--ghost modalLink" href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">
           <span><strong>Spotify</strong><small>Open in app or browser</small></span>
           <span class="pill">Listen</span>
         </a>
 
-        <a class="modalLink" href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">
+        <a class="btn btn--ghost modalLink" href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">
           <span><strong>Apple Music</strong><small>Stream the EP</small></span>
           <span class="pill">Listen</span>
         </a>
 
-        <a class="modalLink" href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
+        <a class="btn btn--ghost modalLink" href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
           <span><strong>SoundCloud</strong><small>Full Pop Dump set</small></span>
           <span class="pill">Listen</span>
         </a>
@@ -738,27 +761,27 @@
   </div>
 
   <div class="modalBackdrop" id="rapModal">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rapTitle">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rapTitle" tabindex="-1">
       <div class="modalHeader">
         <div>
           <div class="modalTitle" id="rapTitle">Rap Dump</div>
           <div class="modalSub">Pick your platform and stream the EP.</div>
         </div>
-        <button class="modalClose" type="button" dataClose="rapModal">×</button>
+        <button class="modalClose" type="button" dataClose="rapModal" aria-label="Close">×</button>
       </div>
 
       <div class="modalLinks">
-        <a class="modalLink" href="https://open.spotify.com/album/7jd2Z6etB43TvzNZ2Qx4fV?si=dph-E2EQTL6pDoXsrmNNRQ" target="_blank" rel="noopener">
+        <a class="btn btn--ghost modalLink" href="https://open.spotify.com/album/7jd2Z6etB43TvzNZ2Qx4fV?si=dph-E2EQTL6pDoXsrmNNRQ" target="_blank" rel="noopener">
           <span><strong>Spotify</strong><small>Open in app or browser</small></span>
           <span class="pill">Listen</span>
         </a>
 
-        <a class="modalLink" href="https://music.apple.com/ca/album/rap-dump/1862592487" target="_blank" rel="noopener">
+        <a class="btn btn--ghost modalLink" href="https://music.apple.com/ca/album/rap-dump/1862592487" target="_blank" rel="noopener">
           <span><strong>Apple Music</strong><small>Stream the EP</small></span>
           <span class="pill">Listen</span>
         </a>
 
-        <a class="modalLink" href="https://soundcloud.com/b2nny/sets/rapdump?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
+        <a class="btn btn--ghost modalLink" href="https://soundcloud.com/b2nny/sets/rapdump?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
           <span><strong>SoundCloud</strong><small>Full Rap Dump set</small></span>
           <span class="pill">Listen</span>
         </a>
@@ -811,29 +834,128 @@
     }
 
     (function modals(){
+      const lastFocus = new Map();
+
+      function getFocusable(container){
+        if(!container) return [];
+        return Array.from(container.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )).filter(el=> !el.hasAttribute("disabled") && el.getAttribute("aria-hidden") !== "true");
+      }
+
+      function focusFirst(modalEl){
+        const focusables = getFocusable(modalEl);
+        const first = focusables[0] || modalEl;
+        try{ first.focus(); } catch(e){}
+      }
+
+      function trapTab(e, modalEl){
+        if(e.key !== "Tab") return;
+        const focusables = getFocusable(modalEl);
+        if(!focusables.length){
+          e.preventDefault();
+          modalEl.focus();
+          return;
+        }
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if(e.shiftKey && document.activeElement === first){
+          e.preventDefault();
+          last.focus();
+        } else if(!e.shiftKey && document.activeElement === last){
+          e.preventDefault();
+          first.focus();
+        }
+      }
+
+      function openModalA11y(id){
+        const el = document.getElementById(id);
+        if(!el) return;
+        lastFocus.set(id, document.activeElement);
+        el.classList.add("open");
+        document.body.classList.add("modalOpen");
+        const modal = el.querySelector(".modal");
+        if(modal) focusFirst(modal);
+      }
+
+      function closeModalA11y(id){
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.classList.remove("open");
+        document.body.classList.remove("modalOpen");
+        // If the modal was opened via hash, clean the URL so refresh doesn't reopen it.
+        try{
+          const hash = (location.hash || "").toLowerCase();
+          const wantsPop = (id === "popModal" && hash === "#pop");
+          const wantsRap = (id === "rapModal" && hash === "#rap");
+          if(wantsPop || wantsRap){
+            history.replaceState(null, "", "#home");
+          }
+        } catch(e){}
+        const prev = lastFocus.get(id);
+        lastFocus.delete(id);
+        if(prev && typeof prev.focus === "function"){
+          try{ prev.focus(); } catch(e){}
+        }
+      }
+
       document.querySelectorAll("[dataClose]").forEach(btn=>{
-        btn.addEventListener("click", ()=> closeModal(btn.getAttribute("dataClose")));
+        btn.addEventListener("click", ()=> closeModalA11y(btn.getAttribute("dataClose")));
       });
 
       ["popModal","rapModal"].forEach(id=>{
         const el = document.getElementById(id);
-        el.addEventListener("click", (e)=>{ if(e.target === el) closeModal(id); });
+        el.addEventListener("click", (e)=>{ if(e.target === el) closeModalA11y(id); });
+        el.addEventListener("keydown", (e)=>{
+          if(!el.classList.contains("open")) return;
+          const modal = el.querySelector(".modal");
+          if(!modal) return;
+          trapTab(e, modal);
+        });
       });
 
       document.addEventListener("keydown", (e)=>{
         if(e.key === "Escape"){
-          closeModal("popModal");
-          closeModal("rapModal");
+          closeModalA11y("popModal");
+          closeModalA11y("rapModal");
         }
       });
 
-      window.openPop = ()=> openModal("popModal");
-      window.openRap = ()=> openModal("rapModal");
+      window.openPop = ()=> openModalA11y("popModal");
+      window.openRap = ()=> openModalA11y("rapModal");
+      window.closePop = ()=> closeModalA11y("popModal");
+      window.closeRap = ()=> closeModalA11y("rapModal");
     })();
 
     (function router(){
       const home = document.getElementById("sectionHome");
       const book = document.getElementById("sectionBook");
+
+      const BASE_URL = "https://b2nny.com/";
+      const DEFAULT_DESC = "Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here.";
+
+      function setMeta({ title, desc, url }){
+        const t = title || "b2nny | links";
+        const d = desc || DEFAULT_DESC;
+        const u = url || BASE_URL;
+
+        document.title = t;
+
+        const set = (sel, val)=>{
+          const el = document.querySelector(sel);
+          if(el) el.setAttribute("content", val);
+        };
+
+        const descEl = document.querySelector('meta[name="description"]');
+        if(descEl) descEl.setAttribute("content", d);
+
+        set('meta[property="og:title"]', t);
+        set('meta[property="og:description"]', d);
+        set('meta[property="og:url"]', u);
+
+        set('meta[name="twitter:title"]', t);
+        set('meta[name="twitter:description"]', d);
+      }
 
       function show(el){
         home.classList.remove("active");
@@ -843,9 +965,41 @@
 
       function onHash(){
         const h = (location.hash || "#home").replace("#","");
-        if(h === "pop"){ window.openPop(); show(home); return; }
-        if(h === "rap"){ window.openRap(); show(home); return; }
-        if(h === "book"){ show(book); return; }
+        if(h !== "pop" && h !== "rap"){
+          // Ensure modals never stay open when navigating to other sections.
+          if(window.closePop) window.closePop();
+          if(window.closeRap) window.closeRap();
+        }
+        if(h === "pop"){
+          setMeta({
+            title: "b2nny | Pop Dump",
+            desc: "Pop Dump by b2nny — pick Spotify, Apple Music, or SoundCloud and stream the EP.",
+            url: BASE_URL + "#pop"
+          });
+          window.openPop();
+          show(home);
+          return;
+        }
+        if(h === "rap"){
+          setMeta({
+            title: "b2nny | Rap Dump",
+            desc: "Rap Dump by b2nny — pick Spotify, Apple Music, or SoundCloud and stream the EP.",
+            url: BASE_URL + "#rap"
+          });
+          window.openRap();
+          show(home);
+          return;
+        }
+        if(h === "book"){
+          setMeta({
+            title: "b2nny | booking",
+            desc: "Book a studio session with b2nny — request a date and time, and I’ll confirm with you.",
+            url: BASE_URL + "#book"
+          });
+          show(book);
+          return;
+        }
+        setMeta({ title: "b2nny | links", desc: DEFAULT_DESC, url: BASE_URL + "#home" });
         show(home);
       }
 
@@ -895,6 +1049,7 @@
       const successPrice = document.getElementById("bkSuccessPrice");
       const anotherBtn = document.getElementById("bkAnother");
 
+      const formEl = document.getElementById("bkForm");
       const dateEl = document.getElementById("bkDate");
       const startEl = document.getElementById("bkStart");
       const endEl = document.getElementById("bkEnd");
@@ -908,8 +1063,19 @@
 
       const submitBtn = document.getElementById("bkSubmit");
       const msgEl = document.getElementById("bkMsg");
+      const tzEl = document.getElementById("bkTz");
 
       let busy = new Set();
+
+      function setTimezoneLabel(){
+        if(!tzEl) return;
+        try{
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          tzEl.textContent = tz || "your timezone";
+        } catch(e){
+          tzEl.textContent = "your timezone";
+        }
+      }
 
       function setMinDate(){
         const min = "2026-01-01";
@@ -1147,12 +1313,21 @@
         rebuildEndOptions();
       });
 
-      submitBtn.addEventListener("click", submit);
+      if(formEl){
+        formEl.addEventListener("submit", (e)=>{
+          e.preventDefault();
+          submit();
+        });
+      } else {
+        submitBtn.addEventListener("click", submit);
+      }
 
       loadBusy().then(()=>{
         buildStartOptions();
         rebuildEndOptions();
       });
+
+      setTimezoneLabel();
     })();
   </script>
 </body>
