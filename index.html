@@ -38,10 +38,11 @@
       --bg0: #07080b;
       --bg1: #0c0e14;
 
-      --mag: rgba(255, 70, 190, 0.20);
-      --cyan: rgba(80, 190, 255, 0.22);
-      --lime: rgba(95, 255, 140, 0.18);
-      --acid: rgba(255, 255, 170, 0.14);
+      /* Higher-energy palette (reduced purple) */
+      --mag: rgba(255, 70, 190, 0.14);
+      --cyan: rgba(80, 190, 255, 0.30);
+      --lime: rgba(95, 255, 140, 0.22);
+      --acid: rgba(255, 255, 170, 0.18);
 
       --cardA: rgba(7,8,11,0.68);
       --cardB: rgba(7,8,11,0.88);
@@ -54,15 +55,21 @@
 
       --focusRing: rgba(80, 190, 255, 0.34);
 
-      --neonC: rgba(80,190,255,0.45);
-      --neonM: rgba(255,70,190,0.34);
-      --neonG: rgba(95,255,140,0.30);
+      --neonC: rgba(80,190,255,0.62);
+      --neonM: rgba(255,70,190,0.22);
+      --neonG: rgba(95,255,140,0.44);
       --glass: rgba(12,14,20,0.46);
       --glass2: rgba(12,14,20,0.70);
+
+      --holoA: rgba(80,190,255,0.58);
+      --holoB: rgba(255,70,190,0.18);
+      --holoC: rgba(95,255,140,0.44);
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
     html, body{ height:100%; }
+
+    html{ scroll-behavior: smooth; }
 
     body{
       font-family:
@@ -100,7 +107,7 @@
       inset:0;
       z-index:-4;
       pointer-events:none;
-      opacity: 0.16;
+      opacity: 0.20;
       background:
         radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.55), transparent 60%),
         radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.35), transparent 60%),
@@ -112,7 +119,7 @@
         radial-gradient(2px 2px at 75% 85%, rgba(255,255,255,0.16), transparent 55%);
       filter: blur(0.2px);
       mix-blend-mode: screen;
-      animation: starDrift 18s linear infinite;
+      animation: starDrift 14s linear infinite;
     }
 
     @keyframes starDrift{
@@ -130,9 +137,9 @@
         radial-gradient(620px 620px at 72% 20%, rgba(80,190,255,0.20), transparent 62%),
         radial-gradient(540px 540px at 82% 70%, rgba(95,255,140,0.16), transparent 62%),
         radial-gradient(700px 700px at 40% 82%, rgba(255,255,170,0.12), transparent 62%);
-      filter: blur(12px) saturate(140%);
-      opacity: 0.9;
-      animation: swirl 14s ease-in-out infinite alternate;
+      filter: blur(10px) saturate(165%);
+      opacity: 0.98;
+      animation: swirl 11s ease-in-out infinite alternate;
     }
 
     @keyframes swirl{
@@ -146,8 +153,8 @@
       inset:0;
       z-index:-2;
       pointer-events:none;
-      opacity:0.95;
-      filter:saturate(125%);
+      opacity:0.98;
+      filter:saturate(145%);
       background:
         radial-gradient(900px 700px at 20% 30%, rgba(255,255,255,0.07), transparent 62%),
         radial-gradient(850px 650px at 80% 65%, rgba(255,255,255,0.06), transparent 62%),
@@ -163,7 +170,7 @@
           transparent 1px,
           transparent 44px
         );
-      animation: driftGrid 18s linear infinite;
+      animation: driftGrid 13s linear infinite;
     }
 
     @keyframes driftGrid{
@@ -184,8 +191,21 @@
           transparent 1px,
           transparent 3px
         );
-      opacity:0.18;
+      opacity:0.22;
       mix-blend-mode: overlay;
+    }
+
+    @keyframes holoShift{
+      0%{ filter: hue-rotate(0deg); transform: translate3d(0,0,0); }
+      50%{ filter: hue-rotate(120deg); transform: translate3d(10px,-6px,0); }
+      100%{ filter: hue-rotate(240deg); transform: translate3d(-8px,8px,0); }
+    }
+
+    @keyframes scanSweep{
+      0%{ transform: translateX(-120%); opacity: 0.0; }
+      15%{ opacity: 0.55; }
+      50%{ opacity: 0.12; }
+      100%{ transform: translateX(120%); opacity: 0.0; }
     }
 
     .wrap{
@@ -296,11 +316,14 @@
       margin: 8px 0 10px;
       letter-spacing: 0.04em;
       font-weight: 950;
-      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(180,235,255,0.90), rgba(255,195,235,0.88));
+      background: linear-gradient(90deg, rgba(255,255,255,0.98), rgba(180,235,255,0.94), rgba(170,255,240,0.92));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 0 22px rgba(80,190,255,0.10);
+      text-shadow:
+        0 0 18px rgba(80,190,255,0.22),
+        0 0 26px rgba(95,255,140,0.10),
+        0 18px 60px rgba(0,0,0,0.75);
     }
 
     .subHead{
@@ -406,18 +429,308 @@
       text-align:left;
     }
 
-    .section{ display:none; }
-    .section.active{ display:block; }
-
-    .backRow{
-      display:flex;
-      justify-content:flex-start;
-      align-items:center;
+    /* Page layout (artist site) */
+    .nav{
       position: sticky;
       top: 14px;
-      z-index: 6;
-      margin: 0 0 12px;
-      padding: 6px 0;
+      z-index: 9;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        radial-gradient(220px 160px at 12% 0%, rgba(255,255,255,0.10), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.84), rgba(7,8,11,0.96));
+      box-shadow: var(--shadowA), 0 14px 34px rgba(0,0,0,0.72);
+      position: sticky;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .nav::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      z-index:-1;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg,
+        rgba(80,190,255,0.00),
+        var(--holoA),
+        var(--holoB),
+        var(--holoC),
+        var(--holoA),
+        rgba(80,190,255,0.00)
+      );
+      opacity: 0.55;
+      filter: blur(12px);
+      animation: holoShift 10s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    .nav::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: 999px;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.14) 45%, transparent 70%);
+      transform: translateX(-120%);
+      opacity: 0;
+      animation: scanSweep 6.5s ease-in-out infinite;
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+
+    .nav a{
+      color: var(--fg);
+      text-decoration:none;
+      opacity: 0.92;
+      font-weight: 850;
+      letter-spacing: 0.02em;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 13px;
+    }
+
+    .nav a:hover{ opacity: 1; border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.04); }
+    .nav a:focus-visible{
+      outline:none;
+      box-shadow: 0 0 0 3px var(--focusRing);
+    }
+
+    .navBrand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      white-space:nowrap;
+      padding-left: 10px;
+      padding-right: 10px;
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .navToggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+      color: var(--fg);
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor:pointer;
+      font: inherit;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: var(--shadowA), 0 10px 24px rgba(0,0,0,0.55);
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .navToggle:hover{ border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.07); }
+
+    .navToggle:focus-visible{
+      outline:none;
+      box-shadow: var(--shadowA), 0 10px 24px rgba(0,0,0,0.55), 0 0 0 3px var(--focusRing);
+    }
+
+    .navMenu{
+      position:absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 10px);
+      display:none;
+      padding: 10px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        radial-gradient(260px 190px at 12% 0%, rgba(255,255,255,0.10), transparent 62%),
+        linear-gradient(180deg, rgba(7,8,11,0.88), rgba(7,8,11,0.97));
+      box-shadow: var(--shadowA), 0 18px 46px rgba(0,0,0,0.78);
+      overflow:hidden;
+    }
+
+    .nav.navOpen .navMenu{ display:block; }
+
+    .navMenu::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 22px;
+      background: conic-gradient(from 180deg,
+        rgba(80,190,255,0.00),
+        rgba(80,190,255,0.30),
+        rgba(95,255,140,0.22),
+        rgba(80,190,255,0.30),
+        rgba(80,190,255,0.00)
+      );
+      opacity: 0.22;
+      filter: blur(14px);
+      pointer-events:none;
+    }
+
+    .navMenuGrid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    @media (max-width: 420px){
+      .navMenuGrid{ grid-template-columns: 1fr; }
+    }
+
+    .navMenu a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      opacity: 0.95;
+    }
+
+    .navMenu a:hover{
+      opacity: 1;
+      border-color: rgba(255,255,255,0.26);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .hero{
+      margin-top: 18px;
+      margin-bottom: 16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      text-align:center;
+    }
+
+    .heroBlurb{
+      font-size: 14px;
+      opacity: 0.80;
+      max-width: 44ch;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+
+    .heroCtas{
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .pageSection{
+      margin-top: 18px;
+    }
+
+    .secTitle{
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.86;
+      margin: 0 0 10px;
+      position:relative;
+    }
+
+    .secTitle::after{
+      content:"";
+      display:block;
+      height: 2px;
+      border-radius: 999px;
+      margin-top: 10px;
+      background: linear-gradient(90deg, rgba(80,190,255,0.00), rgba(80,190,255,0.80), rgba(95,255,140,0.58), rgba(80,190,255,0.00));
+      box-shadow: 0 0 18px rgba(80,190,255,0.22);
+      opacity: 0.85;
+    }
+
+    .cardGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 640px){
+      .cardGrid{ grid-template-columns: 1fr; }
+    }
+
+    .releaseCard{
+      padding: 16px;
+      text-align:left;
+    }
+
+    .releaseTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .releaseTitle{
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: 0.03em;
+    }
+
+    .releaseMeta{
+      margin-top: 6px;
+      font-size: 12px;
+      opacity: 0.76;
+      line-height: 1.35;
+    }
+
+    .releaseActions{
+      margin-top: 12px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+
+    .socialRow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .iconLink{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+      color: var(--fg);
+      text-decoration:none;
+      box-shadow: var(--shadowA), 0 12px 26px rgba(0,0,0,0.55);
+      transition: transform 140ms ease, border-color 140ms ease, filter 140ms ease;
+    }
+
+    .iconLink:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.30); filter:saturate(120%); }
+    .iconLink:focus-visible{
+      outline:none;
+      box-shadow: var(--shadowA), 0 12px 26px rgba(0,0,0,0.55), 0 0 0 3px var(--focusRing);
+    }
+
+    .iconLink img{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.22);
     }
 
     .card{
@@ -428,6 +741,44 @@
         radial-gradient(260px 190px at 12% 0%, rgba(255,255,255,0.12), transparent 62%),
         linear-gradient(180deg, var(--glass), var(--glass2));
       box-shadow: var(--shadowA), var(--shadowB);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 22px;
+      background: conic-gradient(from 180deg,
+        rgba(80,190,255,0.00),
+        rgba(80,190,255,0.36),
+        rgba(255,70,190,0.28),
+        rgba(95,255,140,0.24),
+        rgba(80,190,255,0.36),
+        rgba(80,190,255,0.00)
+      );
+      opacity: 0.10;
+      filter: blur(14px);
+      pointer-events:none;
+      animation: holoShift 13s ease-in-out infinite alternate;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: 22px;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.10) 45%, transparent 70%);
+      transform: translateX(-120%);
+      opacity: 0;
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+
+    .card:hover::after{
+      opacity: 0.65;
+      animation: scanSweep 2.9s ease-in-out 1;
     }
 
     .title2{
@@ -579,7 +930,12 @@
     .btn:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.38);
-      filter: saturate(130%);
+      filter: saturate(145%) brightness(1.03);
+      box-shadow:
+        var(--shadowA),
+        0 16px 36px rgba(0,0,0,0.72),
+        0 0 28px rgba(80,190,255,0.18),
+        0 0 46px rgba(255,70,190,0.12);
     }
 
     .btn:active{
@@ -853,13 +1209,15 @@
     @media (prefers-reduced-motion: reduce){
       body::before{ animation: none !important; }
       .colorFX, .bgFX, .pfpRing{ animation: none !important; }
+      .nav::before, .nav::after{ animation: none !important; }
+      .card::before, .card:hover::after{ animation: none !important; }
       *{ scroll-behavior: auto !important; transition: none !important; }
     }
 
     @media (max-width: 480px){
       .pfp img{ width: 102px; height: 102px; }
       h1{ font-size: 26px; }
-      .topBtn{ width:100%; }
+      .nav{ top: 10px; }
     }
   </style>
 </head>
@@ -869,85 +1227,109 @@
   <div class="bgFX"></div>
   <div class="scanFX"></div>
 
-  <main class="wrap">
-    <header>
+  <main class="wrap" id="top">
+    <nav class="nav" aria-label="Primary" id="siteNav">
+      <a class="navBrand" href="#top">b2nny</a>
+      <button class="navToggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu">menu</button>
+      <div class="navMenu" id="navMenu">
+        <div class="navMenuGrid">
+          <a href="#releases">releases <span class="pill">01</span></a>
+          <a href="#links">links <span class="pill">02</span></a>
+          <a href="#book">booking <span class="pill">03</span></a>
+          <a href="#contact">contact <span class="pill">04</span></a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
       <div class="pfp">
         <div class="pfpRing">
           <img src="apple music.jpg" alt="b2nny profile" width="120" height="120" decoding="async" fetchpriority="high">
         </div>
       </div>
 
-      <div class="topRow">
-        <a href="pop.html" class="btn btn--pill topBtn">
-          <span class="topLabel">Pop Dump</span>
-          <span class="topSub">open</span>
-        </a>
+      <div>
+        <h1>@b2nny</h1>
+        <div class="subHead">artist • releases • booking</div>
+        <p class="heroBlurb">Stream the latest drops, hit the socials, or request a studio session.</p>
 
-        <a href="rap.html" class="btn btn--pill topBtn">
-          <span class="topLabel">Rap Dump</span>
-          <span class="topSub">open</span>
-        </a>
+        <div class="heroCtas">
+          <a class="btn btn--pill" href="#releases">listen</a>
+          <a class="btn btn--pill btn--ghost" href="#book">book a session</a>
+          <button class="btn btn--pill btn--ghost" id="homeShare" type="button" style="display:none;">share</button>
+        </div>
+
+        <div class="cta" style="justify-content:center; margin-top:12px;">
+          <button class="btn btn--ghost" id="homeCopyLink" type="button">copy booking link</button>
+          <button class="btn btn--ghost" id="homeCopySpotify" type="button">copy spotify link</button>
+          <div class="msg" id="homeMsg" role="status" aria-live="polite"></div>
+        </div>
       </div>
-
-      <h1>@b2nny</h1>
-      <div class="subHead">links and booking</div>
     </header>
 
-    <section class="section active" id="sectionHome">
-      <section class="links">
-        <a class="link" href="#book">
-          <img src="calendar.png" alt="Book" width="28" height="28" loading="lazy" decoding="async">
-          <span>book a session</span>
-        </a>
+    <section class="pageSection" id="releases" aria-label="Releases">
+      <div class="secTitle">releases</div>
+      <div class="cardGrid">
+        <article class="card releaseCard" aria-label="Pop Dump release">
+          <div class="releaseTop">
+            <div>
+              <div class="releaseTitle">Pop Dump</div>
+              <div class="releaseMeta">Pick a platform and stream the EP.</div>
+            </div>
+            <span class="pill">EP</span>
+          </div>
+          <div class="releaseActions">
+            <a class="btn btn--pill" href="#pop">open</a>
+          </div>
+        </article>
 
-        <a class="link" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
-          <img src="Spotify.png" alt="Spotify" width="28" height="28" loading="lazy" decoding="async">
-          <span>b2nny | spotify</span>
-        </a>
-
-        <a class="link" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
-          <img src="Apple.png" alt="Apple Music" width="28" height="28" loading="lazy" decoding="async">
-          <span>b2nny | apple music</span>
-        </a>
-
-        <a class="link" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
-          <img src="Soundcloud.png" alt="SoundCloud" width="28" height="28" loading="lazy" decoding="async">
-          <span>b2nny | soundcloud</span>
-        </a>
-
-        <a class="link" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
-          <img src="Youtube.jpg" alt="YouTube" width="28" height="28" loading="lazy" decoding="async">
-          <span>b2nny | youtube</span>
-        </a>
-
-        <a class="link" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
-          <img src="Instagram.png" alt="Instagram" width="28" height="28" loading="lazy" decoding="async">
-          <span>b2nny | instagram</span>
-        </a>
-
-        <a class="link" href="https://x.com/b2nnny" target="_blank" rel="noopener">
-          <img src="Twitter.jpg" alt="X" width="28" height="28" loading="lazy" decoding="async">
-          <span>b2nny | x</span>
-        </a>
-      </section>
-
-      <div class="cta" style="margin-top:14px;">
-        <button class="btn btn--ghost" id="homeCopyLink" type="button">copy booking link</button>
-        <button class="btn btn--ghost" id="homeCopySpotify" type="button">copy spotify link</button>
-        <button class="btn btn--ghost" id="homeShare" type="button" style="display:none;">share</button>
-        <div class="msg" id="homeMsg" role="status" aria-live="polite"></div>
+        <article class="card releaseCard" aria-label="Rap Dump release">
+          <div class="releaseTop">
+            <div>
+              <div class="releaseTitle">Rap Dump</div>
+              <div class="releaseMeta">Pick a platform and stream the EP.</div>
+            </div>
+            <span class="pill">EP</span>
+          </div>
+          <div class="releaseActions">
+            <a class="btn btn--pill" href="#rap">open</a>
+          </div>
+        </article>
       </div>
-
-      <footer>
-        © <script>document.write(new Date().getFullYear());</script> Harmony Hill
-      </footer>
     </section>
 
-    <section class="section" id="sectionBook">
-      <div class="backRow">
-        <a class="btn btn--pill btn--ghost backBtn" href="#home">back</a>
+    <section class="pageSection" id="links" aria-label="Official links">
+      <div class="secTitle">links</div>
+      <div class="socialRow">
+        <a class="iconLink" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
+          <img src="Spotify.png" alt="Spotify" width="22" height="22" loading="lazy" decoding="async">
+          <strong>Spotify</strong>
+        </a>
+        <a class="iconLink" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
+          <img src="Apple.png" alt="Apple Music" width="22" height="22" loading="lazy" decoding="async">
+          <strong>Apple Music</strong>
+        </a>
+        <a class="iconLink" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
+          <img src="Soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy" decoding="async">
+          <strong>SoundCloud</strong>
+        </a>
+        <a class="iconLink" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
+          <img src="Youtube.jpg" alt="YouTube" width="22" height="22" loading="lazy" decoding="async">
+          <strong>YouTube</strong>
+        </a>
+        <a class="iconLink" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
+          <img src="Instagram.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
+          <strong>Instagram</strong>
+        </a>
+        <a class="iconLink" href="https://x.com/b2nnny" target="_blank" rel="noopener">
+          <img src="Twitter.jpg" alt="X" width="22" height="22" loading="lazy" decoding="async">
+          <strong>X</strong>
+        </a>
       </div>
+    </section>
 
+    <section class="pageSection" id="book" aria-label="Booking">
+      <div class="secTitle">booking</div>
       <div class="card" id="bookFormCard">
         <div class="title2">request booking</div>
         <div class="sub2">pick a date then pick a start and end time</div>
@@ -1072,6 +1454,23 @@
         </div>
       </div>
     </section>
+
+    <section class="pageSection" id="contact" aria-label="Contact">
+      <div class="secTitle">contact</div>
+      <div class="card">
+        <div class="title2">reach out</div>
+        <div class="sub2">for sessions, features, or questions</div>
+        <div class="cta">
+          <a class="btn btn--pill" href="#book">request booking</a>
+          <a class="btn btn--pill btn--ghost" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">instagram dm</a>
+        </div>
+        <div class="tiny" style="margin-top:10px;">if the booking form ever bugs out, hit IG and I’ll get you scheduled.</div>
+      </div>
+    </section>
+
+    <footer style="margin-top:22px;">
+      <div class="tiny">© <script>document.write(new Date().getFullYear());</script> Harmony Hill</div>
+    </footer>
   </main>
 
   <div class="modalBackdrop" id="popModal">
@@ -1271,15 +1670,12 @@
       window.closeRap = ()=> closeModalA11y("rapModal");
     })();
 
-    (function router(){
-      const home = document.getElementById("sectionHome");
-      const book = document.getElementById("sectionBook");
-
+    (function hashRoutes(){
       const BASE_URL = "https://b2nny.com/";
-      const DEFAULT_DESC = "Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here.";
+      const DEFAULT_DESC = "Official site for b2nny — releases, links, and booking.";
 
       function setMeta({ title, desc, url }){
-        const t = title || "b2nny | links";
+        const t = title || "b2nny";
         const d = desc || DEFAULT_DESC;
         const u = url || BASE_URL;
 
@@ -1301,50 +1697,45 @@
         set('meta[name="twitter:description"]', d);
       }
 
-      function show(el){
-        home.classList.remove("active");
-        book.classList.remove("active");
-        el.classList.add("active");
-      }
-
       function onHash(){
-        const h = (location.hash || "#home").replace("#","");
-        if(h !== "pop" && h !== "rap"){
-          // Ensure modals never stay open when navigating to other sections.
+        const hash = (location.hash || "#top").toLowerCase();
+
+        // Close modals unless explicitly opened.
+        if(hash !== "#pop" && hash !== "#rap"){
           if(window.closePop) window.closePop();
           if(window.closeRap) window.closeRap();
         }
-        if(h === "pop"){
+
+        if(hash === "#pop"){
           setMeta({
             title: "b2nny | Pop Dump",
             desc: "Pop Dump by b2nny — pick Spotify, Apple Music, or SoundCloud and stream the EP.",
             url: BASE_URL + "#pop"
           });
-          window.openPop();
-          show(home);
+          if(window.openPop) window.openPop();
           return;
         }
-        if(h === "rap"){
+
+        if(hash === "#rap"){
           setMeta({
             title: "b2nny | Rap Dump",
             desc: "Rap Dump by b2nny — pick Spotify, Apple Music, or SoundCloud and stream the EP.",
             url: BASE_URL + "#rap"
           });
-          window.openRap();
-          show(home);
+          if(window.openRap) window.openRap();
           return;
         }
-        if(h === "book"){
+
+        if(hash === "#book"){
           setMeta({
             title: "b2nny | booking",
             desc: "Book a studio session with b2nny — request a date and time, and I’ll confirm with you.",
             url: BASE_URL + "#book"
           });
-          show(book);
           return;
         }
-        setMeta({ title: "b2nny | links", desc: DEFAULT_DESC, url: BASE_URL + "#home" });
-        show(home);
+
+        setMeta({ title: "b2nny", desc: DEFAULT_DESC, url: BASE_URL + (hash || "#top") });
       }
 
       window.addEventListener("hashchange", onHash);
@@ -1455,6 +1846,46 @@
           } catch(e){}
         });
       }
+    })();
+
+    (function navDropdown(){
+      const nav = document.getElementById("siteNav");
+      const btn = document.getElementById("navToggle");
+      const menu = document.getElementById("navMenu");
+      if(!nav || !btn || !menu) return;
+
+      function setOpen(open){
+        nav.classList.toggle("navOpen", !!open);
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
+      btn.addEventListener("click", ()=>{
+        const open = !nav.classList.contains("navOpen");
+        setOpen(open);
+      });
+
+      // Close when clicking a menu link
+      menu.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener("click", ()=> setOpen(false));
+      });
+
+      // Close on outside click
+      document.addEventListener("click", (e)=>{
+        if(!nav.classList.contains("navOpen")) return;
+        if(nav.contains(e.target)) return;
+        setOpen(false);
+      });
+
+      // Close on Escape
+      document.addEventListener("keydown", (e)=>{
+        if(e.key !== "Escape") return;
+        if(!nav.classList.contains("navOpen")) return;
+        setOpen(false);
+        try{ btn.focus(); } catch(err){}
+      });
+
+      // Close dropdown on hash changes (navigation)
+      window.addEventListener("hashchange", ()=> setOpen(false));
     })();
 
     (function booking(){
