@@ -375,6 +375,14 @@
     .link:hover::before{ opacity: 0.9; }
     .link:hover::after{ transform: translateX(120%); opacity: 0.45; }
 
+    .link:focus-visible{
+      outline:none;
+      box-shadow:
+        var(--shadowA),
+        0 14px 34px rgba(0,0,0,0.68),
+        0 0 0 3px var(--focusRing);
+    }
+
     .link img{
       width: 28px;
       height: 28px;
@@ -491,6 +499,50 @@
     }
 
     textarea{ resize: vertical; }
+
+    .isInvalid{
+      border-color: rgba(255, 70, 70, 0.60) !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        0 0 0 3px rgba(255, 70, 70, 0.22) !important;
+    }
+
+    .gear{
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .gear h3{
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      opacity: 0.92;
+      margin-bottom: 10px;
+    }
+
+    .gearList{
+      display:grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .gearItem{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .gearItem strong{ font-weight: 950; }
+    .gearItem small{ display:block; font-size: 11px; opacity: 0.72; margin-top: 2px; }
 
     .cta{
       margin-top: 14px;
@@ -879,6 +931,13 @@
         </a>
       </section>
 
+      <div class="cta" style="margin-top:14px;">
+        <button class="btn btn--ghost" id="homeCopyLink" type="button">copy booking link</button>
+        <button class="btn btn--ghost" id="homeCopySpotify" type="button">copy spotify link</button>
+        <button class="btn btn--ghost" id="homeShare" type="button" style="display:none;">share</button>
+        <div class="msg" id="homeMsg" role="status" aria-live="polite"></div>
+      </div>
+
       <footer>
         © <script>document.write(new Date().getFullYear());</script> Harmony Hill
       </footer>
@@ -897,6 +956,28 @@
         <div class="priceRow">
           <strong>$50</strong>
           <span>per hour</span>
+        </div>
+
+        <div class="gear" aria-label="Studio gear">
+          <h3>gear</h3>
+          <ul class="gearList">
+            <li class="gearItem">
+              <span><strong>TLM 103</strong><small>microphone</small></span>
+              <span class="pill">Mic</span>
+            </li>
+            <li class="gearItem">
+              <span><strong>WA73</strong><small>mic preamp</small></span>
+              <span class="pill">Pre</span>
+            </li>
+            <li class="gearItem">
+              <span><strong>dbx 160A</strong><small>compressor</small></span>
+              <span class="pill">Comp</span>
+            </li>
+            <li class="gearItem">
+              <span><strong>HS5</strong><small>monitors</small></span>
+              <span class="pill">Monitors</span>
+            </li>
+          </ul>
         </div>
 
         <form id="bkForm" novalidate>
@@ -964,6 +1045,9 @@
 
           <div class="cta">
             <button class="btn" id="bkSubmit" type="submit">request booking</button>
+            <button class="btn btn--ghost" id="bkCopyLink" type="button">copy booking link</button>
+            <button class="btn btn--ghost" id="bkCopySpotify" type="button">copy spotify link</button>
+            <button class="btn btn--ghost" id="bkShare" type="button" style="display:none;">share</button>
             <div class="msg" id="bkMsg" role="status" aria-live="polite"></div>
           </div>
 
@@ -1053,6 +1137,7 @@
     const PRICE_PER_HOUR = 50;
     const START_HOUR = 11;
     const END_HOUR = 23;
+    const SPOTIFY_URL = "https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B";
 
     function timeLabel(h){
       const ap = h >= 12 ? "PM" : "AM";
@@ -1301,6 +1386,77 @@
       });
     }
 
+    async function copyText(text){
+      if(!text) return false;
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch(e){}
+      try{
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly","");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        ta.style.top = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return !!ok;
+      } catch(e){
+        return false;
+      }
+    }
+
+    function bookingLink(){
+      try{
+        return location.origin + location.pathname + "#book";
+      } catch(e){
+        return "#book";
+      }
+    }
+
+    (function homeActions(){
+      const msgEl = document.getElementById("homeMsg");
+      const copyLinkBtn = document.getElementById("homeCopyLink");
+      const copySpotifyBtn = document.getElementById("homeCopySpotify");
+      const shareBtn = document.getElementById("homeShare");
+
+      function say(text){
+        if(msgEl) msgEl.textContent = text || "";
+      }
+
+      if(copyLinkBtn){
+        copyLinkBtn.addEventListener("click", async ()=>{
+          const ok = await copyText(bookingLink());
+          say(ok ? "copied booking link" : "couldn't copy (try manually)");
+        });
+      }
+
+      if(copySpotifyBtn){
+        copySpotifyBtn.addEventListener("click", async ()=>{
+          const ok = await copyText(SPOTIFY_URL);
+          say(ok ? "copied spotify link" : "couldn't copy (try manually)");
+        });
+      }
+
+      if(shareBtn && navigator.share){
+        shareBtn.style.display = "";
+        shareBtn.addEventListener("click", async ()=>{
+          try{
+            await navigator.share({
+              title: "b2nny",
+              text: "links + booking",
+              url: location.href
+            });
+          } catch(e){}
+        });
+      }
+    })();
+
     (function booking(){
       const formCard = document.getElementById("bookFormCard");
       const successCard = document.getElementById("bookSuccessCard");
@@ -1325,6 +1481,9 @@
       const submitBtn = document.getElementById("bkSubmit");
       const msgEl = document.getElementById("bkMsg");
       const tzEl = document.getElementById("bkTz");
+      const copyLinkBtn = document.getElementById("bkCopyLink");
+      const copySpotifyBtn = document.getElementById("bkCopySpotify");
+      const shareBtn = document.getElementById("bkShare");
 
       let busy = new Set();
       let selStart = null; // number (hour, 24h)
@@ -1616,17 +1775,57 @@
       }
 
       function validate(){
-        if(!firstEl.value.trim()) return "enter first name";
-        if(!lastEl.value.trim()) return "enter last name";
-        if(!emailEl.value.trim()) return "enter email";
-        if(!phoneEl.value.trim()) return "enter phone";
-        if(!igEl.value.trim()) return "enter instagram";
-        if(!dateEl.value) return "pick a date";
+        // reset per-field errors
+        const fields = [
+          { el: firstEl, name: "first name", type: "text" },
+          { el: lastEl, name: "last name", type: "text" },
+          { el: emailEl, name: "email", type: "email" },
+          { el: phoneEl, name: "phone", type: "tel" },
+          { el: igEl, name: "instagram", type: "text" },
+          { el: dateEl, name: "date", type: "date" }
+        ];
+
+        fields.forEach(f=>{
+          f.el.classList.remove("isInvalid");
+          f.el.removeAttribute("aria-invalid");
+        });
+
+        const problems = [];
+
+        function mark(el, text){
+          problems.push(text);
+          el.classList.add("isInvalid");
+          el.setAttribute("aria-invalid","true");
+        }
+
+        if(!firstEl.value.trim()) mark(firstEl, "first name is required");
+        if(!lastEl.value.trim()) mark(lastEl, "last name is required");
+
+        const emailVal = emailEl.value.trim();
+        if(!emailVal) mark(emailEl, "email is required");
+        else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) mark(emailEl, "email looks invalid");
+
+        if(!phoneEl.value.trim()) mark(phoneEl, "phone is required");
+        if(!igEl.value.trim()) mark(igEl, "instagram is required");
+        if(!dateEl.value) mark(dateEl, "date is required");
 
         const s = Number(startEl.value);
         const e = Number(endEl.value);
-        if(!Number.isFinite(s) || !Number.isFinite(e) || e <= s) return "select a time range";
-        if(!isRangeFree(s, e)) return "that time is already booked";
+        if(!Number.isFinite(s) || !Number.isFinite(e) || e <= s) problems.push("select a valid time range");
+        else if(!isRangeFree(s, e)) problems.push("that time is already booked");
+
+        if(problems.length){
+          // Keep button text consistent in case a prior attempt changed it.
+          submitBtn.disabled = false;
+          submitBtn.textContent = "request booking";
+
+          // Focus the first invalid field (if any).
+          const firstBad = document.querySelector(".isInvalid");
+          if(firstBad && typeof firstBad.focus === "function"){
+            try{ firstBad.focus(); } catch(e){}
+          }
+          return "fix: " + problems.join(", ");
+        }
 
         return "";
       }
@@ -1749,6 +1948,36 @@
       });
 
       setTimezoneLabel();
+
+      if(copyLinkBtn){
+        copyLinkBtn.addEventListener("click", async ()=>{
+          const ok = await copyText(bookingLink());
+          msgEl.textContent = ok ? "copied booking link" : "couldn't copy (try manually)";
+        });
+      }
+
+      if(copySpotifyBtn){
+        copySpotifyBtn.addEventListener("click", async ()=>{
+          const ok = await copyText(SPOTIFY_URL);
+          msgEl.textContent = ok ? "copied spotify link" : "couldn't copy (try manually)";
+        });
+      }
+
+      if(shareBtn){
+        if(navigator.share){
+          shareBtn.style.display = "";
+          shareBtn.addEventListener("click", async ()=>{
+            try{
+              const url = bookingLink();
+              await navigator.share({
+                title: "b2nny — booking",
+                text: "Book a studio session",
+                url
+              });
+            } catch(e){}
+          });
+        }
+      }
     })();
   </script>
 </body>
