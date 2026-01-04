@@ -858,6 +858,109 @@
         0 0 0 3px rgba(255, 70, 70, 0.22) !important;
     }
 
+    input[type="checkbox"].isInvalid{
+      outline: 3px solid rgba(255, 70, 70, 0.22) !important;
+      outline-offset: 4px;
+      box-shadow: none !important;
+    }
+
+    .calWrap{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .calTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .calMonth{
+      font-weight: 950;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 12px;
+      opacity: 0.92;
+    }
+
+    .calBtns{
+      display:flex;
+      gap: 8px;
+      align-items:center;
+    }
+
+    .calGrid{
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .calDay{
+      width:100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.22);
+      color: var(--fg);
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      cursor:pointer;
+      box-shadow: var(--shadowA), 0 10px 22px rgba(0,0,0,0.55);
+      transition: transform 120ms ease, border-color 120ms ease, filter 120ms ease, opacity 120ms ease;
+    }
+
+    .calDay:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.28); filter:saturate(125%); }
+
+    .calDay:disabled{
+      opacity: 0.32;
+      cursor:not-allowed;
+      filter: grayscale(20%);
+      transform:none;
+    }
+
+    .calDay:focus-visible{
+      outline:none;
+      box-shadow: var(--shadowA), 0 10px 22px rgba(0,0,0,0.55), 0 0 0 3px var(--focusRing);
+    }
+
+    .calDay--loading{ opacity: 0.55; }
+    .calDay--avail{ border-color: rgba(95,255,140,0.22); background: radial-gradient(120px 90px at 18% 10%, rgba(95,255,140,0.14), transparent 62%), rgba(0,0,0,0.22); }
+    .calDay--busy{ border-color: rgba(255, 70, 70, 0.22); background: radial-gradient(120px 90px at 18% 10%, rgba(255,70,70,0.12), transparent 62%), rgba(0,0,0,0.22); }
+    .calDay--sel{ border-color: rgba(80,190,255,0.60); background: radial-gradient(120px 90px at 18% 10%, rgba(80,190,255,0.16), transparent 62%), rgba(0,0,0,0.22); }
+
+    .rules{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .rules ul{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      opacity: 0.82;
+      line-height: 1.45;
+      font-size: 12px;
+    }
+
+    .checkRow{
+      margin-top: 10px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .checkRow input{ margin-top: 3px; }
+    .checkRow span{ font-size: 12px; opacity: 0.88; line-height: 1.35; }
+
     .gear{
       margin-top: 14px;
       padding-top: 12px;
@@ -1365,6 +1468,22 @@
         <form id="bkForm" novalidate>
           <div style="height:14px;"></div>
 
+          <div class="calWrap" aria-label="Availability calendar">
+            <div class="calTop">
+              <div class="calMonth" id="bkCalMonth">loading…</div>
+              <div class="calBtns">
+                <button class="btn btn--ghost btn--pill" id="bkCalPrev" type="button">prev</button>
+                <button class="btn btn--ghost btn--pill" id="bkCalNext" type="button">next</button>
+              </div>
+            </div>
+            <div class="timeLegend" id="bkCalLegend" aria-hidden="true"></div>
+            <div style="height:10px;"></div>
+            <div class="calGrid" id="bkCal"></div>
+            <div class="tiny" id="bkCalMsg" style="margin-top:10px;"></div>
+          </div>
+
+          <div style="height:12px;"></div>
+
           <div class="grid2">
             <div>
               <label for="bkFirst">first name</label>
@@ -1420,6 +1539,32 @@
 
           <div style="height:12px;"></div>
 
+          <div class="priceRow" id="bkQuote" style="display:none;">
+            <strong>quote</strong>
+            <span id="bkQuoteLine"></span>
+          </div>
+
+          <div class="rules" aria-label="Studio rules and minimums">
+            <div class="tiny"><strong>minimum:</strong> <span id="bkMinHoursLabel">2 hours</span></div>
+            <ul>
+              <li>arrive on time (late time still counts)</li>
+              <li>no refunds on same-day cancellations</li>
+              <li>be ready (references, beats, lyrics)</li>
+            </ul>
+            <label class="checkRow" style="margin-top:10px;">
+              <input id="bkAgree" type="checkbox" />
+              <span>i understand the rules + minimum and want to request this session</span>
+            </label>
+          </div>
+
+          <div class="calWrap" id="bkDepositWrap" style="display:none; margin-top:12px;" aria-label="Optional deposit">
+            <div class="tiny"><strong>optional:</strong> pay a <strong>$25</strong> deposit to lock your time faster (applied to total).</div>
+            <div class="cta" style="margin-top:10px;">
+              <a class="btn btn--pill" id="bkDepositStripe" target="_blank" rel="noopener">pay deposit (stripe)</a>
+              <a class="btn btn--pill btn--ghost" id="bkDepositPaypal" target="_blank" rel="noopener">pay deposit (paypal)</a>
+            </div>
+          </div>
+
           <div>
             <label for="bkNotes">about</label>
             <textarea id="bkNotes" rows="3" placeholder="what you want to work on, references, any details"></textarea>
@@ -1437,6 +1582,44 @@
             times shown in your local timezone: <span id="bkTz"></span><br>
             booked time blocks will be unavailable
           </div>
+        </form>
+      </div>
+
+      <div class="card" id="waitlistCard" style="display:none;">
+        <div class="title2">day is fully booked</div>
+        <div class="sub2">join the waitlist and get notified if a slot opens</div>
+        <form id="wlForm" novalidate>
+          <div style="height:10px;"></div>
+          <div class="grid3">
+            <div>
+              <label for="wlEmail">email (optional)</label>
+              <input id="wlEmail" type="email" autocomplete="email" />
+            </div>
+            <div>
+              <label for="wlPhone">phone (optional)</label>
+              <input id="wlPhone" type="tel" autocomplete="tel" inputmode="tel" />
+            </div>
+            <div>
+              <label for="wlIg">instagram (optional)</label>
+              <input id="wlIg" type="text" placeholder="@handle" autocomplete="username" />
+            </div>
+          </div>
+          <div style="height:10px;"></div>
+          <div>
+            <label for="wlHours">hours you want</label>
+            <select id="wlHours">
+              <option value="">select…</option>
+              <option value="1">1 hour</option>
+              <option value="2">2 hours</option>
+              <option value="3">3 hours</option>
+              <option value="4">4 hours</option>
+            </select>
+          </div>
+          <div class="cta" style="margin-top:12px;">
+            <button class="btn" type="submit">join waitlist</button>
+            <div class="msg" id="wlMsg" role="status" aria-live="polite"></div>
+          </div>
+          <div class="tiny" style="margin-top:10px;">no names shown publicly — just availability.</div>
         </form>
       </div>
 
@@ -1534,6 +1717,14 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec";
     const PRICE_PER_HOUR = 50;
+    const MIN_HOURS = 2;
+    const DEPOSIT_AMOUNT = 25; // optional
+
+    // Optional: set these to enable "deposit checkout" buttons.
+    // Example Stripe Payment Link: https://buy.stripe.com/xxxx
+    // Example PayPal.me link: https://paypal.me/yourname  (we'll append /{DEPOSIT_AMOUNT})
+    const STRIPE_DEPOSIT_LINK = ""; // <-- paste your Stripe payment link
+    const PAYPAL_DEPOSIT_LINK = ""; // <-- paste your PayPal.me link
     const START_HOUR = 11;
     const END_HOUR = 23;
     const SPOTIFY_URL = "https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B";
@@ -1802,6 +1993,11 @@
       }
     }
 
+    function setText(el, text){
+      if(!el) return;
+      el.textContent = text || "";
+    }
+
     function bookingLink(){
       try{
         return location.origin + location.pathname + "#book";
@@ -1894,6 +2090,7 @@
       const successLine = document.getElementById("bkSuccessLine");
       const successPrice = document.getElementById("bkSuccessPrice");
       const anotherBtn = document.getElementById("bkAnother");
+      const waitlistCard = document.getElementById("waitlistCard");
 
       const formEl = document.getElementById("bkForm");
       const dateEl = document.getElementById("bkDate");
@@ -1916,9 +2113,37 @@
       const copySpotifyBtn = document.getElementById("bkCopySpotify");
       const shareBtn = document.getElementById("bkShare");
 
+      const quoteWrap = document.getElementById("bkQuote");
+      const quoteLine = document.getElementById("bkQuoteLine");
+      const minHoursLabel = document.getElementById("bkMinHoursLabel");
+      const agreeEl = document.getElementById("bkAgree");
+
+      const depositWrap = document.getElementById("bkDepositWrap");
+      const depositStripe = document.getElementById("bkDepositStripe");
+      const depositPaypal = document.getElementById("bkDepositPaypal");
+
+      const calGrid = document.getElementById("bkCal");
+      const calMonthEl = document.getElementById("bkCalMonth");
+      const calPrev = document.getElementById("bkCalPrev");
+      const calNext = document.getElementById("bkCalNext");
+      const calMsg = document.getElementById("bkCalMsg");
+      const calLegend = document.getElementById("bkCalLegend");
+
+      const wlForm = document.getElementById("wlForm");
+      const wlEmail = document.getElementById("wlEmail");
+      const wlPhone = document.getElementById("wlPhone");
+      const wlIg = document.getElementById("wlIg");
+      const wlHours = document.getElementById("wlHours");
+      const wlMsg = document.getElementById("wlMsg");
+
       let busy = new Set();
       let selStart = null; // number (hour, 24h)
       let selEnd = null;   // number (hour, 24h), end hour, exclusive
+
+      // Calendar cache: date -> { busy:Set, fullyBooked:boolean }
+      const dayCache = new Map();
+      let calYear = null;
+      let calMonth = null; // 0-based
 
       function setTimezoneLabel(){
         if(!tzEl) return;
@@ -1950,6 +2175,22 @@
         timeSummaryEl.textContent = selectionText();
       }
 
+      function updateQuote(){
+        if(!quoteWrap || !quoteLine) return;
+        if(selStart == null || selEnd == null){
+          quoteWrap.style.display = "none";
+          quoteLine.textContent = "";
+          return;
+        }
+        const hours = selEnd - selStart;
+        const total = hours * PRICE_PER_HOUR;
+        const minOk = hours >= MIN_HOURS;
+        quoteWrap.style.display = "";
+        quoteLine.textContent =
+          (minOk ? "" : ("minimum is " + MIN_HOURS + " hours. ")) +
+          ("estimated total: $" + total + " (" + hours + " hr × $" + PRICE_PER_HOUR + ")");
+      }
+
       function setSelection(startHour, endHour){
         selStart = (startHour == null) ? null : Number(startHour);
         selEnd = (endHour == null) ? null : Number(endHour);
@@ -1974,6 +2215,7 @@
         syncSelectsFromSelection();
         renderTiles();
         updateTimeSummary();
+        updateQuote();
       }
 
       function syncSelectionFromSelects(){
@@ -1989,6 +2231,7 @@
         }
         renderTiles();
         updateTimeSummary();
+        updateQuote();
       }
 
       function syncSelectsFromSelection(){
@@ -2091,6 +2334,33 @@
         dateEl.value = (t < min) ? min : t;
       }
 
+      function setMinHoursLabel(){
+        setText(minHoursLabel, String(MIN_HOURS) + " hours");
+      }
+
+      function setDepositButtons(){
+        if(!depositWrap) return;
+        const hasStripe = !!(STRIPE_DEPOSIT_LINK && STRIPE_DEPOSIT_LINK.trim());
+        const hasPaypal = !!(PAYPAL_DEPOSIT_LINK && PAYPAL_DEPOSIT_LINK.trim());
+        if(!hasStripe && !hasPaypal){
+          depositWrap.style.display = "none";
+          return;
+        }
+        depositWrap.style.display = "";
+        if(depositStripe){
+          depositStripe.style.display = hasStripe ? "" : "none";
+          if(hasStripe) depositStripe.href = STRIPE_DEPOSIT_LINK.trim();
+        }
+        if(depositPaypal){
+          depositPaypal.style.display = hasPaypal ? "" : "none";
+          if(hasPaypal){
+            const base = PAYPAL_DEPOSIT_LINK.trim().replace(/\/+$/,"");
+            const withAmount = /paypal\.me\/.+\/\d+(\.\d+)?$/i.test(base) ? base : (base + "/" + String(DEPOSIT_AMOUNT));
+            depositPaypal.href = withAmount;
+          }
+        }
+      }
+
       function buildStartOptions(){
         const prev = startEl.value;
         startEl.innerHTML = "";
@@ -2183,6 +2453,135 @@
         return true;
       }
 
+      function isFullyBooked(busySet){
+        let count = 0;
+        for(let h = START_HOUR; h < END_HOUR; h++){
+          if(busySet.has(timeLabel(h))) count++;
+        }
+        return count >= (END_HOUR - START_HOUR);
+      }
+
+      async function getBusyForDate(date){
+        if(dayCache.has(date)) return dayCache.get(date);
+        let set = new Set();
+        if(API_URL && API_URL.indexOf("PASTE_") !== 0){
+          try{
+            const data = await jsonp(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
+            if(data && data.ok && Array.isArray(data.busy)) set = new Set(data.busy);
+          } catch(e){
+            set = new Set();
+          }
+        }
+        const info = { busy: set, fullyBooked: isFullyBooked(set) };
+        dayCache.set(date, info);
+        return info;
+      }
+
+      function daysInMonth(y, m0){
+        return new Date(y, m0 + 1, 0).getDate();
+      }
+
+      function monthLabel(y, m0){
+        const d = new Date(y, m0, 1);
+        return d.toLocaleString(undefined, { month: "long", year: "numeric" });
+      }
+
+      function setCalLegend(){
+        if(!calLegend) return;
+        calLegend.innerHTML =
+          '<span class="timeLegendItem"><span class="timeSwatch timeSwatch--avail"></span>available day</span>' +
+          '<span class="timeLegendItem"><span class="timeSwatch timeSwatch--busy"></span>fully booked day</span>' +
+          '<span class="timeLegendItem"><span class="timeSwatch timeSwatch--sel"></span>selected</span>';
+      }
+
+      async function renderCalendar(y, m0){
+        if(!calGrid || !calMonthEl) return;
+        calYear = y; calMonth = m0;
+        calMonthEl.textContent = monthLabel(y, m0);
+        setCalLegend();
+
+        const today = isoToday();
+        const totalDays = daysInMonth(y, m0);
+        const firstDow = new Date(y, m0, 1).getDay(); // 0 Sun
+
+        calGrid.innerHTML = "";
+        const cells = [];
+        for(let i=0; i<42; i++){
+          const cell = document.createElement("button");
+          cell.type = "button";
+          cell.className = "calDay";
+          cell.disabled = true;
+          cell.textContent = "";
+          cells.push(cell);
+          calGrid.appendChild(cell);
+        }
+
+        for(let day=1; day<=totalDays; day++){
+          const idx = firstDow + (day - 1);
+          const date = y + "-" + String(m0 + 1).padStart(2,"0") + "-" + String(day).padStart(2,"0");
+          const cell = cells[idx];
+          cell.textContent = String(day);
+          cell.disabled = (date < today);
+          cell.dataset.date = date;
+          cell.classList.toggle("calDay--sel", date === dateEl.value);
+          cell.classList.add("calDay--loading");
+
+          cell.addEventListener("click", async ()=>{
+            if(cell.disabled) return;
+            dateEl.value = date;
+            await loadBusy();
+            buildStartOptions();
+            rebuildEndOptions();
+            syncSelectionFromSelects();
+            await updateCalHighlights();
+          });
+        }
+
+        await updateCalHighlights();
+      }
+
+      async function updateCalHighlights(){
+        if(!calGrid) return;
+        const buttons = Array.from(calGrid.querySelectorAll(".calDay[data-date]"));
+        if(!buttons.length) return;
+
+        setText(calMsg, "loading availability…");
+        const queue = buttons.slice();
+        const limit = 5;
+        let active = 0;
+        let done = 0;
+
+        await new Promise((resolve)=>{
+          const pump = ()=>{
+            while(active < limit && queue.length){
+              const btn = queue.shift();
+              active++;
+              const date = btn.dataset.date;
+              getBusyForDate(date).then((info)=>{
+                btn.classList.remove("calDay--loading");
+                btn.classList.toggle("calDay--busy", info.fullyBooked);
+                btn.classList.toggle("calDay--avail", !info.fullyBooked);
+                btn.classList.toggle("calDay--sel", date === dateEl.value);
+
+                if(date === dateEl.value && waitlistCard){
+                  waitlistCard.style.display = info.fullyBooked ? "" : "none";
+                }
+              }).finally(()=>{
+                active--;
+                done++;
+                if(done >= buttons.length){
+                  setText(calMsg, "");
+                  resolve();
+                } else {
+                  pump();
+                }
+              });
+            }
+          };
+          pump();
+        });
+      }
+
       async function loadBusy(){
         msgEl.textContent = "";
         busy = new Set();
@@ -2203,6 +2602,9 @@
         } catch(e){
           busy = new Set();
         }
+
+        dayCache.set(date, { busy, fullyBooked: isFullyBooked(busy) });
+        if(waitlistCard) waitlistCard.style.display = isFullyBooked(busy) ? "" : "none";
       }
 
       function validate(){
@@ -2244,6 +2646,19 @@
         const e = Number(endEl.value);
         if(!Number.isFinite(s) || !Number.isFinite(e) || e <= s) problems.push("select a valid time range");
         else if(!isRangeFree(s, e)) problems.push("that time is already booked");
+        else {
+          const hours = e - s;
+          if(hours < MIN_HOURS) problems.push("minimum is " + MIN_HOURS + " hours");
+        }
+
+        if(agreeEl && !agreeEl.checked){
+          problems.push("confirm studio rules");
+          agreeEl.classList.add("isInvalid");
+          agreeEl.setAttribute("aria-invalid","true");
+        } else if(agreeEl){
+          agreeEl.classList.remove("isInvalid");
+          agreeEl.removeAttribute("aria-invalid");
+        }
 
         if(problems.length){
           // Keep button text consistent in case a prior attempt changed it.
@@ -2318,6 +2733,9 @@
         q.set("time", timeLabel(sHour));
         q.set("durationMinutes", String(durationMinutes));
         q.set("notes", String(notesEl.value || "").trim());
+        q.set("minHours", String(MIN_HOURS));
+        q.set("agreedRules", agreeEl && agreeEl.checked ? "yes" : "no");
+        q.set("depositAmount", String(DEPOSIT_AMOUNT));
 
         try{
           const data = await jsonp(API_URL + "?" + q.toString());
@@ -2350,12 +2768,40 @@
       buildStartOptions();
       rebuildEndOptions();
       syncSelectionFromSelects();
+      updateQuote();
+      setMinHoursLabel();
+      setDepositButtons();
+
+      // Calendar init
+      try{
+        const d = new Date(dateEl.value || isoToday());
+        renderCalendar(d.getFullYear(), d.getMonth());
+      } catch(e){}
+
+      if(calPrev){
+        calPrev.addEventListener("click", ()=>{
+          if(calYear == null || calMonth == null) return;
+          const d = new Date(calYear, calMonth, 1);
+          d.setMonth(d.getMonth() - 1);
+          renderCalendar(d.getFullYear(), d.getMonth());
+        });
+      }
+
+      if(calNext){
+        calNext.addEventListener("click", ()=>{
+          if(calYear == null || calMonth == null) return;
+          const d = new Date(calYear, calMonth, 1);
+          d.setMonth(d.getMonth() + 1);
+          renderCalendar(d.getFullYear(), d.getMonth());
+        });
+      }
 
       dateEl.addEventListener("change", async ()=>{
         await loadBusy();
         buildStartOptions();
         rebuildEndOptions();
         syncSelectionFromSelects();
+        if(calYear != null && calMonth != null) updateCalHighlights();
       });
 
       startEl.addEventListener("change", ()=>{
@@ -2376,6 +2822,7 @@
         buildStartOptions();
         rebuildEndOptions();
         syncSelectionFromSelects();
+        if(calYear != null && calMonth != null) updateCalHighlights();
       });
 
       setTimezoneLabel();
@@ -2408,6 +2855,46 @@
             } catch(e){}
           });
         }
+      }
+
+      // Waitlist submission (requires backend support: mode=waitlist)
+      if(wlForm){
+        wlForm.addEventListener("submit", async (e)=>{
+          e.preventDefault();
+          if(!API_URL || API_URL.indexOf("PASTE_") === 0){
+            setText(wlMsg, "backend not set");
+            return;
+          }
+          const date = dateEl.value;
+          const email = (wlEmail && wlEmail.value || "").trim();
+          const phone = (wlPhone && wlPhone.value || "").trim();
+          const ig = (wlIg && wlIg.value || "").trim();
+          const hrs = (wlHours && wlHours.value || "").trim();
+          if(!date){ setText(wlMsg, "pick a date first"); return; }
+          if(!email && !phone && !ig){ setText(wlMsg, "enter email or phone or instagram"); return; }
+          if(!hrs){ setText(wlMsg, "select hours"); return; }
+
+          setText(wlMsg, "joining…");
+          const q = new URLSearchParams();
+          q.set("mode","waitlist");
+          q.set("date", date);
+          q.set("hours", hrs);
+          q.set("email", email);
+          q.set("phone", phone);
+          q.set("instagram", ig);
+
+          try{
+            const data = await jsonp(API_URL + "?" + q.toString());
+            if(data && data.ok){
+              setText(wlMsg, "added to waitlist — you’ll be notified if a slot opens");
+              wlForm.reset();
+            } else {
+              setText(wlMsg, (data && data.error) ? data.error : "error, try again");
+            }
+          } catch(err){
+            setText(wlMsg, "error, try again");
+          }
+        });
       }
     })();
   </script>
