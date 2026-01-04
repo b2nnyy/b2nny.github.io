@@ -449,7 +449,7 @@
         0 0 28px rgba(80,190,255,0.10);
       position: sticky;
       isolation: isolate;
-      overflow: hidden;
+      overflow: visible; /* allow dropdown to render outside the bar */
     }
 
     .nav::before{
@@ -2028,6 +2028,7 @@
       function setOpen(open){
         nav.classList.toggle("navOpen", !!open);
         btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.textContent = open ? "close" : "menu";
       }
 
       btn.addEventListener("click", ()=>{
