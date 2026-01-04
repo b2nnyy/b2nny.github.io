@@ -84,15 +84,27 @@
         Arial,
         sans-serif;
       color: var(--fg);
+      /* Keep body background solid so it doesn't "shift" as the page scrolls (body is tall). */
+      background: linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    /* Base fluid color field anchored to the viewport (so it's consistent while scrolling). */
+    .baseFX{
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      pointer-events: none;
       background:
         radial-gradient(1100px 900px at 18% 12%, var(--cyan), transparent 55%),
         radial-gradient(900px 800px at 85% 18%, var(--lime), transparent 58%),
         radial-gradient(1000px 900px at 70% 95%, var(--mag), transparent 60%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
-      overflow-x:hidden;
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
+      filter: saturate(120%);
+      opacity: 1;
     }
 
     html{
@@ -1267,6 +1279,7 @@
 </head>
 
 <body>
+  <div class="baseFX"></div>
   <div class="colorFX"></div>
   <div class="bgFX"></div>
   <div class="scanFX"></div>
