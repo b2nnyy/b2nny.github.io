@@ -441,10 +441,12 @@
       padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.18);
-      background:
-        radial-gradient(220px 160px at 12% 0%, rgba(255,255,255,0.10), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.84), rgba(7,8,11,0.96));
-      box-shadow: var(--shadowA), 0 14px 34px rgba(0,0,0,0.72);
+      background: rgba(7,8,11,0.92);
+      box-shadow:
+        var(--shadowA),
+        0 14px 34px rgba(0,0,0,0.72),
+        0 0 0 1px rgba(80,190,255,0.10),
+        0 0 28px rgba(80,190,255,0.10);
       position: sticky;
       isolation: isolate;
       overflow: hidden;
@@ -456,18 +458,7 @@
       inset:-2px;
       z-index:-1;
       border-radius: 999px;
-      background: conic-gradient(from 180deg,
-        rgba(80,190,255,0.00),
-        var(--holoA),
-        var(--holoB),
-        var(--holoC),
-        var(--holoA),
-        rgba(80,190,255,0.00)
-      );
-      opacity: 0.55;
-      filter: blur(12px);
-      animation: holoShift 10s ease-in-out infinite alternate;
-      pointer-events:none;
+      display:none; /* remove swirly holo fill */
     }
 
     .nav::after{
@@ -475,12 +466,7 @@
       position:absolute;
       inset:0;
       border-radius: 999px;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.14) 45%, transparent 70%);
-      transform: translateX(-120%);
-      opacity: 0;
-      animation: scanSweep 6.5s ease-in-out infinite;
-      pointer-events:none;
-      mix-blend-mode: overlay;
+      display:none; /* remove sweep fill */
     }
 
     .nav a{
@@ -508,7 +494,7 @@
       white-space:nowrap;
       padding-left: 10px;
       padding-right: 10px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
       border-color: rgba(255,255,255,0.14);
     }
 
@@ -549,9 +535,7 @@
       padding: 10px;
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,0.16);
-      background:
-        radial-gradient(260px 190px at 12% 0%, rgba(255,255,255,0.10), transparent 62%),
-        linear-gradient(180deg, rgba(7,8,11,0.88), rgba(7,8,11,0.97));
+      background: rgba(7,8,11,0.96);
       box-shadow: var(--shadowA), 0 18px 46px rgba(0,0,0,0.78);
       overflow:hidden;
     }
@@ -563,16 +547,7 @@
       position:absolute;
       inset:-2px;
       border-radius: 22px;
-      background: conic-gradient(from 180deg,
-        rgba(80,190,255,0.00),
-        rgba(80,190,255,0.30),
-        rgba(95,255,140,0.22),
-        rgba(80,190,255,0.30),
-        rgba(80,190,255,0.00)
-      );
-      opacity: 0.22;
-      filter: blur(14px);
-      pointer-events:none;
+      display:none; /* remove swirly holo fill */
     }
 
     .navMenuGrid{
