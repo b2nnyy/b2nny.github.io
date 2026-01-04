@@ -170,13 +170,19 @@
           transparent 1px,
           transparent 44px
         );
+      /* Animate background-position (seamless) instead of moving the whole layer (which can reveal edges). */
+      background-position: 0 0, 0 0, 0 0, 0 0;
       animation: driftGrid 13s linear infinite;
     }
 
     @keyframes driftGrid{
-      0%{ transform: translate3d(0,0,0); }
-      50%{ transform: translate3d(-22px, 14px, 0); }
-      100%{ transform: translate3d(0,0,0); }
+      0%{
+        background-position: 0 0, 0 0, 0 0, 0 0;
+      }
+      100%{
+        /* 44px matches the repeating grid spacing so it loops forever with no seams */
+        background-position: 0 0, 0 0, -44px 44px, 44px -44px;
+      }
     }
 
     .scanFX{
