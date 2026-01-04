@@ -517,6 +517,7 @@
       user-select:none;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      text-decoration:none;
     }
 
     .navToggle:hover{ border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.07); }
@@ -526,57 +527,7 @@
       box-shadow: var(--shadowA), 0 10px 24px rgba(0,0,0,0.55), 0 0 0 3px var(--focusRing);
     }
 
-    .navMenu{
-      position:absolute;
-      left: 0;
-      right: 0;
-      top: calc(100% + 10px);
-      display:none;
-      padding: 10px;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(7,8,11,0.96);
-      box-shadow: var(--shadowA), 0 18px 46px rgba(0,0,0,0.78);
-      overflow:hidden;
-    }
-
-    .nav.navOpen .navMenu{ display:block; }
-
-    .navMenu::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius: 22px;
-      display:none; /* remove swirly holo fill */
-    }
-
-    .navMenuGrid{
-      position:relative;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    @media (max-width: 420px){
-      .navMenuGrid{ grid-template-columns: 1fr; }
-    }
-
-    .navMenu a{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 10px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
-      opacity: 0.95;
-    }
-
-    .navMenu a:hover{
-      opacity: 1;
-      border-color: rgba(255,255,255,0.26);
-      background: rgba(255,255,255,0.07);
-    }
+    /* dropdown menu removed; top-right button is now "back to top" */
 
     .hero{
       margin-top: 18px;
@@ -1308,15 +1259,7 @@
   <main class="wrap" id="top">
     <nav class="nav" aria-label="Primary" id="siteNav">
       <a class="navBrand" href="#top">b2nny</a>
-      <button class="navToggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu">menu</button>
-      <div class="navMenu" id="navMenu">
-        <div class="navMenuGrid">
-          <a href="#releases">releases <span class="pill">01</span></a>
-          <a href="#links">links <span class="pill">02</span></a>
-          <a href="#book">booking <span class="pill">03</span></a>
-          <a href="#contact">contact <span class="pill">04</span></a>
-        </div>
-      </div>
+      <a class="navToggle" id="navTop" href="#top">top</a>
     </nav>
 
     <header class="hero">
@@ -2019,46 +1962,7 @@
       }
     })();
 
-    (function navDropdown(){
-      const nav = document.getElementById("siteNav");
-      const btn = document.getElementById("navToggle");
-      const menu = document.getElementById("navMenu");
-      if(!nav || !btn || !menu) return;
-
-      function setOpen(open){
-        nav.classList.toggle("navOpen", !!open);
-        btn.setAttribute("aria-expanded", open ? "true" : "false");
-        btn.textContent = open ? "close" : "menu";
-      }
-
-      btn.addEventListener("click", ()=>{
-        const open = !nav.classList.contains("navOpen");
-        setOpen(open);
-      });
-
-      // Close when clicking a menu link
-      menu.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener("click", ()=> setOpen(false));
-      });
-
-      // Close on outside click
-      document.addEventListener("click", (e)=>{
-        if(!nav.classList.contains("navOpen")) return;
-        if(nav.contains(e.target)) return;
-        setOpen(false);
-      });
-
-      // Close on Escape
-      document.addEventListener("keydown", (e)=>{
-        if(e.key !== "Escape") return;
-        if(!nav.classList.contains("navOpen")) return;
-        setOpen(false);
-        try{ btn.focus(); } catch(err){}
-      });
-
-      // Close dropdown on hash changes (navigation)
-      window.addEventListener("hashchange", ()=> setOpen(false));
-    })();
+    // dropdown menu removed
 
     (function booking(){
       const formCard = document.getElementById("bookFormCard");
