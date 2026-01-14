@@ -929,6 +929,55 @@
       margin-bottom: 10px;
     }
 
+    .gearDrop{
+      border-radius: 16px;
+    }
+
+    .gearDrop summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      opacity: 0.92;
+      margin-bottom: 10px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+
+    .gearDrop summary::-webkit-details-marker{ display:none; }
+    .gearDrop summary::marker{ content:""; }
+
+    .gearDrop summary::after{
+      content:"▾";
+      opacity: 0.75;
+      transform: translateY(-1px);
+      transition: transform 140ms ease, opacity 140ms ease;
+    }
+
+    .gearDrop[open] summary::after{
+      transform: rotate(-180deg) translateY(1px);
+      opacity: 0.95;
+    }
+
+    .gearDrop summary:focus-visible{
+      outline:none;
+      box-shadow: var(--shadowA), 0 0 0 3px var(--focusRing);
+      border-radius: 14px;
+      padding: 6px 8px;
+      margin-left: -8px;
+      margin-right: -8px;
+    }
+
+    .gearDrop .gearList{ margin-top: 10px; }
+
     .gearList{
       display:grid;
       gap: 8px;
@@ -1390,25 +1439,27 @@
         </div>
 
         <div class="gear" aria-label="Studio gear">
-          <h3>gear</h3>
-          <ul class="gearList">
-            <li class="gearItem">
-              <span><strong>TLM 103</strong><small>microphone</small></span>
-              <span class="pill">Mic</span>
-            </li>
-            <li class="gearItem">
-              <span><strong>WA73</strong><small>mic preamp</small></span>
-              <span class="pill">Pre</span>
-            </li>
-            <li class="gearItem">
-              <span><strong>dbx 160A</strong><small>compressor</small></span>
-              <span class="pill">Comp</span>
-            </li>
-            <li class="gearItem">
-              <span><strong>HS5</strong><small>monitors</small></span>
-              <span class="pill">Monitors</span>
-            </li>
-          </ul>
+          <details class="gearDrop">
+            <summary>gear</summary>
+            <ul class="gearList">
+              <li class="gearItem">
+                <span><strong>TLM 103</strong><small>microphone</small></span>
+                <span class="pill">Mic</span>
+              </li>
+              <li class="gearItem">
+                <span><strong>WA73</strong><small>mic preamp</small></span>
+                <span class="pill">Pre</span>
+              </li>
+              <li class="gearItem">
+                <span><strong>dbx 160A</strong><small>compressor</small></span>
+                <span class="pill">Comp</span>
+              </li>
+              <li class="gearItem">
+                <span><strong>HS5</strong><small>monitors</small></span>
+                <span class="pill">Monitors</span>
+              </li>
+            </ul>
+          </details>
         </div>
 
         <form id="bkForm" novalidate>
