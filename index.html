@@ -606,6 +606,43 @@
       opacity: 0.85;
     }
 
+    /* collapsible section (used for booking) */
+    .secDropdown{ margin: 0; }
+
+    summary.secTitle{
+      list-style: none;
+      cursor: pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    summary.secTitle::-webkit-details-marker{ display:none; }
+    summary.secTitle::marker{ content:""; }
+
+    .secTitleRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .secChevron{
+      display:inline-block;
+      transform: rotate(0deg);
+      transition: transform 160ms ease;
+      opacity: 0.75;
+      font-size: 14px;
+      line-height: 1;
+      margin-top: -1px;
+    }
+
+    details[open] > summary .secChevron{ transform: rotate(180deg); }
+
+    .secDropdownBody{
+      padding-top: 2px;
+    }
+
     .cardGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -1318,6 +1355,14 @@
 
     <section class="pageSection" id="releases" aria-label="Releases">
       <div class="secTitle">releases</div>
+      <div class="cta" style="margin:-2px 0 12px;">
+        <a
+          class="btn btn--pill"
+          href="https://distrokid.com/hyperfollow/b2nny/party-going?ref=release"
+          target="_blank"
+          rel="noopener"
+        >pre-save “party going”</a>
+      </div>
       <div class="cardGrid">
         <article class="card releaseCard" aria-label="Pop Dump release">
           <div class="releaseTop">
@@ -1378,8 +1423,16 @@
     </section>
 
     <section class="pageSection" id="book" aria-label="Booking">
-      <div class="secTitle">booking</div>
-      <div class="card" id="bookFormCard">
+      <details class="secDropdown" id="bookDropdown">
+        <summary class="secTitle">
+          <span class="secTitleRow">
+            <span>booking</span>
+            <span class="secChevron" aria-hidden="true">▾</span>
+          </span>
+        </summary>
+
+        <div class="secDropdownBody">
+          <div class="card" id="bookFormCard">
         <div class="title2">request booking</div>
         <div class="sub2">pick a date then pick a start and end time</div>
         <div class="tiny">no payment here. I will contact you to confirm.</div>
@@ -1582,6 +1635,8 @@
           <button class="btn" id="bkAnother">book another session</button>
         </div>
       </div>
+        </div>
+      </details>
     </section>
 
     <section class="pageSection" id="contact" aria-label="Contact">
@@ -1869,6 +1924,11 @@
             desc: "Book a studio session with b2nny — request a date and time, and I’ll confirm with you.",
             url: BASE_URL + "#book"
           });
+          // If booking is collapsed, expand it when someone navigates directly to #book.
+          const dd = document.getElementById("bookDropdown");
+          if(dd && dd.tagName && dd.tagName.toLowerCase() === "details"){
+            dd.open = true;
+          }
           return;
         }
 
