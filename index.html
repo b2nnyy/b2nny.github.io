@@ -606,43 +606,6 @@
       opacity: 0.85;
     }
 
-    /* collapsible section (used for booking) */
-    .secDropdown{ margin: 0; }
-
-    summary.secTitle{
-      list-style: none;
-      cursor: pointer;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    summary.secTitle::-webkit-details-marker{ display:none; }
-    summary.secTitle::marker{ content:""; }
-
-    .secTitleRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-    }
-
-    .secChevron{
-      display:inline-block;
-      transform: rotate(0deg);
-      transition: transform 160ms ease;
-      opacity: 0.75;
-      font-size: 14px;
-      line-height: 1;
-      margin-top: -1px;
-    }
-
-    details[open] > summary .secChevron{ transform: rotate(180deg); }
-
-    .secDropdownBody{
-      padding-top: 2px;
-    }
-
     .cardGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -1119,30 +1082,6 @@
       filter: saturate(118%);
     }
 
-    /* extra-prominent CTA (used for Party Going pre-save) */
-    .btn--hot{
-      border-color: rgba(255,255,255,0.42);
-      background:
-        radial-gradient(200px 140px at 18% 10%, rgba(255,255,255,0.28), transparent 62%),
-        linear-gradient(135deg, rgba(255,70,190,0.58), rgba(80,190,255,0.52), rgba(95,255,140,0.44));
-      box-shadow:
-        var(--shadowA),
-        0 18px 44px rgba(0,0,0,0.78),
-        0 0 36px rgba(80,190,255,0.20),
-        0 0 62px rgba(255,70,190,0.16);
-      filter: saturate(160%) brightness(1.04);
-    }
-
-    .btn--hot:hover{
-      border-color: rgba(255,255,255,0.55);
-      filter: saturate(175%) brightness(1.06);
-      box-shadow:
-        var(--shadowA),
-        0 18px 44px rgba(0,0,0,0.78),
-        0 0 44px rgba(80,190,255,0.25),
-        0 0 78px rgba(255,70,190,0.22);
-    }
-
     .msg{
       font-size: 13px;
       opacity: 0.92;
@@ -1413,7 +1352,7 @@
         <p class="heroBlurb">Stream the latest drops, hit the socials, or request a studio session.</p>
 
         <div class="heroCtas">
-          <a class="btn btn--pill btn--hot" href="https://distrokid.com/hyperfollow/b2nny/party-going?ref=release" target="_blank" rel="noopener">pre-save “party going”</a>
+          <a class="btn btn--pill btn--hot" href="https://distrokid.com/hyperfollow/b2nny/stressed?ref=release" target="_blank" rel="noopener">pre-save "stressed"</a>
           <a class="btn btn--pill" href="#releases">listen</a>
           <a class="btn btn--pill btn--ghost" href="#book">book a session</a>
           <button class="btn btn--pill btn--ghost" id="homeShare" type="button" style="display:none;">share</button>
@@ -1428,101 +1367,69 @@
     </header>
 
     <section class="pageSection" id="releases" aria-label="Releases">
-      <details class="secDropdown" id="releasesDropdown">
-        <summary class="secTitle">
-          <span class="secTitleRow">
-            <span>releases</span>
-            <span class="secChevron" aria-hidden="true">▾</span>
-          </span>
-        </summary>
-
-        <div class="secDropdownBody">
-          <div class="cta" style="margin:-2px 0 12px;">
-            <a class="btn btn--pill btn--hot" href="https://distrokid.com/hyperfollow/b2nny/party-going?ref=release" target="_blank" rel="noopener">pre-save “party going”</a>
+      <div class="secTitle">releases</div>
+      <div class="cardGrid">
+        <article class="card releaseCard" aria-label="Pop Dump release">
+          <div class="releaseTop">
+            <div>
+              <div class="releaseTitle">Pop Dump</div>
+              <div class="releaseMeta">Pick a platform and stream the EP.</div>
+            </div>
+            <span class="pill">EP</span>
           </div>
-
-          <div class="cardGrid">
-            <article class="card releaseCard" aria-label="Pop Dump release">
-              <div class="releaseTop">
-                <div>
-                  <div class="releaseTitle">Pop Dump</div>
-                  <div class="releaseMeta">Pick a platform and stream the EP.</div>
-                </div>
-                <span class="pill">EP</span>
-              </div>
-              <div class="releaseActions">
-                <a class="btn btn--pill" href="#pop">open</a>
-              </div>
-            </article>
-
-            <article class="card releaseCard" aria-label="Rap Dump release">
-              <div class="releaseTop">
-                <div>
-                  <div class="releaseTitle">Rap Dump</div>
-                  <div class="releaseMeta">Pick a platform and stream the EP.</div>
-                </div>
-                <span class="pill">EP</span>
-              </div>
-              <div class="releaseActions">
-                <a class="btn btn--pill" href="#rap">open</a>
-              </div>
-            </article>
+          <div class="releaseActions">
+            <a class="btn btn--pill" href="#pop">open</a>
           </div>
-        </div>
-      </details>
+        </article>
+
+        <article class="card releaseCard" aria-label="Rap Dump release">
+          <div class="releaseTop">
+            <div>
+              <div class="releaseTitle">Rap Dump</div>
+              <div class="releaseMeta">Pick a platform and stream the EP.</div>
+            </div>
+            <span class="pill">EP</span>
+          </div>
+          <div class="releaseActions">
+            <a class="btn btn--pill" href="#rap">open</a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="pageSection" id="links" aria-label="Official links">
-      <details class="secDropdown" id="linksDropdown">
-        <summary class="secTitle">
-          <span class="secTitleRow">
-            <span>links</span>
-            <span class="secChevron" aria-hidden="true">▾</span>
-          </span>
-        </summary>
-
-        <div class="secDropdownBody">
-          <div class="socialRow">
-            <a class="iconLink" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
-              <img src="Spotify.png" alt="Spotify" width="22" height="22" loading="lazy" decoding="async">
-              <strong>Spotify</strong>
-            </a>
-            <a class="iconLink" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
-              <img src="Apple.png" alt="Apple Music" width="22" height="22" loading="lazy" decoding="async">
-              <strong>Apple Music</strong>
-            </a>
-            <a class="iconLink" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
-              <img src="Soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy" decoding="async">
-              <strong>SoundCloud</strong>
-            </a>
-            <a class="iconLink" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
-              <img src="Youtube.jpg" alt="YouTube" width="22" height="22" loading="lazy" decoding="async">
-              <strong>YouTube</strong>
-            </a>
-            <a class="iconLink" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
-              <img src="Instagram.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
-              <strong>Instagram</strong>
-            </a>
-            <a class="iconLink" href="https://x.com/b2nnny" target="_blank" rel="noopener">
-              <img src="Twitter.jpg" alt="X" width="22" height="22" loading="lazy" decoding="async">
-              <strong>X</strong>
-            </a>
-          </div>
-        </div>
-      </details>
+      <div class="secTitle">links</div>
+      <div class="socialRow">
+        <a class="iconLink" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
+          <img src="Spotify.png" alt="Spotify" width="22" height="22" loading="lazy" decoding="async">
+          <strong>Spotify</strong>
+        </a>
+        <a class="iconLink" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
+          <img src="Apple.png" alt="Apple Music" width="22" height="22" loading="lazy" decoding="async">
+          <strong>Apple Music</strong>
+        </a>
+        <a class="iconLink" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
+          <img src="Soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy" decoding="async">
+          <strong>SoundCloud</strong>
+        </a>
+        <a class="iconLink" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
+          <img src="Youtube.jpg" alt="YouTube" width="22" height="22" loading="lazy" decoding="async">
+          <strong>YouTube</strong>
+        </a>
+        <a class="iconLink" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
+          <img src="Instagram.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
+          <strong>Instagram</strong>
+        </a>
+        <a class="iconLink" href="https://x.com/b2nnny" target="_blank" rel="noopener">
+          <img src="Twitter.jpg" alt="X" width="22" height="22" loading="lazy" decoding="async">
+          <strong>X</strong>
+        </a>
+      </div>
     </section>
 
     <section class="pageSection" id="book" aria-label="Booking">
-      <details class="secDropdown" id="bookDropdown">
-        <summary class="secTitle">
-          <span class="secTitleRow">
-            <span>booking</span>
-            <span class="secChevron" aria-hidden="true">▾</span>
-          </span>
-        </summary>
-
-        <div class="secDropdownBody">
-          <div class="card" id="bookFormCard">
+      <div class="secTitle">booking</div>
+      <div class="card" id="bookFormCard">
         <div class="title2">request booking</div>
         <div class="sub2">pick a date then pick a start and end time</div>
         <div class="tiny">no payment here. I will contact you to confirm.</div>
@@ -1727,31 +1634,19 @@
           <button class="btn" id="bkAnother">book another session</button>
         </div>
       </div>
-        </div>
-      </details>
     </section>
 
     <section class="pageSection" id="contact" aria-label="Contact">
-      <details class="secDropdown" id="contactDropdown">
-        <summary class="secTitle">
-          <span class="secTitleRow">
-            <span>contact</span>
-            <span class="secChevron" aria-hidden="true">▾</span>
-          </span>
-        </summary>
-
-        <div class="secDropdownBody">
-          <div class="card">
-            <div class="title2">reach out</div>
-            <div class="sub2">for sessions, features, or questions</div>
-            <div class="cta">
-              <a class="btn btn--pill" href="#book">request booking</a>
-              <a class="btn btn--pill btn--ghost" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">instagram dm</a>
-            </div>
-            <div class="tiny" style="margin-top:10px;">if the booking form ever bugs out, hit IG and I’ll get you scheduled.</div>
-          </div>
+      <div class="secTitle">contact</div>
+      <div class="card">
+        <div class="title2">reach out</div>
+        <div class="sub2">for sessions, features, or questions</div>
+        <div class="cta">
+          <a class="btn btn--pill" href="#book">request booking</a>
+          <a class="btn btn--pill btn--ghost" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">instagram dm</a>
         </div>
-      </details>
+        <div class="tiny" style="margin-top:10px;">if the booking form ever bugs out, hit IG and I’ll get you scheduled.</div>
+      </div>
     </section>
 
     <footer style="margin-top:22px;">
@@ -2026,11 +1921,6 @@
             desc: "Book a studio session with b2nny — request a date and time, and I’ll confirm with you.",
             url: BASE_URL + "#book"
           });
-          // If booking is collapsed, expand it when someone navigates directly to #book.
-          const dd = document.getElementById("bookDropdown");
-          if(dd && dd.tagName && dd.tagName.toLowerCase() === "details"){
-            dd.open = true;
-          }
           return;
         }
 
@@ -2973,3 +2863,4 @@
 </body>
 </html>
 
+ 
