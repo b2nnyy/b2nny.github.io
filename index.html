@@ -452,6 +452,75 @@
       margin-top: 28px;
     }
 
+    /* Section dropdown styles */
+    .secDrop{
+      border-radius: 20px;
+      border: 1px solid var(--glassBorder);
+      background: var(--glass);
+      box-shadow: var(--shadowC);
+      overflow: hidden;
+    }
+
+    .secDrop summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background 150ms ease;
+    }
+
+    .secDrop summary::-webkit-details-marker{ display: none; }
+    .secDrop summary::marker{ content: ""; }
+
+    .secDrop summary:hover{
+      background: rgba(180,150,255,0.08);
+    }
+
+    .secDrop summary:focus-visible{
+      outline: none;
+      box-shadow: inset 0 0 0 3px var(--focusRing);
+    }
+
+    .secDrop .secTitle{
+      margin: 0;
+      pointer-events: none;
+    }
+
+    .secDrop .secTitle::after{
+      display: none;
+    }
+
+    .secDrop .secChevron{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(180,150,255,0.15), rgba(130,200,255,0.15));
+      color: var(--fg2);
+      font-size: 12px;
+      transition: transform 200ms ease, background 150ms ease;
+    }
+
+    .secDrop[open] .secChevron{
+      transform: rotate(180deg);
+      background: linear-gradient(135deg, rgba(255,127,127,0.20), rgba(180,150,255,0.20));
+    }
+
+    .secDropBody{
+      padding: 0 20px 20px;
+    }
+
+    .secDropBody > .card + .card{
+      margin-top: 14px;
+    }
+
     .secTitle{
       font-family: "Syne", sans-serif;
       font-size: 14px;
@@ -1180,6 +1249,48 @@
       *{ scroll-behavior: auto !important; transition: none !important; }
     }
 
+    /* Footer */
+    .siteFooter{
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(180,150,255,0.15);
+      text-align: center;
+    }
+
+    .footerLinks{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footerLinks a, .footerBtn{
+      color: var(--fg2);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+    }
+
+    .footerLinks a:hover, .footerBtn:hover{
+      color: var(--fg);
+      border-color: rgba(180,150,255,0.25);
+      background: rgba(180,150,255,0.08);
+    }
+
+    .footerDot{
+      color: var(--fg2);
+      opacity: 0.4;
+      font-size: 10px;
+    }
+
     @media (max-width: 480px){
       .pfp img{ width: 100px; height: 100px; }
       h1{ font-size: 28px; }
@@ -1198,7 +1309,7 @@
   <main class="wrap" id="top">
     <nav class="nav" aria-label="Primary" id="siteNav">
       <a class="navBrand" href="#top">b2nny</a>
-      <a class="navToggle" id="navTop" href="#top">top</a>
+      <a class="navToggle" href="#book">book</a>
     </nav>
 
     <header class="hero">
@@ -1215,89 +1326,100 @@
 
         <div class="heroCtas">
           <a class="btn btn--pill btn--hot" href="https://distrokid.com/hyperfollow/b2nny/stressed?ref=release" target="_blank" rel="noopener">pre-save "stressed"</a>
-          <a class="btn btn--pill" href="#releases">listen</a>
-          <a class="btn btn--pill btn--ghost" href="#book">book a session</a>
-          <button class="btn btn--pill btn--ghost" id="homeShare" type="button" style="display:none;">share</button>
-        </div>
-
-        <div class="cta" style="justify-content:center; margin-top:12px;">
-          <button class="btn btn--ghost" id="homeCopyLink" type="button">copy booking link</button>
-          <button class="btn btn--ghost" id="homeCopySpotify" type="button">copy spotify link</button>
-          <div class="msg" id="homeMsg" role="status" aria-live="polite"></div>
+          <a class="btn btn--pill" href="#book">book a session</a>
         </div>
       </div>
     </header>
 
     <section class="pageSection" id="releases" aria-label="Releases">
-      <div class="secTitle">releases</div>
-      <div class="cardGrid">
-        <article class="card releaseCard" aria-label="Pop Dump release">
-          <div class="releaseTop">
-            <div>
-              <div class="releaseTitle">Pop Dump</div>
-              <div class="releaseMeta">Pick a platform and stream the EP.</div>
-            </div>
-            <span class="pill">EP</span>
-          </div>
-          <div class="releaseActions">
-            <a class="btn btn--pill" href="#pop">open</a>
-          </div>
-        </article>
+      <details class="secDrop">
+        <summary>
+          <div class="secTitle">releases</div>
+          <span class="secChevron">▾</span>
+        </summary>
+        <div class="secDropBody">
+          <div class="cardGrid">
+            <article class="card releaseCard" aria-label="Pop Dump release">
+              <div class="releaseTop">
+                <div>
+                  <div class="releaseTitle">Pop Dump</div>
+                  <div class="releaseMeta">5 tracks • pop vibes</div>
+                </div>
+                <span class="pill">EP</span>
+              </div>
+              <div class="releaseActions">
+                <a class="btn btn--pill" href="#pop">stream</a>
+              </div>
+            </article>
 
-        <article class="card releaseCard" aria-label="Rap Dump release">
-          <div class="releaseTop">
-            <div>
-              <div class="releaseTitle">Rap Dump</div>
-              <div class="releaseMeta">Pick a platform and stream the EP.</div>
-            </div>
-            <span class="pill">EP</span>
+            <article class="card releaseCard" aria-label="Rap Dump release">
+              <div class="releaseTop">
+                <div>
+                  <div class="releaseTitle">Rap Dump</div>
+                  <div class="releaseMeta">5 tracks • rap vibes</div>
+                </div>
+                <span class="pill">EP</span>
+              </div>
+              <div class="releaseActions">
+                <a class="btn btn--pill" href="#rap">stream</a>
+              </div>
+            </article>
           </div>
-          <div class="releaseActions">
-            <a class="btn btn--pill" href="#rap">open</a>
-          </div>
-        </article>
-      </div>
+        </div>
+      </details>
     </section>
 
     <section class="pageSection" id="links" aria-label="Official links">
-      <div class="secTitle">links</div>
-      <div class="socialRow">
-        <a class="iconLink" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
-          <img src="Spotify.png" alt="Spotify" width="22" height="22" loading="lazy" decoding="async">
-          <strong>Spotify</strong>
-        </a>
-        <a class="iconLink" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
-          <img src="Apple.png" alt="Apple Music" width="22" height="22" loading="lazy" decoding="async">
-          <strong>Apple Music</strong>
-        </a>
-        <a class="iconLink" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
-          <img src="Soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy" decoding="async">
-          <strong>SoundCloud</strong>
-        </a>
-        <a class="iconLink" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
-          <img src="Youtube.jpg" alt="YouTube" width="22" height="22" loading="lazy" decoding="async">
-          <strong>YouTube</strong>
-        </a>
-        <a class="iconLink" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
-          <img src="Instagram.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
-          <strong>Instagram</strong>
-        </a>
-        <a class="iconLink" href="https://x.com/b2nnny" target="_blank" rel="noopener">
-          <img src="Twitter.jpg" alt="X" width="22" height="22" loading="lazy" decoding="async">
-          <strong>X</strong>
-        </a>
-      </div>
+      <details class="secDrop">
+        <summary>
+          <div class="secTitle">links</div>
+          <span class="secChevron">▾</span>
+        </summary>
+        <div class="secDropBody">
+          <div class="socialRow">
+            <a class="iconLink" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
+              <img src="Spotify.png" alt="Spotify" width="22" height="22" loading="lazy" decoding="async">
+              <strong>Spotify</strong>
+            </a>
+            <a class="iconLink" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
+              <img src="Apple.png" alt="Apple Music" width="22" height="22" loading="lazy" decoding="async">
+              <strong>Apple Music</strong>
+            </a>
+            <a class="iconLink" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
+              <img src="Soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy" decoding="async">
+              <strong>SoundCloud</strong>
+            </a>
+            <a class="iconLink" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
+              <img src="Youtube.jpg" alt="YouTube" width="22" height="22" loading="lazy" decoding="async">
+              <strong>YouTube</strong>
+            </a>
+            <a class="iconLink" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
+              <img src="Instagram.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
+              <strong>Instagram</strong>
+            </a>
+            <a class="iconLink" href="https://x.com/b2nnny" target="_blank" rel="noopener">
+              <img src="Twitter.jpg" alt="X" width="22" height="22" loading="lazy" decoding="async">
+              <strong>X</strong>
+            </a>
+          </div>
+        </div>
+      </details>
     </section>
 
     <section class="pageSection" id="book" aria-label="Booking">
-      <div class="secTitle">booking</div>
-      <div class="card" id="bookFormCard">
+      <details class="secDrop">
+        <summary>
+          <div class="secTitle">booking</div>
+          <span class="secChevron">▾</span>
+        </summary>
+        <div class="secDropBody">
+          <div class="card" id="bookFormCard">
         <div class="title2">request booking</div>
         <div class="sub2">pick a date then pick a start and end time</div>
         <div class="tiny">no payment here. I will contact you to confirm.</div>
 
         <div class="priceRow">
-          <strong>$50</strong>
+          <strong>$60</strong>
           <span>per hour</span>
         </div>
 
@@ -1432,87 +1554,79 @@
 
           <div class="cta">
             <button class="btn" id="bkSubmit" type="submit">request booking</button>
-            <button class="btn btn--ghost" id="bkCopyLink" type="button">copy booking link</button>
-            <button class="btn btn--ghost" id="bkCopySpotify" type="button">copy spotify link</button>
-            <button class="btn btn--ghost" id="bkShare" type="button" style="display:none;">share</button>
             <div class="msg" id="bkMsg" role="status" aria-live="polite"></div>
           </div>
 
           <div class="tiny" style="margin-top:10px;">
-            times shown in your local timezone: <span id="bkTz"></span><br>
-            booked time blocks will be unavailable
+            times shown in your local timezone: <span id="bkTz"></span>
           </div>
         </form>
       </div>
 
-      <div class="card" id="waitlistCard" style="display:none;">
-        <div class="title2">day is fully booked</div>
-        <div class="sub2">join the waitlist and get notified if a slot opens</div>
-        <form id="wlForm" novalidate>
-          <div style="height:10px;"></div>
-          <div class="grid3">
-            <div>
-              <label for="wlEmail">email (optional)</label>
-              <input id="wlEmail" type="email" autocomplete="email" />
-            </div>
-            <div>
-              <label for="wlPhone">phone (optional)</label>
-              <input id="wlPhone" type="tel" autocomplete="tel" inputmode="tel" />
-            </div>
-            <div>
-              <label for="wlIg">instagram (optional)</label>
-              <input id="wlIg" type="text" placeholder="@handle" autocomplete="username" />
+          <div class="card" id="waitlistCard" style="display:none;">
+            <div class="title2">day is fully booked</div>
+            <div class="sub2">join the waitlist and get notified if a slot opens</div>
+            <form id="wlForm" novalidate>
+              <div style="height:10px;"></div>
+              <div class="grid3">
+                <div>
+                  <label for="wlEmail">email (optional)</label>
+                  <input id="wlEmail" type="email" autocomplete="email" />
+                </div>
+                <div>
+                  <label for="wlPhone">phone (optional)</label>
+                  <input id="wlPhone" type="tel" autocomplete="tel" inputmode="tel" />
+                </div>
+                <div>
+                  <label for="wlIg">instagram (optional)</label>
+                  <input id="wlIg" type="text" placeholder="@handle" autocomplete="username" />
+                </div>
+              </div>
+              <div style="height:10px;"></div>
+              <div>
+                <label for="wlHours">hours you want</label>
+                <select id="wlHours">
+                  <option value="">select…</option>
+                  <option value="1">1 hour</option>
+                  <option value="2">2 hours</option>
+                  <option value="3">3 hours</option>
+                  <option value="4">4 hours</option>
+                </select>
+              </div>
+              <div class="cta" style="margin-top:12px;">
+                <button class="btn" type="submit">join waitlist</button>
+                <div class="msg" id="wlMsg" role="status" aria-live="polite"></div>
+              </div>
+              <div class="tiny" style="margin-top:10px;">no names shown publicly — just availability.</div>
+            </form>
+          </div>
+
+          <div class="card" id="bookSuccessCard" style="display:none;">
+            <div class="title2">request received</div>
+            <div class="sub2" id="bkSuccessLine"></div>
+            <div class="tiny">I will contact you to confirm and lock it in.</div>
+
+            <div style="height:12px;"></div>
+
+            <div class="priceRow" id="bkSuccessPrice"></div>
+
+            <div class="cta" style="margin-top:14px;">
+              <button class="btn" id="bkAnother">book another session</button>
             </div>
           </div>
-          <div style="height:10px;"></div>
-          <div>
-            <label for="wlHours">hours you want</label>
-            <select id="wlHours">
-              <option value="">select…</option>
-              <option value="1">1 hour</option>
-              <option value="2">2 hours</option>
-              <option value="3">3 hours</option>
-              <option value="4">4 hours</option>
-            </select>
-          </div>
-          <div class="cta" style="margin-top:12px;">
-            <button class="btn" type="submit">join waitlist</button>
-            <div class="msg" id="wlMsg" role="status" aria-live="polite"></div>
-          </div>
-          <div class="tiny" style="margin-top:10px;">no names shown publicly — just availability.</div>
-        </form>
-      </div>
-
-      <div class="card" id="bookSuccessCard" style="display:none;">
-        <div class="title2">request received</div>
-        <div class="sub2" id="bkSuccessLine"></div>
-        <div class="tiny">I will contact you to confirm and lock it in.</div>
-
-        <div style="height:12px;"></div>
-
-        <div class="priceRow" id="bkSuccessPrice"></div>
-
-        <div class="cta" style="margin-top:14px;">
-          <button class="btn" id="bkAnother">book another session</button>
         </div>
-      </div>
+      </details>
     </section>
 
-    <section class="pageSection" id="contact" aria-label="Contact">
-      <div class="secTitle">contact</div>
-      <div class="card">
-        <div class="title2">reach out</div>
-        <div class="sub2">for sessions, features, or questions</div>
-        <div class="cta">
-          <a class="btn btn--pill" href="#book">request booking</a>
-          <a class="btn btn--pill btn--ghost" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">instagram dm</a>
-        </div>
-        <div class="tiny" style="margin-top:10px;">if the booking form ever bugs out, hit IG and I’ll get you scheduled.</div>
+    <footer class="siteFooter">
+      <div class="footerLinks">
+        <a href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">dm me</a>
+        <span class="footerDot">•</span>
+        <a href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">spotify</a>
+        <span class="footerDot">•</span>
+        <button type="button" id="footerShare" class="footerBtn">share</button>
       </div>
-    </section>
-
-    <footer style="margin-top:22px;">
-      <div class="tiny">© <script>document.write(new Date().getFullYear());</script> Harmony Hill</div>
+      <div class="tiny" style="margin-top:12px;">© <script>document.write(new Date().getFullYear());</script> Harmony Hill</div>
     </footer>
   </main>
 
@@ -1528,18 +1642,18 @@
 
       <div class="modalLinks">
         <a class="btn btn--ghost modalLink" href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">
-          <span><strong>Spotify</strong><small>Open in app or browser</small></span>
-          <span class="pill">Listen</span>
+          <span><strong>Spotify</strong><small>stream on spotify</small></span>
+          <span class="pill">→</span>
         </a>
 
         <a class="btn btn--ghost modalLink" href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">
-          <span><strong>Apple Music</strong><small>Stream the EP</small></span>
-          <span class="pill">Listen</span>
+          <span><strong>Apple Music</strong><small>stream on apple</small></span>
+          <span class="pill">→</span>
         </a>
 
         <a class="btn btn--ghost modalLink" href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
-          <span><strong>SoundCloud</strong><small>Full Pop Dump set</small></span>
-          <span class="pill">Listen</span>
+          <span><strong>SoundCloud</strong><small>free streaming</small></span>
+          <span class="pill">→</span>
         </a>
       </div>
     </div>
@@ -1557,18 +1671,18 @@
 
       <div class="modalLinks">
         <a class="btn btn--ghost modalLink" href="https://open.spotify.com/album/7jd2Z6etB43TvzNZ2Qx4fV?si=dph-E2EQTL6pDoXsrmNNRQ" target="_blank" rel="noopener">
-          <span><strong>Spotify</strong><small>Open in app or browser</small></span>
-          <span class="pill">Listen</span>
+          <span><strong>Spotify</strong><small>stream on spotify</small></span>
+          <span class="pill">→</span>
         </a>
 
         <a class="btn btn--ghost modalLink" href="https://music.apple.com/ca/album/rap-dump/1862592487" target="_blank" rel="noopener">
-          <span><strong>Apple Music</strong><small>Stream the EP</small></span>
-          <span class="pill">Listen</span>
+          <span><strong>Apple Music</strong><small>stream on apple</small></span>
+          <span class="pill">→</span>
         </a>
 
         <a class="btn btn--ghost modalLink" href="https://soundcloud.com/b2nny/sets/rapdump?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
-          <span><strong>SoundCloud</strong><small>Full Rap Dump set</small></span>
-          <span class="pill">Listen</span>
+          <span><strong>SoundCloud</strong><small>free streaming</small></span>
+          <span class="pill">→</span>
         </a>
       </div>
     </div>
@@ -1576,7 +1690,7 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec";
-    const PRICE_PER_HOUR = 50;
+    const PRICE_PER_HOUR = 60;
     const MIN_HOURS = 2;
     const DEPOSIT_AMOUNT = 25; // optional
 
@@ -1866,41 +1980,28 @@
       }
     }
 
-    (function homeActions(){
-      const msgEl = document.getElementById("homeMsg");
-      const copyLinkBtn = document.getElementById("homeCopyLink");
-      const copySpotifyBtn = document.getElementById("homeCopySpotify");
-      const shareBtn = document.getElementById("homeShare");
+    (function footerActions(){
+      const shareBtn = document.getElementById("footerShare");
 
-      function say(text){
-        if(msgEl) msgEl.textContent = text || "";
-      }
-
-      if(copyLinkBtn){
-        copyLinkBtn.addEventListener("click", async ()=>{
-          const ok = await copyText(bookingLink());
-          say(ok ? "copied booking link" : "couldn't copy (try manually)");
-        });
-      }
-
-      if(copySpotifyBtn){
-        copySpotifyBtn.addEventListener("click", async ()=>{
-          const ok = await copyText(SPOTIFY_URL);
-          say(ok ? "copied spotify link" : "couldn't copy (try manually)");
-        });
-      }
-
-      if(shareBtn && navigator.share){
-        shareBtn.style.display = "";
-        shareBtn.addEventListener("click", async ()=>{
-          try{
-            await navigator.share({
-              title: "b2nny",
-              text: "links + booking",
-              url: location.href
-            });
-          } catch(e){}
-        });
+      if(shareBtn){
+        if(navigator.share){
+          shareBtn.addEventListener("click", async ()=>{
+            try{
+              await navigator.share({
+                title: "b2nny",
+                text: "music + booking",
+                url: location.href
+              });
+            } catch(e){}
+          });
+        } else {
+          // Fallback: copy link to clipboard
+          shareBtn.addEventListener("click", async ()=>{
+            const ok = await copyText(location.href);
+            if(ok) shareBtn.textContent = "copied!";
+            setTimeout(()=>{ shareBtn.textContent = "share"; }, 1500);
+          });
+        }
       }
     })();
 
@@ -1931,9 +2032,6 @@
       const submitBtn = document.getElementById("bkSubmit");
       const msgEl = document.getElementById("bkMsg");
       const tzEl = document.getElementById("bkTz");
-      const copyLinkBtn = document.getElementById("bkCopyLink");
-      const copySpotifyBtn = document.getElementById("bkCopySpotify");
-      const shareBtn = document.getElementById("bkShare");
 
       const quoteWrap = document.getElementById("bkQuote");
       const quoteLine = document.getElementById("bkQuoteLine");
@@ -2650,36 +2748,6 @@
       });
 
       setTimezoneLabel();
-
-      if(copyLinkBtn){
-        copyLinkBtn.addEventListener("click", async ()=>{
-          const ok = await copyText(bookingLink());
-          msgEl.textContent = ok ? "copied booking link" : "couldn't copy (try manually)";
-        });
-      }
-
-      if(copySpotifyBtn){
-        copySpotifyBtn.addEventListener("click", async ()=>{
-          const ok = await copyText(SPOTIFY_URL);
-          msgEl.textContent = ok ? "copied spotify link" : "couldn't copy (try manually)";
-        });
-      }
-
-      if(shareBtn){
-        if(navigator.share){
-          shareBtn.style.display = "";
-          shareBtn.addEventListener("click", async ()=>{
-            try{
-              const url = bookingLink();
-              await navigator.share({
-                title: "b2nny — booking",
-                text: "Book a studio session",
-                url
-              });
-            } catch(e){}
-          });
-        }
-      }
 
       // Waitlist submission (requires backend support: mode=waitlist)
       if(wlForm){
