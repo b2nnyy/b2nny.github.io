@@ -423,6 +423,14 @@
       box-shadow: var(--shadowA), 0 0 0 3px var(--focusRing);
     }
 
+    .navActions{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .hero{
       margin-top: 20px;
       margin-bottom: 20px;
@@ -587,6 +595,10 @@
       gap: 10px;
       flex-wrap: wrap;
       align-items:center;
+    }
+
+    .pluginDownloadsNote{
+      margin-top: 14px;
     }
 
     .socialRow{
@@ -1309,7 +1321,10 @@
   <main class="wrap" id="top">
     <nav class="nav" aria-label="Primary" id="siteNav">
       <a class="navBrand" href="#top">b2nny</a>
-      <a class="navToggle" href="#book">book</a>
+      <div class="navActions">
+        <a class="navToggle" href="#plugins">plug-ins</a>
+        <a class="navToggle" href="#book">book</a>
+      </div>
     </nav>
 
     <header class="hero">
@@ -1326,6 +1341,7 @@
 
         <div class="heroCtas">
           <a class="btn btn--pill btn--hot" href="https://open.spotify.com/track/4UNT9lBqiSI9KbiatolxPY?si=eb400639ba2c4df5" target="_blank" rel="noopener">stream "stressed"</a>
+          <a class="btn btn--pill" href="#plugins">get plug-ins</a>
           <a class="btn btn--pill" href="#book">book a session</a>
         </div>
       </div>
@@ -1364,6 +1380,39 @@
               <strong>X</strong>
             </a>
           </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="pageSection" id="plugins" aria-label="Audio plug-ins">
+      <!-- Deliverables live in /downloads — macos/windows zip per product (see filenames below). -->
+      <details class="secDrop" open>
+        <summary>
+          <div class="secTitle">plug-ins</div>
+          <span class="secChevron">▾</span>
+        </summary>
+        <div class="secDropBody">
+          <div class="card releaseCard">
+            <div class="releaseTop">
+              <div class="releaseTitle">2sample</div>
+            </div>
+            <div class="releaseMeta">VST3 / AU — stereo buffer recorder and waveform helper. macOS installers are signed/notarized via CI.</div>
+            <div class="releaseActions">
+              <a class="btn btn--ghost" href="/downloads/macos-installer-2sample.zip">macOS (.zip)</a>
+              <a class="btn btn--ghost" href="/downloads/windows-installer-2sample.zip">Windows (.zip)</a>
+            </div>
+          </div>
+          <div class="card releaseCard">
+            <div class="releaseTop">
+              <div class="releaseTitle">2pin</div>
+            </div>
+            <div class="releaseMeta">VST3 / AU — lightweight floating metering HUD.</div>
+            <div class="releaseActions">
+              <a class="btn btn--ghost" href="/downloads/macos-installer-2pin.zip">macOS (.zip)</a>
+              <a class="btn btn--ghost" href="/downloads/windows-installer-2pin.zip">Windows (.zip)</a>
+            </div>
+          </div>
+          <p class="tiny pluginDownloadsNote">Ship new builds by replacing the zips under <code>downloads/</code> in your site repo, then redeploy.</p>
         </div>
       </details>
     </section>

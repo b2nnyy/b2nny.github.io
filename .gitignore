@@ -1,0 +1,5 @@
+.DS_Store
+**/.DS_Store
+
+# Plugin source belongs in Sampler2; Pages only ships zips under downloads/
+2plugins/
