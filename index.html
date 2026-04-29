@@ -155,9 +155,14 @@
       border-bottom-color: var(--fg);
     }
 
+    #feedback .feedbackIntro {
+      margin-top: 0;
+    }
+
     .pluginFeedbackForm {
       margin-top: 1rem;
       max-width: 100%;
+      position: relative;
     }
     .pluginFeedbackForm label {
       display: block;
@@ -231,6 +236,12 @@
       padding: 0.65rem 0.75rem;
       border: 1px solid var(--line);
       line-height: 1.45;
+    }
+
+    /* Ensure feedback is visible when jumping to #feedback before IntersectionObserver runs */
+    .reveal:has(#feedback:target) {
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     .pluginShelf {
@@ -428,9 +439,13 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="bw-section reveal" aria-label="Feedback">
+      <h2>feedback</h2>
 
       <div id="feedback" tabindex="-1">
-        <p class="pluginFeedback">
+        <p class="pluginFeedback feedbackIntro">
           <strong>Feedback &amp; bugs.</strong>
           Send a note below (delivered by email), or
           <a href="https://github.com/b2nnyy/Sampler2/issues/new" target="_blank" rel="noopener">open a GitHub issue</a>
@@ -481,7 +496,16 @@
         }
       }
 
+      if (window.location.hash === "#feedback") {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          if (el.querySelector("#feedback")) el.classList.add("is-visible");
+        });
+      }
+
       if (new URLSearchParams(window.location.search).get("feedback") === "sent") {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          if (el.querySelector("#feedback")) el.classList.add("is-visible");
+        });
         var thanks = document.getElementById("feedback-thanks");
         if (thanks) {
           thanks.hidden = false;
