@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>b2nny</title>
-  <meta name="description" content="b2nny — links and free 2Plugins (2sample, 2pin) VST3/AU downloads." />
+  <meta name="description" content="b2nny — links and beta 2Plugins (2sample, 2pin) VST3/AU downloads. Report bugs and ideas on GitHub." />
   <meta name="theme-color" content="#ffffff" />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://b2nny.com/" />
@@ -12,11 +12,11 @@
   <meta property="og:site_name" content="b2nny" />
   <meta property="og:url" content="https://b2nny.com/" />
   <meta property="og:title" content="b2nny" />
-  <meta property="og:description" content="Links and free 2Plugins downloads." />
+  <meta property="og:description" content="Links and beta 2Plugins downloads. Feedback welcome on GitHub." />
   <meta property="og:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="b2nny" />
-  <meta name="twitter:description" content="Links and free 2Plugins downloads." />
+  <meta name="twitter:description" content="Links and beta 2Plugins downloads. Feedback welcome on GitHub." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -120,11 +120,38 @@
       border-bottom-color: var(--fg);
     }
 
+    .pluginBetaNote {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.55;
+      border: 1px solid var(--line);
+      padding: 0.875rem 1rem;
+      background: var(--bg);
+    }
+
     .pluginStoreIntro {
       font-size: 0.875rem;
       color: var(--muted);
       margin-bottom: 1.25rem;
       line-height: 1.55;
+    }
+
+    .pluginFeedback {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      line-height: 1.55;
+    }
+    .pluginFeedback a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      transition: border-color 0.2s var(--ease);
+    }
+    .pluginFeedback a:hover,
+    .pluginFeedback a:focus-visible {
+      border-bottom-color: var(--fg);
     }
 
     .pluginShelf {
@@ -205,13 +232,6 @@
       border-color: var(--fg);
     }
 
-    .pluginDownloadsNote {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 1.25rem;
-      line-height: 1.5;
-    }
-
     .siteFooter {
       margin-top: 3rem;
       padding-top: 1.5rem;
@@ -281,6 +301,7 @@
         <a class="siteNavBrand" href="#top">b2nny</a>
         <a href="#links">links</a>
         <a href="#plugins">plug-ins</a>
+        <a href="#feedback">feedback</a>
       </nav>
       <h1>@b2nny</h1>
       <p class="tagline">music · plug-ins</p>
@@ -301,8 +322,12 @@
     <section class="bw-section reveal" id="plugins" aria-label="Plug-ins">
       <h2>plug-ins</h2>
 
+      <p class="pluginBetaNote">
+        <strong>Beta.</strong> These plug-ins are in early release; expect rough edges and changes between builds. Grab the latest from tagged releases below, and please report problems so they can be fixed.
+      </p>
+
       <p class="pluginStoreIntro">
-        <strong>VST3 / AU</strong> · MIT-licensed. Latest macOS installers below (same payloads built in CI). Windows downloads use the matching <code>.exe</code> artifacts from GitHub Releases.
+        <strong>VST3 / AU</strong>
       </p>
 
       <div class="pluginShelf">
@@ -325,7 +350,11 @@
         </div>
       </div>
 
-      <p class="pluginDownloadsNote">Tagged builds also publish a combined installers archive on <a href="https://github.com/b2nnyy/Sampler2/releases/latest" target="_blank" rel="noopener">GitHub Releases</a>.</p>
+      <p id="feedback" class="pluginFeedback" tabindex="-1">
+        <strong>Feedback &amp; bugs.</strong>
+        <a href="https://github.com/b2nnyy/Sampler2/issues/new" target="_blank" rel="noopener">Open a GitHub issue</a>
+        for bug reports, crashes, or feature ideas—I read every thread there. Include your <strong>DAW</strong> and version, <strong>OS</strong> (macOS or Windows and version), which plug-in (<strong>2sample</strong> or <strong>2pin</strong>), and the installer or release version if you know it.
+      </p>
     </section>
 
     <footer class="siteFooter">
