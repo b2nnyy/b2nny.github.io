@@ -17,7 +17,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="b2nny" />
   <meta name="twitter:description" content="Links and beta 2Plugins downloads. Feedback welcome on GitHub." />
-  <meta name="b2nny-formsubmit-email" content="feedback@b2nny.com" />
+  <!-- Add your UUID from https://web3forms.com (no activation page for visitors) -->
+  <meta name="b2nny-web3forms-access-key" content="" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -445,11 +446,11 @@
           Send a note below (delivered by email). Include <strong>DAW</strong> and version, <strong>OS</strong>, which plug-in (<strong>2sample</strong> or <strong>2pin</strong>), and build version if you know it.
         </p>
 
-        <form class="pluginFeedbackForm" id="plugin-feedback-form" method="POST" action="">
-          <input type="hidden" name="_subject" value="b2nny.com plugin feedback" />
-          <input type="hidden" name="_next" value="https://b2nny.com/?feedback=sent#feedback" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="text" name="_honey" class="feedbackHoney" value="" autocomplete="off" tabindex="-1" aria-hidden="true" />
+        <form class="pluginFeedbackForm" id="plugin-feedback-form" method="POST" action="https://api.web3forms.com/submit">
+          <input type="hidden" name="access_key" id="web3forms-access-key" value="" autocomplete="off" />
+          <input type="hidden" name="subject" value="b2nny.com plugin feedback" />
+          <input type="hidden" name="redirect" value="https://b2nny.com/?feedback=sent#feedback" />
+          <input type="text" name="botcheck" class="feedbackHoney" value="" autocomplete="off" tabindex="-1" aria-hidden="true" />
 
           <label for="feedback-message">Message</label>
           <textarea id="feedback-message" name="message" required maxlength="10000" placeholder="Bugs, ideas, anything—what helps to reproduce or understand it?"></textarea>
@@ -474,18 +475,22 @@
 
   <script>
     (function () {
-      var meta = document.querySelector('meta[name="b2nny-formsubmit-email"]');
+      var metaKey = document.querySelector('meta[name="b2nny-web3forms-access-key"]');
       var formEl = document.getElementById("plugin-feedback-form");
-      if (meta && formEl) {
-        var addr = (meta.getAttribute("content") || "").trim();
-        if (addr.indexOf("@") > 0) {
-          formEl.setAttribute("action", "https://formsubmit.co/" + addr);
-        } else {
-          formEl.addEventListener("submit", function (e) {
+      var keyInput = document.getElementById("web3forms-access-key");
+      if (metaKey && keyInput) {
+        keyInput.value = (metaKey.getAttribute("content") || "").trim();
+      }
+      if (formEl) {
+        formEl.addEventListener("submit", function (e) {
+          var key = keyInput ? keyInput.value.trim() : "";
+          if (key.length < 36) {
             e.preventDefault();
-            window.alert("Feedback form is not configured.");
-          });
-        }
+            window.alert(
+              "Feedback form needs a Web3Forms access key. Sign up free at https://web3forms.com and paste your key into index.html (meta b2nny-web3forms-access-key)."
+            );
+          }
+        });
       }
 
       if (window.location.hash === "#feedback") {
