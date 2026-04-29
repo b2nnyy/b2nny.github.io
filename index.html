@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>b2nny</title>
-  <meta name="description" content="b2nny — music links and 2Plugins (2sample, 2pin) VST3/AU desktop plug-ins." />
+  <meta name="description" content="b2nny — links and free 2Plugins (2sample, 2pin) VST3/AU downloads." />
   <meta name="theme-color" content="#ffffff" />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://b2nny.com/" />
@@ -12,11 +12,11 @@
   <meta property="og:site_name" content="b2nny" />
   <meta property="og:url" content="https://b2nny.com/" />
   <meta property="og:title" content="b2nny" />
-  <meta property="og:description" content="Music links and 2Plugins desktop plug-ins." />
+  <meta property="og:description" content="Links and free 2Plugins downloads." />
   <meta property="og:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="b2nny" />
-  <meta name="twitter:description" content="Music links and 2Plugins desktop plug-ins." />
+  <meta name="twitter:description" content="Links and free 2Plugins downloads." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -120,48 +120,6 @@
       border-bottom-color: var(--fg);
     }
 
-    .releaseBlock {
-      margin-top: 1.5rem;
-    }
-    .releaseBlock h3 {
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-    .releaseLinks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      font-size: 0.875rem;
-    }
-    .releaseLinks a {
-      color: var(--fg);
-      text-decoration: none;
-      border-bottom: 1px solid var(--line);
-    }
-    .releaseLinks a:hover,
-    .releaseLinks a:focus-visible {
-      border-bottom-color: var(--fg);
-    }
-
-    #pluginStoreNotice {
-      display: none;
-      font-size: 0.8125rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      padding: 0.75rem 0.875rem;
-      border: 1px solid var(--line);
-    }
-    #pluginStoreNotice.visible { display: block; }
-    #pluginStoreNotice code {
-      font-size: 0.75rem;
-      background: #f5f5f5;
-      padding: 0.1em 0.35em;
-    }
-
     .pluginStoreIntro {
       font-size: 0.875rem;
       color: var(--muted);
@@ -175,23 +133,11 @@
       gap: 1rem;
     }
 
-    .pluginShelfRow {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    @media (max-width: 520px) {
-      .pluginShelfRow { grid-template-columns: 1fr; }
-    }
+    .pluginShelf {
 
-    .bw-card {
       border: 1px solid var(--line);
       padding: 1.125rem 1.25rem;
       background: var(--bg);
-    }
-
-    .pluginBundleCard {
-      border: 1px solid var(--fg);
     }
 
     .releaseTitle {
@@ -205,25 +151,16 @@
       margin-top: 0.35rem;
       line-height: 1.45;
     }
-    .pluginPriceLine {
+    .pluginDlRow {
       display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
       flex-wrap: wrap;
-      margin-top: 0.75rem;
-    }
-    .pluginPriceLine strong {
-      font-size: 1.125rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .pluginPriceLine span {
-      font-size: 0.75rem;
-      color: var(--muted);
+      gap: 0.5rem;
+      margin-top: 1rem;
+      align-items: center;
     }
 
     .releaseActions {
-      margin-top: 1rem;
+      margin-top: 0;
     }
 
     .btn {
@@ -266,12 +203,6 @@
     .btn--ghost:hover,
     .btn--ghost:focus-visible {
       border-color: var(--fg);
-    }
-
-    a.plugin-buy-btn.disabled {
-      opacity: 0.4;
-      pointer-events: none;
-      cursor: not-allowed;
     }
 
     .pluginDownloadsNote {
@@ -365,79 +296,36 @@
         <li><a href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://x.com/b2nnny" target="_blank" rel="noopener">X</a></li>
       </ul>
-
-      <div class="releaseBlock">
-        <h3>Pop Dump</h3>
-        <div class="releaseLinks">
-          <a href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">Apple Music</a>
-          <a href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">SoundCloud</a>
-        </div>
-      </div>
-
-      <div class="releaseBlock">
-        <h3>Rap Dump</h3>
-        <div class="releaseLinks">
-          <a href="https://open.spotify.com/album/7jd2Z6etB43TvzNZ2Qx4fV?si=dph-E2EQTL6pDoXsrmNNRQ" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/ca/album/rap-dump/1862592487" target="_blank" rel="noopener">Apple Music</a>
-          <a href="https://soundcloud.com/b2nny/sets/rapdump?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">SoundCloud</a>
-        </div>
-      </div>
     </section>
 
     <section class="bw-section reveal" id="plugins" aria-label="Plug-ins">
-      <!-- Paid checkout URLs: /plugin-store.json (Lemon Squeezy). -->
-      <div id="pluginStoreNotice" role="status">
-        Add your Lemon Squeezy checkout links in <code>plugin-store.json</code> (deployed at <code>/plugin-store.json</code>) — see <strong>RELEASE_STEPS.md</strong> in the Sampler2 repo.
-      </div>
-
       <h2>plug-ins</h2>
 
       <p class="pluginStoreIntro">
-        <strong>VST3 / AU</strong> desktop plug-ins · buy once, installers via secure checkout (<strong>$4</strong> bundle or <strong>$2.50</strong> each). Payment on Lemon Squeezy (cards, Apple Pay / Google Pay, PayPal varies by region). After purchase, Lemon emails your receipt and download links. DRM-free builds; refunds follow the policy at checkout.
+        <strong>VST3 / AU</strong> · MIT-licensed. Latest macOS installers below (same payloads built in CI). Windows downloads use the matching <code>.exe</code> artifacts from GitHub Releases.
       </p>
 
       <div class="pluginShelf">
-        <div class="pluginBundleCard bw-card releaseCard">
-          <div class="releaseTitle">2Plugins bundle</div>
-          <div class="releaseMeta">2sample plus 2pin — macOS (.pkg) and Windows (.exe).</div>
-          <div class="pluginPriceLine">
-            <strong>$4.00</strong>
-            <span>bundle checkout</span>
-          </div>
-          <div class="releaseActions">
-            <a class="btn btn--primary plugin-buy-btn magnetic" href="#plugins" data-role="checkout" data-sku="bundle">buy bundle — $4</a>
+        <div class="bw-card releaseCard">
+          <div class="releaseTitle">2sample</div>
+          <div class="releaseMeta">Rolling stereo capture, waveform HUD, WAV drag-out — macOS + Windows.</div>
+          <div class="releaseActions pluginDlRow">
+            <a class="btn btn--primary magnetic" href="/downloads/2sample-macOS-Installer.pkg" download="2sample-macOS-Installer.pkg">macOS (.pkg)</a>
+            <a class="btn btn--ghost magnetic" href="https://github.com/b2nnyy/Sampler2/releases/latest/download/2sample-Windows-Installer.exe" target="_blank" rel="noopener">Windows (.exe)</a>
           </div>
         </div>
 
-        <div class="pluginShelfRow">
-          <div class="bw-card releaseCard">
-            <div class="releaseTitle">2sample</div>
-            <div class="releaseMeta">Rolling stereo capture, waveform HUD, WAV drag-out — VST3 / AU · macOS + Windows.</div>
-            <div class="pluginPriceLine">
-              <strong>$2.50</strong>
-              <span>single</span>
-            </div>
-            <div class="releaseActions">
-              <a class="btn btn--ghost plugin-buy-btn magnetic" href="#plugins" data-role="checkout" data-sku="2sample">buy 2sample — $2.50</a>
-            </div>
-          </div>
-
-          <div class="bw-card releaseCard">
-            <div class="releaseTitle">2pin</div>
-            <div class="releaseMeta">Floating metering HUD (peak / RMS / LUFS / clock) · VST3 / AU · macOS + Windows.</div>
-            <div class="pluginPriceLine">
-              <strong>$2.50</strong>
-              <span>single</span>
-            </div>
-            <div class="releaseActions">
-              <a class="btn btn--ghost plugin-buy-btn magnetic" href="#plugins" data-role="checkout" data-sku="2pin">buy 2pin — $2.50</a>
-            </div>
+        <div class="bw-card releaseCard">
+          <div class="releaseTitle">2pin</div>
+          <div class="releaseMeta">Floating metering HUD (peak / RMS / LUFS / clock) · macOS + Windows.</div>
+          <div class="releaseActions pluginDlRow">
+            <a class="btn btn--primary magnetic" href="/downloads/2pin-macOS-Installer.pkg" download="2pin-macOS-Installer.pkg">macOS (.pkg)</a>
+            <a class="btn btn--ghost magnetic" href="https://github.com/b2nnyy/Sampler2/releases/latest/download/2pin-Windows-Installer.exe" target="_blank" rel="noopener">Windows (.exe)</a>
           </div>
         </div>
       </div>
 
-      <p class="pluginDownloadsNote">Downloads are available after checkout. Lemon emails the receipt and files; refunds follow the payment screen policy.</p>
+      <p class="pluginDownloadsNote">Tagged builds also publish a combined installers archive on <a href="https://github.com/b2nnyy/Sampler2/releases/latest" target="_blank" rel="noopener">GitHub Releases</a>.</p>
     </section>
 
     <footer class="siteFooter">
@@ -505,64 +393,6 @@
       }
     })();
 
-    (async function hydratePluginCheckout() {
-      var notice = document.getElementById("pluginStoreNotice");
-      var buttons = Array.prototype.slice.call(
-        document.querySelectorAll('a[data-role="checkout"][data-sku].plugin-buy-btn')
-      );
-      if (!buttons.length) return;
-
-      function setDisabled(a, disabled) {
-        if (disabled) {
-          a.classList.add("disabled");
-          a.setAttribute("href", "#plugins");
-          a.setAttribute("aria-disabled", "true");
-          a.removeAttribute("target");
-          a.removeAttribute("rel");
-        } else {
-          a.classList.remove("disabled");
-          a.removeAttribute("aria-disabled");
-        }
-      }
-
-      var cfg = null;
-      try {
-        var res = await fetch("/plugin-store.json", { cache: "no-store" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        cfg = await res.json();
-      } catch (e) {
-        if (notice) {
-          notice.textContent =
-            "Could not load /plugin-store.json — check that it is deployed on the site root.";
-          notice.classList.add("visible");
-        }
-        buttons.forEach(function (a) {
-          setDisabled(a, true);
-        });
-        return;
-      }
-
-      var urls = cfg && cfg.checkoutUrls ? cfg.checkoutUrls : {};
-      var missing = false;
-      buttons.forEach(function (a) {
-        var sku = a.getAttribute("data-sku");
-        var raw = urls[sku];
-        var u = typeof raw === "string" ? raw.trim() : "";
-        if (!/^https?:\/\//i.test(u)) {
-          missing = true;
-          setDisabled(a, true);
-          return;
-        }
-        a.setAttribute("href", u);
-        a.setAttribute("target", "_blank");
-        a.setAttribute("rel", "noopener noreferrer");
-        setDisabled(a, false);
-      });
-
-      if (missing && notice) {
-        notice.classList.add("visible");
-      }
-    })();
   </script>
 </body>
 </html>

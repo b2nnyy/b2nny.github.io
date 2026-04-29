@@ -1,3 +1,2 @@
-Paid plug-ins only: installers are delivered through Lemon Squeezy after checkout (see plugin-store.json on the site root).
-
-Do not commit public installer zips to this folder — b2nny.com does not host free download links for customers.
+Public installer payloads for b2nny.com (macOS .pkg in this folder).
+Windows .exe links on the site point at GitHub Releases (same builds as CI).

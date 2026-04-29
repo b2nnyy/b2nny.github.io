@@ -4,7 +4,9 @@
 # Plugin source belongs in Sampler2
 2plugins/
 
-# Paid installers are sold via Lemon Squeezy — do not commit public zips here
+# Public plugin installers (committed for GitHub Pages hosting)
 downloads/*
 !downloads/.gitkeep
 !downloads/STORE.txt
+!downloads/*.pkg
+!downloads/*.exe
