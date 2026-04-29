@@ -1,2 +1,3 @@
-Public installer payloads for b2nny.com (macOS .pkg in this folder).
-Windows .exe links on the site point at GitHub Releases (same builds as CI).
+Public installer payloads for b2nny.com: macOS .pkg and Windows .exe for 2sample and 2pin
+live in this folder. The link-in-bio pages point straight here — same filenames as CI publishes
+from the Sampler2 repo (see github.com/b2nnyy/Sampler2).
