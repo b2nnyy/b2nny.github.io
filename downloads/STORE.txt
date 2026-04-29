@@ -1,0 +1,3 @@
+Paid plug-ins only: installers are delivered through Lemon Squeezy after checkout (see plugin-store.json on the site root).
+
+Do not commit public installer zips to this folder — b2nny.com does not host free download links for customers.

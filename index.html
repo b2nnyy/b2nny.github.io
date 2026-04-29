@@ -3,2805 +3,566 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>b2nny | links</title>
-  <meta name="description" content="Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here." />
-  <meta name="theme-color" content="#faf8f5" />
+  <title>b2nny</title>
+  <meta name="description" content="b2nny — music links and 2Plugins (2sample, 2pin) VST3/AU desktop plug-ins." />
+  <meta name="theme-color" content="#ffffff" />
   <meta name="robots" content="index,follow" />
-
   <link rel="canonical" href="https://b2nny.com/" />
-
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="b2nny" />
   <meta property="og:url" content="https://b2nny.com/" />
-  <meta property="og:title" content="b2nny | links" />
-  <meta property="og:description" content="Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here." />
+  <meta property="og:title" content="b2nny" />
+  <meta property="og:description" content="Music links and 2Plugins desktop plug-ins." />
   <meta property="og:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
-  <meta property="og:image:alt" content="b2nny — official links" />
-
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="b2nny | links" />
-  <meta name="twitter:description" content="Official links for b2nny — stream on Spotify, Apple Music, and SoundCloud, plus YouTube + socials. Book a session right here." />
-  <meta name="twitter:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff7f7f'/%3E%3Cstop offset='100%25' stop-color='%23b496ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M18 40c9 8 19 8 28 0' stroke='%23fff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='26' r='4' fill='%23fff'/%3E%3Ccircle cx='38' cy='26' r='4' fill='%23fff'/%3E%3C/svg%3E" />
-
+  <meta name="twitter:title" content="b2nny" />
+  <meta name="twitter:description" content="Music links and 2Plugins desktop plug-ins." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
   <style>
-    :root{
-      --maxw: 780px;
-      --fg: #1a1625;
-      --fg2: #3d3654;
-      --muted: rgba(26,22,37,0.65);
-
-      /* iOS 26 + 2016 retro palette */
-      --bg0: #faf8f5;
-      --bg1: #f0ebe4;
-
-      /* Vaporwave-inspired pastels */
-      --coral: rgba(255, 127, 127, 0.35);
-      --peach: rgba(255, 180, 128, 0.30);
-      --lavender: rgba(180, 150, 255, 0.28);
-      --mint: rgba(130, 230, 200, 0.30);
-      --sky: rgba(130, 200, 255, 0.32);
-
-      /* Glass effect colors */
-      --glass: rgba(255,255,255,0.72);
-      --glass2: rgba(255,255,255,0.55);
-      --glassBorder: rgba(255,255,255,0.85);
-
-      --radius: 20px;
-      --radius2: 28px;
-
-      --shadowA: 0 1px 2px rgba(26,22,37,0.06);
-      --shadowB: 0 12px 40px rgba(26,22,37,0.12);
-      --shadowC: 0 4px 20px rgba(26,22,37,0.08);
-
-      --focusRing: rgba(180, 150, 255, 0.50);
-
-      /* Accent for buttons */
-      --accent1: #ff7f7f;
-      --accent2: #b496ff;
-      --accent3: #82c8ff;
+    :root {
+      --bg: #ffffff;
+      --fg: #0a0a0a;
+      --muted: #5c5c5c;
+      --line: #d4d4d4;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html, body{ height:100%; }
-    html{ scroll-behavior: smooth; }
-
-    body{
-      font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
       color: var(--fg);
-      background: var(--bg0);
-      overflow-x:hidden;
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-    }
-
-    html{
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
+      min-height: 100vh;
     }
 
-    /* Retro geometric background */
-    .baseFX{
-      position: fixed;
-      inset: 0;
-      z-index: -5;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 900px 700px at 15% 10%, var(--coral), transparent 60%),
-        radial-gradient(ellipse 800px 600px at 85% 20%, var(--lavender), transparent 55%),
-        radial-gradient(ellipse 700px 500px at 50% 90%, var(--mint), transparent 50%),
-        radial-gradient(ellipse 600px 500px at 20% 70%, var(--sky), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+    .wrap {
+      max-width: 36rem;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
     }
 
-    /* Subtle grid pattern - 2016 aesthetic */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-4;
-      pointer-events:none;
-      opacity: 0.35;
-      background:
-        repeating-linear-gradient(0deg,
-          transparent 0px,
-          transparent 39px,
-          rgba(180,150,255,0.08) 39px,
-          rgba(180,150,255,0.08) 40px
-        ),
-        repeating-linear-gradient(90deg,
-          transparent 0px,
-          transparent 39px,
-          rgba(180,150,255,0.08) 39px,
-          rgba(180,150,255,0.08) 40px
-        );
+    .siteHeader {
+      margin-bottom: 3.5rem;
     }
 
-    /* Floating orbs - iOS liquid glass feel */
-    .colorFX{
-      position:fixed;
-      inset:-10%;
-      z-index:-3;
-      pointer-events:none;
-      background:
-        radial-gradient(300px 280px at 20% 25%, rgba(255,127,127,0.20), transparent 70%),
-        radial-gradient(350px 320px at 75% 15%, rgba(180,150,255,0.18), transparent 65%),
-        radial-gradient(280px 260px at 80% 75%, rgba(130,230,200,0.15), transparent 70%),
-        radial-gradient(320px 300px at 25% 80%, rgba(130,200,255,0.16), transparent 65%);
-      filter: blur(60px);
-      animation: floatOrbs 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes floatOrbs{
-      0%{ transform: translate3d(0,0,0) scale(1); }
-      50%{ transform: translate3d(30px,-20px,0) scale(1.05); }
-      100%{ transform: translate3d(-20px,15px,0) scale(0.98); }
-    }
-
-    /* Diagonal stripes - retro accent */
-    .bgFX{
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      pointer-events:none;
-      opacity: 0.04;
-      background: repeating-linear-gradient(
-        -45deg,
-        var(--fg) 0px,
-        var(--fg) 1px,
-        transparent 1px,
-        transparent 12px
-      );
-    }
-
-    .scanFX{
-      display: none; /* Removing scan lines for cleaner iOS look */
-    }
-
-    @keyframes shimmer{
-      0%{ background-position: -200% 0; }
-      100%{ background-position: 200% 0; }
-    }
-
-    .wrap{
-      width:100%;
-      max-width: var(--maxw);
-      padding: 28px 20px 60px;
-    }
-
-    main.wrap{
-      position:relative;
-    }
-
-    header{
-      text-align:center;
-      margin-bottom: 20px;
-    }
-
-    .pfp{
-      display:flex;
-      justify-content:center;
-      margin-bottom: 16px;
-      position:relative;
-    }
-
-    .pfpRing{
-      position:relative;
-      padding: 4px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.90),
-        0 8px 32px rgba(180,150,255,0.25),
-        0 2px 8px rgba(255,127,127,0.20);
-    }
-
-    .pfpRing::after{
-      content:"";
-      position:absolute;
-      inset:-12px;
-      border-radius: 999px;
-      background: radial-gradient(closest-side, rgba(180,150,255,0.15), transparent 70%);
-      filter: blur(8px);
-      z-index:-1;
-    }
-
-    .pfp img{
-      width: 115px;
-      height: 115px;
-      border-radius: 999px;
-      object-fit: cover;
-      border: 3px solid #fff;
-      box-shadow: 0 4px 20px rgba(26,22,37,0.15);
-      background: #fff;
-      display:block;
-    }
-
-    .topRow{
-      display:grid;
-      gap: 12px;
-      justify-content:center;
-      margin: 10px 0 14px;
-    }
-
-    .topBtn{
-      justify-content:space-between;
-      gap: 14px;
-      width: min(100%, 480px);
-    }
-
-    .topLabel{
+    .siteNav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.8125rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+    }
+    .siteNav a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s var(--ease), opacity 0.2s var(--ease);
+    }
+    .siteNav a:hover,
+    .siteNav a:focus-visible {
+      border-bottom-color: var(--fg);
+    }
+    .siteNavBrand { letter-spacing: 0.08em; }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 2.75rem);
       font-weight: 700;
-      font-size: 11px;
-      color: var(--fg2);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
     }
 
-    .topSub{
+    .tagline {
+      font-size: 0.9375rem;
+      color: var(--muted);
+    }
+
+    .bw-section {
+      margin-bottom: 3rem;
+    }
+    .bw-section:last-of-type {
+      margin-bottom: 2rem;
+    }
+
+    .bw-section h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .linkList {
+      list-style: none;
+    }
+    .linkList li { margin-bottom: 0.25rem; }
+    .linkList a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.9375rem;
+      transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+      display: inline-block;
+      padding-bottom: 1px;
+    }
+    .linkList a:hover,
+    .linkList a:focus-visible {
+      border-bottom-color: var(--fg);
+    }
+
+    .releaseBlock {
+      margin-top: 1.5rem;
+    }
+    .releaseBlock h3 {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .releaseLinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+    .releaseLinks a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .releaseLinks a:hover,
+    .releaseLinks a:focus-visible {
+      border-bottom-color: var(--fg);
+    }
+
+    #pluginStoreNotice {
+      display: none;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding: 0.75rem 0.875rem;
+      border: 1px solid var(--line);
+    }
+    #pluginStoreNotice.visible { display: block; }
+    #pluginStoreNotice code {
+      font-size: 0.75rem;
+      background: #f5f5f5;
+      padding: 0.1em 0.35em;
+    }
+
+    .pluginStoreIntro {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.55;
+    }
+
+    .pluginShelf {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .pluginShelfRow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 520px) {
+      .pluginShelfRow { grid-template-columns: 1fr; }
+    }
+
+    .bw-card {
+      border: 1px solid var(--line);
+      padding: 1.125rem 1.25rem;
+      background: var(--bg);
+    }
+
+    .pluginBundleCard {
+      border: 1px solid var(--fg);
+    }
+
+    .releaseTitle {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .releaseMeta {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      line-height: 1.45;
+    }
+    .pluginPriceLine {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .pluginPriceLine strong {
+      font-size: 1.125rem;
       font-weight: 700;
-      font-size: 13px;
+      letter-spacing: -0.02em;
+    }
+    .pluginPriceLine span {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .releaseActions {
+      margin-top: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 0.55rem 1rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid var(--fg);
+      background: var(--bg);
+      color: var(--fg);
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
+    }
+    .btn:hover,
+    .btn:focus-visible {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .btn--primary {
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .btn--primary:hover,
+    .btn--primary:focus-visible {
+      background: var(--bg);
       color: var(--fg);
     }
 
-    h1{
-      font-family: "Syne", sans-serif;
-      font-size: 32px;
-      margin: 10px 0 8px;
-      letter-spacing: -0.01em;
-      font-weight: 800;
-      color: var(--fg);
-    }
-
-    .subHead{
-      font-size: 12px;
-      color: var(--fg2);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 4px;
+    .btn--ghost {
+      border-color: var(--line);
       font-weight: 500;
     }
-
-    .links{
-      display:grid;
-      gap: 12px;
-      margin-top: 18px;
+    .btn--ghost:hover,
+    .btn--ghost:focus-visible {
+      border-color: var(--fg);
     }
 
-    .link{
-      display:flex;
-      align-items:center;
-      gap: 14px;
-      padding: 14px 18px;
-      border-radius: var(--radius2);
-      text-decoration:none;
-      color: var(--fg);
-      border: 1px solid var(--glassBorder);
-      background: var(--glass);
-      box-shadow: var(--shadowC);
-      position:relative;
-      overflow:hidden;
-      transition: transform 200ms ease, box-shadow 200ms ease;
+    a.plugin-buy-btn.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+      cursor: not-allowed;
     }
 
-    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
-      .link, .card, .modal, .nav, .iconLink{
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        backdrop-filter: blur(20px) saturate(180%);
+    .pluginDownloadsNote {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .siteFooter {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
       }
     }
 
-    .link::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 50%);
-      pointer-events:none;
-    }
-
-    .link:hover{
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: var(--shadowB);
-    }
-
-    .link:focus-visible{
-      outline:none;
-      box-shadow: var(--shadowC), 0 0 0 3px var(--focusRing);
-    }
-
-    .link img{
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.80);
-      box-shadow: 0 2px 8px rgba(26,22,37,0.10);
-      background: #fff;
-      flex: 0 0 auto;
-    }
-
-    .link span{
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
-
-    footer{
-      font-size: 12px;
-      color: var(--fg2);
-      margin-top: 30px;
-      text-align:center;
-    }
-
-    /* Navigation - iOS pill style */
-    .nav{
-      position: sticky;
-      top: 16px;
-      z-index: 9;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--glassBorder);
-      background: var(--glass);
-      box-shadow: var(--shadowC);
-      isolation: isolate;
-    }
-
-    .nav::before{ display:none; }
-    .nav::after{ display:none; }
-
-    .nav a{
-      color: var(--fg);
-      text-decoration:none;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 13px;
-      transition: background 150ms ease, border-color 150ms ease;
-    }
-
-    .nav a:hover{
-      background: rgba(180,150,255,0.12);
-      border-color: rgba(180,150,255,0.20);
-    }
-
-    .nav a:focus-visible{
-      outline:none;
-      box-shadow: 0 0 0 3px var(--focusRing);
-    }
-
-    .navBrand{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      white-space:nowrap;
-      padding-left: 12px;
-      padding-right: 12px;
-      background: linear-gradient(135deg, rgba(255,127,127,0.15), rgba(180,150,255,0.15));
-      border-color: rgba(255,255,255,0.60) !important;
-      font-weight: 700 !important;
-    }
-
-    .navToggle{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 8px;
-      border: 1px solid rgba(180,150,255,0.30);
-      background: linear-gradient(135deg, rgba(180,150,255,0.15), rgba(130,200,255,0.15));
-      color: var(--fg);
-      padding: 8px 14px;
-      border-radius: 999px;
-      cursor:pointer;
-      font: inherit;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      box-shadow: var(--shadowA);
-      user-select:none;
-      text-decoration:none;
-      transition: transform 150ms ease, box-shadow 150ms ease;
-    }
-
-    .navToggle:hover{
-      transform: translateY(-1px);
-      box-shadow: var(--shadowC);
-    }
-
-    .navToggle:focus-visible{
-      outline:none;
-      box-shadow: var(--shadowA), 0 0 0 3px var(--focusRing);
-    }
-
-    .navActions{
-      display:flex;
-      align-items:center;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .hero{
-      margin-top: 20px;
-      margin-bottom: 20px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      text-align:center;
-    }
-
-    .heroBlurb{
-      font-size: 15px;
-      color: var(--fg2);
-      max-width: 42ch;
-      margin: 0 auto;
-      line-height: 1.55;
-    }
-
-    .heroCtas{
-      display:flex;
-      gap: 12px;
-      justify-content:center;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .pageSection{
-      margin-top: 28px;
-    }
-
-    /* Section dropdown styles */
-    .secDrop{
-      border-radius: 20px;
-      border: 1px solid var(--glassBorder);
-      background: var(--glass);
-      box-shadow: var(--shadowC);
-      overflow: hidden;
-    }
-
-    .secDrop summary{
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      transition: background 150ms ease;
-    }
-
-    .secDrop summary::-webkit-details-marker{ display: none; }
-    .secDrop summary::marker{ content: ""; }
-
-    .secDrop summary:hover{
-      background: rgba(180,150,255,0.08);
-    }
-
-    .secDrop summary:focus-visible{
-      outline: none;
-      box-shadow: inset 0 0 0 3px var(--focusRing);
-    }
-
-    .secDrop .secTitle{
-      margin: 0;
+    #cursor-ring,
+    #cursor-dot {
+      position: fixed;
+      left: 0;
+      top: 0;
       pointer-events: none;
+      z-index: 10000;
+      border-radius: 50%;
+      will-change: transform;
     }
-
-    .secDrop .secTitle::after{
-      display: none;
-    }
-
-    .secDrop .secChevron{
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 6px;
-      background: linear-gradient(135deg, rgba(180,150,255,0.15), rgba(130,200,255,0.15));
-      color: var(--fg2);
-      font-size: 12px;
-      transition: transform 200ms ease, background 150ms ease;
-    }
-
-    .secDrop[open] .secChevron{
-      transform: rotate(180deg);
-      background: linear-gradient(135deg, rgba(255,127,127,0.20), rgba(180,150,255,0.20));
-    }
-
-    .secDropBody{
-      padding: 0 20px 20px;
-    }
-
-    .secDropBody > .card + .card{
-      margin-top: 14px;
-    }
-
-    .secTitle{
-      font-family: "Syne", sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--fg2);
-      margin: 0 0 14px;
-      position:relative;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .secTitle::after{
-      content:"";
-      flex: 1;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3), transparent);
-      opacity: 0.40;
-    }
-
-    .cardGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    @media (max-width: 640px){
-      .cardGrid{ grid-template-columns: 1fr; }
-    }
-
-    .releaseCard{
-      padding: 18px;
-      text-align:left;
-    }
-
-    .releaseTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-    }
-
-    .releaseTitle{
-      font-family: "Syne", sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      color: var(--fg);
-    }
-
-    .releaseMeta{
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--fg2);
-      line-height: 1.4;
-    }
-
-    .releaseActions{
-      margin-top: 14px;
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-    }
-
-    .pluginDownloadsNote{
-      margin-top: 14px;
-    }
-
-    .socialRow{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .iconLink{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 18px;
-      border: 1px solid var(--glassBorder);
-      background: var(--glass);
-      color: var(--fg);
-      text-decoration:none;
-      box-shadow: var(--shadowA);
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .iconLink:hover{
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: var(--shadowC);
-    }
-
-    .iconLink:focus-visible{
-      outline:none;
-      box-shadow: var(--shadowA), 0 0 0 3px var(--focusRing);
-    }
-
-    .iconLink img{
+    #cursor-ring {
       width: 28px;
       height: 28px;
-      border-radius: 8px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.70);
-      background: #fff;
-    }
-
-    .iconLink strong{
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .card{
-      border-radius: 24px;
-      padding: 20px;
-      border: 1px solid var(--glassBorder);
-      background: var(--glass);
-      box-shadow: var(--shadowB);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(160deg, rgba(255,255,255,0.6) 0%, transparent 40%);
-      pointer-events:none;
-    }
-
-    .card::after{
-      display: none;
-    }
-
-    .title2{
-      font-family: "Syne", sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      color: var(--fg);
-    }
-
-    .sub2{
-      font-size: 14px;
-      color: var(--fg2);
-      margin-top: 6px;
-      margin-bottom: 12px;
-    }
-
-    .tiny{
-      font-size: 12px;
-      color: var(--fg2);
-      line-height: 1.45;
-    }
-
-    .priceRow{
-      margin-top: 12px;
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(180,150,255,0.25);
-      background: linear-gradient(135deg, rgba(180,150,255,0.10), rgba(130,200,255,0.10));
-    }
-
-    .priceRow strong{
-      font-family: "Syne", sans-serif;
-      font-size: 18px;
-      color: var(--accent2);
-    }
-
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .grid3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-
-    @media (max-width: 640px){
-      .grid2, .grid3{ grid-template-columns: 1fr; }
-    }
-
-    label{
-      font-size: 12px;
-      color: var(--fg2);
-      display:block;
-      margin: 2px 0 6px;
-      letter-spacing: 0.02em;
-      font-weight: 500;
-    }
-
-    input, select, textarea{
-      width:100%;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(180,150,255,0.25);
-      background: rgba(255,255,255,0.80);
-      color: var(--fg);
-      font: inherit;
-      font-size: 15px;
-      outline:none;
-      box-shadow: inset 0 1px 2px rgba(26,22,37,0.04);
-      transition: border-color 150ms ease, box-shadow 150ms ease;
-    }
-
-    input:focus, select:focus, textarea:focus{
-      border-color: var(--accent2);
-      box-shadow:
-        inset 0 1px 2px rgba(26,22,37,0.04),
-        0 0 0 3px var(--focusRing);
-    }
-
-    input::placeholder, textarea::placeholder{
-      color: var(--fg2);
-      opacity: 0.6;
-    }
-
-    textarea{ resize: vertical; }
-
-    .isInvalid{
-      border-color: var(--accent1) !important;
-      box-shadow:
-        inset 0 1px 2px rgba(26,22,37,0.04),
-        0 0 0 3px rgba(255,127,127,0.25) !important;
-    }
-
-    input[type="checkbox"].isInvalid{
-      outline: 3px solid rgba(255,127,127,0.25) !important;
-      outline-offset: 4px;
-      box-shadow: none !important;
-    }
-
-    .calWrap{
-      margin-top: 14px;
-      padding: 16px;
-      border-radius: 20px;
-      border: 1px solid rgba(180,150,255,0.20);
-      background: rgba(255,255,255,0.50);
-    }
-
-    .calTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .calMonth{
-      font-family: "Syne", sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 13px;
-      color: var(--fg);
-    }
-
-    .calBtns{
-      display:flex;
-      gap: 8px;
-      align-items:center;
-    }
-
-    .calGrid{
-      display:grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-    }
-
-    .calDay{
-      width:100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 14px;
-      border: 1px solid rgba(180,150,255,0.15);
-      background: rgba(255,255,255,0.70);
-      color: var(--fg);
-      font-weight: 600;
-      font-size: 13px;
-      cursor:pointer;
-      box-shadow: var(--shadowA);
-      transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
-    }
-
-    .calDay:hover{
-      transform: translateY(-1px) scale(1.03);
-      box-shadow: var(--shadowC);
-    }
-
-    .calDay:disabled{
-      opacity: 0.35;
-      cursor:not-allowed;
-      transform:none;
-    }
-
-    .calDay:focus-visible{
-      outline:none;
-      box-shadow: var(--shadowA), 0 0 0 3px var(--focusRing);
-    }
-
-    .calDay--loading{ opacity: 0.50; }
-    .calDay--avail{
-      border-color: rgba(130,230,200,0.50);
-      background: linear-gradient(135deg, rgba(130,230,200,0.20), rgba(255,255,255,0.70));
-    }
-    .calDay--busy{
-      border-color: rgba(255,127,127,0.40);
-      background: linear-gradient(135deg, rgba(255,127,127,0.15), rgba(255,255,255,0.70));
-    }
-    .calDay--sel{
-      border-color: var(--accent2);
-      background: linear-gradient(135deg, rgba(180,150,255,0.25), rgba(255,255,255,0.70));
-      box-shadow: 0 0 0 2px rgba(180,150,255,0.30);
-    }
-
-    .rules{
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(180,150,255,0.15);
-    }
-
-    .rules ul{
-      margin: 10px 0 0;
-      padding-left: 20px;
-      color: var(--fg2);
-      line-height: 1.55;
-      font-size: 13px;
-    }
-
-    .checkRow{
-      margin-top: 12px;
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(180,150,255,0.15);
-      background: rgba(255,255,255,0.50);
-    }
-
-    .checkRow input{ margin-top: 3px; accent-color: var(--accent2); }
-    .checkRow span{ font-size: 13px; color: var(--fg2); line-height: 1.45; }
-
-    .gear{
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(180,150,255,0.15);
-    }
-
-    .gear h3{
-      font-family: "Syne", sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--fg2);
-      margin-bottom: 12px;
-    }
-
-    .gearDrop{
-      border-radius: 14px;
-    }
-
-    .gearDrop summary{
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
-
-      font-family: "Syne", sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--fg2);
-      margin-bottom: 12px;
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-    }
-
-    .gearDrop summary::-webkit-details-marker{ display:none; }
-    .gearDrop summary::marker{ content:""; }
-
-    .gearDrop summary::after{
-      content:"▾";
-      opacity: 0.60;
-      transition: transform 150ms ease;
-    }
-
-    .gearDrop[open] summary::after{
-      transform: rotate(-180deg);
-    }
-
-    .gearDrop summary:focus-visible{
-      outline:none;
-      box-shadow: 0 0 0 3px var(--focusRing);
-      border-radius: 12px;
-      padding: 6px 10px;
-      margin-left: -10px;
-      margin-right: -10px;
-    }
-
-    .gearDrop .gearList{ margin-top: 12px; }
-
-    .gearList{
-      display:grid;
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .gearItem{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(180,150,255,0.15);
-      background: rgba(255,255,255,0.60);
-    }
-
-    .gearItem strong{ font-weight: 600; color: var(--fg); }
-    .gearItem small{ display:block; font-size: 11px; color: var(--fg2); margin-top: 2px; }
-
-    .cta{
-      margin-top: 16px;
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      flex-wrap: wrap;
-    }
-
-    /* Buttons - iOS style with retro gradient */
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 8px;
-      border: none;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      color: #fff;
-      padding: 14px 20px;
-      border-radius: 16px;
-      cursor:pointer;
-      font: inherit;
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 0.01em;
-      box-shadow: 0 4px 16px rgba(180,150,255,0.30), 0 2px 4px rgba(255,127,127,0.20);
-      transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
-      text-decoration:none;
-      user-select:none;
-    }
-
-    .btn:hover{
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 24px rgba(180,150,255,0.35), 0 4px 8px rgba(255,127,127,0.25);
-      filter: brightness(1.05);
-    }
-
-    .btn:active{
-      transform: translateY(1px) scale(0.98);
-    }
-
-    .btn:focus-visible{
-      outline:none;
-      box-shadow: 0 4px 16px rgba(180,150,255,0.30), 0 0 0 3px var(--focusRing);
-    }
-
-    .btn:disabled{
-      opacity: 0.45;
-      cursor:not-allowed;
-      transform:none;
-      filter: grayscale(30%);
-    }
-
-    .btn--pill{
-      border-radius: 999px;
-      padding: 14px 24px;
-    }
-
-    .btn--hot{
-      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-      box-shadow: 0 4px 20px rgba(255,107,107,0.35), 0 2px 6px rgba(255,142,83,0.25);
-    }
-
-    .btn--hot:hover{
-      box-shadow: 0 8px 28px rgba(255,107,107,0.40), 0 4px 10px rgba(255,142,83,0.30);
-    }
-
-    .btn--ghost{
-      border: 1px solid rgba(180,150,255,0.30);
-      background: var(--glass);
-      color: var(--fg);
-      box-shadow: var(--shadowA);
-    }
-
-    .btn--ghost:hover{
-      background: rgba(180,150,255,0.10);
-      border-color: rgba(180,150,255,0.45);
-      box-shadow: var(--shadowC);
-    }
-
-    .msg{
-      font-size: 13px;
-      color: var(--fg2);
-      white-space: pre-wrap;
-    }
-
-    .timePick{
-      margin-top: 14px;
-    }
-
-    .timeLegend{
-      display:flex;
-      align-items:center;
-      gap: 14px;
-      flex-wrap: wrap;
-      font-size: 12px;
-      color: var(--fg2);
-      margin-top: 8px;
-    }
-
-    .timeLegendItem{
-      display:inline-flex;
-      align-items:center;
-      gap: 6px;
-    }
-
-    .timeSwatch{
-      width: 14px;
-      height: 14px;
-      border-radius: 6px;
-      border: 1px solid rgba(26,22,37,0.10);
-    }
-
-    .timeSwatch--avail{ background: linear-gradient(135deg, rgba(130,230,200,0.50), rgba(130,230,200,0.30)); }
-    .timeSwatch--busy{ background: linear-gradient(135deg, rgba(255,127,127,0.50), rgba(255,127,127,0.30)); }
-    .timeSwatch--sel{ background: linear-gradient(135deg, rgba(180,150,255,0.60), rgba(180,150,255,0.40)); }
-
-    .timeGrid{
-      margin-top: 12px;
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 10px;
-    }
-
-    .timeTile{
-      width:100%;
-      border-radius: 14px;
-      border: 1px solid rgba(180,150,255,0.20);
-      background: rgba(255,255,255,0.70);
-      color: var(--fg);
-      padding: 12px;
-      text-align:left;
-      cursor:pointer;
-      user-select:none;
-      transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
-      box-shadow: var(--shadowA);
-    }
-
-    .timeTile:hover{
-      transform: translateY(-1px);
-      box-shadow: var(--shadowC);
-    }
-
-    .timeTile:active{ transform: translateY(1px) scale(0.98); }
-
-    .timeTile:focus-visible{
-      outline:none;
-      box-shadow: var(--shadowA), 0 0 0 3px var(--focusRing);
-    }
-
-    .timeTile--avail{
-      border-color: rgba(130,230,200,0.45);
-      background: linear-gradient(135deg, rgba(130,230,200,0.15), rgba(255,255,255,0.80));
-    }
-
-    .timeTile--busy{
-      border-color: rgba(255,127,127,0.35);
-      background: linear-gradient(135deg, rgba(255,127,127,0.12), rgba(255,255,255,0.70));
+      margin: -14px 0 0 -14px;
+      border: 1px solid var(--fg);
       opacity: 0.55;
-      cursor:not-allowed;
+      mix-blend-mode: multiply;
     }
-
-    .timeTile--sel{
-      border-color: var(--accent2);
-      background: linear-gradient(135deg, rgba(180,150,255,0.20), rgba(255,255,255,0.80));
-      box-shadow: 0 0 0 2px rgba(180,150,255,0.25);
+    #cursor-dot {
+      width: 4px;
+      height: 4px;
+      margin: -2px 0 0 -2px;
+      background: var(--fg);
     }
-
-    .timeTile .tMain{
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--fg);
+    body.bw-hideCursor.is-fine-pointer {
+      cursor: none !important;
     }
-
-    .timeTile .tSub{
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--fg2);
-    }
-
-    .timeSummary{
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--fg2);
-    }
-
-    .srOnly{
-      position:absolute !important;
-      width:1px !important;
-      height:1px !important;
-      padding:0 !important;
-      margin:-1px !important;
-      overflow:hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space:nowrap !important;
-      border:0 !important;
-    }
-
-    .modalBackdrop{
-      position:fixed;
-      inset:0;
-      background: rgba(26,22,37,0.50);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index: 10;
-      padding: 20px;
-    }
-
-    .modalBackdrop.open{ display:flex; }
-
-    .modal{
-      width: min(440px, 100%);
-      border-radius: 28px;
-      border: 1px solid var(--glassBorder);
-      background: var(--glass);
-      box-shadow: var(--shadowB), 0 0 0 1px rgba(255,255,255,0.50);
-      padding: 24px;
-    }
-
-    .modalHeader{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 14px;
-      margin-bottom: 12px;
-    }
-
-    .modalTitle{
-      font-family: "Syne", sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--fg);
-    }
-
-    .modalSub{
-      font-size: 13px;
-      color: var(--fg2);
-      margin-top: 4px;
-    }
-
-    .modalClose{
-      border: 1px solid rgba(180,150,255,0.20);
-      background: rgba(255,255,255,0.70);
-      color: var(--fg2);
-      cursor:pointer;
-      font-size: 18px;
-      line-height: 1;
-      padding: 8px 12px;
-      border-radius: 999px;
-      transition: transform 150ms ease, background 150ms ease;
-    }
-
-    .modalClose:hover{
-      background: rgba(180,150,255,0.15);
-      transform: scale(1.05);
-    }
-
-    .modalClose:focus-visible{
-      outline:none;
-      box-shadow: 0 0 0 3px var(--focusRing);
-    }
-
-    .modalLinks{
-      display:grid;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .modalLink{
-      justify-content:space-between;
-      gap: 12px;
-      width: 100%;
-      border-radius: 18px;
-    }
-
-    .modalLink strong{ font-weight: 600; color: var(--fg); }
-    .modalLink small{ font-size: 12px; color: var(--fg2); display:block; margin-top:2px; }
-
-    .pill{
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(180,150,255,0.30);
-      background: linear-gradient(135deg, rgba(180,150,255,0.15), rgba(130,200,255,0.15));
-      color: var(--fg2);
-      white-space:nowrap;
-    }
-
-    body.modalOpen{
-      overflow: hidden;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .colorFX{ animation: none !important; }
-      *{ scroll-behavior: auto !important; transition: none !important; }
-    }
-
-    /* Footer */
-    .siteFooter{
-      margin-top: 32px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(180,150,255,0.15);
-      text-align: center;
-    }
-
-    .footerLinks{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .footerLinks a, .footerBtn{
-      color: var(--fg2);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      background: none;
-      cursor: pointer;
-      font-family: inherit;
-      transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
-    }
-
-    .footerLinks a:hover, .footerBtn:hover{
-      color: var(--fg);
-      border-color: rgba(180,150,255,0.25);
-      background: rgba(180,150,255,0.08);
-    }
-
-    .footerDot{
-      color: var(--fg2);
-      opacity: 0.4;
-      font-size: 10px;
-    }
-
-    @media (max-width: 480px){
-      .pfp img{ width: 100px; height: 100px; }
-      h1{ font-size: 28px; }
-      .nav{ top: 12px; padding: 6px 10px; }
-      .wrap{ padding: 24px 16px 50px; }
+    body:not(.bw-hideCursor) #cursor-ring,
+    body:not(.bw-hideCursor) #cursor-dot {
+      display: none !important;
     }
   </style>
 </head>
-
 <body>
-  <div class="baseFX"></div>
-  <div class="colorFX"></div>
-  <div class="bgFX"></div>
-  <div class="scanFX"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="cursor-dot" aria-hidden="true"></div>
 
   <main class="wrap" id="top">
-    <nav class="nav" aria-label="Primary" id="siteNav">
-      <a class="navBrand" href="#top">b2nny</a>
-      <div class="navActions">
-        <a class="navToggle" href="#plugins">plug-ins</a>
-        <a class="navToggle" href="#book">book</a>
-      </div>
-    </nav>
-
-    <header class="hero">
-      <div class="pfp">
-        <div class="pfpRing">
-          <img src="apple music.jpg" alt="b2nny profile" width="120" height="120" decoding="async" fetchpriority="high">
-        </div>
-      </div>
-
-      <div>
-        <h1>@b2nny</h1>
-        <div class="subHead">artist • releases • booking</div>
-        <p class="heroBlurb">Stream the latest drops, hit the socials, or request a studio session.</p>
-
-        <div class="heroCtas">
-          <a class="btn btn--pill btn--hot" href="https://open.spotify.com/track/4UNT9lBqiSI9KbiatolxPY?si=eb400639ba2c4df5" target="_blank" rel="noopener">stream "stressed"</a>
-          <a class="btn btn--pill" href="#plugins">get plug-ins</a>
-          <a class="btn btn--pill" href="#book">book a session</a>
-        </div>
-      </div>
+    <header class="siteHeader">
+      <nav class="siteNav" aria-label="Primary">
+        <a class="siteNavBrand" href="#top">b2nny</a>
+        <a href="#links">links</a>
+        <a href="#plugins">plug-ins</a>
+      </nav>
+      <h1>@b2nny</h1>
+      <p class="tagline">music · plug-ins</p>
     </header>
 
-    <section class="pageSection" id="links" aria-label="Official links">
-      <details class="secDrop">
-        <summary>
-          <div class="secTitle">links</div>
-          <span class="secChevron">▾</span>
-        </summary>
-        <div class="secDropBody">
-          <div class="socialRow">
-            <a class="iconLink" href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">
-              <img src="Spotify.png" alt="Spotify" width="22" height="22" loading="lazy" decoding="async">
-              <strong>Spotify</strong>
-            </a>
-            <a class="iconLink" href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">
-              <img src="Apple.png" alt="Apple Music" width="22" height="22" loading="lazy" decoding="async">
-              <strong>Apple Music</strong>
-            </a>
-            <a class="iconLink" href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">
-              <img src="Soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy" decoding="async">
-              <strong>SoundCloud</strong>
-            </a>
-            <a class="iconLink" href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">
-              <img src="Youtube.jpg" alt="YouTube" width="22" height="22" loading="lazy" decoding="async">
-              <strong>YouTube</strong>
-            </a>
-            <a class="iconLink" href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">
-              <img src="Instagram.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
-              <strong>Instagram</strong>
-            </a>
-            <a class="iconLink" href="https://x.com/b2nnny" target="_blank" rel="noopener">
-              <img src="Twitter.jpg" alt="X" width="22" height="22" loading="lazy" decoding="async">
-              <strong>X</strong>
-            </a>
-          </div>
+    <section class="bw-section reveal" id="links" aria-label="Links">
+      <h2>links</h2>
+      <ul class="linkList">
+        <li><a href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">Spotify</a></li>
+        <li><a href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">Apple Music</a></li>
+        <li><a href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">SoundCloud</a></li>
+        <li><a href="https://www.youtube.com/channel/UCfdQotfDZTGMygO-wCEGX5g" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://x.com/b2nnny" target="_blank" rel="noopener">X</a></li>
+      </ul>
+
+      <div class="releaseBlock">
+        <h3>Pop Dump</h3>
+        <div class="releaseLinks">
+          <a href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">Apple Music</a>
+          <a href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">SoundCloud</a>
         </div>
-      </details>
-    </section>
-
-    <section class="pageSection" id="plugins" aria-label="Audio plug-ins">
-      <!-- Deliverables live in /downloads — macos/windows zip per product (see filenames below). -->
-      <details class="secDrop" open>
-        <summary>
-          <div class="secTitle">plug-ins</div>
-          <span class="secChevron">▾</span>
-        </summary>
-        <div class="secDropBody">
-          <div class="card releaseCard">
-            <div class="releaseTop">
-              <div class="releaseTitle">2sample</div>
-            </div>
-            <div class="releaseMeta">VST3 / AU — stereo buffer recorder and waveform helper. macOS installers are signed/notarized via CI.</div>
-            <div class="releaseActions">
-              <a class="btn btn--ghost" href="/downloads/macos-installer-2sample.zip">macOS (.zip)</a>
-              <a class="btn btn--ghost" href="/downloads/windows-installer-2sample.zip">Windows (.zip)</a>
-            </div>
-          </div>
-          <div class="card releaseCard">
-            <div class="releaseTop">
-              <div class="releaseTitle">2pin</div>
-            </div>
-            <div class="releaseMeta">VST3 / AU — lightweight floating metering HUD.</div>
-            <div class="releaseActions">
-              <a class="btn btn--ghost" href="/downloads/macos-installer-2pin.zip">macOS (.zip)</a>
-              <a class="btn btn--ghost" href="/downloads/windows-installer-2pin.zip">Windows (.zip)</a>
-            </div>
-          </div>
-          <p class="tiny pluginDownloadsNote">Ship new builds by replacing the zips under <code>downloads/</code> in your site repo, then redeploy.</p>
-        </div>
-      </details>
-    </section>
-
-    <section class="pageSection" id="book" aria-label="Booking">
-      <details class="secDrop">
-        <summary>
-          <div class="secTitle">booking</div>
-          <span class="secChevron">▾</span>
-        </summary>
-        <div class="secDropBody">
-          <div class="card" id="bookFormCard">
-        <div class="title2">request booking</div>
-        <div class="sub2">pick a date then pick a start and end time</div>
-        <div class="tiny">no payment here. I will contact you to confirm.</div>
-
-        <div class="priceRow">
-          <strong>$60</strong>
-          <span>per hour</span>
-        </div>
-
-        <div class="gear" aria-label="Studio gear">
-          <details class="gearDrop">
-            <summary>gear</summary>
-            <ul class="gearList">
-              <li class="gearItem">
-                <span><strong>TLM 103</strong><small>microphone</small></span>
-                <span class="pill">Mic</span>
-              </li>
-              <li class="gearItem">
-                <span><strong>WA73</strong><small>mic preamp</small></span>
-                <span class="pill">Pre</span>
-              </li>
-              <li class="gearItem">
-                <span><strong>dbx 160A</strong><small>compressor</small></span>
-                <span class="pill">Comp</span>
-              </li>
-              <li class="gearItem">
-                <span><strong>HS5</strong><small>monitors</small></span>
-                <span class="pill">Monitors</span>
-              </li>
-            </ul>
-          </details>
-        </div>
-
-        <form id="bkForm" novalidate>
-          <div style="height:14px;"></div>
-
-          <div class="calWrap" aria-label="Availability calendar">
-            <div class="calTop">
-              <div class="calMonth" id="bkCalMonth">loading…</div>
-              <div class="calBtns">
-                <button class="btn btn--ghost btn--pill" id="bkCalPrev" type="button">prev</button>
-                <button class="btn btn--ghost btn--pill" id="bkCalNext" type="button">next</button>
-              </div>
-            </div>
-            <div class="timeLegend" id="bkCalLegend" aria-hidden="true"></div>
-            <div style="height:10px;"></div>
-            <div class="calGrid" id="bkCal"></div>
-            <div class="tiny" id="bkCalMsg" style="margin-top:10px;"></div>
-          </div>
-
-          <div style="height:12px;"></div>
-
-          <div class="grid2">
-            <div>
-              <label for="bkFirst">first name</label>
-              <input id="bkFirst" type="text" autocomplete="given-name" required />
-            </div>
-            <div>
-              <label for="bkLast">last name</label>
-              <input id="bkLast" type="text" autocomplete="family-name" required />
-            </div>
-          </div>
-
-          <div style="height:12px;"></div>
-
-          <div class="grid3">
-            <div>
-              <label for="bkEmail">email</label>
-              <input id="bkEmail" type="email" autocomplete="email" required />
-            </div>
-            <div>
-              <label for="bkPhone">phone</label>
-              <input id="bkPhone" type="tel" autocomplete="tel" inputmode="tel" required />
-            </div>
-            <div>
-              <label for="bkIg">instagram</label>
-              <input id="bkIg" type="text" placeholder="@handle" autocomplete="username" required />
-            </div>
-          </div>
-
-          <div style="height:12px;"></div>
-
-          <div>
-            <label for="bkDate">date</label>
-            <input id="bkDate" type="date" required />
-          </div>
-
-          <div class="timePick">
-            <div class="timeLegend" aria-hidden="true">
-              <span class="timeLegendItem"><span class="timeSwatch timeSwatch--avail"></span>available</span>
-              <span class="timeLegendItem"><span class="timeSwatch timeSwatch--busy"></span>unavailable</span>
-              <span class="timeLegendItem"><span class="timeSwatch timeSwatch--sel"></span>selected</span>
-            </div>
-
-            <div class="timeGrid" id="bkTiles"></div>
-            <div class="timeSummary" id="bkTimeSummary"></div>
-
-            <div class="srOnly">
-              <label for="bkStart">start time</label>
-              <select id="bkStart" required></select>
-              <label for="bkEnd">end time</label>
-              <select id="bkEnd" required></select>
-            </div>
-          </div>
-
-          <div style="height:12px;"></div>
-
-          <div class="priceRow" id="bkQuote" style="display:none;">
-            <strong>quote</strong>
-            <span id="bkQuoteLine"></span>
-          </div>
-
-          <div class="rules" aria-label="Studio rules and minimums">
-            <div class="tiny"><strong>minimum:</strong> <span id="bkMinHoursLabel">2 hours</span></div>
-            <ul>
-              <li>arrive on time (late time still counts)</li>
-              <li>no refunds on same-day cancellations</li>
-              <li>be ready (references, beats, lyrics)</li>
-            </ul>
-            <label class="checkRow" style="margin-top:10px;">
-              <input id="bkAgree" type="checkbox" />
-              <span>i understand the rules + minimum and want to request this session</span>
-            </label>
-          </div>
-
-          <div class="calWrap" id="bkDepositWrap" style="display:none; margin-top:12px;" aria-label="Optional deposit">
-            <div class="tiny"><strong>optional:</strong> pay a <strong>$25</strong> deposit to lock your time faster (applied to total).</div>
-            <div class="cta" style="margin-top:10px;">
-              <a class="btn btn--pill" id="bkDepositStripe" target="_blank" rel="noopener">pay deposit (stripe)</a>
-              <a class="btn btn--pill btn--ghost" id="bkDepositPaypal" target="_blank" rel="noopener">pay deposit (paypal)</a>
-            </div>
-          </div>
-
-          <div>
-            <label for="bkNotes">about</label>
-            <textarea id="bkNotes" rows="3" placeholder="what you want to work on, references, any details"></textarea>
-          </div>
-
-          <div class="cta">
-            <button class="btn" id="bkSubmit" type="submit">request booking</button>
-            <div class="msg" id="bkMsg" role="status" aria-live="polite"></div>
-          </div>
-
-          <div class="tiny" style="margin-top:10px;">
-            times shown in your local timezone: <span id="bkTz"></span>
-          </div>
-        </form>
       </div>
 
-          <div class="card" id="waitlistCard" style="display:none;">
-            <div class="title2">day is fully booked</div>
-            <div class="sub2">join the waitlist and get notified if a slot opens</div>
-            <form id="wlForm" novalidate>
-              <div style="height:10px;"></div>
-              <div class="grid3">
-                <div>
-                  <label for="wlEmail">email (optional)</label>
-                  <input id="wlEmail" type="email" autocomplete="email" />
-                </div>
-                <div>
-                  <label for="wlPhone">phone (optional)</label>
-                  <input id="wlPhone" type="tel" autocomplete="tel" inputmode="tel" />
-                </div>
-                <div>
-                  <label for="wlIg">instagram (optional)</label>
-                  <input id="wlIg" type="text" placeholder="@handle" autocomplete="username" />
-                </div>
-              </div>
-              <div style="height:10px;"></div>
-              <div>
-                <label for="wlHours">hours you want</label>
-                <select id="wlHours">
-                  <option value="">select…</option>
-                  <option value="1">1 hour</option>
-                  <option value="2">2 hours</option>
-                  <option value="3">3 hours</option>
-                  <option value="4">4 hours</option>
-                </select>
-              </div>
-              <div class="cta" style="margin-top:12px;">
-                <button class="btn" type="submit">join waitlist</button>
-                <div class="msg" id="wlMsg" role="status" aria-live="polite"></div>
-              </div>
-              <div class="tiny" style="margin-top:10px;">no names shown publicly — just availability.</div>
-            </form>
+      <div class="releaseBlock">
+        <h3>Rap Dump</h3>
+        <div class="releaseLinks">
+          <a href="https://open.spotify.com/album/7jd2Z6etB43TvzNZ2Qx4fV?si=dph-E2EQTL6pDoXsrmNNRQ" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://music.apple.com/ca/album/rap-dump/1862592487" target="_blank" rel="noopener">Apple Music</a>
+          <a href="https://soundcloud.com/b2nny/sets/rapdump?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">SoundCloud</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bw-section reveal" id="plugins" aria-label="Plug-ins">
+      <!-- Paid checkout URLs: /plugin-store.json (Lemon Squeezy). -->
+      <div id="pluginStoreNotice" role="status">
+        Add your Lemon Squeezy checkout links in <code>plugin-store.json</code> (deployed at <code>/plugin-store.json</code>) — see <strong>RELEASE_STEPS.md</strong> in the Sampler2 repo.
+      </div>
+
+      <h2>plug-ins</h2>
+
+      <p class="pluginStoreIntro">
+        <strong>VST3 / AU</strong> desktop plug-ins · buy once, installers via secure checkout (<strong>$4</strong> bundle or <strong>$2.50</strong> each). Payment on Lemon Squeezy (cards, Apple Pay / Google Pay, PayPal varies by region). After purchase, Lemon emails your receipt and download links. DRM-free builds; refunds follow the policy at checkout.
+      </p>
+
+      <div class="pluginShelf">
+        <div class="pluginBundleCard bw-card releaseCard">
+          <div class="releaseTitle">2Plugins bundle</div>
+          <div class="releaseMeta">2sample plus 2pin — macOS (.pkg) and Windows (.exe).</div>
+          <div class="pluginPriceLine">
+            <strong>$4.00</strong>
+            <span>bundle checkout</span>
+          </div>
+          <div class="releaseActions">
+            <a class="btn btn--primary plugin-buy-btn magnetic" href="#plugins" data-role="checkout" data-sku="bundle">buy bundle — $4</a>
+          </div>
+        </div>
+
+        <div class="pluginShelfRow">
+          <div class="bw-card releaseCard">
+            <div class="releaseTitle">2sample</div>
+            <div class="releaseMeta">Rolling stereo capture, waveform HUD, WAV drag-out — VST3 / AU · macOS + Windows.</div>
+            <div class="pluginPriceLine">
+              <strong>$2.50</strong>
+              <span>single</span>
+            </div>
+            <div class="releaseActions">
+              <a class="btn btn--ghost plugin-buy-btn magnetic" href="#plugins" data-role="checkout" data-sku="2sample">buy 2sample — $2.50</a>
+            </div>
           </div>
 
-          <div class="card" id="bookSuccessCard" style="display:none;">
-            <div class="title2">request received</div>
-            <div class="sub2" id="bkSuccessLine"></div>
-            <div class="tiny">I will contact you to confirm and lock it in.</div>
-
-            <div style="height:12px;"></div>
-
-            <div class="priceRow" id="bkSuccessPrice"></div>
-
-            <div class="cta" style="margin-top:14px;">
-              <button class="btn" id="bkAnother">book another session</button>
+          <div class="bw-card releaseCard">
+            <div class="releaseTitle">2pin</div>
+            <div class="releaseMeta">Floating metering HUD (peak / RMS / LUFS / clock) · VST3 / AU · macOS + Windows.</div>
+            <div class="pluginPriceLine">
+              <strong>$2.50</strong>
+              <span>single</span>
+            </div>
+            <div class="releaseActions">
+              <a class="btn btn--ghost plugin-buy-btn magnetic" href="#plugins" data-role="checkout" data-sku="2pin">buy 2pin — $2.50</a>
             </div>
           </div>
         </div>
-      </details>
+      </div>
+
+      <p class="pluginDownloadsNote">Downloads are available after checkout. Lemon emails the receipt and files; refunds follow the payment screen policy.</p>
     </section>
 
     <footer class="siteFooter">
-      <div class="footerLinks">
-        <a href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">dm me</a>
-        <span class="footerDot">•</span>
-        <a href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">spotify</a>
-        <span class="footerDot">•</span>
-        <button type="button" id="footerShare" class="footerBtn">share</button>
-      </div>
-      <div class="tiny" style="margin-top:12px;">© <script>document.write(new Date().getFullYear());</script> Harmony Hill</div>
+      © <script>document.write(new Date().getFullYear());</script> b2nny
     </footer>
   </main>
 
-  <div class="modalBackdrop" id="popModal">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="popTitle" tabindex="-1">
-      <div class="modalHeader">
-        <div>
-          <div class="modalTitle" id="popTitle">Pop Dump</div>
-          <div class="modalSub">Pick your platform and stream the EP.</div>
-        </div>
-        <button class="modalClose" type="button" dataClose="popModal" aria-label="Close">×</button>
-      </div>
-
-      <div class="modalLinks">
-        <a class="btn btn--ghost modalLink" href="https://open.spotify.com/album/58jeo8RCP2mkinc7HJpavb?si=b71efb8642f44a66" target="_blank" rel="noopener">
-          <span><strong>Spotify</strong><small>stream on spotify</small></span>
-          <span class="pill">→</span>
-        </a>
-
-        <a class="btn btn--ghost modalLink" href="https://music.apple.com/us/album/pop-dump/1858773650" target="_blank" rel="noopener">
-          <span><strong>Apple Music</strong><small>stream on apple</small></span>
-          <span class="pill">→</span>
-        </a>
-
-        <a class="btn btn--ghost modalLink" href="https://soundcloud.com/b2nny/sets/popdump?si=69c737891c974c8fa08064e44697c3d5&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
-          <span><strong>SoundCloud</strong><small>free streaming</small></span>
-          <span class="pill">→</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="modalBackdrop" id="rapModal">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rapTitle" tabindex="-1">
-      <div class="modalHeader">
-        <div>
-          <div class="modalTitle" id="rapTitle">Rap Dump</div>
-          <div class="modalSub">Pick your platform and stream the EP.</div>
-        </div>
-        <button class="modalClose" type="button" dataClose="rapModal" aria-label="Close">×</button>
-      </div>
-
-      <div class="modalLinks">
-        <a class="btn btn--ghost modalLink" href="https://open.spotify.com/album/7jd2Z6etB43TvzNZ2Qx4fV?si=dph-E2EQTL6pDoXsrmNNRQ" target="_blank" rel="noopener">
-          <span><strong>Spotify</strong><small>stream on spotify</small></span>
-          <span class="pill">→</span>
-        </a>
-
-        <a class="btn btn--ghost modalLink" href="https://music.apple.com/ca/album/rap-dump/1862592487" target="_blank" rel="noopener">
-          <span><strong>Apple Music</strong><small>stream on apple</small></span>
-          <span class="pill">→</span>
-        </a>
-
-        <a class="btn btn--ghost modalLink" href="https://soundcloud.com/b2nny/sets/rapdump?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">
-          <span><strong>SoundCloud</strong><small>free streaming</small></span>
-          <span class="pill">→</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec";
-    const PRICE_PER_HOUR = 60;
-    const MIN_HOURS = 2;
-    const DEPOSIT_AMOUNT = 25; // optional
+    (function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var finePointer = window.matchMedia("(pointer: fine)").matches && window.matchMedia("(hover: hover)").matches;
 
-    // Optional: set these to enable "deposit checkout" buttons.
-    // Example Stripe Payment Link: https://buy.stripe.com/xxxx
-    // Example PayPal.me link: https://paypal.me/yourname  (we'll append /{DEPOSIT_AMOUNT})
-    const STRIPE_DEPOSIT_LINK = ""; // <-- paste your Stripe payment link
-    const PAYPAL_DEPOSIT_LINK = ""; // <-- paste your PayPal.me link
-    const START_HOUR = 11;
-    const END_HOUR = 23;
-    const SPOTIFY_URL = "https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B";
+      if (!reduce && finePointer) {
+        document.body.classList.add("bw-hideCursor");
+        document.body.classList.add("is-fine-pointer");
 
-    function timeLabel(h){
-      const ap = h >= 12 ? "PM" : "AM";
-      const hh = ((h + 11) % 12) + 1;
-      return hh + ":00 " + ap;
-    }
-
-    function isoToday(){
-      const d = new Date();
-      const y = d.getFullYear();
-      const m = String(d.getMonth() + 1).padStart(2,"0");
-      const day = String(d.getDate()).padStart(2,"0");
-      return y + "-" + m + "-" + day;
-    }
-
-    function pad2(n){ return String(n).padStart(2,"0"); }
-
-    function fmtLocalFromIso(iso){
-      const d = new Date(iso);
-      const y = d.getFullYear();
-      const m = pad2(d.getMonth() + 1);
-      const day = pad2(d.getDate());
-      let hh = d.getHours();
-      const ap = hh >= 12 ? "PM" : "AM";
-      hh = ((hh + 11) % 12) + 1;
-      const mm = pad2(d.getMinutes());
-      return { date: y + "-" + m + "-" + day, time: hh + ":" + mm + " " + ap };
-    }
-
-    function openModal(id){
-      const el = document.getElementById(id);
-      if(el) el.classList.add("open");
-    }
-
-    function closeModal(id){
-      const el = document.getElementById(id);
-      if(el) el.classList.remove("open");
-    }
-
-    (function modals(){
-      const lastFocus = new Map();
-
-      function getFocusable(container){
-        if(!container) return [];
-        return Array.from(container.querySelectorAll(
-          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-        )).filter(el=> !el.hasAttribute("disabled") && el.getAttribute("aria-hidden") !== "true");
-      }
-
-      function focusFirst(modalEl){
-        const focusables = getFocusable(modalEl);
-        const first = focusables[0] || modalEl;
-        try{ first.focus(); } catch(e){}
-      }
-
-      function trapTab(e, modalEl){
-        if(e.key !== "Tab") return;
-        const focusables = getFocusable(modalEl);
-        if(!focusables.length){
-          e.preventDefault();
-          modalEl.focus();
-          return;
-        }
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if(e.shiftKey && document.activeElement === first){
-          e.preventDefault();
-          last.focus();
-        } else if(!e.shiftKey && document.activeElement === last){
-          e.preventDefault();
-          first.focus();
-        }
-      }
-
-      function openModalA11y(id){
-        const el = document.getElementById(id);
-        if(!el) return;
-        lastFocus.set(id, document.activeElement);
-        el.classList.add("open");
-        document.body.classList.add("modalOpen");
-        const modal = el.querySelector(".modal");
-        if(modal) focusFirst(modal);
-      }
-
-      function closeModalA11y(id){
-        const el = document.getElementById(id);
-        if(!el) return;
-        el.classList.remove("open");
-        document.body.classList.remove("modalOpen");
-        // If the modal was opened via hash, clean the URL so refresh doesn't reopen it.
-        try{
-          const hash = (location.hash || "").toLowerCase();
-          const wantsPop = (id === "popModal" && hash === "#pop");
-          const wantsRap = (id === "rapModal" && hash === "#rap");
-          if(wantsPop || wantsRap){
-            history.replaceState(null, "", "#home");
-          }
-        } catch(e){}
-        const prev = lastFocus.get(id);
-        lastFocus.delete(id);
-        if(prev && typeof prev.focus === "function"){
-          try{ prev.focus(); } catch(e){}
-        }
-      }
-
-      document.querySelectorAll("[dataClose]").forEach(btn=>{
-        btn.addEventListener("click", ()=> closeModalA11y(btn.getAttribute("dataClose")));
-      });
-
-      ["popModal","rapModal"].forEach(id=>{
-        const el = document.getElementById(id);
-        el.addEventListener("click", (e)=>{ if(e.target === el) closeModalA11y(id); });
-        el.addEventListener("keydown", (e)=>{
-          if(!el.classList.contains("open")) return;
-          const modal = el.querySelector(".modal");
-          if(!modal) return;
-          trapTab(e, modal);
+        var ring = document.getElementById("cursor-ring");
+        var dot = document.getElementById("cursor-dot");
+        var mx = 0, my = 0, rx = 0, ry = 0, dx = 0, dy = 0;
+        window.addEventListener("mousemove", function (e) {
+          mx = e.clientX;
+          my = e.clientY;
         });
-      });
-
-      document.addEventListener("keydown", (e)=>{
-        if(e.key === "Escape"){
-          closeModalA11y("popModal");
-          closeModalA11y("rapModal");
+        function cursorTick() {
+          rx += (mx - rx) * 0.12;
+          ry += (my - ry) * 0.12;
+          dx += (mx - dx) * 0.55;
+          dy += (my - dy) * 0.55;
+          ring.style.transform = "translate(" + rx + "px, " + ry + "px)";
+          dot.style.transform = "translate(" + dx + "px, " + dy + "px)";
+          requestAnimationFrame(cursorTick);
         }
-      });
-
-      window.openPop = ()=> openModalA11y("popModal");
-      window.openRap = ()=> openModalA11y("rapModal");
-      window.closePop = ()=> closeModalA11y("popModal");
-      window.closeRap = ()=> closeModalA11y("rapModal");
-    })();
-
-    (function hashRoutes(){
-      const BASE_URL = "https://b2nny.com/";
-      const DEFAULT_DESC = "Official site for b2nny — releases, links, and booking.";
-
-      function setMeta({ title, desc, url }){
-        const t = title || "b2nny";
-        const d = desc || DEFAULT_DESC;
-        const u = url || BASE_URL;
-
-        document.title = t;
-
-        const set = (sel, val)=>{
-          const el = document.querySelector(sel);
-          if(el) el.setAttribute("content", val);
-        };
-
-        const descEl = document.querySelector('meta[name="description"]');
-        if(descEl) descEl.setAttribute("content", d);
-
-        set('meta[property="og:title"]', t);
-        set('meta[property="og:description"]', d);
-        set('meta[property="og:url"]', u);
-
-        set('meta[name="twitter:title"]', t);
-        set('meta[name="twitter:description"]', d);
+        cursorTick();
       }
 
-      function onHash(){
-        const hash = (location.hash || "#top").toLowerCase();
-
-        // Close modals unless explicitly opened.
-        if(hash !== "#pop" && hash !== "#rap"){
-          if(window.closePop) window.closePop();
-          if(window.closeRap) window.closeRap();
-        }
-
-        if(hash === "#pop"){
-          setMeta({
-            title: "b2nny | Pop Dump",
-            desc: "Pop Dump by b2nny — pick Spotify, Apple Music, or SoundCloud and stream the EP.",
-            url: BASE_URL + "#pop"
-          });
-          if(window.openPop) window.openPop();
-          return;
-        }
-
-        if(hash === "#rap"){
-          setMeta({
-            title: "b2nny | Rap Dump",
-            desc: "Rap Dump by b2nny — pick Spotify, Apple Music, or SoundCloud and stream the EP.",
-            url: BASE_URL + "#rap"
-          });
-          if(window.openRap) window.openRap();
-          return;
-        }
-
-        if(hash === "#book"){
-          setMeta({
-            title: "b2nny | booking",
-            desc: "Book a studio session with b2nny — request a date and time, and I’ll confirm with you.",
-            url: BASE_URL + "#book"
-          });
-          return;
-        }
-
-        setMeta({ title: "b2nny", desc: DEFAULT_DESC, url: BASE_URL + (hash || "#top") });
-      }
-
-      window.addEventListener("hashchange", onHash);
-      onHash();
-    })();
-
-    function jsonp(url){
-      return new Promise((resolve, reject)=>{
-        const cb = "cb" + Math.random().toString(36).slice(2);
-        const sep = url.includes("?") ? "&" : "?";
-        const full = url + sep + "callback=" + cb;
-
-        const s = document.createElement("script");
-        s.src = full;
-        s.async = true;
-
-        const t = setTimeout(()=>{
-          cleanup();
-          reject(new Error("timeout"));
-        }, 12000);
-
-        function cleanup(){
-          clearTimeout(t);
-          delete window[cb];
-          if(s && s.parentNode) s.parentNode.removeChild(s);
-        }
-
-        window[cb] = (data)=>{
-          cleanup();
-          resolve(data);
-        };
-
-        s.onerror = ()=>{
-          cleanup();
-          reject(new Error("load error"));
-        };
-
-        document.head.appendChild(s);
-      });
-    }
-
-    async function copyText(text){
-      if(!text) return false;
-      try{
-        if(navigator.clipboard && navigator.clipboard.writeText){
-          await navigator.clipboard.writeText(text);
-          return true;
-        }
-      } catch(e){}
-      try{
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly","");
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        ta.style.top = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        const ok = document.execCommand("copy");
-        document.body.removeChild(ta);
-        return !!ok;
-      } catch(e){
-        return false;
-      }
-    }
-
-    function setText(el, text){
-      if(!el) return;
-      el.textContent = text || "";
-    }
-
-    function bookingLink(){
-      try{
-        return location.origin + location.pathname + "#book";
-      } catch(e){
-        return "#book";
-      }
-    }
-
-    (function footerActions(){
-      const shareBtn = document.getElementById("footerShare");
-
-      if(shareBtn){
-        if(navigator.share){
-          shareBtn.addEventListener("click", async ()=>{
-            try{
-              await navigator.share({
-                title: "b2nny",
-                text: "music + booking",
-                url: location.href
-              });
-            } catch(e){}
-          });
-        } else {
-          // Fallback: copy link to clipboard
-          shareBtn.addEventListener("click", async ()=>{
-            const ok = await copyText(location.href);
-            if(ok) shareBtn.textContent = "copied!";
-            setTimeout(()=>{ shareBtn.textContent = "share"; }, 1500);
-          });
-        }
-      }
-    })();
-
-    // dropdown menu removed
-
-    (function booking(){
-      const formCard = document.getElementById("bookFormCard");
-      const successCard = document.getElementById("bookSuccessCard");
-      const successLine = document.getElementById("bkSuccessLine");
-      const successPrice = document.getElementById("bkSuccessPrice");
-      const anotherBtn = document.getElementById("bkAnother");
-      const waitlistCard = document.getElementById("waitlistCard");
-
-      const formEl = document.getElementById("bkForm");
-      const dateEl = document.getElementById("bkDate");
-      const startEl = document.getElementById("bkStart");
-      const endEl = document.getElementById("bkEnd");
-      const tilesEl = document.getElementById("bkTiles");
-      const timeSummaryEl = document.getElementById("bkTimeSummary");
-
-      const firstEl = document.getElementById("bkFirst");
-      const lastEl = document.getElementById("bkLast");
-      const emailEl = document.getElementById("bkEmail");
-      const phoneEl = document.getElementById("bkPhone");
-      const igEl = document.getElementById("bkIg");
-      const notesEl = document.getElementById("bkNotes");
-
-      const submitBtn = document.getElementById("bkSubmit");
-      const msgEl = document.getElementById("bkMsg");
-      const tzEl = document.getElementById("bkTz");
-
-      const quoteWrap = document.getElementById("bkQuote");
-      const quoteLine = document.getElementById("bkQuoteLine");
-      const minHoursLabel = document.getElementById("bkMinHoursLabel");
-      const agreeEl = document.getElementById("bkAgree");
-
-      const depositWrap = document.getElementById("bkDepositWrap");
-      const depositStripe = document.getElementById("bkDepositStripe");
-      const depositPaypal = document.getElementById("bkDepositPaypal");
-
-      const calGrid = document.getElementById("bkCal");
-      const calMonthEl = document.getElementById("bkCalMonth");
-      const calPrev = document.getElementById("bkCalPrev");
-      const calNext = document.getElementById("bkCalNext");
-      const calMsg = document.getElementById("bkCalMsg");
-      const calLegend = document.getElementById("bkCalLegend");
-
-      const wlForm = document.getElementById("wlForm");
-      const wlEmail = document.getElementById("wlEmail");
-      const wlPhone = document.getElementById("wlPhone");
-      const wlIg = document.getElementById("wlIg");
-      const wlHours = document.getElementById("wlHours");
-      const wlMsg = document.getElementById("wlMsg");
-
-      let busy = new Set();
-      let selStart = null; // number (hour, 24h)
-      let selEnd = null;   // number (hour, 24h), end hour, exclusive
-
-      // Calendar cache: date -> { busy:Set, fullyBooked:boolean }
-      const dayCache = new Map();
-      let calYear = null;
-      let calMonth = null; // 0-based
-
-      function setTimezoneLabel(){
-        if(!tzEl) return;
-        try{
-          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          tzEl.textContent = tz || "your timezone";
-        } catch(e){
-          tzEl.textContent = "your timezone";
-        }
-      }
-
-      function clampSelection(){
-        if(selStart == null || selEnd == null) return;
-        if(selStart < START_HOUR) selStart = START_HOUR;
-        if(selEnd > END_HOUR) selEnd = END_HOUR;
-        if(selEnd <= selStart) selEnd = Math.min(selStart + 1, END_HOUR);
-      }
-
-      function selectionText(){
-        if(selStart == null || selEnd == null) return "tap a green tile to pick a time";
-        const hours = selEnd - selStart;
-        const startText = timeLabel(selStart);
-        const endText = timeLabel(selEnd);
-        return "selected: " + startText + " – " + endText + " (" + hours + " hour" + (hours === 1 ? "" : "s") + ")";
-      }
-
-      function updateTimeSummary(){
-        if(!timeSummaryEl) return;
-        timeSummaryEl.textContent = selectionText();
-      }
-
-      function updateQuote(){
-        if(!quoteWrap || !quoteLine) return;
-        if(selStart == null || selEnd == null){
-          quoteWrap.style.display = "none";
-          quoteLine.textContent = "";
-          return;
-        }
-        const hours = selEnd - selStart;
-        const total = hours * PRICE_PER_HOUR;
-        const minOk = hours >= MIN_HOURS;
-        quoteWrap.style.display = "";
-        quoteLine.textContent =
-          (minOk ? "" : ("minimum is " + MIN_HOURS + " hours. ")) +
-          ("estimated total: $" + total + " (" + hours + " hr × $" + PRICE_PER_HOUR + ")");
-      }
-
-      function setSelection(startHour, endHour){
-        selStart = (startHour == null) ? null : Number(startHour);
-        selEnd = (endHour == null) ? null : Number(endHour);
-        if(selStart != null && selEnd == null){
-          selEnd = Math.min(selStart + 1, END_HOUR);
-        }
-        if(selStart != null && selEnd != null){
-          clampSelection();
-          // Hard rule: don't allow selection across busy slots.
-          if(!isRangeFree(selStart, selEnd)){
-            // fallback to 1-hour slot if possible
-            const fallbackEnd = Math.min(selStart + 1, END_HOUR);
-            if(isRangeFree(selStart, fallbackEnd)){
-              selEnd = fallbackEnd;
-            } else {
-              selStart = null;
-              selEnd = null;
-            }
-          }
-        }
-        msgEl.textContent = "";
-        syncSelectsFromSelection();
-        renderTiles();
-        updateTimeSummary();
-        updateQuote();
-      }
-
-      function syncSelectionFromSelects(){
-        const s = Number(startEl && startEl.value);
-        const e = Number(endEl && endEl.value);
-        if(Number.isFinite(s) && Number.isFinite(e) && e > s){
-          selStart = s;
-          selEnd = e;
-          clampSelection();
-        } else {
-          selStart = null;
-          selEnd = null;
-        }
-        renderTiles();
-        updateTimeSummary();
-        updateQuote();
-      }
-
-      function syncSelectsFromSelection(){
-        if(!startEl || !endEl) return;
-        if(selStart == null || selEnd == null) return;
-
-        // Ensure start options exist and select a valid start.
-        buildStartOptions();
-        if(startEl.querySelector('option[value="' + String(selStart) + '"]:not([disabled])')){
-          startEl.value = String(selStart);
-        }
-
-        // Ensure end options exist for this start.
-        rebuildEndOptions();
-        if(endEl.querySelector('option[value="' + String(selEnd) + '"]:not([disabled])')){
-          endEl.value = String(selEnd);
-        } else {
-          // pick nearest available end >= selStart+1
-          const firstAvail = endEl.querySelector('optgroup[label="Available"] option:not([disabled])') ||
-                             endEl.querySelector('option:not([disabled])');
-          if(firstAvail){
-            endEl.value = firstAvail.value;
-            selEnd = Number(firstAvail.value);
-          }
-        }
-      }
-
-      function renderTiles(){
-        if(!tilesEl) return;
-        tilesEl.innerHTML = "";
-
-        for(let h = START_HOUR; h < END_HOUR; h++){
-          const label = timeLabel(h);
-          const isBusy = busy.has(label);
-          const inSel = (selStart != null && selEnd != null && h >= selStart && h < selEnd);
-
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "timeTile " + (isBusy ? "timeTile--busy" : "timeTile--avail") + (inSel ? " timeTile--sel" : "");
-          btn.disabled = isBusy;
-          btn.setAttribute("aria-pressed", inSel ? "true" : "false");
-          btn.dataset.hour = String(h);
-
-          const main = document.createElement("div");
-          main.className = "tMain";
-          main.textContent = label;
-
-          const sub = document.createElement("div");
-          sub.className = "tSub";
-          sub.textContent = isBusy ? "unavailable" : "available";
-
-          btn.appendChild(main);
-          btn.appendChild(sub);
-
-          btn.addEventListener("click", ()=>{
-            if(isBusy) return;
-
-            // First pick, or reset after a finished range.
-            if(selStart == null || selEnd == null){
-              setSelection(h, Math.min(h + 1, END_HOUR));
-              return;
-            }
-
-            // If clicking inside the current range, shrink to 1 hour at that tile.
-            if(h >= selStart && h < selEnd){
-              setSelection(h, Math.min(h + 1, END_HOUR));
-              return;
-            }
-
-            // Extend left
-            if(h < selStart){
-              if(isRangeFree(h, selEnd)){
-                setSelection(h, selEnd);
-              } else {
-                msgEl.textContent = "that range includes unavailable time";
-              }
-              return;
-            }
-
-            // Extend right
-            if(h >= selEnd){
-              const newEnd = Math.min(h + 1, END_HOUR);
-              if(isRangeFree(selStart, newEnd)){
-                setSelection(selStart, newEnd);
-              } else {
-                msgEl.textContent = "that range includes unavailable time";
-              }
-              return;
-            }
-          });
-
-          tilesEl.appendChild(btn);
-        }
-      }
-
-      function setMinDate(){
-        const min = "2026-01-01";
-        dateEl.min = min;
-        const t = isoToday();
-        dateEl.value = (t < min) ? min : t;
-      }
-
-      function setMinHoursLabel(){
-        setText(minHoursLabel, String(MIN_HOURS) + " hours");
-      }
-
-      function setDepositButtons(){
-        if(!depositWrap) return;
-        const hasStripe = !!(STRIPE_DEPOSIT_LINK && STRIPE_DEPOSIT_LINK.trim());
-        const hasPaypal = !!(PAYPAL_DEPOSIT_LINK && PAYPAL_DEPOSIT_LINK.trim());
-        if(!hasStripe && !hasPaypal){
-          depositWrap.style.display = "none";
-          return;
-        }
-        depositWrap.style.display = "";
-        if(depositStripe){
-          depositStripe.style.display = hasStripe ? "" : "none";
-          if(hasStripe) depositStripe.href = STRIPE_DEPOSIT_LINK.trim();
-        }
-        if(depositPaypal){
-          depositPaypal.style.display = hasPaypal ? "" : "none";
-          if(hasPaypal){
-            const base = PAYPAL_DEPOSIT_LINK.trim().replace(/\/+$/,"");
-            const withAmount = /paypal\.me\/.+\/\d+(\.\d+)?$/i.test(base) ? base : (base + "/" + String(DEPOSIT_AMOUNT));
-            depositPaypal.href = withAmount;
-          }
-        }
-      }
-
-      function buildStartOptions(){
-        const prev = startEl.value;
-        startEl.innerHTML = "";
-
-        const availGroup = document.createElement("optgroup");
-        availGroup.label = "Available";
-        const unavailGroup = document.createElement("optgroup");
-        unavailGroup.label = "Unavailable";
-
-        for(let h = START_HOUR; h < END_HOUR; h++){
-          const label = timeLabel(h);
-          const isBusy = busy.has(label);
-
-          const opt = document.createElement("option");
-          opt.value = String(h);
-          opt.textContent = label + (isBusy ? " (Unavailable)" : " (Available)");
-          if(isBusy) opt.disabled = true;
-
-          (isBusy ? unavailGroup : availGroup).appendChild(opt);
-        }
-
-        if(availGroup.children.length) startEl.appendChild(availGroup);
-        if(unavailGroup.children.length) startEl.appendChild(unavailGroup);
-
-        // Keep previous selection if it's still available; otherwise pick first available.
-        const prevHour = Number(prev);
-        const canKeepPrev = Number.isFinite(prevHour) && !busy.has(timeLabel(prevHour));
-        if(canKeepPrev && startEl.querySelector('option[value="' + prev + '"]:not([disabled])')){
-          startEl.value = prev;
-          return;
-        }
-
-        const firstAvail = startEl.querySelector('optgroup[label="Available"] option:not([disabled])') ||
-                           startEl.querySelector('option:not([disabled])');
-        if(firstAvail){
-          startEl.value = firstAvail.value;
-        } else {
-          startEl.value = String(START_HOUR);
-        }
-      }
-
-      function rebuildEndOptions(){
-        const s = Number(startEl.value);
-        const prev = endEl.value;
-        endEl.innerHTML = "";
-
-        const availGroup = document.createElement("optgroup");
-        availGroup.label = "Available";
-        const unavailGroup = document.createElement("optgroup");
-        unavailGroup.label = "Unavailable";
-
-        for(let h = s + 1; h <= END_HOUR; h++){
-          const ok = isRangeFree(s, h);
-
-          const opt = document.createElement("option");
-          opt.value = String(h);
-          opt.textContent = timeLabel(h) + (ok ? " (Available)" : " (Unavailable)");
-          if(!ok) opt.disabled = true;
-
-          (ok ? availGroup : unavailGroup).appendChild(opt);
-        }
-
-        if(availGroup.children.length) endEl.appendChild(availGroup);
-        if(unavailGroup.children.length) endEl.appendChild(unavailGroup);
-
-        // Keep previous selection if it's still available; otherwise pick a sensible default.
-        const prevEnd = prev;
-        if(prevEnd && endEl.querySelector('option[value="' + prevEnd + '"]:not([disabled])')){
-          endEl.value = prevEnd;
-          return;
-        }
-
-        const preferred = String(Math.min(s + 2, END_HOUR));
-        if(endEl.querySelector('option[value="' + preferred + '"]:not([disabled])')){
-          endEl.value = preferred;
-          return;
-        }
-
-        const firstAvail = endEl.querySelector('optgroup[label="Available"] option:not([disabled])') ||
-                           endEl.querySelector('option:not([disabled])');
-        if(firstAvail){
-          endEl.value = firstAvail.value;
-        }
-      }
-
-      function isRangeFree(s, e){
-        for(let h = s; h < e; h++){
-          if(busy.has(timeLabel(h))) return false;
-        }
-        return true;
-      }
-
-      function isFullyBooked(busySet){
-        let count = 0;
-        for(let h = START_HOUR; h < END_HOUR; h++){
-          if(busySet.has(timeLabel(h))) count++;
-        }
-        return count >= (END_HOUR - START_HOUR);
-      }
-
-      async function getBusyForDate(date){
-        if(dayCache.has(date)) return dayCache.get(date);
-        let set = new Set();
-        if(API_URL && API_URL.indexOf("PASTE_") !== 0){
-          try{
-            const data = await jsonp(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
-            if(data && data.ok && Array.isArray(data.busy)) set = new Set(data.busy);
-          } catch(e){
-            set = new Set();
-          }
-        }
-        const info = { busy: set, fullyBooked: isFullyBooked(set) };
-        dayCache.set(date, info);
-        return info;
-      }
-
-      function daysInMonth(y, m0){
-        return new Date(y, m0 + 1, 0).getDate();
-      }
-
-      function monthLabel(y, m0){
-        const d = new Date(y, m0, 1);
-        return d.toLocaleString(undefined, { month: "long", year: "numeric" });
-      }
-
-      function setCalLegend(){
-        if(!calLegend) return;
-        calLegend.innerHTML =
-          '<span class="timeLegendItem"><span class="timeSwatch timeSwatch--avail"></span>available day</span>' +
-          '<span class="timeLegendItem"><span class="timeSwatch timeSwatch--busy"></span>fully booked day</span>' +
-          '<span class="timeLegendItem"><span class="timeSwatch timeSwatch--sel"></span>selected</span>';
-      }
-
-      async function renderCalendar(y, m0){
-        if(!calGrid || !calMonthEl) return;
-        calYear = y; calMonth = m0;
-        calMonthEl.textContent = monthLabel(y, m0);
-        setCalLegend();
-
-        const today = isoToday();
-        const totalDays = daysInMonth(y, m0);
-        const firstDow = new Date(y, m0, 1).getDay(); // 0 Sun
-        const usedCells = firstDow + totalDays;
-        const cellCount = (usedCells <= 35) ? 35 : 42; // avoid an extra blank row when possible
-
-        calGrid.innerHTML = "";
-        const cells = [];
-        for(let i=0; i<cellCount; i++){
-          const cell = document.createElement("button");
-          cell.type = "button";
-          cell.className = "calDay";
-          cell.disabled = true;
-          cell.textContent = "";
-          cells.push(cell);
-          calGrid.appendChild(cell);
-        }
-
-        for(let day=1; day<=totalDays; day++){
-          const idx = firstDow + (day - 1);
-          const date = y + "-" + String(m0 + 1).padStart(2,"0") + "-" + String(day).padStart(2,"0");
-          const cell = cells[idx];
-          cell.textContent = String(day);
-          cell.disabled = (date < today);
-          cell.dataset.date = date;
-          cell.classList.toggle("calDay--sel", date === dateEl.value);
-          cell.classList.add("calDay--loading");
-
-          cell.addEventListener("click", async ()=>{
-            if(cell.disabled) return;
-            dateEl.value = date;
-            await loadBusy();
-            buildStartOptions();
-            rebuildEndOptions();
-            syncSelectionFromSelects();
-            await updateCalHighlights();
-          });
-        }
-
-        await updateCalHighlights();
-      }
-
-      async function updateCalHighlights(){
-        if(!calGrid) return;
-        const buttons = Array.from(calGrid.querySelectorAll(".calDay[data-date]"));
-        if(!buttons.length) return;
-
-        setText(calMsg, "loading availability…");
-        const queue = buttons.slice();
-        const limit = 5;
-        let active = 0;
-        let done = 0;
-
-        await new Promise((resolve)=>{
-          const pump = ()=>{
-            while(active < limit && queue.length){
-              const btn = queue.shift();
-              active++;
-              const date = btn.dataset.date;
-              getBusyForDate(date).then((info)=>{
-                btn.classList.remove("calDay--loading");
-                btn.classList.toggle("calDay--busy", info.fullyBooked);
-                btn.classList.toggle("calDay--avail", !info.fullyBooked);
-                btn.classList.toggle("calDay--sel", date === dateEl.value);
-
-                if(date === dateEl.value && waitlistCard){
-                  waitlistCard.style.display = info.fullyBooked ? "" : "none";
-                }
-              }).finally(()=>{
-                active--;
-                done++;
-                if(done >= buttons.length){
-                  setText(calMsg, "");
-                  resolve();
-                } else {
-                  pump();
+      if (!reduce) {
+        var els = document.querySelectorAll(".reveal");
+        if (els.length && "IntersectionObserver" in window) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
                 }
               });
-            }
-          };
-          pump();
+            },
+            { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0 }
+          );
+          els.forEach(function (el) { io.observe(el); });
+        } else {
+          els.forEach(function (el) { el.classList.add("is-visible"); });
+        }
+
+        document.querySelectorAll(".magnetic").forEach(function (btn) {
+          btn.addEventListener("mousemove", function (e) {
+            var r = btn.getBoundingClientRect();
+            var ox = ((e.clientX - r.left) / r.width - 0.5) * 10;
+            var oy = ((e.clientY - r.top) / r.height - 0.5) * 10;
+            btn.style.transform = "translate(" + ox + "px, " + oy + "px)";
+          });
+          btn.addEventListener("mouseleave", function () {
+            btn.style.transform = "";
+          });
         });
       }
+    })();
 
-      async function loadBusy(){
-        msgEl.textContent = "";
-        busy = new Set();
+    (async function hydratePluginCheckout() {
+      var notice = document.getElementById("pluginStoreNotice");
+      var buttons = Array.prototype.slice.call(
+        document.querySelectorAll('a[data-role="checkout"][data-sku].plugin-buy-btn')
+      );
+      if (!buttons.length) return;
 
-        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
-          msgEl.textContent = "backend not set";
+      function setDisabled(a, disabled) {
+        if (disabled) {
+          a.classList.add("disabled");
+          a.setAttribute("href", "#plugins");
+          a.setAttribute("aria-disabled", "true");
+          a.removeAttribute("target");
+          a.removeAttribute("rel");
+        } else {
+          a.classList.remove("disabled");
+          a.removeAttribute("aria-disabled");
+        }
+      }
+
+      var cfg = null;
+      try {
+        var res = await fetch("/plugin-store.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        cfg = await res.json();
+      } catch (e) {
+        if (notice) {
+          notice.textContent =
+            "Could not load /plugin-store.json — check that it is deployed on the site root.";
+          notice.classList.add("visible");
+        }
+        buttons.forEach(function (a) {
+          setDisabled(a, true);
+        });
+        return;
+      }
+
+      var urls = cfg && cfg.checkoutUrls ? cfg.checkoutUrls : {};
+      var missing = false;
+      buttons.forEach(function (a) {
+        var sku = a.getAttribute("data-sku");
+        var raw = urls[sku];
+        var u = typeof raw === "string" ? raw.trim() : "";
+        if (!/^https?:\/\//i.test(u)) {
+          missing = true;
+          setDisabled(a, true);
           return;
         }
-
-        const date = dateEl.value;
-        if(!date) return;
-
-        try{
-          const data = await jsonp(API_URL + "?mode=busy&date=" + encodeURIComponent(date));
-          if(data && data.ok && Array.isArray(data.busy)){
-            busy = new Set(data.busy);
-          }
-        } catch(e){
-          busy = new Set();
-        }
-
-        dayCache.set(date, { busy, fullyBooked: isFullyBooked(busy) });
-        if(waitlistCard) waitlistCard.style.display = isFullyBooked(busy) ? "" : "none";
-      }
-
-      function validate(){
-        // reset per-field errors
-        const fields = [
-          { el: firstEl, name: "first name", type: "text" },
-          { el: lastEl, name: "last name", type: "text" },
-          { el: emailEl, name: "email", type: "email" },
-          { el: phoneEl, name: "phone", type: "tel" },
-          { el: igEl, name: "instagram", type: "text" },
-          { el: dateEl, name: "date", type: "date" }
-        ];
-
-        fields.forEach(f=>{
-          f.el.classList.remove("isInvalid");
-          f.el.removeAttribute("aria-invalid");
-        });
-
-        const problems = [];
-
-        function mark(el, text){
-          problems.push(text);
-          el.classList.add("isInvalid");
-          el.setAttribute("aria-invalid","true");
-        }
-
-        if(!firstEl.value.trim()) mark(firstEl, "first name is required");
-        if(!lastEl.value.trim()) mark(lastEl, "last name is required");
-
-        const emailVal = emailEl.value.trim();
-        if(!emailVal) mark(emailEl, "email is required");
-        else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) mark(emailEl, "email looks invalid");
-
-        if(!phoneEl.value.trim()) mark(phoneEl, "phone is required");
-        if(!igEl.value.trim()) mark(igEl, "instagram is required");
-        if(!dateEl.value) mark(dateEl, "date is required");
-
-        const s = Number(startEl.value);
-        const e = Number(endEl.value);
-        if(!Number.isFinite(s) || !Number.isFinite(e) || e <= s) problems.push("select a valid time range");
-        else if(!isRangeFree(s, e)) problems.push("that time is already booked");
-        else {
-          const hours = e - s;
-          if(hours < MIN_HOURS) problems.push("minimum is " + MIN_HOURS + " hours");
-        }
-
-        if(agreeEl && !agreeEl.checked){
-          problems.push("confirm studio rules");
-          agreeEl.classList.add("isInvalid");
-          agreeEl.setAttribute("aria-invalid","true");
-        } else if(agreeEl){
-          agreeEl.classList.remove("isInvalid");
-          agreeEl.removeAttribute("aria-invalid");
-        }
-
-        if(problems.length){
-          // Keep button text consistent in case a prior attempt changed it.
-          submitBtn.disabled = false;
-          submitBtn.textContent = "request booking";
-
-          // Focus the first invalid field (if any).
-          const firstBad = document.querySelector(".isInvalid");
-          if(firstBad && typeof firstBad.focus === "function"){
-            try{ firstBad.focus(); } catch(e){}
-          }
-          return "fix: " + problems.join(", ");
-        }
-
-        return "";
-      }
-
-      function showSuccess(data, sHour, eHour){
-        const hours = eHour - sHour;
-        const total = hours * PRICE_PER_HOUR;
-
-        formCard.style.display = "none";
-        successCard.style.display = "block";
-
-        const st = data && data.start ? fmtLocalFromIso(data.start) : null;
-        const en = data && data.end ? fmtLocalFromIso(data.end) : null;
-
-        const dateText = st ? st.date : dateEl.value;
-        const startText = st ? st.time : timeLabel(sHour);
-        const endText = en ? en.time : timeLabel(eHour);
-
-        successLine.textContent =
-          dateText + " " + startText + " to " + endText + " (" + hours + " hour" + (hours === 1 ? "" : "s") + ")";
-
-        successPrice.innerHTML = "<strong>$" + total + "</strong><span>estimated total</span>";
-        msgEl.textContent = "";
-      }
-
-      function resetFormView(){
-        successCard.style.display = "none";
-        formCard.style.display = "block";
-        msgEl.textContent = "";
-        notesEl.value = "";
-      }
-
-      async function submit(){
-        const err = validate();
-        if(err){ msgEl.textContent = err; return; }
-
-        if(!API_URL || API_URL.indexOf("PASTE_") === 0){
-          msgEl.textContent = "backend not set";
-          return;
-        }
-
-        const fullName = firstEl.value.trim() + " " + lastEl.value.trim();
-        const sHour = Number(startEl.value);
-        const eHour = Number(endEl.value);
-        const hours = eHour - sHour;
-        const durationMinutes = hours * 60;
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = "sending...";
-        msgEl.textContent = "";
-
-        const q = new URLSearchParams();
-        q.set("mode","book");
-        q.set("name", fullName);
-        q.set("email", emailEl.value.trim());
-        q.set("phone", phoneEl.value.trim());
-        q.set("instagram", igEl.value.trim());
-        q.set("date", dateEl.value);
-        q.set("time", timeLabel(sHour));
-        q.set("durationMinutes", String(durationMinutes));
-        q.set("notes", String(notesEl.value || "").trim());
-        q.set("minHours", String(MIN_HOURS));
-        q.set("agreedRules", agreeEl && agreeEl.checked ? "yes" : "no");
-        q.set("depositAmount", String(DEPOSIT_AMOUNT));
-
-        try{
-          const data = await jsonp(API_URL + "?" + q.toString());
-          if(!data || !data.ok){
-            msgEl.textContent = (data && data.error) ? data.error : "error, try again";
-            submitBtn.disabled = false;
-            submitBtn.textContent = "request booking";
-            return;
-          }
-
-          showSuccess(data, sHour, eHour);
-          await loadBusy();
-          buildStartOptions();
-          rebuildEndOptions();
-        } catch(e){
-          msgEl.textContent = "error, try again";
-          submitBtn.disabled = false;
-          submitBtn.textContent = "request booking";
-        }
-      }
-
-      anotherBtn.addEventListener("click", async ()=>{
-        resetFormView();
-        await loadBusy();
-        buildStartOptions();
-        rebuildEndOptions();
+        a.setAttribute("href", u);
+        a.setAttribute("target", "_blank");
+        a.setAttribute("rel", "noopener noreferrer");
+        setDisabled(a, false);
       });
 
-      setMinDate();
-      buildStartOptions();
-      rebuildEndOptions();
-      syncSelectionFromSelects();
-      updateQuote();
-      setMinHoursLabel();
-      setDepositButtons();
-
-      // Calendar init
-      try{
-        const d = new Date(dateEl.value || isoToday());
-        renderCalendar(d.getFullYear(), d.getMonth());
-      } catch(e){}
-
-      if(calPrev){
-        calPrev.addEventListener("click", ()=>{
-          if(calYear == null || calMonth == null) return;
-          const d = new Date(calYear, calMonth, 1);
-          d.setMonth(d.getMonth() - 1);
-          renderCalendar(d.getFullYear(), d.getMonth());
-        });
-      }
-
-      if(calNext){
-        calNext.addEventListener("click", ()=>{
-          if(calYear == null || calMonth == null) return;
-          const d = new Date(calYear, calMonth, 1);
-          d.setMonth(d.getMonth() + 1);
-          renderCalendar(d.getFullYear(), d.getMonth());
-        });
-      }
-
-      dateEl.addEventListener("change", async ()=>{
-        await loadBusy();
-        buildStartOptions();
-        rebuildEndOptions();
-        syncSelectionFromSelects();
-        if(calYear != null && calMonth != null) updateCalHighlights();
-      });
-
-      startEl.addEventListener("change", ()=>{
-        rebuildEndOptions();
-        syncSelectionFromSelects();
-      });
-
-      if(formEl){
-        formEl.addEventListener("submit", (e)=>{
-          e.preventDefault();
-          submit();
-        });
-      } else {
-        submitBtn.addEventListener("click", submit);
-      }
-
-      loadBusy().then(()=>{
-        buildStartOptions();
-        rebuildEndOptions();
-        syncSelectionFromSelects();
-        if(calYear != null && calMonth != null) updateCalHighlights();
-      });
-
-      setTimezoneLabel();
-
-      // Waitlist submission (requires backend support: mode=waitlist)
-      if(wlForm){
-        wlForm.addEventListener("submit", async (e)=>{
-          e.preventDefault();
-          if(!API_URL || API_URL.indexOf("PASTE_") === 0){
-            setText(wlMsg, "backend not set");
-            return;
-          }
-          const date = dateEl.value;
-          const email = (wlEmail && wlEmail.value || "").trim();
-          const phone = (wlPhone && wlPhone.value || "").trim();
-          const ig = (wlIg && wlIg.value || "").trim();
-          const hrs = (wlHours && wlHours.value || "").trim();
-          if(!date){ setText(wlMsg, "pick a date first"); return; }
-          if(!email && !phone && !ig){ setText(wlMsg, "enter email or phone or instagram"); return; }
-          if(!hrs){ setText(wlMsg, "select hours"); return; }
-
-          setText(wlMsg, "joining…");
-          const q = new URLSearchParams();
-          q.set("mode","waitlist");
-          q.set("date", date);
-          q.set("hours", hrs);
-          q.set("email", email);
-          q.set("phone", phone);
-          q.set("instagram", ig);
-
-          try{
-            const data = await jsonp(API_URL + "?" + q.toString());
-            if(data && data.ok){
-              setText(wlMsg, "added to waitlist — you’ll be notified if a slot opens");
-              wlForm.reset();
-            } else {
-              setText(wlMsg, (data && data.error) ? data.error : "error, try again");
-            }
-          } catch(err){
-            setText(wlMsg, "error, try again");
-          }
-        });
+      if (missing && notice) {
+        notice.classList.add("visible");
       }
     })();
   </script>
 </body>
 </html>
-
- 

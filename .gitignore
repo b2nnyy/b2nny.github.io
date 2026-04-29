@@ -1,5 +1,10 @@
 .DS_Store
 **/.DS_Store
 
-# Plugin source belongs in Sampler2; Pages only ships zips under downloads/
+# Plugin source belongs in Sampler2
 2plugins/
+
+# Paid installers are sold via Lemon Squeezy — do not commit public zips here
+downloads/*
+!downloads/.gitkeep
+!downloads/STORE.txt
