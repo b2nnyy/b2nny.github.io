@@ -156,8 +156,15 @@
       border-bottom-color: var(--fg);
     }
 
-    #feedback .feedbackIntro {
-      margin-top: 0;
+    #feedback:focus,
+    #feedback:focus-visible {
+      outline: none;
+    }
+
+    /* Browsers outline :target (#fragment); Web3Forms returns with #feedback unless we strip it — hide ring anyway */
+    #feedback:target {
+      outline: none;
+      box-shadow: none;
     }
 
     .pluginFeedbackForm {
@@ -449,7 +456,7 @@
         <form class="pluginFeedbackForm" id="plugin-feedback-form" method="POST" action="https://api.web3forms.com/submit">
           <input type="hidden" name="access_key" id="web3forms-access-key" value="" autocomplete="off" />
           <input type="hidden" name="subject" value="b2nny.com plugin feedback" />
-          <input type="hidden" name="redirect" value="https://b2nny.com/?feedback=sent#feedback" />
+          <input type="hidden" name="redirect" value="https://b2nny.com/?feedback=sent" />
           <input type="text" name="botcheck" class="feedbackHoney" value="" autocomplete="off" tabindex="-1" aria-hidden="true" />
 
           <label for="feedback-message">Message</label>
@@ -508,7 +515,7 @@
           thanks.hidden = false;
         }
         if (window.history && window.history.replaceState) {
-          window.history.replaceState(null, "", window.location.pathname + "#feedback");
+          window.history.replaceState(null, "", window.location.pathname + "?feedback=sent");
         }
         if (thanks && thanks.scrollIntoView) {
           thanks.scrollIntoView({ behavior: "smooth", block: "nearest" });
