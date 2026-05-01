@@ -375,7 +375,8 @@
       margin: -2px 0 0 -2px;
       background: var(--fg);
     }
-    body.bw-hideCursor.is-fine-pointer {
+    body.bw-hideCursor.is-fine-pointer,
+    body.bw-hideCursor.is-fine-pointer * {
       cursor: none !important;
     }
     body:not(.bw-hideCursor) #cursor-ring,
@@ -523,29 +524,33 @@
       }
 
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var finePointer = window.matchMedia("(pointer: fine)").matches && window.matchMedia("(hover: hover)").matches;
+      // (any-pointer: fine) enables the custom cursor when a mouse/trackpad is present even if
+      // Windows reports the primary pointer as coarse (touch-first laptops / hybrid devices).
+      var hasFinePointer = window.matchMedia("(any-pointer: fine)").matches;
 
-      if (!reduce && finePointer) {
+      if (!reduce && hasFinePointer) {
         document.body.classList.add("bw-hideCursor");
         document.body.classList.add("is-fine-pointer");
 
         var ring = document.getElementById("cursor-ring");
         var dot = document.getElementById("cursor-dot");
-        var mx = 0, my = 0, rx = 0, ry = 0, dx = 0, dy = 0;
-        window.addEventListener("mousemove", function (e) {
-          mx = e.clientX;
-          my = e.clientY;
-        });
-        function cursorTick() {
-          rx += (mx - rx) * 0.12;
-          ry += (my - ry) * 0.12;
-          dx += (mx - dx) * 0.55;
-          dy += (my - dy) * 0.55;
-          ring.style.transform = "translate(" + rx + "px, " + ry + "px)";
-          dot.style.transform = "translate(" + dx + "px, " + dy + "px)";
-          requestAnimationFrame(cursorTick);
+        if (ring && dot) {
+          window.addEventListener(
+            "pointermove",
+            function (e) {
+              var pt = e.pointerType;
+              if (pt && pt !== "mouse" && pt !== "pen") {
+                return;
+              }
+              var x = e.clientX;
+              var y = e.clientY;
+              var t = "translate3d(" + x + "px, " + y + "px, 0)";
+              ring.style.transform = t;
+              dot.style.transform = t;
+            },
+            { passive: true }
+          );
         }
-        cursorTick();
       }
 
       if (!reduce) {
