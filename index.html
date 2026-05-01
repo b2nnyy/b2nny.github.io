@@ -41,9 +41,20 @@
     }
 
     .wrap {
+      position: relative;
+      z-index: 1;
       max-width: 36rem;
       margin: 0 auto;
       padding: 3rem 1.5rem 4rem;
+    }
+
+    #bw-marble-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
 
     .siteHeader {
@@ -331,6 +342,12 @@
       border-top: 1px solid var(--line);
       font-size: 0.75rem;
       color: var(--muted);
+      /* Soft halo so type stays legible over marbles without a footer “card” */
+      text-shadow:
+        0 0 1px var(--bg),
+        0 0 12px var(--bg),
+        0 0 24px var(--bg),
+        0 1px 2px var(--bg);
     }
 
     .reveal {
@@ -348,6 +365,9 @@
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
+      }
+      #bw-marble-canvas {
+        display: none !important;
       }
     }
 
@@ -386,6 +406,7 @@
   </style>
 </head>
 <body>
+  <canvas id="bw-marble-canvas" aria-hidden="true"></canvas>
   <div id="cursor-ring" aria-hidden="true"></div>
   <div id="cursor-dot" aria-hidden="true"></div>
 
@@ -524,36 +545,257 @@
       }
 
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      // (any-pointer: fine) enables the custom cursor when a mouse/trackpad is present even if
-      // Windows reports the primary pointer as coarse (touch-first laptops / hybrid devices).
       var hasFinePointer = window.matchMedia("(any-pointer: fine)").matches;
 
-      if (!reduce && hasFinePointer) {
-        document.body.classList.add("bw-hideCursor");
-        document.body.classList.add("is-fine-pointer");
-
-        var ring = document.getElementById("cursor-ring");
-        var dot = document.getElementById("cursor-dot");
-        if (ring && dot) {
-          window.addEventListener(
-            "pointermove",
-            function (e) {
-              var pt = e.pointerType;
-              if (pt && pt !== "mouse" && pt !== "pen") {
-                return;
-              }
-              var x = e.clientX;
-              var y = e.clientY;
-              var t = "translate3d(" + x + "px, " + y + "px, 0)";
-              ring.style.transform = t;
-              dot.style.transform = t;
-            },
-            { passive: true }
-          );
-        }
+      var enableMarbles = false;
+      try {
+        var loadCount =
+          parseInt(localStorage.getItem("b2nny_site_load_count") || "0", 10) + 1;
+        localStorage.setItem("b2nny_site_load_count", String(loadCount));
+        enableMarbles = loadCount % 100 === 0;
+      } catch (errLocal) {}
+      if (reduce) {
+        enableMarbles = false;
       }
 
+      var marblePointer = { x: 0, y: 0, valid: false };
+      var ring = document.getElementById("cursor-ring");
+      var dot = document.getElementById("cursor-dot");
+
       if (!reduce) {
+        window.addEventListener(
+          "pointermove",
+          function (e) {
+            var pt = e.pointerType;
+            if (pt && pt !== "mouse" && pt !== "pen") {
+              return;
+            }
+            var cx = e.clientX;
+            var cy = e.clientY;
+            if (enableMarbles) {
+              marblePointer.x = cx;
+              marblePointer.y = cy;
+              marblePointer.valid = true;
+            }
+            if (hasFinePointer && ring && dot) {
+              var t = "translate3d(" + cx + "px, " + cy + "px, 0)";
+              ring.style.transform = t;
+              dot.style.transform = t;
+            }
+          },
+          { passive: true }
+        );
+
+        if (hasFinePointer) {
+          document.body.classList.add("bw-hideCursor");
+          document.body.classList.add("is-fine-pointer");
+        }
+
+        if (!enableMarbles) {
+          var marbleCanvasEl = document.getElementById("bw-marble-canvas");
+          if (marbleCanvasEl) {
+            marbleCanvasEl.style.display = "none";
+          }
+        } else {
+        (function initMarbleCanvas() {
+          var canvas = document.getElementById("bw-marble-canvas");
+          if (!canvas || !canvas.getContext) {
+            return;
+          }
+          var ctx = canvas.getContext("2d");
+          var W = 0;
+          var H = 0;
+          var balls = [];
+          var BALL_COUNT_MIN = 110;
+          var BALL_COUNT_MAX = 240;
+          var BALL_AREA_DIVISOR = 7600;
+          var GRAVITY = 2200;
+          var AIR_DRAG = 0.99935;
+          var REST_WALL = 0.93;
+          var REST_BALL = 0.92;
+          var GROUND_LAUNCH_VY_MIN = 1500;
+          var GROUND_LAUNCH_VY_EXTRA = 1000;
+          var GROUND_LAUNCH_VX_SPREAD = 1600;
+          var OFFSCREEN_MARGIN = 120;
+          var REPULSE_R = 118;
+          var REPULSE_ACCEL = 15500;
+          var SUBSTEPS = 6;
+          var fg = getComputedStyle(document.documentElement).getPropertyValue("--fg").trim() || "#0a0a0a";
+
+          function resize() {
+            var dpr = window.devicePixelRatio || 1;
+            W = window.innerWidth;
+            H = window.innerHeight;
+            canvas.width = Math.max(1, Math.floor(W * dpr));
+            canvas.height = Math.max(1, Math.floor(H * dpr));
+            canvas.style.width = W + "px";
+            canvas.style.height = H + "px";
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          }
+
+          function spawn() {
+            balls.length = 0;
+            var area = W * H;
+            var n = Math.min(
+              BALL_COUNT_MAX,
+              Math.max(BALL_COUNT_MIN, Math.round(area / BALL_AREA_DIVISOR))
+            );
+            for (var i = 0; i < n; i++) {
+              var r = 6 + Math.random() * 7;
+              balls.push({
+                x: Math.random() * W,
+                y: -30 - Math.random() * 280,
+                vx: (Math.random() - 0.5) * 120,
+                vy: (Math.random() - 0.5) * 40,
+                r: r,
+                m: r * r,
+              });
+            }
+          }
+
+          function resolveBallBall(a, b) {
+            var dx = b.x - a.x;
+            var dy = b.y - a.y;
+            var distSq = dx * dx + dy * dy;
+            var minD = a.r + b.r;
+            var minDSq = minD * minD;
+            if (distSq >= minDSq || distSq < 1e-6) {
+              return;
+            }
+            var dist = Math.sqrt(distSq);
+            var nx = dx / dist;
+            var ny = dy / dist;
+            var overlap = minD - dist;
+            var invMassSum = 1 / (a.m + b.m);
+            var sx = nx * overlap * 0.5;
+            var sy = ny * overlap * 0.5;
+            a.x -= sx * (b.m * invMassSum * 2);
+            a.y -= sy * (b.m * invMassSum * 2);
+            b.x += sx * (a.m * invMassSum * 2);
+            b.y += sy * (a.m * invMassSum * 2);
+
+            var rvx = b.vx - a.vx;
+            var rvy = b.vy - a.vy;
+            var relN = rvx * nx + rvy * ny;
+            if (relN > 0) {
+              return;
+            }
+            var e = REST_BALL;
+            var j = -(1 + e) * relN / (1 / a.m + 1 / b.m);
+            var ix = j * nx;
+            var iy = j * ny;
+            a.vx -= ix / a.m;
+            a.vy -= iy / a.m;
+            b.vx += ix / b.m;
+            b.vy += iy / b.m;
+          }
+
+          function step(dt) {
+            var i;
+            var j;
+            for (i = 0; i < balls.length; i++) {
+              var b = balls[i];
+              b.vy += GRAVITY * dt;
+              b.vx *= AIR_DRAG;
+              b.vy *= AIR_DRAG;
+
+              if (marblePointer.valid) {
+                var px = marblePointer.x;
+                var py = marblePointer.y;
+                var ddx = b.x - px;
+                var ddy = b.y - py;
+                var dist = Math.sqrt(ddx * ddx + ddy * ddy);
+                if (dist < REPULSE_R && dist > 0.5) {
+                  var u = 1 - dist / REPULSE_R;
+                  var f = REPULSE_ACCEL * u * u * u;
+                  var inv = f / dist;
+                  b.vx += ddx * inv * dt;
+                  b.vy += ddy * inv * dt;
+                }
+              }
+
+              b.x += b.vx * dt;
+              b.y += b.vy * dt;
+            }
+
+            for (i = 0; i < balls.length; i++) {
+              var bb = balls[i];
+              if (bb.x < bb.r) {
+                bb.x = bb.r;
+                bb.vx = -bb.vx * REST_WALL;
+              } else if (bb.x > W - bb.r) {
+                bb.x = W - bb.r;
+                bb.vx = -bb.vx * REST_WALL;
+              }
+              if (bb.y < bb.r) {
+                bb.y = bb.r;
+                bb.vy = -bb.vy * REST_WALL;
+              }
+              if (bb.y > H - bb.r) {
+                bb.y = H - bb.r;
+                bb.vy = -(GROUND_LAUNCH_VY_MIN + Math.random() * GROUND_LAUNCH_VY_EXTRA);
+                bb.vx = bb.vx * 0.35 + (Math.random() - 0.5) * GROUND_LAUNCH_VX_SPREAD;
+              }
+            }
+
+            var pass;
+            for (pass = 0; pass < 2; pass++) {
+              for (i = 0; i < balls.length; i++) {
+                for (j = i + 1; j < balls.length; j++) {
+                  resolveBallBall(balls[i], balls[j]);
+                }
+              }
+            }
+
+            var m = OFFSCREEN_MARGIN;
+            for (i = balls.length - 1; i >= 0; i--) {
+              var o = balls[i];
+              if (
+                o.x + o.r < -m ||
+                o.x - o.r > W + m ||
+                o.y + o.r < -m ||
+                o.y - o.r > H + m
+              ) {
+                balls.splice(i, 1);
+              }
+            }
+          }
+
+          function draw() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = fg;
+            var i;
+            for (i = 0; i < balls.length; i++) {
+              var b = balls[i];
+              ctx.beginPath();
+              ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+
+          var last = performance.now();
+          function frame(now) {
+            var dt = Math.min(1 / 30, (now - last) / 1000);
+            last = now;
+            var h = dt / SUBSTEPS;
+            var s;
+            for (s = 0; s < SUBSTEPS; s++) {
+              step(h);
+            }
+            draw();
+            requestAnimationFrame(frame);
+          }
+
+          resize();
+          spawn();
+          window.addEventListener("resize", function () {
+            resize();
+            spawn();
+          });
+          requestAnimationFrame(frame);
+        })();
+        }
+
         var els = document.querySelectorAll(".reveal");
         if (els.length && "IntersectionObserver" in window) {
           var io = new IntersectionObserver(
@@ -566,9 +808,13 @@
             },
             { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0 }
           );
-          els.forEach(function (el) { io.observe(el); });
+          els.forEach(function (el) {
+            io.observe(el);
+          });
         } else {
-          els.forEach(function (el) { el.classList.add("is-visible"); });
+          els.forEach(function (el) {
+            el.classList.add("is-visible");
+          });
         }
 
         document.querySelectorAll(".magnetic").forEach(function (btn) {
