@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>b2nny EP vote</title>
+  <meta name="description" content="Listen to 10 b2nny tracks and vote for the 5 that should make the next EP." />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://b2nny.com/vote/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="b2nny" />
+  <meta property="og:url" content="https://b2nny.com/vote/" />
+  <meta property="og:title" content="b2nny EP vote" />
+  <meta property="og:description" content="Listen. Pick your 5." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="b2nny EP vote" />
+  <meta name="twitter:description" content="Listen. Pick your 5." />
+  <meta name="b2nny-vote-endpoint" content="https://script.google.com/macros/s/AKfycbw5jwF36qitvAlrXWDzCDxFAUH688urvXvfMuuCZpqBOP1-j7D2ziRKHjtlpNZp40gA/exec" />
+  <link rel="stylesheet" href="/vote/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="cursor-dot" aria-hidden="true"></div>
+
+  <main class="wrap" id="top">
+    <header class="siteHeader reveal">
+      <nav class="siteNav" aria-label="Primary">
+        <a class="siteNavBrand" href="/">b2nny</a>
+        <a href="#tracks">tracks</a>
+        <a href="#results">results</a>
+      </nav>
+      <p class="eyebrow">EP vote</p>
+      <h1>Listen. Pick your 5.</h1>
+      <p class="tagline">Help choose the next b2nny EP from 10 demos.</p>
+    </header>
+
+    <section class="voteIntro reveal" aria-labelledby="vote-status-title">
+      <div>
+        <h2 id="vote-status-title">vote window</h2>
+        <p id="phase-copy" class="phaseCopy">Loading vote window...</p>
+      </div>
+      <div class="countdown" aria-live="polite">
+        <span id="countdown-label">time remaining</span>
+        <strong id="countdown-value">--:--:--</strong>
+      </div>
+    </section>
+
+    <p id="setup-message" class="setupMessage" hidden role="status"></p>
+    <p id="vote-message" class="voteMessage" hidden role="status"></p>
+
+    <section class="trackSection reveal" id="tracks" aria-label="Tracks">
+      <div class="sectionHead">
+        <h2>tracks</h2>
+        <span id="track-help">hover or press play</span>
+      </div>
+      <div id="track-list" class="trackList"></div>
+    </section>
+
+    <section class="resultsSection reveal" id="results" aria-labelledby="results-title" hidden>
+      <div class="sectionHead">
+        <h2 id="results-title">results</h2>
+        <span id="results-meta">waiting for votes</span>
+      </div>
+      <div id="thanks-panel" class="thanksPanel" hidden>
+        <strong>Thanks for voting.</strong>
+        <span>Your picks are locked on this browser.</span>
+      </div>
+      <div id="results-list" class="resultsList"></div>
+    </section>
+  </main>
+
+  <div id="vote-bar" class="voteBar" aria-live="polite">
+    <span id="selection-count">0 of 5 selected</span>
+    <button id="submit-vote" class="btn btn--primary magnetic" type="button" disabled>Submit vote</button>
+  </div>
+
+  <script src="/vote/vote.js"></script>
+</body>
+</html>

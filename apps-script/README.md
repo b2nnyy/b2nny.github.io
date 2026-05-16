@@ -1,63 +1,45 @@
-## b2nny booking backend upgrades (Google Apps Script)
+## b2nny EP vote backend (Google Apps Script)
 
-Your site calls your Apps Script endpoint with JSONP:
+`apps-script/Code.gs` is the backend for the `/vote/` page. It is JSONP-friendly for static GitHub Pages hosting.
 
-- `mode=busy&date=YYYY-MM-DD` → returns busy time blocks for that date
-- `mode=book&...` → creates a booking request (and writes details into the Calendar event description)
+### Modes
 
-This site update adds **optional** frontend calls for:
+- `mode=results` returns ranked vote totals.
+- `mode=vote&choices=track-01,track-02,track-03,track-04,track-05&fingerprintHash=...` records one ballot.
 
-- `mode=waitlist&date=YYYY-MM-DD&hours=2&email=...&phone=...&instagram=...`
+Voting opens **May 18, 2026 12:00 AM ET** and closes **May 21, 2026 12:00 AM ET**. Votes are stored in a Google Sheet that is auto-created unless `VOTE_SHEET_ID` is set in `Code.gs`.
 
-`apps-script/Code.gs` includes these additions.
+### Setup
 
-### Important limitations (honest)
+1. Open your Apps Script project.
+2. Replace the project `Code.gs` with `apps-script/Code.gs`.
+3. Deploy as a Web App:
+   - Execute as: `Me`
+   - Who has access: `Anyone`
+4. Copy the `/exec` Web App URL.
+5. Paste it into `vote/index.html`:
 
-- **Deposit checkout “locking”** cannot be fully automated from a static site without verifying Stripe/PayPal payments on a server (webhook or API verification).
-  - The site supports **deposit links** (Stripe Payment Link / PayPal.me) and can **record deposit intent** in the booking request.
-  - True “lock the time instantly after payment” requires backend + payment verification.
+```html
+<meta name="b2nny-vote-endpoint" content="https://script.google.com/macros/s/.../exec" />
+```
 
-- **Auto-notify waitlist** requires backend storage + a trigger to re-check availability and send messages when slots open.
+6. Test the deployment:
 
-This repo includes a working baseline:
-- `mode=waitlist` stores entries in a Google Sheet (auto-created if you don’t set an ID).
-- `notifyWaitlist()` sends **email notifications** when a requested-length window exists.
+```text
+https://script.google.com/macros/s/.../exec?mode=results
+```
 
-### Setup steps
+Expected response starts with:
 
-1. Open your Apps Script project
-2. Replace your existing code with `apps-script/Code.gs` (or merge it)
-3. Deploy as Web App (execute as you; allow anyone)
-4. Hit your endpoint once with `mode=waitlist` to auto-create the waitlist spreadsheet (or set `WAITLIST_SHEET_ID`)
-5. Add a trigger:
-   - Triggers → Add Trigger
-   - Choose function: `notifyWaitlist`
-   - Event source: Time-driven
-   - Every 10/30 minutes
+```json
+{"ok":true
+```
 
-### Notes
+### Updating Tracks
 
-- Auto-notify is **email-only** (unless you build SMS/DM integrations). Users can still join with phone/IG, but email is required for automatic notifications.
-- You can edit:
-  - `NOTIFY_LOOKAHEAD_DAYS`
-  - `NOTIFY_COOLDOWN_HOURS`
-  - `BOOKING_LINK`
+Track IDs must match in both places:
 
-1. Add a **Waitlist** sheet + endpoint support:
-   - Store waitlist entries into a Google Sheet.
-   - Optionally email the user a confirmation immediately.
+- `vote/vote.js`
+- `apps-script/Code.gs`
 
-2. Add a timed trigger (every 10–30 min) that:
-   - Looks at waitlist entries for the next N days.
-   - Checks availability for those days.
-   - Emails/texts users when enough time becomes available.
-
-### Next step
-
-If you want me to generate the full Apps Script code tailored to your current `busy` + `book` logic, paste your existing Apps Script source (the Code.gs contents) here and I’ll:
-
-- Add `mode=waitlist`
-- Add a `notifyWaitlist()` function + instructions to create a trigger
-- Keep output JSONP-compatible (your frontend uses `callback=...`)
-
-
+When replacing placeholders, update both the display titles and the audio filenames in the frontend manifest. Keep the IDs stable (`track-01` through `track-10`) unless you also update all stored votes or start a fresh vote sheet.
