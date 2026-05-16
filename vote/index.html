@@ -4,30 +4,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>b2nny EP vote</title>
-  <meta name="description" content="Listen to 10 b2nny tracks and vote for the 5 that should make the next EP." />
+  <meta name="description" content="EP vote — opening soon." />
   <meta name="theme-color" content="#f2f0ed" />
-  <meta name="robots" content="index,follow" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="b2nny-vote-locked" content="true" />
   <link rel="canonical" href="https://b2nny.com/vote/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="b2nny" />
   <meta property="og:url" content="https://b2nny.com/vote/" />
   <meta property="og:title" content="b2nny EP vote" />
-  <meta property="og:description" content="Listen. Pick your 5." />
+  <meta property="og:description" content="Opening soon." />
   <meta property="og:image" content="https://b2nny.com/vote/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="b2nny EP vote" />
-  <meta name="twitter:description" content="Listen. Pick your 5." />
+  <meta name="twitter:description" content="Opening soon." />
   <meta name="twitter:image" content="https://b2nny.com/vote/og-image.svg" />
   <meta name="b2nny-vote-endpoint" content="https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec" />
   <script src="/theme.js"></script>
   <link rel="stylesheet" href="/vote/style.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
 </head>
-<body>
+<body class="is-vote-locked">
+  <div id="vote-lock" class="voteLock" role="dialog" aria-modal="true" aria-labelledby="vote-lock-title">
+    <div class="voteLockPanel">
+      <p class="eyebrow">EP vote</p>
+      <h1 id="vote-lock-title">Not open yet</h1>
+      <p class="voteLockCopy">The vote page is still being set up. Check back soon.</p>
+      <a class="btn magnetic" href="/">Back to b2nny</a>
+    </div>
+  </div>
+
   <div id="cursor-ring" aria-hidden="true"></div>
   <div id="cursor-dot" aria-hidden="true"></div>
 
-  <main class="wrap" id="top">
+  <main class="wrap" id="top" inert>
     <header class="siteHeader reveal">
       <nav class="siteNav" aria-label="Primary">
         <a class="siteNavBrand" href="/">b2nny</a>

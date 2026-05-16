@@ -30,6 +30,17 @@
 
   var URL_PARAMS = new URLSearchParams(window.location.search);
   CONFIG.localPreview = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
+
+  var lockMeta = document.querySelector('meta[name="b2nny-vote-locked"]');
+  var voteLocked = lockMeta && lockMeta.getAttribute("content") === "true";
+  if (voteLocked && !(CONFIG.localPreview && URL_PARAMS.get("unlock") === "1")) {
+    return;
+  }
+  document.body.classList.remove("is-vote-locked");
+  var voteLockEl = document.getElementById("vote-lock");
+  if (voteLockEl) voteLockEl.remove();
+  var mainEl = document.querySelector("main.wrap");
+  if (mainEl) mainEl.removeAttribute("inert");
   CONFIG.previewPhase = CONFIG.localPreview ? URL_PARAMS.get("preview") : "";
   CONFIG.testSubmit = CONFIG.localPreview && URL_PARAMS.get("testSubmit") === "1";
   CONFIG.resetVisit = CONFIG.localPreview && URL_PARAMS.get("resetVisit") === "1";
