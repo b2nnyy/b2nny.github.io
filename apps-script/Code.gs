@@ -9,19 +9,19 @@
 // Leave blank to auto-create a spreadsheet on first vote submission.
 const VOTE_SHEET_ID = ""; // optional: paste Spreadsheet ID here
 const VOTE_SHEET_NAME = "Votes";
-const VOTE_START_AT = "2026-05-18T00:00:00-04:00";
-const VOTE_END_AT = "2026-05-21T00:00:00-04:00";
+const VOTE_START_AT = "2026-05-16T13:45:00-04:00";
+const VOTE_END_AT = "2026-05-19T00:00:00-04:00";
 const VOTE_TRACKS = [
-  { id: "track-01", title: "Track 01" },
-  { id: "track-02", title: "Track 02" },
-  { id: "track-03", title: "Track 03" },
-  { id: "track-04", title: "Track 04" },
-  { id: "track-05", title: "Track 05" },
-  { id: "track-06", title: "Track 06" },
-  { id: "track-07", title: "Track 07" },
-  { id: "track-08", title: "Track 08" },
-  { id: "track-09", title: "Track 09" },
-  { id: "track-10", title: "Track 10" }
+  { id: "track-01", title: "bad4me (b2nny krovie)" },
+  { id: "track-02", title: "block (b2nny)" },
+  { id: "track-03", title: "bonnie and clyde (b2nny)" },
+  { id: "track-04", title: "bubblegum (rxi)" },
+  { id: "track-05", title: "on my life (rxi nvy)" },
+  { id: "track-06", title: "shittt (b2nny)" },
+  { id: "track-07", title: "slime (rxi 3s lr)" },
+  { id: "track-08", title: "ik ik (b2nny)" },
+  { id: "track-09", title: "vean (jarii)" },
+  { id: "track-10", title: "waste my time (rxi 2ndchances)" }
 ];
 
 function doGet(e) {
@@ -61,6 +61,11 @@ function doPost(e) {
   } catch (err) {
     return reply_(e, { ok: false, error: String(err) });
   }
+}
+
+function setupVoteBackend() {
+  const sh = getVoteSheet_();
+  return "Vote sheet ready: " + sh.getName();
 }
 
 function handleVote_(e, p) {
@@ -220,6 +225,7 @@ function buildVoteResults_() {
 
   const idx = voteIndexMap_(values[0]);
   let totalVotes = 0;
+  let totalPicks = 0;
 
   for (let r = 1; r < values.length; r++) {
     const row = values[r];
@@ -236,6 +242,7 @@ function buildVoteResults_() {
       const id = String(raw || "").trim();
       if (validIds.has(id)) {
         counts[id] = (counts[id] || 0) + 1;
+        totalPicks++;
         countedBallot = true;
       }
     }
@@ -249,7 +256,7 @@ function buildVoteResults_() {
       id: track.id,
       title: track.title,
       votes: votes,
-      percentage: totalVotes > 0 ? votes / totalVotes * 100 : 0
+      percentage: totalPicks > 0 ? votes / totalPicks * 100 : 0
     };
   }).sort(function (a, b) {
     if (b.votes !== a.votes) return b.votes - a.votes;
