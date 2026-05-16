@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">b2nny EP vote</title>
+  <desc id="desc">A minimal social preview image for the b2nny EP vote.</desc>
+  <rect width="1200" height="630" fill="#f2f0ed"/>
+  <rect x="72" y="72" width="1056" height="486" fill="#e5e1dc" stroke="#101010" stroke-width="2"/>
+  <g fill="none" stroke="#9eb8c7" stroke-linecap="round" stroke-width="4" opacity="0.95">
+    <path d="M128 355 C182 290 236 420 290 330 S398 295 452 350 S560 415 614 318 S722 280 776 352 S884 420 938 332 S1046 292 1092 346"/>
+    <path d="M128 400 C180 360 232 440 284 392 S388 338 440 398 S544 454 596 382 S700 328 752 400 S856 450 908 386 S1012 340 1092 396" opacity="0.45"/>
+  </g>
+  <g fill="#101010">
+    <text x="128" y="175" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="34" font-weight="700" letter-spacing="4">B2NNY</text>
+    <text x="128" y="273" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="86" font-weight="750">EP vote</text>
+    <text x="132" y="458" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="30" font-weight="520">Listen. Pick your 5.</text>
+  </g>
+  <g transform="translate(816 155)">
+    <circle cx="0" cy="0" r="9" fill="#9eb8c7"/>
+    <circle cx="44" cy="0" r="9" fill="#9eb8c7"/>
+    <circle cx="88" cy="0" r="9" fill="#9eb8c7"/>
+    <circle cx="132" cy="0" r="9" fill="#d7d1ca" stroke="#101010" stroke-width="2"/>
+    <circle cx="176" cy="0" r="9" fill="#d7d1ca" stroke="#101010" stroke-width="2"/>
+  </g>
+</svg>
