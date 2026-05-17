@@ -757,14 +757,13 @@
 
     els.resultsSection.hidden = false;
     els.resultsSection.classList.remove("is-final-board");
-    els.resultsMeta.textContent = totalVotes + (totalVotes === 1 ? " vote" : " votes");
+    els.resultsMeta.textContent = "percent standings";
     els.resultsList.innerHTML = rows.map(function (row, index) {
       var percent = row.displayPercentage;
       return [
         '<div class="resultRow">',
         '  <div>',
         '    <div class="resultTitle">' + titleHtml(row.title) + '</div>',
-        '    <div class="resultMeta">' + row.votes + (row.votes === 1 ? " vote" : " votes") + '</div>',
         '  </div>',
         '  <strong>' + percent + '%</strong>',
         '  <div class="resultBar" aria-hidden="true"><div class="resultFill" style="width:' + Math.min(100, percent) + '%"></div></div>',
@@ -778,7 +777,7 @@
     els.resultsSection.hidden = false;
     els.resultsSection.classList.add("is-final-board");
     els.thanksPanel.hidden = true;
-    els.resultsMeta.textContent = totalVotes + (totalVotes === 1 ? " vote" : " votes");
+    els.resultsMeta.textContent = "percent standings";
     els.resultsList.innerHTML = [
       '<div class="leaderHero">',
       '  <span class="leaderLabel">final tracklist</span>',
@@ -791,7 +790,6 @@
         '  <span class="leaderRank">#' + (index + 1) + '</span>',
         '  <div class="leaderMain">',
         '    <div class="leaderTitle">' + titleHtml(row.title) + '</div>',
-        '    <div class="leaderMeta">' + row.votes + (row.votes === 1 ? " vote" : " votes") + '</div>',
         '  </div>',
         '  <strong class="leaderPercent">' + row.displayPercentage + '%</strong>',
         '</div>'
