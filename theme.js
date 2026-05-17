@@ -123,12 +123,6 @@
   function pickThemeId() {
     var params = new URLSearchParams(window.location.search);
     var fromUrl = normalizeThemeId(params.get("theme"));
-    var nav = performance.getEntriesByType("navigation")[0];
-    var isReload = nav && nav.type === "reload";
-
-    if (isReload) {
-      return randomThemeId();
-    }
     if (fromUrl) {
       return fromUrl;
     }
