@@ -21,7 +21,7 @@
   var CONFIG = {
     maxSelections: 5,
     unlockSeconds: 15,
-    startAt: Date.parse("2026-05-17T13:00:00-04:00"),
+    startAt: Date.parse("2026-05-17T14:00:00-04:00"),
     endAt: Date.parse("2026-05-19T00:00:00-04:00"),
     receiptKey: "b2nny_ep_vote_receipt_v1",
     progressKey: "b2nny_ep_vote_listen_progress_v2",
@@ -55,6 +55,8 @@
     selectionCount: document.getElementById("selection-count"),
     setupMessage: document.getElementById("setup-message"),
     voteMessage: document.getElementById("vote-message"),
+    preopenScreen: document.getElementById("preopen-screen"),
+    preopenTimer: document.getElementById("preopen-timer"),
     trackTitle: document.getElementById("track-title"),
     trackHelp: document.getElementById("track-help"),
     progressPath: document.getElementById("progress-path"),
@@ -841,23 +843,33 @@
   }
 
   function updatePhase() {
+    var previousPhase = state.phase;
     var now = nowMs();
     if (now < CONFIG.startAt) {
       state.phase = "before";
       els.countdownLabel.textContent = "opens in";
-      els.phaseCopy.textContent = "Voting opens May 17, 2026 at 1:00 PM ET.";
-      els.countdownValue.textContent = formatDuration(CONFIG.startAt - now);
+      els.phaseCopy.textContent = "Voting opens May 17, 2026 at 2:00 PM ET.";
+      var timeUntilOpen = formatDuration(CONFIG.startAt - now);
+      els.countdownValue.textContent = timeUntilOpen;
+      if (els.preopenTimer) els.preopenTimer.textContent = timeUntilOpen;
     } else if (now < CONFIG.endAt) {
       state.phase = "active";
       els.countdownLabel.textContent = "closes in";
       els.phaseCopy.textContent = "Voting is open through May 19, 2026 at 12:00 AM ET.";
       els.countdownValue.textContent = formatDuration(CONFIG.endAt - now);
+      if (els.preopenTimer) els.preopenTimer.textContent = "00:00:00";
     } else {
       state.phase = "closed";
       els.countdownLabel.textContent = "status";
       els.phaseCopy.textContent = "Voting is closed. Results are public.";
       els.countdownValue.textContent = "closed";
+      if (els.preopenTimer) els.preopenTimer.textContent = "closed";
       loadResults();
+    }
+    updatePreopenScreen();
+    if (previousPhase === "before" && state.phase === "active" && !CONFIG.previewPhase) {
+      window.location.reload();
+      return;
     }
     updateClosedPhaseLayout();
     updateResultsHeading();
@@ -878,6 +890,15 @@
       return;
     }
     els.trackSection.hidden = false;
+  }
+
+  function updatePreopenScreen() {
+    var main = document.getElementById("top");
+    if (!els.preopenScreen || !main) return;
+    var isPreopen = state.phase === "before";
+    els.preopenScreen.hidden = !isPreopen;
+    main.hidden = isPreopen;
+    document.body.classList.toggle("is-preopen", isPreopen);
   }
 
   function updateResultsHeading() {

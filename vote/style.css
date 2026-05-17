@@ -29,6 +29,43 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.preopenScreen {
+  display: none;
+  min-height: 100vh;
+  padding: 3rem 1.25rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+body.is-preopen .preopenScreen {
+  display: flex;
+}
+
+body.is-preopen #cursor-ring,
+body.is-preopen #cursor-dot,
+body.is-preopen .voteBar,
+body.is-preopen .confirmPanel,
+body.is-preopen .themeShuffle {
+  display: none !important;
+}
+
+.preopenTitle {
+  margin: 0.35rem 0 0.5rem;
+  font-size: clamp(1.6rem, 4.4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.preopenTimer {
+  font-size: clamp(2.4rem, 10vw, 6.4rem);
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
 .wrap {
   max-width: 48rem;
   margin: 0 auto;

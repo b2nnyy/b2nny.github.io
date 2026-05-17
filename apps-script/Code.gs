@@ -9,7 +9,7 @@
 // Leave blank to auto-create a spreadsheet on first vote submission.
 const VOTE_SHEET_ID = ""; // optional: paste Spreadsheet ID here
 const VOTE_SHEET_NAME = "Votes";
-const VOTE_START_AT = "2026-05-16T13:45:00-04:00";
+const VOTE_START_AT = "2026-05-17T14:00:00-04:00";
 const VOTE_END_AT = "2026-05-19T00:00:00-04:00";
 const VOTE_TRACKS = [
   { id: "track-01", title: "bad4me (b2nny krovie)" },
