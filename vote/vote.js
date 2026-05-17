@@ -21,7 +21,7 @@
   var CONFIG = {
     maxSelections: 5,
     unlockSeconds: 15,
-    startAt: Date.parse("2026-05-16T13:45:00-04:00"),
+    startAt: Date.parse("2026-05-17T13:00:00-04:00"),
     endAt: Date.parse("2026-05-19T00:00:00-04:00"),
     receiptKey: "b2nny_ep_vote_receipt_v1",
     progressKey: "b2nny_ep_vote_listen_progress_v2",
@@ -856,7 +856,7 @@
     if (now < CONFIG.startAt) {
       state.phase = "before";
       els.countdownLabel.textContent = "opens in";
-      els.phaseCopy.textContent = "Voting opens May 16, 2026 at 1:45 PM ET.";
+      els.phaseCopy.textContent = "Voting opens May 17, 2026 at 1:00 PM ET.";
       els.countdownValue.textContent = formatDuration(CONFIG.startAt - now);
     } else if (now < CONFIG.endAt) {
       state.phase = "active";
