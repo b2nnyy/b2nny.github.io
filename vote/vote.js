@@ -865,10 +865,6 @@
       loadResults();
     }
     updatePreopenScreen();
-    if (previousPhase === "before" && state.phase === "active" && !CONFIG.previewPhase) {
-      window.location.reload();
-      return;
-    }
     updateClosedPhaseLayout();
     updateResultsHeading();
     updateSelectionUI();
