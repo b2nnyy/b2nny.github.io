@@ -931,59 +931,6 @@ body:not(.bw-hideCursor) #cursor-dot { display: none !important; }
   }
 }
 
-.voteLock {
-  position: fixed;
-  inset: 0;
-  z-index: 20000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  background: var(--bg);
-}
-
-body:not(.is-vote-locked) .voteLock {
-  display: none;
-}
-
-body.is-vote-locked {
-  overflow: hidden;
-}
-
-body.is-vote-locked #cursor-ring,
-body.is-vote-locked #cursor-dot,
-body.is-vote-locked .voteBar,
-body.is-vote-locked .confirmPanel,
-body.is-vote-locked .themeShuffle {
-  display: none !important;
-}
-
-.voteLockPanel {
-  width: min(100%, 24rem);
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  text-align: center;
-}
-
-.voteLockPanel h1 {
-  margin-bottom: 0.65rem;
-}
-
-.voteLockCopy {
-  margin-bottom: 1.25rem;
-  color: var(--muted);
-  font-size: 0.9375rem;
-}
-
-.voteLockPanel .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 10rem;
-  text-decoration: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal,
