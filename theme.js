@@ -120,12 +120,28 @@
     return Number.isInteger(id) && id >= 1 && id <= PALETTES.length ? id : null;
   }
 
+  function readSessionThemeId() {
+    try {
+      return normalizeThemeId(sessionStorage.getItem("b2nny_theme_id"));
+    } catch (_e) {
+      return null;
+    }
+  }
+
+  function writeSessionThemeId(themeId) {
+    try {
+      sessionStorage.setItem("b2nny_theme_id", String(themeId));
+    } catch (_e) {}
+  }
+
   function pickThemeId() {
     var params = new URLSearchParams(window.location.search);
     var fromUrl = normalizeThemeId(params.get("theme"));
-    if (fromUrl) {
-      return fromUrl;
-    }
+    if (fromUrl) return fromUrl;
+
+    var fromSession = readSessionThemeId();
+    if (fromSession) return fromSession;
+
     if (document.referrer) {
       try {
         var ref = new URL(document.referrer);
@@ -145,6 +161,7 @@
   }
 
   function syncCurrentUrl(themeId) {
+    if (new URLSearchParams(window.location.search).get("theme")) return;
     var next = withThemeParam(window.location.href, themeId);
     var nextHref = next.pathname + next.search + next.hash;
     var currentHref = window.location.pathname + window.location.search + window.location.hash;
@@ -193,6 +210,7 @@
     var themeId = pickThemeId();
     var theme = PALETTES[themeId - 1];
     applyTheme(theme, themeId);
+    writeSessionThemeId(themeId);
     syncCurrentUrl(themeId);
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () {
