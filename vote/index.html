@@ -3,105 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>b2nny EP vote</title>
-  <meta name="description" content="Listen to 10 b2nny tracks and vote for the 5 that should make the next EP." />
+  <title>b2nny final EP tracklist</title>
+  <meta name="description" content="The final 5 songs are selected. Pre-save the new b2nny EP now." />
   <meta name="theme-color" content="#f2f0ed" />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://b2nny.com/vote/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="b2nny" />
   <meta property="og:url" content="https://b2nny.com/vote/" />
-  <meta property="og:title" content="b2nny EP vote" />
-  <meta property="og:description" content="Listen. Pick your 5." />
+  <meta property="og:title" content="b2nny final EP tracklist" />
+  <meta property="og:description" content="The final 5 songs are selected. Pre-save now." />
   <meta property="og:image" content="https://b2nny.com/vote/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="b2nny EP vote" />
-  <meta name="twitter:description" content="Listen. Pick your 5." />
+  <meta name="twitter:title" content="b2nny final EP tracklist" />
+  <meta name="twitter:description" content="The final 5 songs are selected. Pre-save now." />
   <meta name="twitter:image" content="https://b2nny.com/vote/og-image.svg" />
-  <meta name="b2nny-vote-endpoint" content="https://script.google.com/macros/s/AKfycbxaScRgE9K1m9UKTj9BTqmPZ7c4k2IOU1g3hM9BwVT7TVTx1XKckK9cHBLX8gYDKzP2/exec" />
   <script src="/theme.js"></script>
   <link rel="stylesheet" href="/vote/style.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
 </head>
 <body>
-  <section id="preopen-screen" class="preopenScreen" aria-live="polite">
-    <p class="eyebrow">EP vote</p>
-    <h1 class="preopenTitle">VOTING BEGINS IN:</h1>
-    <p id="preopen-timer" class="preopenTimer">--:--:--</p>
-  </section>
-
-  <div id="cursor-ring" aria-hidden="true"></div>
-  <div id="cursor-dot" aria-hidden="true"></div>
-
-  <main class="wrap" id="top">
-    <header class="siteHeader reveal">
+  <main class="wrap">
+    <header class="siteHeader">
       <nav class="siteNav" aria-label="Primary">
         <a class="siteNavBrand" href="/">b2nny</a>
-        <a href="#tracks">tracks</a>
-        <a href="#results">results</a>
+        <a href="#tracklist">tracklist</a>
+        <a href="https://distrokid.com/hyperfollow/b2nny/b2nnycom" target="_blank" rel="noopener noreferrer">pre-save</a>
       </nav>
-      <p class="eyebrow">EP vote</p>
-      <h1>Listen. Pick your 5.</h1>
-      <p class="tagline">Help choose the next b2nny EP from 10 demos.</p>
+      <p class="eyebrow">final EP</p>
+      <h1>Final EP Tracklist Selected</h1>
+      <p class="tagline">Voting is complete. The 5 songs are locked in. Pre-save the project now.</p>
+      <a class="btn btn--primary" href="https://distrokid.com/hyperfollow/b2nny/b2nnycom" target="_blank" rel="noopener noreferrer">Pre-save the EP</a>
     </header>
 
-    <section class="voteIntro reveal" aria-labelledby="vote-status-title">
-      <div>
-        <h2 id="vote-status-title">vote window</h2>
-        <p id="phase-copy" class="phaseCopy">Loading vote window...</p>
+    <section class="finalPanel" id="tracklist" aria-label="Final EP songs">
+      <div class="sectionHead">
+        <h2>selected songs</h2>
+        <span>top 5 by vote</span>
       </div>
-      <div class="countdown" aria-live="polite">
-        <span id="countdown-label">time remaining</span>
-        <strong id="countdown-value">--:--:--</strong>
-      </div>
+      <ol class="trackList">
+        <li class="trackRow">
+          <span class="trackRank">#1</span>
+          <div class="trackText"><strong>bad4me</strong><span>b2nny krovie</span></div>
+        </li>
+        <li class="trackRow">
+          <span class="trackRank">#2</span>
+          <div class="trackText"><strong>vean</strong><span>jarii</span></div>
+        </li>
+        <li class="trackRow">
+          <span class="trackRank">#3</span>
+          <div class="trackText"><strong>shittt</strong><span>b2nny</span></div>
+        </li>
+        <li class="trackRow">
+          <span class="trackRank">#4</span>
+          <div class="trackText"><strong>ik ik</strong><span>b2nny</span></div>
+        </li>
+        <li class="trackRow">
+          <span class="trackRank">#5</span>
+          <div class="trackText"><strong>bonnie and clyde</strong><span>b2nny</span></div>
+        </li>
+      </ol>
     </section>
 
-    <p id="setup-message" class="setupMessage" hidden role="status"></p>
-    <p id="vote-message" class="voteMessage" hidden role="status"></p>
-
-    <section class="trackSection reveal" id="tracks" aria-label="Tracks">
-      <div class="sectionHead">
-        <h2 id="track-title">tracks</h2>
-        <span id="track-help">play in order</span>
+    <section class="ctaPanel" aria-label="Pre-save options">
+      <div class="qrWrap">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=https%3A%2F%2Fdistrokid.com%2Fhyperfollow%2Fb2nny%2Fb2nnycom"
+          width="240"
+          height="240"
+          alt="QR code linking to the b2nny EP pre-save page" />
       </div>
-      <div id="progress-path" class="progressPath" aria-live="polite">
-        <span id="progress-summary">1 / 10 unlocked</span>
-        <div id="progress-dots" class="progressDots" aria-label="Track unlock progress"></div>
+      <div class="ctaText">
+        <p class="eyebrow">pre-save</p>
+        <h2>Lock it in early</h2>
+        <p>Use the QR code or button to open HyperFollow and pre-save the EP.</p>
+        <a class="btn btn--primary" href="https://distrokid.com/hyperfollow/b2nny/b2nnycom" target="_blank" rel="noopener noreferrer">Pre-save the EP</a>
       </div>
-      <div id="track-list" class="trackList"></div>
-    </section>
-
-    <section class="resultsSection reveal" id="results" aria-labelledby="results-title" hidden>
-      <div class="sectionHead">
-        <h2 id="results-title">results</h2>
-        <span id="results-meta">waiting for votes</span>
-      </div>
-      <div id="thanks-panel" class="thanksPanel" hidden>
-        <strong>Thanks for voting.</strong>
-        <span>Your picks are locked on this browser.</span>
-      </div>
-      <div id="results-list" class="resultsList"></div>
     </section>
   </main>
-
-  <button id="theme-shuffle" class="themeShuffle magnetic" type="button" hidden>shuffle theme</button>
-
-  <div id="confirm-panel" class="confirmPanel" hidden>
-    <div>
-      <strong>Review your 5 picks.</strong>
-      <ol id="confirm-list"></ol>
-    </div>
-    <div class="confirmActions">
-      <button id="edit-picks" class="btn magnetic" type="button">Edit picks</button>
-      <button id="confirm-vote" class="btn btn--primary magnetic" type="button">Confirm vote</button>
-    </div>
-  </div>
-
-  <div id="vote-bar" class="voteBar" aria-live="polite">
-    <span id="selection-count">0 of 5 selected</span>
-    <button id="submit-vote" class="btn btn--primary magnetic" type="button" disabled>Submit vote</button>
-  </div>
-
-  <script src="/vote/vote.js"></script>
 </body>
 </html>
