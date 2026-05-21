@@ -155,6 +155,21 @@
       color: var(--muted);
       font-size: 0.78rem;
     }
+
+    .downloadActions {
+      margin-top: 0.9rem;
+      display: none;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .downloadActions.show {
+      display: flex;
+    }
+    .downloadGhost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--fg);
+    }
   </style>
 </head>
 <body>
@@ -180,6 +195,10 @@
       </form>
 
       <div id="status" class="status" role="status" aria-live="polite"></div>
+      <div id="download-actions" class="downloadActions">
+        <button type="button" class="downloadGhost" id="download-mac-btn">Download 2synth macOS</button>
+        <button type="button" class="downloadGhost" id="download-win-btn">Download 2synth Windows</button>
+      </div>
 
       <p class="small">
         If claim fails, make sure email matches your Stripe receipt exactly and payment has completed.
@@ -197,11 +216,19 @@
       var claimBtn = document.getElementById('claim-btn');
       var sessionInput = document.getElementById('session-id');
       var emailInput = document.getElementById('email');
+      var dlWrap = document.getElementById('download-actions');
+      var dlMacBtn = document.getElementById('download-mac-btn');
+      var dlWinBtn = document.getElementById('download-win-btn');
+      var claimedLicenseKey = '';
 
       var params = new URLSearchParams(window.location.search);
       var sessionFromQuery = (params.get('session_id') || '').trim();
       if (sessionFromQuery && sessionInput) {
         sessionInput.value = sessionFromQuery;
+      }
+      var dlErr = (params.get('download_error') || '').trim();
+      if (dlErr) {
+        setStatus('err', 'Download failed: ' + dlErr + '. Claim again to get a fresh link.');
       }
 
       function setStatus(type, message, licenseKey) {
@@ -211,6 +238,37 @@
           html += '<div class="licenseBox">' + escapeHtml(licenseKey) + '</div>';
         }
         statusEl.innerHTML = html;
+      }
+
+      function setDownloadReady(licenseKey) {
+        claimedLicenseKey = String(licenseKey || '').trim().toUpperCase();
+        if (!claimedLicenseKey) return;
+        if (dlWrap) dlWrap.classList.add('show');
+      }
+
+      function requestDownload(platform) {
+        if (!claimedLicenseKey) {
+          setStatus('err', 'Claim a license key first.');
+          return;
+        }
+        var url = endpoint
+          + (endpoint.indexOf('?') === -1 ? '?' : '&')
+          + 'mode=download_link&licenseKey=' + encodeURIComponent(claimedLicenseKey)
+          + '&platform=' + encodeURIComponent(platform);
+
+        fetch(url, { method: 'GET' })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data && data.ok && data.downloadUrl) {
+              window.location.href = data.downloadUrl;
+              return;
+            }
+            var err = data && data.error ? data.error : 'Could not create download link.';
+            setStatus('err', err);
+          })
+          .catch(function () {
+            setStatus('err', 'Could not create download link. Check backend deployment.');
+          });
       }
 
       function escapeHtml(str) {
@@ -250,7 +308,9 @@
           .then(function (res) { return res.json(); })
           .then(function (data) {
             if (data && data.ok) {
-              setStatus('ok', 'License claimed successfully. Save this key:', data.licenseKey || '');
+              var key = data.licenseKey || '';
+              setStatus('ok', 'License claimed successfully. Save this key:', key);
+              setDownloadReady(key);
               return;
             }
             var err = data && data.error ? data.error : 'Claim failed.';
@@ -264,6 +324,17 @@
             claimBtn.textContent = 'Claim License';
           });
       });
+
+      if (dlMacBtn) {
+        dlMacBtn.addEventListener('click', function () {
+          requestDownload('mac');
+        });
+      }
+      if (dlWinBtn) {
+        dlWinBtn.addEventListener('click', function () {
+          requestDownload('win');
+        });
+      }
     })();
   </script>
 </body>

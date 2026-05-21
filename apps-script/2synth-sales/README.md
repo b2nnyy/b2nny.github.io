@@ -14,11 +14,18 @@ This backend lets you sell `2synth` for `$15` directly on `b2nny.com` while keep
 - `mode=claim&sessionId=...&email=...`
 - `mode=activate&licenseKey=...&machineHash=...&pluginVersion=...`
 - `mode=validate&licenseKey=...&machineHash=...`
+- `mode=download_link&licenseKey=...&platform=mac|win`
+- `mode=download&token=...` (internal signed redirect)
 
 ### Setup
 
 1. In Apps Script, create/open a project and paste `Code.gs`.
-2. Set Script Property `STRIPE_SECRET_KEY` to your Stripe secret key.
+2. Set Script Properties:
+- `STRIPE_SECRET_KEY` = Stripe secret key (`sk_live_...`)
+- `SCRIPT_BASE_URL` = your deployed Apps Script `/exec` URL
+- `DOWNLOAD_SIGNING_SECRET` = long random string (32+ chars)
+- `DOWNLOAD_URL_MAC` = final `2synth` mac installer URL
+- `DOWNLOAD_URL_WIN` = final `2synth` windows installer URL
 3. Run `setup2SynthSalesBackend()` once.
 4. Deploy as Web App:
 - Execute as: `Me`
@@ -40,7 +47,8 @@ Set these meta tags:
 2. Stripe success page redirects to your license page with `{CHECKOUT_SESSION_ID}`.
 3. License page calls Apps Script `mode=claim` with `sessionId` + email.
 4. Backend returns `licenseKey` only if Stripe confirms payment is complete and amount is exactly `$15`.
-5. Customer downloads installer from a private location after claim.
+5. License page requests a signed short-lived download URL (`mode=download_link`).
+6. Backend verifies active license and redirects through a signed token (`mode=download`).
 6. Plugin/app calls `activate` on first run and `validate` periodically.
 
 ### Strong protection recommendations

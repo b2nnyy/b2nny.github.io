@@ -11,6 +11,8 @@ const PRODUCT_CODE = '2synth';
 const PRICE_CENTS = 1500;
 const CURRENCY = 'usd';
 const MAX_DEVICES = 2;
+const DOWNLOAD_TOKEN_TTL_SECONDS = 600;
+const DOWNLOAD_PLATFORMS = ['mac', 'win'];
 
 const SALES_SHEET_ID = ''; // optional: paste sheet ID. Empty = auto-create
 const SHEET_LICENSES = 'Licenses';
@@ -24,13 +26,15 @@ function doGet(e) {
       return reply_(e, {
         ok: true,
         service: PRODUCT_CODE,
-        modes: ['claim', 'activate', 'validate']
+        modes: ['claim', 'activate', 'validate', 'download_link', 'download']
       });
     }
 
     if (mode === 'claim') return handleClaim_(e, p);
     if (mode === 'activate') return handleActivate_(e, p);
     if (mode === 'validate') return handleValidate_(e, p);
+    if (mode === 'download_link') return handleDownloadLink_(e, p);
+    if (mode === 'download') return handleDownload_(e, p);
 
     return reply_(e, { ok: false, error: 'Unknown mode' });
   } catch (err) {
@@ -193,6 +197,89 @@ function handleValidate_(e, p) {
   });
 }
 
+function handleDownloadLink_(e, p) {
+  const licenseKey = String(p.licenseKey || '').trim().toUpperCase();
+  const platform = String(p.platform || '').trim().toLowerCase();
+
+  if (!licenseKey) return reply_(e, { ok: false, error: 'Missing licenseKey' });
+  if (DOWNLOAD_PLATFORMS.indexOf(platform) === -1) {
+    return reply_(e, { ok: false, error: 'Platform must be one of: ' + DOWNLOAD_PLATFORMS.join(', ') });
+  }
+
+  const sheet = getLicenseSheet_();
+  const state = loadLicenseState_(sheet);
+  const rowNum = state.byLicenseKey[licenseKey];
+  if (!rowNum) return reply_(e, { ok: false, error: 'License not found' });
+
+  const row = state.rows[rowNum];
+  if (row.status !== 'active') return reply_(e, { ok: false, error: 'License is not active' });
+
+  const now = Math.floor(Date.now() / 1000);
+  const exp = now + DOWNLOAD_TOKEN_TTL_SECONDS;
+  const payloadObj = { lk: licenseKey, pf: platform, exp: exp };
+  const payload = Utilities.base64EncodeWebSafe(JSON.stringify(payloadObj));
+  const sig = signDownloadPayload_(payload);
+  const token = payload + '.' + sig;
+
+  const baseUrl = getScriptBaseUrl_();
+  return reply_(e, {
+    ok: true,
+    expiresAtEpochSec: exp,
+    downloadUrl: baseUrl + '?mode=download&token=' + encodeURIComponent(token)
+  });
+}
+
+function handleDownload_(e, p) {
+  const token = String(p.token || '').trim();
+  if (!token) {
+    return redirectWithError_('Missing token');
+  }
+
+  const parts = token.split('.');
+  if (parts.length !== 2) {
+    return redirectWithError_('Invalid token format');
+  }
+
+  const payload = parts[0];
+  const sig = parts[1];
+  const expectedSig = signDownloadPayload_(payload);
+  if (sig !== expectedSig) {
+    return redirectWithError_('Invalid token signature');
+  }
+
+  let obj;
+  try {
+    obj = JSON.parse(Utilities.newBlob(Utilities.base64DecodeWebSafe(payload)).getDataAsString());
+  } catch (err) {
+    return redirectWithError_('Token payload parse failed');
+  }
+
+  const licenseKey = String(obj.lk || '').trim().toUpperCase();
+  const platform = String(obj.pf || '').trim().toLowerCase();
+  const exp = Number(obj.exp || 0);
+  const now = Math.floor(Date.now() / 1000);
+
+  if (!licenseKey || DOWNLOAD_PLATFORMS.indexOf(platform) === -1 || !exp) {
+    return redirectWithError_('Invalid token payload');
+  }
+  if (now > exp) {
+    return redirectWithError_('Token expired');
+  }
+
+  const sheet = getLicenseSheet_();
+  const state = loadLicenseState_(sheet);
+  const rowNum = state.byLicenseKey[licenseKey];
+  if (!rowNum) return redirectWithError_('License not found');
+  if (state.rows[rowNum].status !== 'active') return redirectWithError_('License is not active');
+
+  const downloadUrl = getDownloadUrlForPlatform_(platform);
+  if (!downloadUrl) return redirectWithError_('Download URL is not configured');
+
+  return HtmlService
+    .createHtmlOutput('<!doctype html><meta http-equiv="refresh" content="0; url=' + escapeHtmlAttr_(downloadUrl) + '">')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
 function fetchStripeCheckoutSession_(sessionId) {
   const stripeKey = PropertiesService.getScriptProperties().getProperty('STRIPE_SECRET_KEY') || '';
   if (!stripeKey) {
@@ -215,6 +302,43 @@ function fetchStripeCheckoutSession_(sessionId) {
   }
 
   return JSON.parse(body);
+}
+
+function getDownloadUrlForPlatform_(platform) {
+  const props = PropertiesService.getScriptProperties();
+  if (platform === 'mac') return String(props.getProperty('DOWNLOAD_URL_MAC') || '').trim();
+  if (platform === 'win') return String(props.getProperty('DOWNLOAD_URL_WIN') || '').trim();
+  return '';
+}
+
+function signDownloadPayload_(payload) {
+  const secret = String(PropertiesService.getScriptProperties().getProperty('DOWNLOAD_SIGNING_SECRET') || '').trim();
+  if (!secret) {
+    throw new Error('Missing DOWNLOAD_SIGNING_SECRET in Script Properties');
+  }
+  const raw = Utilities.computeHmacSha256Signature(payload, secret);
+  return Utilities.base64EncodeWebSafe(raw).replace(/=+$/g, '');
+}
+
+function getScriptBaseUrl_() {
+  const fromProps = String(PropertiesService.getScriptProperties().getProperty('SCRIPT_BASE_URL') || '').trim();
+  if (fromProps) return fromProps;
+  throw new Error('Missing SCRIPT_BASE_URL in Script Properties');
+}
+
+function redirectWithError_(message) {
+  const safe = encodeURIComponent(message);
+  return HtmlService
+    .createHtmlOutput('<!doctype html><meta http-equiv="refresh" content="0; url=https://b2nny.com/license.html?download_error=' + safe + '">')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function escapeHtmlAttr_(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 }
 
 function getLicenseSheet_() {
