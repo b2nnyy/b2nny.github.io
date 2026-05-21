@@ -115,74 +115,6 @@
     return Math.floor(Math.random() * PALETTES.length) + 1;
   }
 
-  function normalizeThemeId(value) {
-    var id = Number(value);
-    return Number.isInteger(id) && id >= 1 && id <= PALETTES.length ? id : null;
-  }
-
-  function readSessionThemeId() {
-    try {
-      return normalizeThemeId(sessionStorage.getItem("b2nny_theme_id"));
-    } catch (_e) {
-      return null;
-    }
-  }
-
-  function writeSessionThemeId(themeId) {
-    try {
-      sessionStorage.setItem("b2nny_theme_id", String(themeId));
-    } catch (_e) {}
-  }
-
-  function pickThemeId() {
-    var params = new URLSearchParams(window.location.search);
-    var fromUrl = normalizeThemeId(params.get("theme"));
-    if (fromUrl) return fromUrl;
-
-    var fromSession = readSessionThemeId();
-    if (fromSession) return fromSession;
-
-    if (document.referrer) {
-      try {
-        var ref = new URL(document.referrer);
-        if (ref.origin === window.location.origin) {
-          var fromRef = normalizeThemeId(ref.searchParams.get("theme"));
-          if (fromRef) return fromRef;
-        }
-      } catch (_e) {}
-    }
-    return randomThemeId();
-  }
-
-  function withThemeParam(url, themeId) {
-    var parsed = new URL(url, window.location.origin);
-    parsed.searchParams.set("theme", String(themeId));
-    return parsed;
-  }
-
-  function syncCurrentUrl(themeId) {
-    if (new URLSearchParams(window.location.search).get("theme")) return;
-    var next = withThemeParam(window.location.href, themeId);
-    var nextHref = next.pathname + next.search + next.hash;
-    var currentHref = window.location.pathname + window.location.search + window.location.hash;
-    if (nextHref !== currentHref) {
-      window.history.replaceState({}, "", nextHref);
-    }
-  }
-
-  function syncInternalLinks(themeId) {
-    document.querySelectorAll("a[href]").forEach(function (a) {
-      var href = a.getAttribute("href");
-      if (!href || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("#")) return;
-
-      var parsed = new URL(href, window.location.origin);
-      if (parsed.origin !== window.location.origin) return;
-
-      parsed.searchParams.set("theme", String(themeId));
-      a.setAttribute("href", parsed.pathname + parsed.search + parsed.hash);
-    });
-  }
-
   function applyTheme(theme, themeId) {
     var root = document.documentElement;
     root.style.setProperty("--bg", theme.bg);
@@ -207,18 +139,9 @@
   }
 
   try {
-    var themeId = pickThemeId();
+    var themeId = randomThemeId();
     var theme = PALETTES[themeId - 1];
     applyTheme(theme, themeId);
-    writeSessionThemeId(themeId);
-    syncCurrentUrl(themeId);
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", function () {
-        syncInternalLinks(themeId);
-      }, { once: true });
-    } else {
-      syncInternalLinks(themeId);
-    }
     window.__b2nnyTheme = Object.assign({ id: themeId }, theme);
   } catch (error) {
     // Keep default CSS tokens if theme initialization fails.
