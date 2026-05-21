@@ -19,6 +19,8 @@
   <meta name="twitter:description" content="Links and beta 2Plugins downloads. Feedback welcome on GitHub." />
   <!-- Add your UUID from https://web3forms.com (no activation page for visitors) -->
   <meta name="b2nny-web3forms-access-key" content="2c10aa19-7c0e-404c-968b-5209ef019692" />
+  <meta name="b2nny-2synth-checkout-url" content="https://buy.stripe.com/28EfZh1k73YWacIekP1B600" />
+  <meta name="b2nny-2synth-license-url" content="https://b2nny.com/license.html" />
   <script src="/theme.js"></script>
   <script src="/cursor.js?v=13"></script>
   <link rel="stylesheet" href="/cursor.css?v=13" />
@@ -304,6 +306,13 @@
       margin-top: 0.35rem;
       line-height: 1.45;
     }
+    .releasePrice {
+      margin-top: 0.45rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
     .pluginDlRow {
       display: flex;
       flex-wrap: wrap;
@@ -436,10 +445,20 @@
       </p>
 
       <p class="pluginStoreIntro">
-        <strong>VST3 / AU</strong>
+        <strong>VST3 / AU</strong> · <strong>2synth</strong> is a paid license ($15), while <strong>2sample</strong> and <strong>2pin</strong> stay free.
       </p>
 
       <div class="pluginShelf">
+        <div class="bw-card releaseCard">
+          <div class="releaseTitle">2synth</div>
+          <div class="releaseMeta">Dual-engine synth and morphing sound design toolkit · macOS + Windows.</div>
+          <div class="releasePrice">$15 · per-user license</div>
+          <div class="releaseActions pluginDlRow">
+            <a class="btn btn--primary magnetic" id="buy-2synth-btn" href="#" target="_blank" rel="noopener">Buy 2synth ($15)</a>
+            <a class="btn btn--ghost magnetic" id="license-2synth-btn" href="#" target="_blank" rel="noopener">Manage license</a>
+          </div>
+        </div>
+
         <div class="bw-card releaseCard">
           <div class="releaseTitle">2sample</div>
           <div class="releaseMeta">Rolling stereo capture, waveform HUD, WAV drag-out — macOS + Windows.</div>
@@ -499,8 +518,37 @@
   <script>
     (function () {
       var metaKey = document.querySelector('meta[name="b2nny-web3forms-access-key"]');
+      var checkoutMeta = document.querySelector('meta[name="b2nny-2synth-checkout-url"]');
+      var licenseMeta = document.querySelector('meta[name="b2nny-2synth-license-url"]');
       var formEl = document.getElementById("plugin-feedback-form");
       var keyInput = document.getElementById("web3forms-access-key");
+      var buy2synthBtn = document.getElementById("buy-2synth-btn");
+      var license2synthBtn = document.getElementById("license-2synth-btn");
+
+      var checkoutUrl = checkoutMeta ? (checkoutMeta.getAttribute("content") || "").trim() : "";
+      if (buy2synthBtn) {
+        if (checkoutUrl) {
+          buy2synthBtn.href = checkoutUrl;
+        } else {
+          buy2synthBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.alert("Set your Stripe Payment Link in the b2nny-2synth-checkout-url meta tag in index.html.");
+          });
+        }
+      }
+
+      var licenseUrl = licenseMeta ? (licenseMeta.getAttribute("content") || "").trim() : "";
+      if (license2synthBtn) {
+        if (licenseUrl) {
+          license2synthBtn.href = licenseUrl;
+        } else {
+          license2synthBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.alert("Set your license portal URL in the b2nny-2synth-license-url meta tag in index.html.");
+          });
+        }
+      }
+
       if (metaKey && keyInput) {
         keyInput.value = (metaKey.getAttribute("content") || "").trim();
       }

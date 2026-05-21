@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2synth License | b2nny</title>
+  <meta name="description" content="Claim and manage your 2synth license." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://b2nny.com/license.html" />
+  <meta name="b2nny-2synth-license-endpoint" content="https://script.google.com/macros/s/AKfycbwv4bEB-Y1uKAa_21iN6vaeV1KBEHvNvD_ZklYuii_5eslaBxOGUqF4GMuyJW757nBsdg/exec" />
+  <style>
+    :root {
+      --bg: #f2f0ed;
+      --fg: #101010;
+      --muted: #5f5953;
+      --line: #d7d1ca;
+      --surface: #e5e1dc;
+      --accent: #bdb3a7;
+      --accent-strong: #9f9385;
+      --ok-bg: #e3f2e7;
+      --ok-fg: #1f5b2d;
+      --err-bg: #f7e3e3;
+      --err-fg: #6d1f1f;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: grid;
+      place-items: start center;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 34rem;
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.875rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 72%, var(--bg));
+      padding: 1.25rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin-top: 0.45rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .row {
+      margin-bottom: 0.9rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--fg);
+      padding: 0.65rem 0.75rem;
+      font: inherit;
+      font-size: 0.94rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent-strong);
+    }
+
+    button {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: var(--fg);
+      padding: 0.62rem 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button:focus-visible {
+      border-color: var(--accent-strong);
+      background: var(--accent-strong);
+      color: #fff;
+    }
+
+    .status {
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+      padding: 0.7rem 0.75rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .status.ok {
+      display: block;
+      background: var(--ok-bg);
+      color: var(--ok-fg);
+      border-color: color-mix(in srgb, var(--ok-fg) 35%, var(--ok-bg));
+    }
+
+    .status.err {
+      display: block;
+      background: var(--err-bg);
+      color: var(--err-fg);
+      border-color: color-mix(in srgb, var(--err-fg) 35%, var(--err-bg));
+    }
+
+    .licenseBox {
+      margin-top: 0.85rem;
+      border: 1px dashed var(--line);
+      background: #fff;
+      padding: 0.65rem 0.7rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      word-break: break-all;
+    }
+
+    .small {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="toplink" href="/">← Back to b2nny.com</a>
+
+    <section class="card">
+      <h1>2synth License</h1>
+      <p class="sub">Claim your license after checkout, then use it inside 2synth activation.</p>
+
+      <form id="claim-form" novalidate>
+        <div class="row">
+          <label for="session-id">Stripe Checkout Session ID</label>
+          <input id="session-id" name="sessionId" required />
+        </div>
+
+        <div class="row">
+          <label for="email">Receipt Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <button type="submit" id="claim-btn">Claim License</button>
+      </form>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <p class="small">
+        If claim fails, make sure email matches your Stripe receipt exactly and payment has completed.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var endpointMeta = document.querySelector('meta[name="b2nny-2synth-license-endpoint"]');
+      var endpoint = endpointMeta ? (endpointMeta.getAttribute('content') || '').trim() : '';
+
+      var form = document.getElementById('claim-form');
+      var statusEl = document.getElementById('status');
+      var claimBtn = document.getElementById('claim-btn');
+      var sessionInput = document.getElementById('session-id');
+      var emailInput = document.getElementById('email');
+
+      var params = new URLSearchParams(window.location.search);
+      var sessionFromQuery = (params.get('session_id') || '').trim();
+      if (sessionFromQuery && sessionInput) {
+        sessionInput.value = sessionFromQuery;
+      }
+
+      function setStatus(type, message, licenseKey) {
+        statusEl.className = 'status ' + type;
+        var html = message;
+        if (licenseKey) {
+          html += '<div class="licenseBox">' + escapeHtml(licenseKey) + '</div>';
+        }
+        statusEl.innerHTML = html;
+      }
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var sessionId = (sessionInput.value || '').trim();
+        var email = (emailInput.value || '').trim().toLowerCase();
+
+        if (!endpoint) {
+          setStatus('err', 'License endpoint is not configured yet. Set b2nny-2synth-license-endpoint in license.html.');
+          return;
+        }
+
+        if (!sessionId || !email) {
+          setStatus('err', 'Please enter both session ID and email.');
+          return;
+        }
+
+        claimBtn.disabled = true;
+        claimBtn.textContent = 'Claiming...';
+
+        var url = endpoint
+          + (endpoint.indexOf('?') === -1 ? '?' : '&')
+          + 'mode=claim&sessionId=' + encodeURIComponent(sessionId)
+          + '&email=' + encodeURIComponent(email);
+
+        fetch(url, { method: 'GET' })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data && data.ok) {
+              setStatus('ok', 'License claimed successfully. Save this key:', data.licenseKey || '');
+              return;
+            }
+            var err = data && data.error ? data.error : 'Claim failed.';
+            setStatus('err', err);
+          })
+          .catch(function () {
+            setStatus('err', 'Request failed. Check endpoint URL and deployment access.');
+          })
+          .finally(function () {
+            claimBtn.disabled = false;
+            claimBtn.textContent = 'Claim License';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
