@@ -19,6 +19,8 @@
   <meta name="twitter:description" content="The final 5 songs are selected. Pre-save now." />
   <meta name="twitter:image" content="https://b2nny.com/vote/og-image.svg" />
   <script src="/theme.js"></script>
+  <script src="/cursor.js?v=13"></script>
+  <link rel="stylesheet" href="/cursor.css?v=13" />
   <link rel="stylesheet" href="/vote/style.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
 </head>
@@ -81,5 +83,10 @@
       </div>
     </section>
   </main>
+  <script>
+    if (window.B2nnyCursor) {
+      window.B2nnyCursor.init();
+    }
+  </script>
 </body>
 </html>

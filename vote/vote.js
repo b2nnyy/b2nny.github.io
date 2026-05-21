@@ -922,25 +922,31 @@
     });
 
     if (!reduce && finePointer) {
-      document.body.classList.add("bw-hideCursor");
-      document.body.classList.add("is-fine-pointer");
-      var ring = document.getElementById("cursor-ring");
-      var dot = document.getElementById("cursor-dot");
-      var mx = 0, my = 0, rx = 0, ry = 0, dx = 0, dy = 0;
-      window.addEventListener("mousemove", function (e) {
-        mx = e.clientX;
-        my = e.clientY;
-      }, { passive: true });
-      function cursorTick() {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        dx += (mx - dx) * 0.55;
-        dy += (my - dy) * 0.55;
-        ring.style.transform = "translate(" + rx + "px, " + ry + "px)";
-        dot.style.transform = "translate(" + dx + "px, " + dy + "px)";
-        requestAnimationFrame(cursorTick);
+      if (window.B2nnyCursor) {
+        window.B2nnyCursor.init();
+      } else {
+        document.body.classList.add("bw-hideCursor");
+        document.body.classList.add("is-fine-pointer");
+        var ring = document.getElementById("cursor-ring");
+        var dot = document.getElementById("cursor-dot");
+        if (ring && dot) {
+          var mx = 0, my = 0, rx = 0, ry = 0, dx = 0, dy = 0;
+          window.addEventListener("mousemove", function (e) {
+            mx = e.clientX;
+            my = e.clientY;
+          }, { passive: true });
+          function cursorTick() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            dx += (mx - dx) * 0.55;
+            dy += (my - dy) * 0.55;
+            ring.style.transform = "translate(" + rx + "px, " + ry + "px)";
+            dot.style.transform = "translate(" + dx + "px, " + dy + "px)";
+            requestAnimationFrame(cursorTick);
+          }
+          cursorTick();
+        }
       }
-      cursorTick();
     }
 
     if (!reduce) {

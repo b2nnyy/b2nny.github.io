@@ -1,0 +1,134 @@
+:root {
+  --cursor-ink: var(--accent-strong, var(--fg, #101010));
+}
+
+.b2nny-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  color: var(--cursor-ink);
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 1;
+  visibility: hidden;
+  mix-blend-mode: normal;
+  will-change: transform;
+  --cursor-hover: 0;
+  --cursor-press: 1;
+  --cursor-speed: 0;
+  --cursor-paper: var(--bg, #f2f0ed);
+}
+
+body.b2nny-cursor-visible .b2nny-cursor {
+  visibility: visible;
+}
+
+body.b2nny-cursor-hovering .b2nny-cursor {
+  --cursor-hover: 1;
+}
+
+body.b2nny-cursor-pressed .b2nny-cursor {
+  --cursor-press: 0.9;
+}
+
+body.bw-hideCursor.is-fine-pointer,
+body.bw-hideCursor.is-fine-pointer * {
+  cursor: none !important;
+}
+
+.b2nny-cursor__mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 21px;
+  height: 19px;
+  transform:
+    translate(-1px, -1px)
+    scale(var(--cursor-press));
+  transform-origin: 3px 3px;
+  transition: transform 120ms ease;
+}
+
+.b2nny-cursor.is-hovering .b2nny-cursor__mark,
+body.b2nny-cursor-hovering .b2nny-cursor__mark {
+  transform:
+    translate(-2px, -2px)
+    scale(calc(var(--cursor-press) * 1.03));
+}
+
+.b2nny-cursor__linkPlate {
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  z-index: 0;
+  width: 0;
+  height: 9px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: width 140ms ease;
+}
+
+.b2nny-cursor.is-hovering .b2nny-cursor__linkPlate,
+body.b2nny-cursor-hovering .b2nny-cursor__linkPlate {
+  width: 14px;
+}
+
+.b2nny-cursor__svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 19px;
+  height: 20px;
+  overflow: visible;
+}
+
+.b2nny-cursor__body,
+.b2nny-cursor__edge,
+.b2nny-cursor__shine {
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.b2nny-cursor__edge {
+  fill: none;
+  stroke: var(--cursor-paper);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-width: 2.8;
+}
+
+.b2nny-cursor__body {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-width: 1.35;
+  transition: transform 140ms ease;
+}
+
+.b2nny-cursor__shine {
+  fill: none;
+  stroke: color-mix(in srgb, var(--cursor-paper) 54%, currentColor);
+  stroke-linecap: round;
+  stroke-width: 0.95;
+  opacity: 1;
+}
+
+.b2nny-cursor.is-hovering .b2nny-cursor__body,
+body.b2nny-cursor-hovering .b2nny-cursor__body {
+  transform: translate(-1px, -1px) scale(1.04);
+}
+
+.b2nny-cursor.is-hovering .b2nny-cursor__shine,
+body.b2nny-cursor-hovering .b2nny-cursor__shine {
+  stroke-width: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .b2nny-cursor {
+    display: none !important;
+  }
+}
