@@ -163,6 +163,18 @@
       margin-bottom: 1.25rem;
       line-height: 1.55;
     }
+    .pluginStoreIntroBadge {
+      display: inline-block;
+      margin-right: 0.45rem;
+      margin-bottom: 0.25rem;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--accent-strong);
+      background: color-mix(in srgb, var(--accent-soft) 74%, var(--bg));
+    }
 
     .pluginFeedback {
       font-size: 0.8125rem;
@@ -298,6 +310,40 @@
       font-weight: 600;
       letter-spacing: -0.02em;
     }
+    .releaseCard {
+      border: 1px solid var(--control-border);
+      background: color-mix(in srgb, var(--control-bg) 58%, var(--bg));
+      padding: 1rem;
+      transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .releaseCard:not(.releaseCard--featured) {
+      opacity: 0.86;
+    }
+    .releaseCard--featured {
+      opacity: 1;
+      border-color: var(--accent-strong);
+      background:
+        linear-gradient(145deg, color-mix(in srgb, var(--accent-soft) 72%, var(--bg)) 0%, color-mix(in srgb, var(--control-bg) 66%, var(--bg)) 100%);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 62%, transparent), 0 14px 30px -18px color-mix(in srgb, var(--accent-strong) 58%, transparent);
+      transform: translateY(-2px);
+    }
+    .releaseCard--featured .releaseTitle {
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+    .releaseBadge {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 0.55rem;
+      padding: 0.2rem 0.48rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      border: 1px solid var(--accent-strong);
+      background: color-mix(in srgb, var(--accent-soft) 72%, var(--bg));
+      color: var(--fg);
+    }
     .releaseMeta {
       font-size: 0.8125rem;
       color: var(--muted);
@@ -425,7 +471,6 @@
     <section class="bw-section reveal" id="links" aria-label="Links">
       <h2>links</h2>
       <ul class="linkList">
-        <li><a href="/vote/">EP Vote</a></li>
         <li><a href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">Spotify</a></li>
         <li><a href="https://music.apple.com/us/artist/b2nny/1541506202" target="_blank" rel="noopener">Apple Music</a></li>
         <li><a href="https://soundcloud.com/b2nny" target="_blank" rel="noopener">SoundCloud</a></li>
@@ -435,15 +480,24 @@
       </ul>
     </section>
 
+    <section class="bw-section reveal" id="vote" aria-label="EP Vote">
+      <h2>ep vote</h2>
+      <ul class="linkList">
+        <li><a href="/vote/">Vote on the next EP tracks</a></li>
+      </ul>
+    </section>
+
     <section class="bw-section reveal" id="plugins" aria-label="Plug-ins">
       <h2>plug-ins</h2>
 
       <p class="pluginStoreIntro">
-        <strong>VST3 / AU</strong> · <strong>2synth</strong> is now available as a paid plug-in ($15). <strong>2sample</strong> and <strong>2pin</strong> remain free downloads.
+        <span class="pluginStoreIntroBadge">Just dropped</span>
+        <strong>VST3 / AU</strong> · <strong>2synth</strong> is out now as a paid plug-in ($15). <strong>2sample</strong> and <strong>2pin</strong> remain free downloads.
       </p>
 
       <div class="pluginShelf">
-        <div class="bw-card releaseCard">
+        <div class="bw-card releaseCard releaseCard--featured">
+          <div class="releaseBadge">New release</div>
           <div class="releaseTitle">2synth</div>
           <div class="releaseMeta">Dual-engine synth and morphing sound design toolkit · macOS + Windows.</div>
           <div class="releasePrice">$15 · per-user license</div>
