@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2Plugins Downloads | b2nny</title>
+  <meta name="description" content="Official 2Plugins downloads for b2nny.com. Get 2synth, 2sample, and 2pin for macOS and Windows." />
+  <meta name="theme-color" content="#f2f0ed" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://b2nny.com/2plugins.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="b2nny" />
+  <meta property="og:url" content="https://b2nny.com/2plugins.html" />
+  <meta property="og:title" content="2Plugins Downloads | b2nny" />
+  <meta property="og:description" content="Official 2Plugins download page: 2synth, 2sample, and 2pin." />
+  <meta name="b2nny-web3forms-access-key" content="2c10aa19-7c0e-404c-968b-5209ef019692" />
+  <script src="./theme.js"></script>
+  <style>
+    :root {
+      --bg: #f2f0ed;
+      --fg: #101010;
+      --muted: #5f5953;
+      --line: #d7d1ca;
+      --surface: #e5e1dc;
+      --accent: #9f9385;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    .wrap { max-width: 52rem; margin: 0 auto; }
+
+    .topNav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+
+    .topNav a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 7vw, 3.1rem);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .notice {
+      border: 2px solid var(--accent);
+      background: color-mix(in srgb, var(--surface) 75%, var(--bg));
+      padding: 0.95rem 1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 72%, var(--bg));
+      padding: 1rem;
+    }
+
+    .card--featured {
+      border: 2px solid var(--accent);
+      background:
+        linear-gradient(
+          140deg,
+          color-mix(in srgb, var(--surface) 78%, var(--accent-soft, var(--surface)) 22%) 0%,
+          color-mix(in srgb, var(--surface) 68%, var(--bg) 32%) 100%
+        );
+      box-shadow: 0 12px 26px -20px color-mix(in srgb, var(--accent) 65%, transparent);
+      transform: translateY(-2px);
+    }
+
+    .featuredTag {
+      display: inline-block;
+      margin-bottom: 0.45rem;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      font-weight: 800;
+      padding: 0.2rem 0.45rem;
+      border: 1px solid var(--accent);
+      background: color-mix(in srgb, var(--accent) 18%, var(--bg));
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      min-height: 2.8em;
+    }
+
+    .price {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.7rem;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: var(--fg);
+      border: 1px solid var(--line);
+      padding: 0.52rem 0.62rem;
+      font-weight: 650;
+      background: var(--bg);
+      transition: border-color 0.18s var(--ease), background 0.18s var(--ease);
+      will-change: transform;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--surface) 55%, var(--bg));
+    }
+
+    .btnPrimary {
+      background: color-mix(in srgb, var(--surface) 85%, var(--bg));
+      border-color: var(--accent);
+    }
+
+    .feedbackSection {
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 72%, var(--bg));
+      padding: 1rem;
+    }
+
+    .feedbackSection h2 {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .feedbackIntro {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feedbackForm label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .feedbackForm textarea,
+    .feedbackForm input[type="email"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--fg);
+      font: inherit;
+      padding: 0.6rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .feedbackForm textarea {
+      min-height: 7.5rem;
+      resize: vertical;
+    }
+
+    .feedbackHoney {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .feedbackThanks {
+      margin-top: 0.5rem;
+      padding: 0.55rem 0.6rem;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 84%, var(--bg));
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media (min-width: 760px) {
+      .card--featured {
+        grid-column: span 2;
+        padding: 1.2rem;
+      }
+      .card--featured h2 {
+        font-size: 1.55rem;
+      }
+      .card--featured .meta {
+        font-size: 1rem;
+      }
+      .card--featured .actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="topNav" aria-label="Page links">
+      <a href="/">Back to b2nny.com</a>
+      <a href="/">Main site</a>
+    </nav>
+
+    <h1>2Plugins Downloads</h1>
+    <p class="intro">This is the dedicated 2Plugins page on the same b2nny.com domain. Download every plugin from here.</p>
+    <p class="notice">Official links only. Platforms: macOS and Windows. Formats: VST3 / AU.</p>
+
+    <section class="grid" aria-label="Plugin downloads">
+      <article class="card card--featured">
+        <span class="featuredTag">Flagship</span>
+        <h2>2synth</h2>
+        <p class="meta">Dual-engine synth and morphing sound design toolkit.</p>
+        <p class="price">Paid · $15</p>
+        <div class="actions">
+          <a class="btn btnPrimary magnetic" href="https://buy.stripe.com/28EfZh1k73YWacIekP1B600" target="_blank" rel="noopener">Buy 2synth</a>
+          <a class="btn magnetic" href="/license.html" target="_blank" rel="noopener">Manage license</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>2sample</h2>
+        <p class="meta">Rolling stereo capture, waveform HUD, WAV drag-out.</p>
+        <p class="price">Free</p>
+        <div class="actions">
+          <a class="btn btnPrimary magnetic" href="/downloads/2sample-macOS-Installer.pkg" download="2sample-macOS-Installer.pkg">macOS (.pkg)</a>
+          <a class="btn magnetic" href="/downloads/2sample-Windows-Installer.exe" download="2sample-Windows-Installer.exe">Windows (.exe)</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>2pin</h2>
+        <p class="meta">Floating metering HUD with peak, RMS, LUFS, and clock.</p>
+        <p class="price">Free</p>
+        <div class="actions">
+          <a class="btn btnPrimary magnetic" href="/downloads/2pin-macOS-Installer.pkg" download="2pin-macOS-Installer.pkg">macOS (.pkg)</a>
+          <a class="btn magnetic" href="/downloads/2pin-Windows-Installer.exe" download="2pin-Windows-Installer.exe">Windows (.exe)</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="feedbackSection" aria-label="Plugin feedback">
+      <h2>Feedback</h2>
+      <p class="feedbackIntro">Send plugin feedback and bugs here. Include DAW, OS, plugin name, and version if possible.</p>
+
+      <form class="feedbackForm" id="plugin-feedback-form" method="POST" action="https://api.web3forms.com/submit">
+        <input type="hidden" name="access_key" id="web3forms-access-key" value="" autocomplete="off" />
+        <input type="hidden" name="subject" value="b2nny.com plugin feedback" />
+        <input type="hidden" name="redirect" value="https://b2nny.com/2plugins.html?feedback=sent" />
+        <input type="text" name="botcheck" class="feedbackHoney" value="" autocomplete="off" tabindex="-1" aria-hidden="true" />
+
+        <label for="feedback-message">Message</label>
+        <textarea id="feedback-message" name="message" required maxlength="10000" placeholder="Bugs, ideas, anything useful to reproduce or understand it."></textarea>
+
+        <label for="feedback-email">Your email (optional)</label>
+        <input type="email" id="feedback-email" name="email" autocomplete="email" inputmode="email" />
+
+        <button type="submit" class="btn btnPrimary magnetic">Send feedback</button>
+      </form>
+
+      <p id="feedback-thanks" class="feedbackThanks" hidden role="status">Thanks, your message was sent.</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var metaKey = document.querySelector('meta[name="b2nny-web3forms-access-key"]');
+      var keyInput = document.getElementById("web3forms-access-key");
+      var formEl = document.getElementById("plugin-feedback-form");
+
+      if (metaKey && keyInput) {
+        keyInput.value = (metaKey.getAttribute("content") || "").trim();
+      }
+
+      if (formEl) {
+        formEl.addEventListener("submit", function (e) {
+          var key = keyInput ? keyInput.value.trim() : "";
+          if (key.length < 36) {
+            e.preventDefault();
+            window.alert("Feedback form key is missing.");
+          }
+        });
+      }
+
+      if (new URLSearchParams(window.location.search).get("feedback") === "sent") {
+        var thanks = document.getElementById("feedback-thanks");
+        if (thanks) {
+          thanks.hidden = false;
+          thanks.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }
+
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".magnetic").forEach(function (btn) {
+          btn.addEventListener("mousemove", function (e) {
+            var r = btn.getBoundingClientRect();
+            var ox = ((e.clientX - r.left) / r.width - 0.5) * 10;
+            var oy = ((e.clientY - r.top) / r.height - 0.5) * 10;
+            btn.style.transform = "translate(" + ox + "px, " + oy + "px)";
+          });
+          btn.addEventListener("mouseleave", function () {
+            btn.style.transform = "";
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

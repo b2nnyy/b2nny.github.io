@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>b2nny</title>
-  <meta name="description" content="b2nny — music + 2Plugins. Buy 2synth ($15) and download 2sample + 2pin free (VST3/AU for macOS and Windows)." />
+  <meta name="description" content="b2nny official links and the new EP b2nny.com." />
   <meta name="theme-color" content="#f2f0ed" />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://b2nny.com/" />
@@ -12,463 +12,163 @@
   <meta property="og:site_name" content="b2nny" />
   <meta property="og:url" content="https://b2nny.com/" />
   <meta property="og:title" content="b2nny" />
-  <meta property="og:description" content="Buy 2synth ($15) and download 2sample + 2pin free. VST3/AU for macOS and Windows." />
+  <meta property="og:description" content="Official links and the new EP b2nny.com." />
   <meta property="og:image" content="https://b2nny.com/Screenshot%202025-10-23%20180721.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="b2nny" />
-  <meta name="twitter:description" content="Buy 2synth ($15) and download 2sample + 2pin free. VST3/AU for macOS and Windows." />
-  <!-- Add your UUID from https://web3forms.com (no activation page for visitors) -->
-  <meta name="b2nny-web3forms-access-key" content="2c10aa19-7c0e-404c-968b-5209ef019692" />
-  <meta name="b2nny-2synth-checkout-url" content="https://buy.stripe.com/28EfZh1k73YWacIekP1B600" />
-  <meta name="b2nny-2synth-license-url" content="https://b2nny.com/license.html" />
-  <script src="/theme.js"></script>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8 20c4 4 12 4 16 0' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23000'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23000'/%3E%3C/svg%3E" />
+  <meta name="twitter:description" content="Official links and the new EP b2nny.com." />
+  <script src="./theme.js"></script>
   <style>
     :root {
       --bg: #f2f0ed;
       --fg: #101010;
       --muted: #5f5953;
       --line: #d7d1ca;
-      --line-strong: #bdb3a7;
       --surface: #e5e1dc;
-      --surface-alt: #cac2b9;
-      --accent-soft: #d8d0c8;
-      --accent: #bdb3a7;
-      --accent-strong: #9f9385;
-      --control-bg: #e5e1dc;
-      --control-bg-hover: #d8d0c8;
-      --control-border: #d7d1ca;
-      --control-border-strong: #bdb3a7;
-      --control-focus: #9f9385;
+      --accent: #9f9385;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--fg);
       line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      padding: 2.75rem 1.25rem 3.25rem;
     }
 
     .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 36rem;
+      width: min(38rem, 100%);
       margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
     }
-
-    #bw-marble-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .siteHeader {
-      margin-bottom: 3.5rem;
-    }
-
-    .siteNav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem 1rem;
-      margin-bottom: 2.5rem;
-      font-size: 0.8125rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .siteNav a {
-      color: var(--fg);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s var(--ease), opacity 0.2s var(--ease);
-    }
-    .siteNav a:hover,
-    .siteNav a:focus-visible {
-      border-bottom-color: var(--fg);
-    }
-    .siteNavBrand { letter-spacing: 0.08em; }
 
     h1 {
-      font-size: clamp(2rem, 6vw, 2.75rem);
-      font-weight: 700;
+      font-size: clamp(2rem, 7vw, 2.9rem);
       letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
+      line-height: 1.06;
+      margin-bottom: 0.45rem;
     }
 
     .tagline {
-      font-size: 0.9375rem;
       color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
     }
 
-    .bw-section {
-      margin-bottom: 3rem;
-    }
-    .bw-section:last-of-type {
+    .section {
       margin-bottom: 2rem;
     }
 
-    .bw-section h2 {
+    .section h2 {
       font-size: 0.75rem;
-      font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--line);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
     }
 
     .linkList {
       list-style: none;
     }
-    .linkList li { margin-bottom: 0.25rem; }
+
+    .linkList li {
+      margin-bottom: 0.35rem;
+    }
+
     .linkList a {
       color: var(--fg);
       text-decoration: none;
       border-bottom: 1px solid var(--line);
-      font-size: 0.9375rem;
-      transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
       display: inline-block;
-      padding-bottom: 1px;
+      transition: border-color 0.2s var(--ease);
     }
+
     .linkList a:hover,
     .linkList a:focus-visible {
       border-bottom-color: var(--fg);
     }
-
-    .pluginBetaNote {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-      line-height: 1.55;
-      border: 1px solid var(--control-border);
-      padding: 0.875rem 1rem;
-      background: color-mix(in srgb, var(--control-bg) 72%, var(--bg));
+    .buttonRow {
+      display: grid;
+      gap: 0.55rem;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     }
-
-    .pluginStoreIntro {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-      line-height: 1.55;
-    }
-    .pluginStoreIntroBadge {
-      display: inline-block;
-      margin-right: 0.45rem;
-      margin-bottom: 0.25rem;
-      padding: 0.2rem 0.5rem;
-      font-size: 0.625rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid var(--accent-strong);
-      background: color-mix(in srgb, var(--accent-soft) 74%, var(--bg));
-    }
-
-    .pluginFeedback {
-      font-size: 0.8125rem;
-      color: var(--muted);
-      margin-top: 1.25rem;
-      line-height: 1.55;
-    }
-    .pluginFeedback a {
-      color: var(--fg);
-      text-decoration: none;
-      border-bottom: 1px solid var(--line);
-      transition: border-color 0.2s var(--ease);
-    }
-    .pluginFeedback a:hover,
-    .pluginFeedback a:focus-visible {
-      border-bottom-color: var(--fg);
-    }
-
-    #feedback:focus,
-    #feedback:focus-visible {
-      outline: none;
-    }
-
-    /* Browsers outline :target (#fragment); Web3Forms returns with #feedback unless we strip it — hide ring anyway */
-    #feedback:target {
-      outline: none;
-      box-shadow: none;
-    }
-
-    .pluginFeedbackForm {
-      margin-top: 1rem;
-      max-width: 100%;
-      position: relative;
-    }
-    .pluginFeedbackForm label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.35rem;
-    }
-    .pluginFeedbackForm textarea {
-      width: 100%;
-      min-height: 8rem;
-      padding: 0.65rem 0.75rem;
-      font: inherit;
-      font-size: 0.875rem;
-      line-height: 1.5;
-      border: 1px solid var(--control-border);
-      background: color-mix(in srgb, var(--control-bg) 68%, var(--bg));
-      color: var(--fg);
-      resize: vertical;
-      margin-bottom: 0.75rem;
-      transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
-    }
-    .pluginFeedbackForm textarea::placeholder {
-      color: color-mix(in srgb, var(--muted) 72%, var(--bg));
-    }
-    .pluginFeedbackForm textarea:focus {
-      outline: none;
-      border-color: var(--control-focus);
-      background: color-mix(in srgb, var(--control-bg) 52%, var(--bg));
-    }
-    .pluginFeedbackForm .feedbackRowOptional {
-      margin-bottom: 0.75rem;
-    }
-    .pluginFeedbackForm input[type="email"] {
-      width: 100%;
-      max-width: 20rem;
-      padding: 0.5rem 0.65rem;
-      font: inherit;
-      font-size: 0.875rem;
-      border: 1px solid var(--control-border);
-      background: color-mix(in srgb, var(--control-bg) 68%, var(--bg));
-      color: var(--fg);
-      transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
-    }
-    .pluginFeedbackForm input[type="email"]:focus {
-      outline: none;
-      border-color: var(--control-focus);
-      background: color-mix(in srgb, var(--control-bg) 52%, var(--bg));
-    }
-    .pluginFeedbackForm .feedbackHoney {
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-    }
-    .pluginFeedbackForm .feedbackActions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      margin-top: 0.25rem;
-    }
-    .pluginFeedbackForm button[type="submit"] {
-      border: none;
-    }
-
-    .feedbackThanks {
-      margin-top: 0.75rem;
-      font-size: 0.8125rem;
-      padding: 0.65rem 0.75rem;
-      border: 1px solid var(--control-border);
-      line-height: 1.45;
-      background: color-mix(in srgb, var(--control-bg) 72%, var(--bg));
-    }
-
-    /* Ensure feedback is visible when jumping to #feedback before IntersectionObserver runs */
-    .reveal:has(#feedback:target) {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-
-    .pluginShelf {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .pluginShelf {
-
-      border: 1px solid var(--control-border);
-      padding: 1.125rem 1.25rem;
-      background: color-mix(in srgb, var(--control-bg) 72%, var(--bg));
-    }
-
-    .releaseTitle {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-    .releaseCard {
-      border: 1px solid var(--control-border);
-      background: color-mix(in srgb, var(--control-bg) 58%, var(--bg));
-      padding: 1rem;
-      transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
-    }
-    .releaseCard:not(.releaseCard--featured) {
-      opacity: 0.86;
-    }
-    .releaseCard--featured {
-      opacity: 1;
-      border-color: var(--accent-strong);
-      background:
-        linear-gradient(145deg, color-mix(in srgb, var(--accent-soft) 72%, var(--bg)) 0%, color-mix(in srgb, var(--control-bg) 66%, var(--bg)) 100%);
-      box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 62%, transparent), 0 14px 30px -18px color-mix(in srgb, var(--accent-strong) 58%, transparent);
-      transform: translateY(-2px);
-    }
-    .releaseCard--featured .releaseTitle {
-      font-size: 1.2rem;
-      letter-spacing: -0.03em;
-    }
-    .releaseBadge {
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 0.55rem;
-      padding: 0.2rem 0.48rem;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-      border: 1px solid var(--accent-strong);
-      background: color-mix(in srgb, var(--accent-soft) 72%, var(--bg));
-      color: var(--fg);
-    }
-    .releaseMeta {
-      font-size: 0.8125rem;
-      color: var(--muted);
-      margin-top: 0.35rem;
-      line-height: 1.45;
-    }
-    .releasePrice {
-      margin-top: 0.45rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .pluginDlRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      align-items: center;
-    }
-
-    .releaseActions {
-      margin-top: 0;
-    }
-
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font: inherit;
-      cursor: pointer;
+      min-height: 2.6rem;
+      width: 100%;
       text-decoration: none;
-      padding: 0.55rem 1rem;
-      font-size: 0.8125rem;
-      font-weight: 600;
+      color: var(--fg);
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 78%, var(--bg));
+      padding: 0.52rem 0.66rem;
+      font-size: 0.86rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      border: 1px solid var(--control-border-strong);
-      background: var(--control-bg);
-      color: var(--fg);
-      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+      font-weight: 700;
+      transition: border-color 0.2s var(--ease), background 0.2s var(--ease), transform 0.2s var(--ease);
+      will-change: transform;
     }
     .btn:hover,
     .btn:focus-visible {
-      border-color: var(--control-focus);
-      background: var(--control-bg-hover);
-      color: var(--fg);
-    }
-
-    .btn--primary {
       border-color: var(--accent);
-      background: var(--accent-soft);
-      color: var(--fg);
+      background: color-mix(in srgb, var(--surface) 55%, var(--bg));
+      transform: translateY(-1px);
     }
-    .btn--primary:hover,
-    .btn--primary:focus-visible {
-      background: var(--accent);
-      color: var(--fg);
-      border-color: var(--accent-strong);
+    .btnPrimary {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--surface) 66%, var(--bg));
     }
-
-    .btn--ghost {
-      border-color: var(--control-border);
-      background: color-mix(in srgb, var(--control-bg) 48%, var(--bg));
-      font-weight: 500;
+    .pluginSpotlight {
+      border: 2px solid var(--accent);
+      background:
+        linear-gradient(
+          140deg,
+          color-mix(in srgb, var(--surface) 72%, var(--bg) 28%) 0%,
+          color-mix(in srgb, var(--surface) 55%, var(--bg) 45%) 100%
+        );
+      padding: 1rem;
+      box-shadow: 0 12px 24px -22px color-mix(in srgb, var(--accent) 65%, transparent);
     }
-    .btn--ghost:hover,
-    .btn--ghost:focus-visible {
-      border-color: var(--fg);
+    .pluginSpotlight .kicker {
+      display: inline-block;
+      margin-bottom: 0.45rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      border: 1px solid var(--accent);
+      padding: 0.18rem 0.42rem;
+      background: color-mix(in srgb, var(--accent) 16%, var(--bg));
+    }
+    .pluginSpotlight p {
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      font-size: 0.93rem;
     }
 
     .siteFooter {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--line);
-      font-size: 0.75rem;
       color: var(--muted);
-      /* Soft halo so type stays legible over marbles without a footer “card” */
-      text-shadow:
-        0 0 1px var(--bg),
-        0 0 12px var(--bg),
-        0 0 24px var(--bg),
-        0 1px 2px var(--bg);
+      font-size: 0.75rem;
     }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
-    }
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-      #bw-marble-canvas {
-        display: none !important;
-      }
-    }
-
   </style>
 </head>
 <body>
-  <canvas id="bw-marble-canvas" aria-hidden="true"></canvas>
-
-  <main class="wrap" id="top">
-    <header class="siteHeader">
-      <nav class="siteNav" aria-label="Primary">
-        <a class="siteNavBrand" href="#top">b2nny</a>
-        <a href="#links">links</a>
-        <a href="/vote/">ep out now</a>
-        <a href="#plugins">plug-ins</a>
-        <a href="#feedback">feedback</a>
-      </nav>
+  <main class="wrap">
+    <header>
       <h1>@b2nny</h1>
-      <p class="tagline">music · plug-ins</p>
+      <p class="tagline">music</p>
     </header>
 
-    <section class="bw-section reveal" id="links" aria-label="Links">
+    <section class="section" aria-label="Links">
       <h2>links</h2>
       <ul class="linkList">
         <li><a href="https://open.spotify.com/artist/2tbEf5RXMJ4XXwssBVlJ2B" target="_blank" rel="noopener">Spotify</a></li>
@@ -480,81 +180,20 @@
       </ul>
     </section>
 
-    <section class="bw-section reveal" id="vote" aria-label="EP Release">
-      <h2>ep out now</h2>
-      <ul class="linkList">
-        <li><a href="/vote/">The voted EP is out now - see tracklist + stream links</a></li>
-      </ul>
-    </section>
-
-    <section class="bw-section reveal" id="plugins" aria-label="Plug-ins">
-      <h2>plug-ins</h2>
-
-      <p class="pluginStoreIntro">
-        <span class="pluginStoreIntroBadge">Just dropped</span>
-        <strong>VST3 / AU</strong> · <strong>2synth</strong> is out now as a paid plug-in ($15). <strong>2sample</strong> and <strong>2pin</strong> remain free downloads.
-      </p>
-
-      <div class="pluginShelf">
-        <div class="bw-card releaseCard releaseCard--featured">
-          <div class="releaseBadge">New release</div>
-          <div class="releaseTitle">2synth</div>
-          <div class="releaseMeta">Dual-engine synth and morphing sound design toolkit · macOS + Windows.</div>
-          <div class="releasePrice">$15 · per-user license</div>
-          <div class="releaseActions pluginDlRow">
-            <a class="btn btn--primary magnetic" id="buy-2synth-btn" href="#" target="_blank" rel="noopener">Buy 2synth ($15)</a>
-            <a class="btn btn--ghost magnetic" id="license-2synth-btn" href="#" target="_blank" rel="noopener">Manage license</a>
-          </div>
-        </div>
-
-        <div class="bw-card releaseCard">
-          <div class="releaseTitle">2sample</div>
-          <div class="releaseMeta">Rolling stereo capture, waveform HUD, WAV drag-out — macOS + Windows.</div>
-          <div class="releaseActions pluginDlRow">
-            <a class="btn btn--primary magnetic" href="/downloads/2sample-macOS-Installer.pkg" download="2sample-macOS-Installer.pkg">macOS (.pkg)</a>
-            <a class="btn btn--ghost magnetic" href="/downloads/2sample-Windows-Installer.exe" download="2sample-Windows-Installer.exe">Windows (.exe)</a>
-          </div>
-        </div>
-
-        <div class="bw-card releaseCard">
-          <div class="releaseTitle">2pin</div>
-          <div class="releaseMeta">Floating metering HUD (peak / RMS / LUFS / clock) · macOS + Windows.</div>
-          <div class="releaseActions pluginDlRow">
-            <a class="btn btn--primary magnetic" href="/downloads/2pin-macOS-Installer.pkg" download="2pin-macOS-Installer.pkg">macOS (.pkg)</a>
-            <a class="btn btn--ghost magnetic" href="/downloads/2pin-Windows-Installer.exe" download="2pin-Windows-Installer.exe">Windows (.exe)</a>
-          </div>
-        </div>
+    <section class="section" aria-label="EP">
+      <h2>b2nny.com ep</h2>
+      <div class="buttonRow">
+        <a class="btn btnPrimary magnetic" href="https://open.spotify.com/album/0DhLFrHPQ6cCvOoFG92PVm?si=OiCGpN8NQou6cqoUvgsG4g" target="_blank" rel="noopener">Listen on Spotify</a>
+        <a class="btn magnetic" href="https://music.apple.com/us/album/b2nny-com-ep/6771491359" target="_blank" rel="noopener">Listen on Apple Music</a>
       </div>
     </section>
 
-    <section class="bw-section reveal" aria-label="Feedback">
-      <h2>feedback</h2>
-
-      <div id="feedback" tabindex="-1">
-        <p class="pluginFeedback feedbackIntro">
-          <strong>Feedback &amp; bugs.</strong>
-          Send a note below (delivered by email). Include <strong>DAW</strong> and version, <strong>OS</strong>, which plug-in (<strong>2synth</strong>, <strong>2sample</strong>, or <strong>2pin</strong>), and build version if you know it.
-        </p>
-
-        <form class="pluginFeedbackForm" id="plugin-feedback-form" method="POST" action="https://api.web3forms.com/submit">
-          <input type="hidden" name="access_key" id="web3forms-access-key" value="" autocomplete="off" />
-          <input type="hidden" name="subject" value="b2nny.com plugin feedback" />
-          <input type="hidden" name="redirect" value="https://b2nny.com/?feedback=sent" />
-          <input type="text" name="botcheck" class="feedbackHoney" value="" autocomplete="off" tabindex="-1" aria-hidden="true" />
-
-          <label for="feedback-message">Message</label>
-          <textarea id="feedback-message" name="message" required maxlength="10000" placeholder="Bugs, ideas, anything—what helps to reproduce or understand it?"></textarea>
-
-          <div class="feedbackRowOptional">
-            <label for="feedback-email">Your email (optional, if you want a reply)</label>
-            <input type="email" id="feedback-email" name="email" autocomplete="email" inputmode="email" />
-          </div>
-
-          <div class="feedbackActions">
-            <button type="submit" class="btn btn--primary magnetic">Send feedback</button>
-          </div>
-        </form>
-        <p id="feedback-thanks" class="feedbackThanks" hidden role="status">Thanks—your message was sent. If you left an email, I may follow up.</p>
+    <section class="section" aria-label="2Plugins">
+      <h2>2plugins</h2>
+      <div class="pluginSpotlight">
+        <span class="kicker">Featured</span>
+        <p>Download all 2plugins and send plugin feedback from one page.</p>
+        <a class="btn btnPrimary magnetic" href="/2plugins.html">Open 2Plugins Page</a>
       </div>
     </section>
 
@@ -562,349 +201,21 @@
       © <script>document.write(new Date().getFullYear());</script> b2nny
     </footer>
   </main>
-
   <script>
     (function () {
-      var metaKey = document.querySelector('meta[name="b2nny-web3forms-access-key"]');
-      var checkoutMeta = document.querySelector('meta[name="b2nny-2synth-checkout-url"]');
-      var licenseMeta = document.querySelector('meta[name="b2nny-2synth-license-url"]');
-      var formEl = document.getElementById("plugin-feedback-form");
-      var keyInput = document.getElementById("web3forms-access-key");
-      var buy2synthBtn = document.getElementById("buy-2synth-btn");
-      var license2synthBtn = document.getElementById("license-2synth-btn");
-
-      var checkoutUrl = checkoutMeta ? (checkoutMeta.getAttribute("content") || "").trim() : "";
-      if (buy2synthBtn) {
-        if (checkoutUrl) {
-          buy2synthBtn.href = checkoutUrl;
-        } else {
-          buy2synthBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            window.alert("Set your Stripe Payment Link in the b2nny-2synth-checkout-url meta tag in index.html.");
-          });
-        }
-      }
-
-      var licenseUrl = licenseMeta ? (licenseMeta.getAttribute("content") || "").trim() : "";
-      if (license2synthBtn) {
-        if (licenseUrl) {
-          license2synthBtn.href = licenseUrl;
-        } else {
-          license2synthBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            window.alert("Set your license portal URL in the b2nny-2synth-license-url meta tag in index.html.");
-          });
-        }
-      }
-
-      if (metaKey && keyInput) {
-        keyInput.value = (metaKey.getAttribute("content") || "").trim();
-      }
-      if (formEl) {
-        formEl.addEventListener("submit", function (e) {
-          var key = keyInput ? keyInput.value.trim() : "";
-          if (key.length < 36) {
-            e.preventDefault();
-            window.alert(
-              "Feedback form needs a Web3Forms access key. Sign up free at https://web3forms.com and paste your key into index.html (meta b2nny-web3forms-access-key)."
-            );
-          }
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      document.querySelectorAll(".magnetic").forEach(function (btn) {
+        btn.addEventListener("mousemove", function (e) {
+          var r = btn.getBoundingClientRect();
+          var ox = ((e.clientX - r.left) / r.width - 0.5) * 10;
+          var oy = ((e.clientY - r.top) / r.height - 0.5) * 10;
+          btn.style.transform = "translate(" + ox + "px, " + oy + "px)";
         });
-      }
-
-      if (window.location.hash === "#feedback") {
-        document.querySelectorAll(".reveal").forEach(function (el) {
-          if (el.querySelector("#feedback")) el.classList.add("is-visible");
+        btn.addEventListener("mouseleave", function () {
+          btn.style.transform = "";
         });
-      }
-
-      if (new URLSearchParams(window.location.search).get("feedback") === "sent") {
-        document.querySelectorAll(".reveal").forEach(function (el) {
-          if (el.querySelector("#feedback")) el.classList.add("is-visible");
-        });
-        var thanks = document.getElementById("feedback-thanks");
-        if (thanks) {
-          thanks.hidden = false;
-        }
-        if (window.history && window.history.replaceState) {
-          window.history.replaceState(null, "", window.location.pathname + "?feedback=sent");
-        }
-        if (thanks && thanks.scrollIntoView) {
-          thanks.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
-      }
-
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var enableMarbles = false;
-      try {
-        var loadCount =
-          parseInt(localStorage.getItem("b2nny_site_load_count") || "0", 10) + 1;
-        localStorage.setItem("b2nny_site_load_count", String(loadCount));
-        enableMarbles = loadCount % 100 === 0;
-      } catch (errLocal) {}
-      if (reduce) {
-        enableMarbles = false;
-      }
-
-      var marblePointer = { x: 0, y: 0, valid: false };
-
-      if (!reduce) {
-        if (enableMarbles) {
-          window.addEventListener(
-            "pointermove",
-            function (e) {
-              var pt = e.pointerType;
-              if (pt && pt !== "mouse" && pt !== "pen") {
-                return;
-              }
-              marblePointer.x = e.clientX;
-              marblePointer.y = e.clientY;
-              marblePointer.valid = true;
-            },
-            { passive: true }
-          );
-        }
-
-        if (!enableMarbles) {
-          var marbleCanvasEl = document.getElementById("bw-marble-canvas");
-          if (marbleCanvasEl) {
-            marbleCanvasEl.style.display = "none";
-          }
-        } else {
-        (function initMarbleCanvas() {
-          var canvas = document.getElementById("bw-marble-canvas");
-          if (!canvas || !canvas.getContext) {
-            return;
-          }
-          var ctx = canvas.getContext("2d");
-          var W = 0;
-          var H = 0;
-          var balls = [];
-          var BALL_COUNT_MIN = 110;
-          var BALL_COUNT_MAX = 240;
-          var BALL_AREA_DIVISOR = 7600;
-          var GRAVITY = 2200;
-          var AIR_DRAG = 0.99935;
-          var REST_WALL = 0.93;
-          var REST_BALL = 0.92;
-          var GROUND_LAUNCH_VY_MIN = 1500;
-          var GROUND_LAUNCH_VY_EXTRA = 1000;
-          var GROUND_LAUNCH_VX_SPREAD = 1600;
-          var OFFSCREEN_MARGIN = 120;
-          var REPULSE_R = 118;
-          var REPULSE_ACCEL = 15500;
-          var SUBSTEPS = 6;
-          var fg = getComputedStyle(document.documentElement).getPropertyValue("--fg").trim() || "#0a0a0a";
-
-          function resize() {
-            var dpr = window.devicePixelRatio || 1;
-            W = window.innerWidth;
-            H = window.innerHeight;
-            canvas.width = Math.max(1, Math.floor(W * dpr));
-            canvas.height = Math.max(1, Math.floor(H * dpr));
-            canvas.style.width = W + "px";
-            canvas.style.height = H + "px";
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          }
-
-          function spawn() {
-            balls.length = 0;
-            var area = W * H;
-            var n = Math.min(
-              BALL_COUNT_MAX,
-              Math.max(BALL_COUNT_MIN, Math.round(area / BALL_AREA_DIVISOR))
-            );
-            for (var i = 0; i < n; i++) {
-              var r = 6 + Math.random() * 7;
-              balls.push({
-                x: Math.random() * W,
-                y: -30 - Math.random() * 280,
-                vx: (Math.random() - 0.5) * 120,
-                vy: (Math.random() - 0.5) * 40,
-                r: r,
-                m: r * r,
-              });
-            }
-          }
-
-          function resolveBallBall(a, b) {
-            var dx = b.x - a.x;
-            var dy = b.y - a.y;
-            var distSq = dx * dx + dy * dy;
-            var minD = a.r + b.r;
-            var minDSq = minD * minD;
-            if (distSq >= minDSq || distSq < 1e-6) {
-              return;
-            }
-            var dist = Math.sqrt(distSq);
-            var nx = dx / dist;
-            var ny = dy / dist;
-            var overlap = minD - dist;
-            var invMassSum = 1 / (a.m + b.m);
-            var sx = nx * overlap * 0.5;
-            var sy = ny * overlap * 0.5;
-            a.x -= sx * (b.m * invMassSum * 2);
-            a.y -= sy * (b.m * invMassSum * 2);
-            b.x += sx * (a.m * invMassSum * 2);
-            b.y += sy * (a.m * invMassSum * 2);
-
-            var rvx = b.vx - a.vx;
-            var rvy = b.vy - a.vy;
-            var relN = rvx * nx + rvy * ny;
-            if (relN > 0) {
-              return;
-            }
-            var e = REST_BALL;
-            var j = -(1 + e) * relN / (1 / a.m + 1 / b.m);
-            var ix = j * nx;
-            var iy = j * ny;
-            a.vx -= ix / a.m;
-            a.vy -= iy / a.m;
-            b.vx += ix / b.m;
-            b.vy += iy / b.m;
-          }
-
-          function step(dt) {
-            var i;
-            var j;
-            for (i = 0; i < balls.length; i++) {
-              var b = balls[i];
-              b.vy += GRAVITY * dt;
-              b.vx *= AIR_DRAG;
-              b.vy *= AIR_DRAG;
-
-              if (marblePointer.valid) {
-                var px = marblePointer.x;
-                var py = marblePointer.y;
-                var ddx = b.x - px;
-                var ddy = b.y - py;
-                var dist = Math.sqrt(ddx * ddx + ddy * ddy);
-                if (dist < REPULSE_R && dist > 0.5) {
-                  var u = 1 - dist / REPULSE_R;
-                  var f = REPULSE_ACCEL * u * u * u;
-                  var inv = f / dist;
-                  b.vx += ddx * inv * dt;
-                  b.vy += ddy * inv * dt;
-                }
-              }
-
-              b.x += b.vx * dt;
-              b.y += b.vy * dt;
-            }
-
-            for (i = 0; i < balls.length; i++) {
-              var bb = balls[i];
-              if (bb.x < bb.r) {
-                bb.x = bb.r;
-                bb.vx = -bb.vx * REST_WALL;
-              } else if (bb.x > W - bb.r) {
-                bb.x = W - bb.r;
-                bb.vx = -bb.vx * REST_WALL;
-              }
-              if (bb.y < bb.r) {
-                bb.y = bb.r;
-                bb.vy = -bb.vy * REST_WALL;
-              }
-              if (bb.y > H - bb.r) {
-                bb.y = H - bb.r;
-                bb.vy = -(GROUND_LAUNCH_VY_MIN + Math.random() * GROUND_LAUNCH_VY_EXTRA);
-                bb.vx = bb.vx * 0.35 + (Math.random() - 0.5) * GROUND_LAUNCH_VX_SPREAD;
-              }
-            }
-
-            var pass;
-            for (pass = 0; pass < 2; pass++) {
-              for (i = 0; i < balls.length; i++) {
-                for (j = i + 1; j < balls.length; j++) {
-                  resolveBallBall(balls[i], balls[j]);
-                }
-              }
-            }
-
-            var m = OFFSCREEN_MARGIN;
-            for (i = balls.length - 1; i >= 0; i--) {
-              var o = balls[i];
-              if (
-                o.x + o.r < -m ||
-                o.x - o.r > W + m ||
-                o.y + o.r < -m ||
-                o.y - o.r > H + m
-              ) {
-                balls.splice(i, 1);
-              }
-            }
-          }
-
-          function draw() {
-            ctx.clearRect(0, 0, W, H);
-            ctx.fillStyle = fg;
-            var i;
-            for (i = 0; i < balls.length; i++) {
-              var b = balls[i];
-              ctx.beginPath();
-              ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-
-          var last = performance.now();
-          function frame(now) {
-            var dt = Math.min(1 / 30, (now - last) / 1000);
-            last = now;
-            var h = dt / SUBSTEPS;
-            var s;
-            for (s = 0; s < SUBSTEPS; s++) {
-              step(h);
-            }
-            draw();
-            requestAnimationFrame(frame);
-          }
-
-          resize();
-          spawn();
-          window.addEventListener("resize", function () {
-            resize();
-            spawn();
-          });
-          requestAnimationFrame(frame);
-        })();
-        }
-
-        var els = document.querySelectorAll(".reveal");
-        if (els.length && "IntersectionObserver" in window) {
-          var io = new IntersectionObserver(
-            function (entries) {
-              entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("is-visible");
-                }
-              });
-            },
-            { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0 }
-          );
-          els.forEach(function (el) {
-            io.observe(el);
-          });
-        } else {
-          els.forEach(function (el) {
-            el.classList.add("is-visible");
-          });
-        }
-
-        document.querySelectorAll(".magnetic").forEach(function (btn) {
-          btn.addEventListener("mousemove", function (e) {
-            var r = btn.getBoundingClientRect();
-            var ox = ((e.clientX - r.left) / r.width - 0.5) * 10;
-            var oy = ((e.clientY - r.top) / r.height - 0.5) * 10;
-            btn.style.transform = "translate(" + ox + "px, " + oy + "px)";
-          });
-          btn.addEventListener("mouseleave", function () {
-            btn.style.transform = "";
-          });
-        });
-      }
+      });
     })();
-
   </script>
 </body>
 </html>
