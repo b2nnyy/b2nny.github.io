@@ -56,6 +56,7 @@
       display: grid;
       gap: 0.8rem;
       grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+      align-items: start;
     }
 
     .panel {
@@ -64,9 +65,10 @@
     }
 
     .videoBox {
-      aspect-ratio: 16 / 9;
       width: 100%;
-      min-height: 300px;
+      height: clamp(260px, 62vh, 720px);
+      position: relative;
+      overflow: hidden;
     }
 
     #twitch-player {
@@ -74,13 +76,18 @@
       height: 100%;
     }
 
-    .offline {
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      height: 100%;
-      text-align: center;
-      padding: 1rem;
+    .streamBadge {
+      position: absolute;
+      top: 0.65rem;
+      left: 0.65rem;
+      z-index: 4;
+      background: rgba(16, 16, 16, 0.84);
+      color: #fff;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.24rem 0.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
 
     .chatHeader {
@@ -109,7 +116,7 @@
     }
 
     .chatLog {
-      height: 470px;
+      height: clamp(240px, 48vh, 580px);
       overflow: auto;
       padding: 0.65rem 0.75rem;
       font-size: 0.9rem;
@@ -164,13 +171,8 @@
 
     <section class="layout">
       <div class="panel videoBox" id="videoPanel">
-        <div class="offline" id="offlineBox">
-          <div>
-            <p>Offline right now.</p>
-            <p style="margin-top:.35rem;">Player appears automatically when @binglee13 is live.</p>
-          </div>
-        </div>
-        <div id="twitch-player" hidden></div>
+        <span id="streamBadge" class="streamBadge">Loading…</span>
+        <div id="twitch-player"></div>
       </div>
 
       <div class="panel">
@@ -198,7 +200,7 @@
       var CHAT_SCOPE = "chat:read chat:edit";
 
       var statusEl = document.getElementById("liveStatus");
-      var offlineBox = document.getElementById("offlineBox");
+      var streamBadge = document.getElementById("streamBadge");
       var playerEl = document.getElementById("twitch-player");
       var chatLog = document.getElementById("chatLog");
       var chatForm = document.getElementById("chatForm");
@@ -317,19 +319,18 @@
         });
 
         player.addEventListener(Twitch.Player.ONLINE, function () {
-          playerEl.hidden = false;
-          offlineBox.hidden = true;
           statusEl.textContent = "Live now";
+          streamBadge.textContent = "Live";
         });
 
         player.addEventListener(Twitch.Player.OFFLINE, function () {
-          playerEl.hidden = true;
-          offlineBox.hidden = false;
           statusEl.textContent = "Offline";
+          streamBadge.textContent = "Offline";
         });
 
         player.addEventListener(Twitch.Player.READY, function () {
-          statusEl.textContent = "Waiting for live signal…";
+          statusEl.textContent = "Player ready";
+          streamBadge.textContent = "Ready";
         });
       }
 
