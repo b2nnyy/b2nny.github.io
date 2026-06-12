@@ -124,6 +124,43 @@
       border-color: var(--accent);
       background: color-mix(in srgb, var(--surface) 66%, var(--bg));
     }
+    .latestRelease {
+      margin-bottom: 2rem;
+      border: 2px solid var(--accent);
+      background:
+        linear-gradient(
+          140deg,
+          color-mix(in srgb, var(--surface) 76%, var(--bg) 24%) 0%,
+          color-mix(in srgb, var(--surface) 58%, var(--bg) 42%) 100%
+        );
+      padding: 1rem;
+      box-shadow: 0 12px 24px -22px color-mix(in srgb, var(--accent) 65%, transparent);
+    }
+    .latestRelease .kicker {
+      display: inline-block;
+      margin-bottom: 0.45rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      border: 1px solid var(--accent);
+      padding: 0.18rem 0.42rem;
+      background: color-mix(in srgb, var(--accent) 16%, var(--bg));
+    }
+    .latestRelease h2 {
+      border: 0;
+      margin: 0 0 0.2rem;
+      padding: 0;
+      font-size: clamp(1.3rem, 4.8vw, 1.8rem);
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: var(--fg);
+    }
+    .latestRelease p {
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      font-size: 0.93rem;
+    }
     .pluginSpotlight {
       border: 2px solid var(--accent);
       background:
@@ -168,6 +205,18 @@
       <p class="tagline">music</p>
     </header>
 
+    <section class="latestRelease" aria-label="Latest Release">
+      <span class="kicker">Latest Release</span>
+      <h2>slime</h2>
+      <p>Now out on all platforms.</p>
+      <div class="buttonRow">
+        <a class="btn btnPrimary magnetic" href="https://open.spotify.com/track/41XZ4nf85XGTT6BUaopBPm?si=bb6b7f593f0b4eea" target="_blank" rel="noopener">Listen on Spotify</a>
+        <a class="btn magnetic" href="https://music.apple.com/us/album/slime-single/6778232616" target="_blank" rel="noopener">Listen on Apple Music</a>
+        <a class="btn magnetic" href="https://soundcloud.com/b2nny/slime?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">Listen on SoundCloud</a>
+        <a class="btn magnetic" href="https://youtu.be/KBxSo4kL-J8?si=et22AO7Eziqbv85e" target="_blank" rel="noopener">Watch on YouTube</a>
+      </div>
+    </section>
+
     <section class="section" aria-label="Links">
       <h2>links</h2>
       <ul class="linkList">
@@ -179,16 +228,6 @@
         <li><a href="https://instagram.com/b2nnyy" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://x.com/b2nnny" target="_blank" rel="noopener">X</a></li>
       </ul>
-    </section>
-
-    <section class="section" aria-label="Slime">
-      <h2>slime</h2>
-      <div class="buttonRow">
-        <a class="btn btnPrimary magnetic" href="https://open.spotify.com/track/41XZ4nf85XGTT6BUaopBPm?si=bb6b7f593f0b4eea" target="_blank" rel="noopener">Listen on Spotify</a>
-        <a class="btn magnetic" href="https://music.apple.com/us/album/slime-single/6778232616" target="_blank" rel="noopener">Listen on Apple Music</a>
-        <a class="btn magnetic" href="https://soundcloud.com/b2nny/slime?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener">Listen on SoundCloud</a>
-        <a class="btn magnetic" href="https://youtu.be/KBxSo4kL-J8?si=et22AO7Eziqbv85e" target="_blank" rel="noopener">Watch on YouTube</a>
-      </div>
     </section>
 
     <section class="section" aria-label="2Plugins">
